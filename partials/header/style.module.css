@@ -34,7 +34,7 @@
   font-size: 13px;
   color: #fff;
 }
-.jawallat_header_topbar_userBtn span {
+/* .jawallat_header_topbar_userBtn span {
   padding-right: 34px;
   background-image: url(../../public/user-icon.png);
   background-repeat: no-repeat;
@@ -47,7 +47,7 @@
   cursor: pointer;
   padding-top: 4px;
   padding-bottom: 4px;
-}
+} */
 
 .jawallat_mainHeader {
   padding: 32px 0;
@@ -55,9 +55,8 @@
 }
 .jawallat_header_cartMain {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: space-between;
 }
 .jawallat_header_cartMain .jawallat_header_search span img {
   max-width: 30px;
@@ -83,7 +82,6 @@
 }
 
 .jawallat_navigation {
-  background: #a4141a;
   position: relative;
   z-index: 998;
   margin-bottom: 10px;
@@ -128,11 +126,10 @@
   padding: 14px 8px;
   display: inline-block;
   position: relative;
-  color: #fff;
+  color: #000;
+  font-size: 19px;
 }
-.jawallat_navigation ul.jawallat_menu > li:hover > a span {
-  color: #fff;
-}
+
 .jawallat_navigation ul.jawallat_menu > li span::after {
   content: "";
   height: 5px;
@@ -1028,6 +1025,7 @@
 .jawallat_navigation ul.jawallat_menu::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 @media (max-width: 991px) {
   .jawlatt_megaMenu {
     display: block;

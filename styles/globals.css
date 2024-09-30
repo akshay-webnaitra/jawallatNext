@@ -150,3 +150,14 @@ a:hover {
 .wrapper.mb-5 {
   margin-bottom: 0 !important;
 }
+.jawlatt-announcement-bar h3{color: #7D7D7D;
+font-size: 12.84px;
+font-weight: 500;
+line-height: 15.41px;
+text-align: left;}
+.jawlatt-announcement-bar {
+  padding-top: 24px;
+}
+.jawlatt-font-medium {
+  font-size: 26px;
+}

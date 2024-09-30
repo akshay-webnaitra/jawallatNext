@@ -65,14 +65,19 @@ export function fetchNews(
       if (!!session) {
         api.setAuthData({ "X-User-ID": `${session?.user?.id}` });
       }
+
+      console.log(params);
       const response = await api.getSingleNewsPage(params);
+
       if (!!response?.data?.return?.news) {
         callback(response?.data?.return);
+        
         dispatch(getNewsSuccess(response?.data?.return));
       } else {
         dispatch(getNewsFailure());
       }
     } catch (error) {
+      console.log(error);
       dispatch(getNewsFailure());
     }
   };

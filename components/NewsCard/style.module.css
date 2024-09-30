@@ -85,7 +85,7 @@
   position: unset;
 }
 .component_news_card {
-  height: 100%;
+  aspect-ratio: 1/1;
 }
 .jawallat_fullimgcont img,
 .jawallat_fullimgcont {
