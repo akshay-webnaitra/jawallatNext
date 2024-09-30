@@ -1,0 +1,35 @@
+.jawallat_main_slider .jawallat_carousel_caption .jawallat_badge {
+  background: #b71c23;
+  color: #fff;
+  padding: 2px 20px;
+  font-size: 12px;
+  border-radius: 40px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+.jawallat_main_slider .jawallat_carousel_caption h4 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-left: 50px;
+  line-height: 40px;
+}
+.jawallat_main_slider .jawallat_carousel_caption p {
+  margin-bottom: 26px;
+}
+.slideImg {
+  margin-bottom: 20px;
+}
+.slideImg img {
+  width: 100% !important;
+  object-fit: cover;
+  height: 370px;
+}
+
+.logo_image {
+  background: #fff;
+}
+@media screen and (max-width: 767px) {
+  .slideImg img {
+    height: auto !important;
+  }
+}

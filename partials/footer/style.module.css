@@ -1,0 +1,227 @@
+.jawallat_footer {
+  background: #0c0c0c;
+  color: #767676;
+  font-size: 14px;
+}
+.footer a {
+  color: #767676;
+}
+.footer a:hover {
+  color: #fff;
+}
+.jawallat_footer_top {
+  padding: 65px 0 50px;
+}
+.jawallat_footer_logo img {
+  width: 100%;
+  max-width: 175px !important;
+  height: 100%;
+}
+.jawallat_footer_top h6 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.jawallat_footer_top .jawallat_footer_menu {
+  margin: 0 0 35px;
+  padding: 0;
+  list-style: none;
+}
+.jawallat_footer_top .jawallat_footer_menu:last-child {
+  margin-bottom: 0;
+}
+.jawallat_footer_top .jawallat_footer_menu li {
+  display: block;
+  font-size: 13px;
+}
+.jawallat_footer_top .jawallat_footer_menu li a:hover,
+.jawallat_footer_bottom li a:hover {
+  color: #a4141a;
+}
+.jawallat_footer_top .jawallat_footer_menu li + li {
+  margin-top: 6px;
+  font-size: 13px;
+}
+.jawallat_footer_top .jawallat_footer_newsletter h5 {
+  margin-bottom: 33px;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 400;
+}
+.jawallat_footer_top .jawallat_footer_newsletter p {
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+.jawallat_footer_top .row {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+.jawallat_footer_top .row [class*="col-"] {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.jawallat_footer_top .row .row {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+.jawallat_footer_top .row .row [class*="col-"] {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.jawallat_footer_top .jawallat_footer_newsletter form {
+  display: block;
+  position: relative;
+  padding-left: 99px;
+  background: #fff;
+  border-radius: 40px;
+}
+.jawallat_footer_top .jawallat_footer_newsletter form .form-control,
+.jawallat_footer_top .jawallat_footer_newsletter form .form-control:focus {
+  border-color: #fff;
+}
+.jawallat_footer_top .jawallat_footer_newsletter form input[type="submit"] {
+  background: #f70c28;
+  color: #fff;
+  position: absolute;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0 30px;
+  border-radius: 40px 40px;
+}
+.jawallat_footer_top .jawallat_footer_newsletter form input[type="text"] {
+  border-radius: 0 40px 40px 0;
+  border: 0;
+  min-height: 38px;
+  font-size: 15px;
+  box-shadow: none;
+}
+.jawallat_footer_top .jawallat_footer_social {
+  margin-top: 50px;
+  padding: 0;
+  list-style: none;
+  align-items: center;
+}
+.jawallat_footer_top .jawallat_footer_social li {
+  max-width: 36px;
+}
+.jawallat_footer_top .jawallat_footer_social li + li {
+  margin-right: 24px;
+}
+.jawallat_footer_top .jawallat_footer_social li a {
+  display: block;
+  line-height: 36px;
+}
+.jawallat_footer_top .jawallat_footer_social li a img {
+  width: 36px;
+}
+.jawallat_footer_app_icons {
+  padding: 0;
+  margin-top: 50px;
+  list-style: none;
+}
+.jawallat_footer_app_icons li {
+  float: right;
+}
+.jawallat_footer_app_icons li + li {
+  margin-right: 10px;
+}
+.jawallat_footer_app_icons li a img {
+  height: 40px;
+  width: auto;
+}
+.jawallat_footer_bottom {
+  border-top: 1px solid #2d2d2d;
+  padding: 30px 0;
+}
+.jawallat_footer_copyright {
+  float: right;
+}
+.jawallat_footer_copyright p {
+  margin: 0;
+  font-size: 15px;
+}
+.jawallat_footer_bottom ul {
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.jawallat_footer_bottom ul li {
+  float: right;
+  font-size: 15px;
+}
+.jawallat_footer_bottom ul li + li {
+  margin-right: 30px;
+}
+.jawallat_footer_bottom li a {
+  display: inline-block;
+  font-size: 15px;
+}
+.jawallat_footer_bottom li a + a:after {
+  content: "|";
+  margin: 0 8px;
+  float: right;
+}
+.jawallat_footer_logo_txt {
+  max-width: 330px;
+}
+.jawallat_footer_newsletter_section {
+  padding-right: 45px;
+}
+
+@media (max-width: 991px) {
+  .jawallat_footer_copyright {
+    float: none;
+    text-align: center;
+  }
+  .jawallat_footer_newsletter_section {
+    padding-right: 0;
+    border-top: 1px solid #2d2d2d;
+    margin-top: 40px;
+    padding-top: 40px;
+  }
+  .jawlatt_footer_logo_sec {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .jawallat_footer_top .jawallat_footer_social {
+    margin-top: 0;
+  }
+  .jawlatt_footer_logo_sec .jawallat_footer_logo_txt {
+    width: 100%;
+    max-width: inherit;
+    margin-top: 25px;
+  }
+  .jawallat_footer_top .jawallat_footer_social li + li {
+    margin-right: 14px;
+  }
+  .jawallat_footer_logo {
+    width: 40%;
+    margin-bottom: 0 !important;
+  }
+  .jawallat_footer_top .jawallat_footer_newsletter h5,
+  .jawallat_footer_top .jawallat_footer_newsletter p {
+    margin-bottom: 15px;
+  }
+  .jawallat_footer_top .jawallat_footer_newsletter form,
+  .jawallat_footer_top .jawallat_footer_newsletter form input[type="submit"],
+  .jawallat_footer_top .jawallat_footer_newsletter form input[type="text"] {
+    border-radius: 0px;
+  }
+  .jawallat_footer_top {
+    padding-bottom: 30px;
+  }
+  .text {
+    border-radius: 0px;
+  }
+  .jawallat_footer_top {
+    padding-bottom: 30px;
+  }
+}

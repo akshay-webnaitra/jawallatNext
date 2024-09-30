@@ -1,0 +1,28 @@
+.jawallat_single_post{    
+    background: #fff;
+    border: 1px solid #e3e3e3;
+}
+.jawallat_single_cnt{
+    padding: 22px 16px 10px;
+}
+.jawallat_single_cnt h6{
+    font-weight: 600;
+}
+.jawallat_single_cnt .jawalat_single_cnt_amt{    
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 21px;
+    margin-top: 10px;
+}
+.jawallat_single_cnt .jawalat_single_cnt_amt span{
+    background: #fe4225;
+    padding: 1px 7px;
+    color: #fff;
+    border-radius: 7px;
+    display: inline-block;
+    margin: 0 10px 0px 0;
+    font-size: 16px;
+    font-weight: 400;
+}

@@ -1,0 +1,152 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Tajawal";
+  direction: rtl;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.container {
+  max-width: 1300px;
+}
+span {
+  vertical-align: top;
+}
+.full-img img {
+  width: 100% !important;
+  /* height: auto !important; */
+  object-fit: cover;
+}
+img {
+  max-width: 100%;
+}
+
+body.menu-active {
+  overflow: hidden;
+}
+body.menu-active [class*="_jawallat_header_search_"] {
+  display: none;
+}
+body.menu-active [class*="_jawallat_header_btn_"] {
+  display: block !important;
+  margin-right: 0;
+}
+body.menu-active [class*="_jawlatt_megaMenu_"] {
+  overflow: auto;
+  height: 100vh;
+}
+body.menu-active [class*="_jawlatt_menu_button_"] {
+  margin-right: 0;
+}
+a:hover {
+  color: #a4141a;
+}
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
+/********* new css add start here ***********/
+
+/* slick slider image css start here */
+
+.slick-slide img {
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+/* slick slider image css end here */
+
+/********* new css add end here ***********/
+
+/************** responsive css start here ***************/
+
+@media (max-width: 991px) {
+  body.menu-active [class*="_jawallat_mainHeader_"] {
+    background: #000;
+  }
+  .container {
+    padding: 0 15px;
+  }
+}
+/* 
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}  */
+
+@media (max-width: 767px) {
+  .full-img img {
+    height: auto !important;
+    aspect-ratio: 4/3 !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  .searchBar {
+    display: none;
+  }
+  div#google_ads_iframe_\/29958771\/New_Jaw_MPU_Mobile_01_1__container__ {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.searchBar {
+  height: 100%;
+  padding: 8px 25px;
+  background: #fff;
+  width: 100%;
+  min-width: 250px;
+  border-radius: 0;
+  border: 1px solid #aaaaaa;
+  margin: 0 6px;
+}
+.searchBar select.searchBarCont {
+  border: 0;
+  width: 100%;
+  font-size: 20px;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+}
+.wrapper.mb-3.mb-lg-5 {
+  padding-bottom: 0px !important;
+  margin: 0 !important;
+}
+
+.wrapper.mb-5.jawallat-ads-mid-sec,
+.wrapper.mb-5 {
+  margin-bottom: 0 !important;
+}

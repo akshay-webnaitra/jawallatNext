@@ -1,0 +1,520 @@
+.jawallat_home_top_wrapper {
+  background-color: #f7f7f7;
+}
+.jawlaat_news_detail_meta ul {
+  display: flex;
+  margin-bottom: 10px;
+}
+.jawlaat_news_detail_meta ul li,
+.jawlaat_news_detail_meta ul li a,
+.jawlaat_news_detail_meta ul li a span {
+  color: #131415;
+  font-size: 15px;
+  font-weight: 600;
+}
+.jawlaat_news_detail_meta ul li a:hover {
+  color: #b71c23;
+}
+.jawlaat_news_detail_meta ul li {
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+}
+.jawlaat_news_detail_meta ul li span {
+  margin: 1px 5px 0 0;
+  font-size: 11px;
+  vertical-align: top;
+  line-height: 10px;
+}
+.jawlaat_news_details_mainpost h1 {
+  color: #1c262f;
+  font-size: 43px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.jawlaat_news_details_mainpost [class*="_jawallat_postmeta_"] li {
+  font-size: 16px;
+  color: #131415;
+  opacity: 0.5;
+  line-height: 20px;
+}
+
+.jawallat_sidebar {
+  transition: all 2s;
+  position: sticky;
+  top: 0;
+}
+
+.jawlatt_post_media_img img {
+  object-fit: cover;
+  object-position: top;
+}
+
+.jawlatt_post_media_landscape_img img {
+}
+
+.jawlatt_post_media_portrait_img img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: initial !important;
+  max-width: 800px !important;
+}
+
+.jawlatt_post_media_source_img img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.jawlaat_news_details_mainpost [class*="_jawallat_postmeta_"] li::before {
+  height: 18px;
+}
+.jawlaat_news_details_mainpost [class*="_jawallat_postmeta_"] li:last-child a {
+  height: 18px;
+  width: 18px;
+  background-size: 14px;
+  display: inherit;
+}
+.jawlatt_post_main_inset {
+  padding-left: 80px;
+}
+.jawlaat_related_news h4 {
+  font-size: 20px;
+  color: #131415;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.jawlaat_related_news [class*="_jawallat_thumb_"] {
+  width: 120px;
+}
+.jawlaat_related_news [class*="_jawallat_thumb_"] span,
+.jawlaat_related_news [class*="_jawallat_thumb_"] span img {
+  width: 100% !important;
+  height: auto !important;
+}
+.jawlaat_news_details_mainpost p {
+  font-size: 20px;
+}
+.jawlaat_btn_res a {
+  background: #b71c23;
+  font-size: 18px;
+  color: #fff;
+  padding: 9px 23px;
+  display: inline-block;
+  border-radius: 8px;
+}
+.jawlaat_related_words ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.jawlaat_related_words ul li {
+  margin-left: 24px;
+  font-size: 13px;
+  color: #616161;
+}
+.jawlaat_related_words ul li a {
+  font-size: 13px;
+  background: #efefef;
+  display: block;
+  line-height: 26px;
+  color: #616161;
+  padding: 0 20px;
+}
+.jawlaat_related_words ul li a:hover {
+  color: #b71c23;
+}
+.jawlaat_related_words ul li b {
+  font-size: 20px;
+  color: #131415;
+}
+.jawlaat_choose_section_head span[class*="_jawallat_badge_"] {
+  background: #b71c23;
+  margin-bottom: 0;
+  font-size: 10px;
+  display: inline-block;
+  padding: 3px 16px;
+}
+.jawlaat_choose_section_head h4 {
+  color: #b71c23;
+  font-size: 26px;
+  font-weight: 600;
+  border-right: 6px solid #b71c23;
+  padding-right: 12px;
+  margin: 0 0 20px 0;
+}
+
+.jawlatt_post_media_card {
+  padding-top: 15px;
+}
+.jawlatt_post_media_card > [class*="jawallat_single_post_"] {
+  margin-bottom: 25px;
+}
+.jawlatt_post_media_card > [class*="MediaNews_"] {
+  border-bottom: 1px solid #dadada;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.jawlatt_post_media_card > [class*="MediaNews_"]:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+[class*="redcolor_heading"] .jawlatt_category_posts_head h5 {
+  color: #b71c23;
+  border-color: #b71c23;
+  border-width: 5px;
+  font-size: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-weight: 600;
+  border-right: 5px solid #b71c23;
+  padding-right: 12px;
+  margin: 0 0 20px 0;
+}
+
+.jawlatt_category_form {
+  background: #f7f7f7;
+  padding: 20px 0;
+  margin-bottom: 25px;
+}
+.jawlatt_category_form p {
+  font-size: 12px;
+  color: #53585c;
+}
+.jawlatt_category_form form {
+  display: flex;
+}
+.jawlatt_category_form form input[type="text"] {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  min-height: 38px;
+  font-size: 12px;
+  padding: 10px;
+  outline: none;
+}
+.jawlatt_category_form form button {
+  background: #b71c23;
+  border: 0;
+  font-size: 18px;
+  color: #fff;
+  padding: 3px 17px;
+}
+
+.jawlatt_category_posts_head h5 {
+  color: #131415;
+  font-size: 26px;
+  font-weight: 600;
+  border-right: 6px solid #131415;
+  padding-right: 12px;
+  margin: 0 0 20px 0;
+}
+.jawlatt_media_detils [class*="_jawallat_media_"] {
+  background: #fff;
+}
+
+.jawlatt_social_section {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.jawlatt_social_section button {
+  margin: 5px 0 5px 4px;
+}
+.jawlatt_social_section [aria-label*="email"] {
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.jawlatt_social_section button {
+  border-radius: 3px;
+  overflow: hidden;
+}
+.jawlatt_social_section button svg {
+  width: 48px;
+  height: 35px;
+}
+.jawlatt_social_section [aria-label*="email"] svg {
+  background-color: #eb4e3f;
+}
+.jawlatt_social_section [aria-label*="email"] svg rect {
+  fill: #eb4e3f;
+}
+
+.jawlatt_social_section [aria-label*="twitter"] {
+  border-radius: 3px;
+  overflow: hidden;
+  background: #5fb2ef !important;
+  padding: 0 40px !important;
+  color: #fff !important;
+  font-size: 11px !important;
+}
+.jawlatt_social_section [aria-label*="twitter"] svg {
+  background-color: #5fb2ef;
+}
+
+.jawlatt_social_section [aria-label*="pinterest"],
+.jawlatt_social_section [aria-label*="pinterest"] svg {
+  background-color: #cf2830 !important;
+}
+.jawlatt_social_section [aria-label*="linkedin"],
+.jawlatt_social_section [aria-label*="linkedin"] svg {
+  background-color: #0083bb !important;
+}
+.jawlatt_social_section [aria-label*="twitter"] svg rect {
+  fill: #5fb2ef;
+}
+.jawlatt_hidden_Icons {
+  display: none;
+}
+.activeSh .jawlatt_hidden_Icons {
+  display: block;
+}
+.jawlatt_social_section [aria-label*="facebook"] {
+  border-radius: 3px;
+  overflow: hidden;
+  background: #45629f !important;
+  padding: 0 40px !important;
+  color: #fff !important;
+  font-size: 11px !important;
+}
+.jawlatt_social_section [aria-label*="facebook"] svg {
+  width: 48px;
+  height: 35px;
+  background-color: #45629f;
+}
+.jawlatt_social_section [aria-label*="facebook"] svg rect {
+  fill: #45629f;
+}
+
+.jawlatt_social_section ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 25px 0 0px;
+}
+.jawlatt_social_section ul li {
+  text-align: center;
+  margin: 0 0 0 20px;
+  position: relative;
+  line-height: 13px;
+}
+.jawlatt_social_section ul li::after {
+  content: "";
+  height: 34px;
+  width: 1px;
+  background: #000;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: -11px;
+  transform: rotate(15deg);
+  opacity: 0.3;
+}
+.jawlatt_social_section ul li.jawlatt_facebookCount h3 {
+  color: #45629f;
+}
+.jawlatt_social_section ul li:last-child:after {
+  display: none;
+}
+.jawlatt_social_section ul li h3 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #5fb2ef;
+  line-height: 22px;
+}
+.jawlatt_social_section ul li span {
+  color: #000;
+  font-size: 10px;
+}
+.jawlatt_social_section .jawlatt_uploadBtn {
+  background: #bdbdbd;
+  border: 0;
+  padding: 2px 17px 3px;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.jawlatt_social_section [aria-label*="email"] {
+  background: #eb4e3f !important;
+  border: 0 !important;
+  padding: 2px 13px !important;
+  border-radius: 3px !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  display: flex;
+  align-items: center;
+}
+.jawlatt_sidebarSocial {
+}
+
+.jawlatt_sidebarSocial ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.jawlatt_sidebarSocial ul li button {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  padding: 14px 16px;
+  line-height: 18px;
+  margin: 0 0 2px 2px;
+}
+.jawlatt_sidebarSocial ul li button i {
+  font-size: 24px;
+}
+.jawlatt_sidebarSocial ul li button h4 {
+  font-size: 17px;
+  margin: 2px 0 0;
+  line-height: 18px;
+}
+.jawlatt_sidebarSocial ul li button span {
+  font-size: 10px;
+  vertical-align: top;
+}
+.jawlatt_sidebarSocial ul li.jawlatt_sidebarSocial_facebook button {
+  background: #45629f;
+}
+.jawlatt_sidebarSocial ul li.jawlatt_sidebarSocial_twitter button {
+  background: #5fb2ef;
+}
+.jawlatt_sidebarSocial ul li.jawlatt_sidebarSocial_youtube button {
+  background: #d85e5e;
+}
+.jawlatt_sidebarSocial ul li.jawlatt_sidebarSocial_instagram button {
+  background: #0f5e8f;
+}
+
+@media (max-width: 1999px) {
+  .jawlatt_post_main_inset {
+    padding-left: 40px;
+  }
+  .jawlatt_social_section [aria-label*="facebook"],
+  .jawlatt_social_section [aria-label*="twitter"] {
+    padding: 0 20px !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .jawallat_home_top_wrapper {
+    background-color: #fff;
+  }
+  .jawlaat_news_details_mainpost h1 {
+    font-size: 24px;
+  }
+  .jawlaat_news_details_mainpost p {
+    font-size: 16px;
+  }
+  .jawlatt_categorySection {
+    overflow: auto;
+    flex-wrap: nowrap;
+  }
+  .jawlatt_categorySection > div {
+    width: 320px;
+    flex: 0 0 320px;
+    margin-left: 5px;
+  }
+  .jawlatt_categorySection > div a,
+  .jawlatt_categorySection > div a span {
+    width: 100% !important;
+  }
+
+  .jawlatt_post_main_inset {
+    padding-left: 0;
+  }
+  .jawlatt_media_detils [class*="jawallat_media__"] {
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+
+  .jawlaat_related_news [class*="_jawallat_thumb_"] {
+    width: 80px;
+  }
+
+  .jawlaat_news_details_mainpost [class*="_jawallat_postmeta_"] li {
+    font-size: 14px;
+  }
+  .jawlaat_news_details_mainpost
+    [class*="_jawallat_postmeta_"]
+    li:last-child
+    a {
+    height: 14px;
+    width: 14px;
+    background-size: 10px;
+  }
+
+  .jawlaat_btn_res a {
+    background: #1d2327;
+    font-size: 14px;
+  }
+  .jawlaat_related_words ul li b {
+    font-size: 16px;
+  }
+  .jawlatt_category_posts_head {
+    background: #f6f8f8;
+    padding: 15px 0 15px 10px;
+    position: relative;
+    margin: 20px 0 15px;
+    border: 0;
+  }
+  .jawlatt_category_posts_head h5 {
+    position: relative;
+    padding: 0 20px 0 0;
+    margin: 0;
+    border: 0;
+    display: inline-block;
+    font-size: 18px;
+    color: #000;
+  }
+  .jawlatt_category_posts_head h5::after {
+    height: 30px;
+    width: 4px;
+    top: 50% !important;
+    transform: translateY(-50%);
+    bottom: auto;
+    background: #b71c23 !important;
+    right: 0;
+    content: "";
+    position: absolute;
+  }
+  .jawlatt_category_posts_head h5::before {
+    content: "\f053";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin: 0 0 0 10px;
+    font-size: 13px;
+    position: absolute;
+    left: -26px;
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .jawlaat_related_words ul li {
+    margin-left: 14px;
+  }
+
+  .jawlatt_social_section [aria-label*="twitter"],
+  .jawlatt_social_section [aria-label*="facebook"] {
+    font-size: 0 !important;
+    padding: 0 5px !important;
+  }
+
+  .jawlatt_social_section ul {
+    margin: 0 8px 0 0px;
+  }
+  .jawlatt_social_section ul li:last-child {
+    margin: 0 0px 0 0px;
+  }
+  .jawlatt_social_section ul li h3 {
+    font-size: 20px;
+    line-height: 18px;
+  }
+  .jawlatt_social_section ul li::after {
+    height: 22px;
+  }
+}

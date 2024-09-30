@@ -1,0 +1,88 @@
+.jawlatt_active {
+  background: transparent;
+  padding: 14px 22px;
+}
+.jawlatt_activeTile {
+  padding: 14px 22px;
+}
+.jawlatt_media {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  direction: rtl;
+}
+.jawlatt_thumb {
+  width: 112px;
+  margin-left: 15px;
+  position: relative;
+}
+.jawlatt_thumb::before {
+  background: url(../../public/play.png) no-repeat center;
+  background-size: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  content: "";
+}
+.jawlatt_thumb img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.jawlatt_media_body {
+  -ms-flex: 1;
+  flex: 1;
+}
+.jawlatt_media_body h6 {
+  font-size: 15px;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+}
+.jawlatt_media_body [class*="_jawallat_postmeta_"] li,
+.jawlatt_media_body [class*="_jawallat_postmeta_"] li a {
+  color: #fff;
+}
+.jawlatt_media_body [class*="_jawallat_postmeta_"] li + li::before {
+  background: #fff;
+}
+/* .jawlatt_media_body [class*=_jawallat_postmeta_] li [class*=_jawallat_bookmark_] {
+    background-image:url(../../public/bookmark-light.svg);
+}
+.jawlatt_media_body [class*=_jawallat_postmeta_] li [class*=_jawallat_upload_] {
+    background-image:url(../../public/upload-light.svg);
+} */
+
+@media (max-width: 991px) {
+  .jawlatt_media_body {
+    display: none;
+  }
+  .jawlatt_media {
+    width: 100%;
+  }
+  .jawlatt_thumb {
+    width: 100%;
+    margin-left: 0;
+  }
+  .jawlatt_thumb span {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .jawlatt_activeTile,
+  .jawlatt_active {
+    padding: 22px 10px;
+  }
+  .jawlatt_thumb img {
+    height: 75px !important;
+    margin: 0 auto !important;
+  }
+}

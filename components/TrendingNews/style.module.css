@@ -1,0 +1,55 @@
+
+
+.jawlatt_newsCard{
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    vertical-align: top;
+}
+.jawlatt_newsCard::before{
+    content:''; position:absolute; top:0; left:0; right:0; bottom:0; 
+    background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC43Ii8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=); background:-moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%); background:-webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.7) 100%); background:linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.7) 100%); filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#b3000000',GradientType=0 );
+    z-index: 2;
+}
+.jawlatt_newsCard h6{
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    z-index: 2;
+    color: white;
+    padding: 0 10px 10px;
+    font-weight: 600;
+    right: 0;
+}
+.jawlatt_newsCard a,
+.jawlatt_newsCard span{
+    width: 100% !important;
+}
+.jawlatt_header [class*=slick-slider]{
+    margin: 0 -2px;
+}
+.jawlatt_header [class*=slick-track] [class*=slick-slide ] > div {
+    padding: 0 4px;
+}
+.jawlatt_newsCard span.jawlatt_newsTredn{
+    background-color: #ff0100;
+    color: #fff;
+    position: absolute;
+    z-index: 2;
+    height: 22px;
+    width: 22px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    font-size: 10px;
+    left: 10px;
+    top: 10px;
+    border-radius: 2px;
+}
+
+
+.jawlatt_header{
+    display: inline-block;
+    width: 100%;
+}

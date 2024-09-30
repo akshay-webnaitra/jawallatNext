@@ -1,0 +1,80 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
+import Api from "@/services/Api";
+import { getSession, getServerSession } from "next-auth/react";
+
+const api = Api.create();
+export const initialState = {
+  homeItemsLoading: false,
+  homeItemsHasErrors: false,
+  tags: [],
+  ticker: [],
+  featured: [],
+  videos: [],
+  featured_categories: [],
+};
+
+// A slice for homeItems with our three reducers
+const homeItemsSlice = createSlice({
+  name: "homeItems",
+  initialState,
+  reducers: {
+    getHomeItems: (state) => {
+      state.homeItemsLoading = true;
+    },
+    getHomeItemsSuccess: (state, { payload }) => {
+      state.tags = payload?.tags;
+      state.ticker = payload?.ticker;
+      state.featured = payload?.featured;
+      state.videos = payload?.videos;
+      state.featured_categories = payload?.featured_categories;
+      state.homeItemsLoading = false;
+      state.homeItemsHasErrors = false;
+    },
+    getHomeItemsFailure: (state) => {
+      state.tags = [];
+      state.ticker = [];
+      state.featured = [];
+      state.videos = [];
+      state.categories = [];
+      state.homeItemsLoading = false;
+      state.homeItemsHasErrors = true;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (state, { payload }) => {
+      return (state = {
+        ...state,
+        ...payload.homeItems,
+      });
+    });
+  },
+});
+
+// Three actions generated from the slice
+export const { getHomeItems, getHomeItemsSuccess, getHomeItemsFailure } =
+  homeItemsSlice.actions;
+
+// A selector
+export const homeItemsSelector = (state) => state.homeItems;
+
+// The reducer
+export default homeItemsSlice.reducer;
+
+//Asynchronous thunk action
+export function fetchHomeItems(session = null) {
+  return async (dispatch) => {
+    dispatch(getHomeItems());
+
+    try {
+      if (!!session) {
+        api.setAuthData({ "X-User-ID": `${session?.user?.id}` });
+      }
+
+      const response = await api.getHomePage();
+      dispatch(getHomeItemsSuccess(response?.data?.return));
+    } catch (error) {
+      dispatch(getHomeItemsFailure());
+    }
+  };
+}

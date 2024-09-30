@@ -1,0 +1,471 @@
+.jawallat_home_top_wrapper{
+    display: inline-block;
+    width: 100%;
+    margin-top: 35px;
+    margin-bottom: 50px;
+}
+.jawlatt_auther_top_box {
+    padding-bottom: 30px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #97979742;
+}
+.jawlatt_news_auther {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.jawlatt_auther_news_img {
+    width: 90px;
+    height: 90px;
+    border-radius: 400px;
+    overflow: hidden;
+    margin: 0 0 0 45px;
+}
+.authernews-text {
+    width: calc(100% - 90px);
+    padding-right: 10px;
+}
+.jawlatt_authernews_text p {
+    color: #1C262F;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 30px;
+    margin: 0 0 16px;
+}
+.jawlatt_authernews_text a {
+    color: #FFFFFF;
+    font-size: 14.22px;
+    border-radius: 3.78px;
+    background-color: #8D0303;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 26px 4px;
+}
+.jawlatt_auther_headTab{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0 0 40px;
+    padding-bottom: 15px;
+}
+.jawlatt_auther_headTab [class*=nav-pills] a { 
+    background: transparent !important;
+    color: #3A3A3A !important;
+    font-size:20px;
+    font-weight: 600;
+    margin: 0 30px 0px 0px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+.jawlatt_auther_headTab [class*=nav-pills] a[class*=active]{
+    color: #8D0303 !important;    
+}
+.jawlatt_auther_headTab [class*=nav-pills] a > span{
+    margin-left: 15px !important;
+}
+.jawlatt_auther_headTab [class*=nav-pills] span,
+.jawlatt_auther_headTab [class*=nav-pills] img {
+    width: auto !important;
+    height: 30px !important;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.jawlatt_auther_headTab [class*=nav-pills] a[class*=active] span,
+.jawlatt_auther_headTab [class*=nav-pills] a[class*=active] img{
+    -webkit-filter: inherit; 
+    filter: inherit;
+}
+.jawlatt_auther_newsSection{
+    margin: -55px 0 0;
+}
+
+.jawlatt_newsHead h1{
+    font-weight: 600;
+    border-bottom: 1px solid #E2E2E2;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    position: relative;
+}
+.jawlatt_newsHead h1::after{
+    position: absolute;
+    content: "";
+    left: auto;
+    right: 0;
+    width: 100%;
+    max-width: 300px;
+    height: 1px;
+    background-color: #8D0303;
+    top: auto;
+    bottom: 0;
+    opacity: .5;
+}
+.jawlatt_newsCards [class*=jawallat_media__]{
+    margin-bottom: 20px;
+}
+.jawlatt_newsCards [class*=jawallat_media__] h4{
+    font-weight: 600;
+    margin: 0 0 15px 0;
+}
+.jawlatt_newsCards [class*=jawallat_media__] p{
+    color: #000;
+    margin: 0 0 15px 0;
+}
+
+
+
+.jawlatt_post_media_card{
+    padding-top: 25px;
+}
+.jawlatt_post_media_card > [class*=jawallat_single_post_]{
+    margin-bottom: 25px;
+}
+.jawlatt_post_media_card > [class*=MediaNews_]{
+    border-bottom: 1px solid #DADADA;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.jawlatt_post_media_card > [class*=MediaNews_]:last-child{
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.jawlaat_card_badge_heading[class*=redcolor_heading] h4{
+    color: #B71C23;
+    border-color: #B71C23;
+    border-width: 5px;
+    font-size: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-weight: 600;
+    border-right: 5px solid #B71C23;
+    padding-right: 12px;
+    margin: 0 0 20px 0;
+}
+
+.jawlatt_message_service {
+    display: flex;
+}
+.jawlatt_envelop_img {
+    width: 46px;
+}
+.jawlatt_envelop_img i{
+    font-size: 40px;
+    color: #8D0303;
+}
+.jawlatt_msgservice_text {
+    padding-right: 17px;
+}
+.jawlatt_msgservice_text h3 {
+    color: #8D0303;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 43px;
+    margin-bottom: 10px;
+}
+.jawlatt_msgservice_text p {
+    opacity: 0.55;
+    color: #131415;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 30px;
+    margin: 0;
+}
+
+
+
+
+.jawlatt_subscribe_section {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #97979780;
+    margin-bottom: 70px;
+}
+.jawlatt_subscribe_box {
+    padding-top: 60px;
+}
+.jawlatt_subscribe_box h2 {
+    color: #131415;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 36px;
+    margin-bottom: 30px;
+}
+.jawlatt_sbscribe_from_box {
+    border-radius: 14px;
+    background-color: rgb(141 141 141 / 11%);
+    max-width: 850px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+}
+.jawlatt_sbscribe_from_box p {
+    color: #131415;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 35px;
+    margin: 0 0 0 15px;
+}
+.jawlatt_sbscribe_from_box input {
+    border-radius: 8px;
+    border: 1px solid #979797;
+    padding: 0 10px;
+    height: 48px;
+    min-width: 321px;
+}
+
+.jawlatt_sbscribe_from_box button {
+    color: #FFFFFF;
+    font-weight: 500;
+    letter-spacing: 0;
+    border-radius: 10px;
+    background-color: #8D0303;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    margin-right: 30px;
+    border: 0;
+    box-shadow: none;    
+    height: 48px;
+    font-size: 22px;
+    padding: 0 30px;
+    min-width: 140px;
+}
+.jawlatt_checkbox_section {
+    padding: 70px 0;
+    max-width: 1048px;
+}
+.jawlatt_checkbox_section h3 {
+    color: #131415;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 14px;
+    line-height: 35px;
+}
+.jawlatt_checkbox_section form {
+    margin-bottom: 40px;
+}
+
+.jawlatt_checkbox_section [class*=form-group] {
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+}
+.jawlatt_checkbox_section [class*=form-group] input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    /* display: none; */
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    opacity: 0; 
+}
+.jawlatt_checkbox_section [class*=form-group] label {
+    color: #666666;
+    font-family: Tajawal;
+    letter-spacing: 0;
+    position: relative;
+    cursor: pointer;
+    padding-right: 40px; 
+    line-height: 37px;
+    font-size: 18px;
+}
+.jawlatt_checkbox_section [class*=form-group] label:before {
+    content: '';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid #979797;
+    padding: 10px;
+    display: inline-block;
+    position: absolute;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+    right: 0;
+    top: 13px;
+}
+
+.jawlatt_checkbox_section [class*=form-group]  input:checked + label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    width: 6px;
+    height: 14px;
+    border: solid #979797;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+.jawlatt_emphasis_button a {
+    border-radius: 11.2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    text-decoration: none;    
+    width: 120px;
+    font-size: 20px;
+    height: 50px;
+}
+.jawlatt_emphasis_button a.jawlatt_black_em {
+    background-color: #131415;
+    margin-left: 20px;
+}
+.jawlatt_emphasis_button a.jawlattt_red_em {
+    background-color: #8D0303;
+}
+
+
+
+
+@media (max-width:767px) {
+    .jawlatt_sbscribe_from_box {
+        flex-wrap: wrap;
+    }
+    
+    .jawlatt_sbscribe_from_box p {
+        width: 100%;
+    }
+    
+    .jawlatt_sbscribe_from_box input {
+        width: calc(100% - 170px);
+        min-width: inherit;
+    }
+
+
+
+
+    .jawlatt_auther_newsSection {
+        margin-top: 0;
+        padding-top: 40px;
+    }
+    
+    .jawlatt_auther_headTab {
+        flex-direction: inherit;
+        margin-bottom: 30px;
+    }
+    
+    .jawlatt_auther_headTab [class*=nav-pills] a {
+        margin: 0 0 0px 25px;
+    }
+    .jawlatt_auther_headTab [class*=nav-pills] a:last-child {
+        margin: 0;
+    }
+    
+    .jawlatt_sbscribe_from_box {
+        padding: 15px;
+    }
+    
+    .jawlatt_sbscribe_from_box p {
+        font-size: 18px;
+    }
+    
+    .jawlatt_sbscribe_from_box input {
+        font-size: 14px;
+        width: calc(100% - 118px);
+        height: 40px;
+    }
+    
+    .jawlatt_sbscribe_from_box button {
+        font-size: 16px;
+        min-width: 75px;
+        margin: 0 12px 0 0px;
+        height: 40px;
+    }
+    
+    .jawlatt_msgservice_text h3 {
+        font-size: 20px;
+        line-height: inherit;
+        margin: 0 0 7px;
+    }
+    
+    .jawlatt_msgservice_text p {
+        font-size: 16px;
+        line-height: inherit;
+    }
+    
+    .jawlatt_subscribe_box {
+        padding-top: 40px;
+    }
+    
+    .jawlatt_subscribe_box h2 {
+        font-size: 18px;
+        line-height: inherit;
+        margin: 0 0  9px;
+    }
+    
+    .jawlatt_subscribe_section {
+        margin-bottom: 10px;
+    }
+    
+    .jawlatt_checkbox_section {
+        padding: 30px 0 0;
+    }
+    
+    .jawlatt_checkbox_section h3 {
+        font-size: 20px;
+        line-height: inherit;
+    }
+    
+    .jawlatt_checkbox_section [class*=form-group] label {
+        font-size: 16px;
+        line-height: 30px;
+        padding-right: 38px;
+    }
+    
+    .jawlatt_checkbox_section [class*=form-group] label:before {
+        top: 4px;
+        padding: 9px;
+    }
+    
+    .jawlatt_checkbox_section form {
+        margin-bottom: 30px;
+    }
+    
+    .jawlatt_emphasis_button a {
+        height: 40px;
+        width: 110px;
+        font-size: 16px;
+    }
+    .jawlatt_newsHead h1{        
+        font-size: 24px;
+        padding: 0 0 10px;
+    }
+    .jawlatt_newsHead h1::after {
+        max-width: 110px;
+    }
+    
+    .jawlatt_newsCards [class*=jawallat_media__] h4{
+        font-size: 15px;
+        margin: 0 0 1px;
+    }
+    .jawlatt_newsCards [class*=jawallat_media__] p{
+        display: none;
+    }
+    
+    .jawlatt_auther_news_img {
+        width: 70px;
+        height: 70px;
+        margin: 0 0 0 25px;
+    }
+    .jawlatt_authernews_text p {
+        font-size: 21px;
+        line-height: 24px;
+        margin: 0 0 7px;
+    }
+}
+
+
+
+
+
+

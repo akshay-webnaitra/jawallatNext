@@ -1,0 +1,48 @@
+.jawlatt_slideMain {
+  margin: 0 -12px;
+}
+.jawlatt_category_slide {
+  padding: 12px;
+  direction: rtl;
+}
+.jawlatt_category_slide [class*="_jawallat_single_post_box_"] {
+  margin-bottom: 0 !important;
+}
+
+.jawlatt_slideMain [class*="slick-slider"] button {
+  left: 11px;
+  right: auto;
+  z-index: 2;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid #e3e3e3;
+  width: 22px;
+  height: 22px;
+  top: -60px;
+  transform: inherit;
+  font-size: 0px;
+  border-radius: 4px;
+}
+.jawlatt_slideMain [class*="slick-slider"] button:hover {
+  background: #fff;
+}
+.jawlatt_slideMain [class*="slick-slider"] button::before {
+  color: #000;
+}
+.jawlatt_slideMain [class*="slick-slider"] button[class*="slick-prev"]::before {
+  content: "\f053";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 10px;
+  color: #7a7a7a;
+}
+.jawlatt_slideMain [class*="slick-slider"] button[class*="slick-next"] {
+  left: 40px;
+}
+.jawlatt_slideMain [class*="slick-slider"] button[class*="slick-next"]::before {
+  content: "\f054";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 10px;
+  color: #7a7a7a;
+}

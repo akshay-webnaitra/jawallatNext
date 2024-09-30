@@ -1,0 +1,220 @@
+.jawlatt_video_wrapper{
+    background: #131416;
+}
+.jawlatt_video_section{
+    background: #242526;
+    max-width: 1206px;
+    height: 455px;
+    overflow: hidden;
+}
+.jawlatt_video_heading h2{
+    color: #fff;
+    font-size: 37px;
+    border-right: 7px solid #B71C23;
+    padding-right: 12px;
+    font-weight: normal;
+    margin-bottom: 38px;
+    position: relative;
+}
+.jawlatt_video_section .jawlatt_video_tab_col > div{
+    height: 100%;
+}
+.jawlatt_video_section .jawlatt_video_tab_col .jawlatt_video_slide{
+    padding: 0 0;
+    cursor: pointer;
+    transition: .4s all ease;
+    position: relative;
+}
+.jawlatt_video_section .jawlatt_video_tab_col [class*=slick-current] .jawlatt_video_slide,
+.jawlatt_video_section .jawlatt_video_tab_col  .jawlatt_video_slide:hover{
+    background-color: #343537;
+}
+.jawlatt_video_section .jawlatt_video_tab_col [class*=slick-current] .jawlatt_video_slide::after{
+    background: #131416;
+    width: 6px;
+    content: '';
+    position: absolute;
+    top: 22px;
+    bottom: 22px;
+    right: 0;
+}
+.jawlatt_videoPlayCard{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.jawlatt_videoPlayCard_inset{
+    position: relative;
+    height: 100%;
+}
+.jawlatt_videoPlayCard_inset > div{
+    height: 100% !important;
+    width: 100% !important;
+}
+.jawlatt_videoPlayCard span{
+    width: 100% !important;
+    height: 100% !important;
+}
+.jawlatt_videoPlayBtn {
+    background: transparent;
+    border: 0;
+    background-size: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+.jawlatt_videoPlayCard_badges{
+    text-align: right;
+    color: #fff;
+    padding: 10px 40px 30px 0px;
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+}
+.jawlatt_videoPlayCard_badges .jawlatt_badge{
+    background: #A4141A;
+    padding: 4px 22px;
+    border-radius: 40px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.jawlatt_videoPlayCard_badges h4{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.jawlatt_videoPlayCard_badges ul{ 
+    direction: rtl;
+}
+.jawlatt_videoPlayCard_badges [class*=_jawallat_postmeta_] li{
+    font-size: 13px;
+    color: #fff;
+}
+.jawlatt_videoPlayCard_badges [class*=_jawallat_postmeta_] li + li::before{
+    background: #fff;
+}
+
+/* .jawlatt_videoPlayCard_badges [class*=_jawallat_postmeta_] li [class*=_jawallat_bookmark_] {
+    background-image:url(../../public/bookmark-light.svg);
+    height: 16px;
+    width: 14px;
+    background-size: 12px;
+}
+.jawlatt_videoPlayCard_badges [class*=_jawallat_postmeta_] li [class*=_jawallat_upload_] {
+    background-image:url(../../public/upload-light.svg);
+    height: 16px;
+    width: 14px;
+    background-size: 12px;
+} */
+.jawlatt_video_tabs [class*=slick-slider],
+.jawlatt_video_tabs [class*=slick-slider] div{
+    height: 100%;
+}
+.jawlatt_video_tabs [class*=slick-slider] [class*=slick-slide] > div {
+    position: relative;
+    z-index: 2;
+}
+.jawlatt_video_tabs [class*=slick-slider] div div[class*=_jawlatt_videoPlayCard_inset__],
+.jawlatt_video_tabs [class*=slick-slider] div div[class*=_jawlatt_videoPlayCard_inset__] > div{
+    height: 100% !important;
+    width: 100% !important;
+}
+.jawlatt_video_tabs [class*=slick-slider] div[class*=_jawlatt_videoPlayCard_badges__],
+.jawlatt_video_tabs [class*=slick-slider] div[class*=_jawlatt_videoPlayCard_badges__] div,
+.jawlatt_video_tabs [class*=slick-slider] div div[class*=_jawlatt_videoPlayCard_inset__] div{
+    height: auto;
+}
+
+@media (max-width : 991px){
+    .jawlatt_video_tab_col{
+        order: 2;
+    }
+    .jawlatt_video_tabs{
+        order: 1;
+    }
+    .jawlatt_video_heading{
+        background: #F6F8F8;
+        padding: 15px 0 15px 10px;
+        position: relative;
+        margin: 20px 0 15px;
+        border: 0;
+    }
+    .jawlatt_video_heading h2{
+        background: #F6F8F8;
+        font-size: 18px;
+        color: #000;
+        font-weight: 600;
+        position: relative;
+        padding: 0 20px 0 0;
+        margin: 0;
+        border: 0;
+        display: inline-block;
+    }
+    .jawlatt_video_heading h2::before{
+        content: "\f053";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        margin: 0 0 0 10px;
+        font-size: 13px;
+        position: absolute;
+        left: -26px;
+        margin: 0;
+        top: 50%;
+        transform: translateY(-50%); 
+    }
+    .jawlatt_video_heading h2::after{
+        content: "";
+        height: 30px;
+        width: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        bottom: auto;
+        background: #b71c23 !important;
+        position: absolute;
+        right: 0;
+        left: auto;
+    }
+    .jawlatt_video_section{
+        height: auto;
+    }
+    .jawlatt_video_wrapper{
+        background: transparent;
+    }
+    .jawlatt_video_section{
+        background: #000;
+        margin: 0 -12px;
+    }
+    .jawlatt_video_section .jawlatt_video_tab_col [class*=slick-current] .jawlatt_video_slide,
+    .jawlatt_video_section .jawlatt_video_tab_col  .jawlatt_video_slide:hover{
+        background: transparent;
+    }
+    .jawlatt_video_section .jawlatt_video_tab_col [class*=slick-current] .jawlatt_video_slide::after{
+        display: none;
+    }
+    .jawlatt_video_section .jawlatt_video_tab_col .jawlatt_video_slide{
+        padding: 0;
+    }
+    .jawlatt_videoPlayBtn{
+        max-width: 75px;
+    }
+    .jawlatt_videoPlayCard_badges{
+        position: relative;
+        padding: 10px 0px 10px 0px;
+    }
+    .jawlatt_videoPlayCard_badges [class*=_jawallat_postmeta_] li,
+    .jawlatt_videoPlayCard_badges [class*=_jawallat_postmeta_] li a{
+        color: #fff;
+    }
+    .jawlatt_videoPlayCard_badges [class*=_jawallat_postmeta_] li + li:before{
+        color: #fff;
+    }
+}

@@ -1,0 +1,65 @@
+.jawallat_media {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 0 10px 0;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.jawallat_media.last_child {
+  margin: 0px;
+  padding-bottom: 0px;
+}
+
+.jawallat_media_small img {
+  min-width: 96px !important;
+  height: 91px !important;
+}
+.jawallat_media_small .jawallat_thumb {
+  width: 100px !important;
+}
+.jawallat_media:last-child {
+  border: none;
+}
+.jawallat_thumb {
+  width: 75px;
+  margin-left: 15px;
+  height: 75px;
+}
+.jawallat_thumb a,
+.jawallat_thumb a img {
+  display: block;
+  height: 100%;
+}
+.jawallat_thumb img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  min-height: 73px;
+  min-width: 69px;
+  border: 1px solid #efecec;
+}
+.jawallat_media_body {
+  -ms-flex: 1;
+  flex: 1;
+}
+.jawallat_media_body h6 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.jawallat_media_body h6 a {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.jawlaat_related_news .jawlatt_media_detils .jawallat_media {
+  padding-bottom: 0 !important;
+}
+
+.logo_image {
+  background: #fff;
+}

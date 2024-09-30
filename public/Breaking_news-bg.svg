@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="173px" height="34px" viewBox="0 0 173 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Rectangle@2x</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HOMEPAGE" transform="translate(-1197.000000, -256.000000)" fill="#B71C23">
+            <g id="Group-11" transform="translate(89.000000, 256.000000)">
+                <path d="M1122.16149,0 L1277,0 C1279.20914,-4.05812251e-16 1281,1.790861 1281,4 L1281,30 C1281,32.209139 1279.20914,34 1277,34 L1122.16149,34 C1120.92617,34 1119.76014,33.4292199 1119.0024,32.4535887 L1109.85846,20.680383 C1108.17665,18.5149908 1108.17665,15.4850092 1109.85846,13.319617 L1119.0024,1.54641131 C1119.76014,0.570780141 1120.92617,-3.7698767e-15 1122.16149,0 Z" id="Rectangle"></path>
+            </g>
+        </g>
+    </g>
+</svg>

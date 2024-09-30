@@ -1,0 +1,50 @@
+.jawallat_single_post_box {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  height: 267px !important;
+}
+.jawallat_single_post_box .jawallat_post_image {
+  position: relative;
+}
+
+.jawallat_badge {
+  background: #a4141a;
+  padding: 3px 16px;
+  border-radius: 40px;
+  font-size: 10px;
+  margin-bottom: 0;
+  display: inline-block;
+  bottom: 14px;
+  right: 14px;
+  position: absolute;
+  z-index: 100;
+  color: #fff;
+}
+.jawallat_badge_img {
+  object-fit: cover;
+  max-width: 300px;
+  height: 150px;
+  /* object-position: right; */
+  width: 100%;
+}
+.jawallat_content {
+  padding: 22px 16px;
+}
+.jawallat_content h6 {
+  font-weight: 500;
+  font-size: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  min-height: 38px;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.jawlatt_video_mainSec_card {
+  margin-bottom: 20px !important;
+}
+
+.logo_image {
+  background: #fff;
+}
