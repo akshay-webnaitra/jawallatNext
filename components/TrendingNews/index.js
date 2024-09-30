@@ -49,7 +49,8 @@ export default function HeaderNews({ tags }) {
                 <div key={item?.id} className={styles.jawlatt_newsCard}>
                   <a
                     href={`/search?q=${item?.tag_name}&type=exact`}
-                    target="_blank" rel="noreferrer"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <span className={styles.jawlatt_newsTredn}>
                       <i className="fa-solid fa-arrow-trend-up"></i>
