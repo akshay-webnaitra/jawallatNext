@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Oswald:wght@200..700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Tajawal;
+  color: #1e1e1e;
+  font-weight: 700;
+}
+p {
+  font-weight: 400;
+}
+.container {
+  max-width: 1370px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.jawlatt-cmn-color {
+  color: #1e1e1e;
+}
+.jawlatt-hdr-lt-btn {
+  background: #ea5153;
+  color: #fff;
+  font-family: Tajawal;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 14.4px;
+  text-align: right;
+  border-radius: 4px;
+  padding: 4px;
+}
+.jawlatt-font-medium {
+  font-size: 26px;
+}
+ul.nav li a.nav-link {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 22.8px;
+  text-align: right;
+  color: #1e1e1e;
+}
+.jawlatt-header-btm-content > div strong {
+  color: #fe0120;
+}
+.jawlatt-header-btm-content > div p {
+  font-size: 15.84px;
+  font-weight: 500;
+  line-height: 19.01px;
+  text-align: right;
+  color: #7d7d7d;
+}
+.card-header {
+  border-bottom: none;
+  background: transparent;
+}
+ul.jawlatt-card-body-badge li {
+  list-style: disc;
+}
+ul.jawlatt-card-body-badge li::marker {
+  color: #b22e39;
+  background: #b22e39;
+}
+li.list-group-item {
+  border: none;
+  background: transparent;
+  border-bottom: 1.1px solid hsl(0deg 0% 0% / 11%);
+  padding-right: 0 !important;
+}
+.card-header {
+  padding: 22px 16px 20px 16px;
+}
+.card-body {
+  padding: 0 24px 25px 32px;
+}
+.card-body a.text-decoration-none {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 17.87px;
+  text-align: right;
+  color: #1e1e1e;
+  height: max-content;
+}
+ul.jawlatt-card-body-badge li a {
+  color: #b22e39;
+  text-decoration: none;
+  font-family: Tajawal;
+  font-size: 10.51px;
+  font-weight: 500;
+  line-height: 12.61px;
+  text-align: right;
+}
+.card-body ul.list-group li.list-group-item {
+  padding-top: 20px;
+}
+ul.p-0.jawlatt-card-body-badge {
+  padding-right: 25px !important;
+}
+.card-body p.card-text {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22.41px;
+  text-align: right;
+}
+.jawlatt-bnr-mid-btm ul li a i.fa-solid {
+  color: #4f545c;
+}
+.jawlatt-right-image-left-text .card-body {
+  padding-right: 0;
+  margin-right: 40px;
+}
+.jawlatt-bnr-top-mid.jawlatt-bnr-top-rt {
+  padding-left: 74px;
+}
+.jawlatt-bnr-mid-btm ul.p-0 li::marker {
+  color: #b22e39;
+  background: #b22e39;
+}
+.jawlatt-news-card-list .col-md-3 {
+  width: 20% !important;
+}
+.jawlatt-news-card-list .card-body p.card-text small {
+  font-size: 9.01px;
+  font-weight: 500;
+  line-height: 10.81px;
+  text-align: right;
+  color: #000;
+}
+.jawlatt-news-card-list .card-body h5.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 17.6px;
+  text-align: right;
+}
+.jawlatt-mid-grey-cards .card {
+  background: #fbfbfb;
+  border: 1.15px solid #e8e8e8;
+}
+.jawlatt-socail-link {
+  width: 100%;
+  text-align: center;
+}
+.jawlatt-socail-link a {
+  margin-right: 20px;
+}
+.jawlatt-socail-link a i {
+  font-size: 30px;
+}
+.jawlatt-box {
+  display: flex;
+  align-items: center;
+}
+.jawlatt-box a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 5px;
+  padding: 5px 8px;
+}
+.jawlatt-box a:first-child {
+  margin-right: 0px;
+}
+.jawlatt-box a:nth-child(3) {
+  border-right: 1px solid #000000;
+}
+.jawlatt-bnr-mid-btm ul.p-0 li::marker {
+  background: #4db22c !important;
+  color: #4db22c !important;
+}

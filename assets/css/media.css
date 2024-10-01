@@ -1,0 +1,9 @@
+@media screen and (max-width: 768px) {
+  .jawlatt-social-icon {
+    gap: 10px;
+    padding-left: 20px;
+  }
+  .jawlatt-bnr-top-mid.jawlatt-bnr-top-rt {
+    padding-left: 0px;
+  }
+}
