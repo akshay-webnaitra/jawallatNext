@@ -12,7 +12,7 @@ const RelatedNewsItem = ({ containerClassName }) => {
           <div className="jawlatt-mid-grey-card-content d-flex flex-row justify-content-between align-items-center">
             <div className="card-text d-flex align-items-center gap-1">
               <img
-                src="images/sadaElBada.png"
+                src="/images/sadaElBada.png"
                 alt="Al Jazeera Logo"
                 width="28px"
                 height="28px"

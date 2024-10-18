@@ -270,6 +270,10 @@ ul.p-0.jawlatt-card-body-badge {
   border-bottom: none;
 }
 
+.jawlatt-separator-svg {
+  max-width: 12px;
+}
+
 .jawlatt-category-card.active h6 {
   color: #fff !important;
 }

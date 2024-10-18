@@ -20,7 +20,7 @@ const Header = () => {
             href="/"
             className="d-flex col-lg-2 align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
           >
-            <img src="images/logo.png" className="img-fluid w-75" />
+            <img src="/images/logo.png" className="img-fluid w-75" />
           </a>
           <ul className="nav col-12 col-lg-8  mb-2 justify-content-start mb-md-0">
             <li>

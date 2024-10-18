@@ -12,7 +12,7 @@ const NewsItem = () => {
             <div className="row g-0">
               <div className="col-md-2">
                 <img
-                  src="images/newsImage.png"
+                  src="/images/newsImage.png"
                   className="img-fluid rounded-start"
                   alt="news"
                 />
@@ -22,7 +22,11 @@ const NewsItem = () => {
                   <div className="d-flex gap-2 align-items-center">
                     <a className="d-block text-decoration-none" href="#">
                       <p className="m-0 text-end fw-semibold jawlatt-news-source">
-                        <img src="images/sky-news-round.png" className="ms-2" />
+                        {/*** get public path to the below image from /public/images folder */}
+                        <img
+                          src="/images/sky-news-round.png"
+                          className="ms-2"
+                        />
                         سكاي نيوز عربية
                       </p>
                     </a>

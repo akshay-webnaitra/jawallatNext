@@ -1,6 +1,7 @@
 import NewsBigItem from "@/components/v2/NewsBigItem";
 import NewsItem from "@/components/v2/NewsItem";
-import Header from "@/partials/v2/header";
+import RedCaret from "@/components/v2/RedCaret";
+import Header from "@/partials/v2/Header";
 
 const Home = () => (
   <>
@@ -11,15 +12,7 @@ const Home = () => (
           <NewsBigItem />
           <div className="jawlatt-single-news pt-3 px-0">
             <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom">
-              <svg
-                width={13}
-                height={25}
-                viewBox="0 0 13 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M0 12.48L12.48 0V24.96L0 12.48Z" fill="#D93932" />
-              </svg>
+              <RedCaret />
               موضوعات تهمك
             </h3>
           </div>
@@ -40,16 +33,7 @@ const Home = () => (
             >
               <div className="jawlatt-single-news pt-3">
                 <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title">
-                  549 |
-                  <svg
-                    width="{13}"
-                    height="{25}"
-                    viewBox="0 0 13 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M0 12.48L12.48 0V24.96L0 12.48Z" fill="#EA5153" />
-                  </svg>
+                  <RedCaret />
                   موضوعات تهمك
                 </h3>
               </div>
@@ -154,15 +138,7 @@ const Home = () => (
           </div>
           <div className="jawlatt-single-news pt-3 px-0">
             <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom">
-              <svg
-                width={13}
-                height={25}
-                viewBox="0 0 13 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M0 12.48L12.48 0V24.96L0 12.48Z" fill="#D93932" />
-              </svg>
+              <RedCaret />
               موضوعات تهمك
             </h3>
           </div>

@@ -5,7 +5,7 @@ const RelatedNewsBigItem = ({ containerClassName }) => {
         <div className="row g-0 flex-column">
           <div>
             <img
-              src="images/single.png"
+              src="/images/single.png"
               className="img-fluid rounded-start"
               alt="..."
             />
@@ -15,7 +15,7 @@ const RelatedNewsBigItem = ({ containerClassName }) => {
               <p className="card-text">
                 <img
                   style={{ marginLeft: 5 }}
-                  src="images/news-label.png"
+                  src="/images/news-label.png"
                   alt="label"
                 />
                 <small className="text-muted">اليوم السابع</small>
