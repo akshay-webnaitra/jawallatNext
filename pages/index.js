@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import JawlattLink from "@/components/JawlattLink";
 import Header from "@/partials/header";
+import HeaderV2 from "@/partials/v2/Header";
 import Footer from "@/partials/footer";
 import NewsMainPost from "@/components/NewsMainPost";
 import NewsCard from "@/components/NewsCard";
@@ -63,7 +64,8 @@ const Home = () => {
       </Head>
 
       <Header />
-      <TrendingNews tags={tags} />
+      <HeaderV2 />
+      {/* <TrendingNews tags={tags} /> */}
       <div className="d-lg-block">
         <NewsTicker items={ticker} />
       </div>

@@ -907,3 +907,18 @@ input:checked + .custom-switch-label:before {
 .moon-icon {
   right: 5px;
 }
+
+/*---*/
+.jawlatt-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+}
+
+.jawlatt-search {
+  display: none;
+}
+.jawlatt-search.jawlatt-search-active {
+  display: block;
+}
