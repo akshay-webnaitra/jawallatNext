@@ -1,7 +1,7 @@
 import RedCaret from "@/components/v2/RedCaret";
 import Header from "@/partials/v2/Header";
+import Sidebar from "@/partials/v2/Sidebar";
 import NewsItem from "@/components/v2/NewsItem";
-import CategorySlider from "@/components/v2/CategorySlider";
 
 const Economic = () => {
   return (
@@ -147,7 +147,9 @@ const Economic = () => {
                           className="img-fluid"
                         />
                         <div className="jawlatt-card1-heading px-2">
-                          <h4 className="mt-2 px-1 jawlatt-right-border">إعلان</h4>
+                          <h4 className="mt-2 px-1 jawlatt-right-border">
+                            إعلان
+                          </h4>
                           <p>أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة</p>
                           <a
                             href="#"
@@ -168,7 +170,9 @@ const Economic = () => {
                           className="img-fluid"
                         />
                         <div className="jawlatt-card1-heading px-2">
-                          <h4 className="mt-2 px-1 jawlatt-right-border">إعلان</h4>
+                          <h4 className="mt-2 px-1 jawlatt-right-border">
+                            إعلان
+                          </h4>
                           <p>أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة</p>
                           <a
                             href="#"
@@ -189,7 +193,9 @@ const Economic = () => {
                           className="img-fluid"
                         />
                         <div className="jawlatt-card1-heading px-2">
-                          <h4 className="mt-2 px-1 jawlatt-right-border">إعلان</h4>
+                          <h4 className="mt-2 px-1 jawlatt-right-border">
+                            إعلان
+                          </h4>
                           <p>أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة</p>
                           <a
                             href="#"
@@ -210,7 +216,9 @@ const Economic = () => {
                           className="img-fluid"
                         />
                         <div className="jawlatt-card1-heading px-2">
-                          <h4 className="mt-2 px-1 jawlatt-right-border">إعلان</h4>
+                          <h4 className="mt-2 px-1 jawlatt-right-border">
+                            إعلان
+                          </h4>
                           <p>أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة</p>
                           <a
                             href="#"
@@ -240,7 +248,7 @@ const Economic = () => {
             </div>
           </div>
 
-          <div className="col-md-3 jawlatt-bnr-top-lt">
+          <Sidebar>
             <div className="card mb-3 mt-5 jawlatt-card-border">
               <div className="card-header pb-0">
                 <h5 className="card-title text-end mb-0" dir="ltr">
@@ -260,6 +268,7 @@ const Economic = () => {
                           <img
                             style={{ width: 20, marginLeft: 6 }}
                             src="/images/Group 1197.png"
+                            alt=""
                           />
                           اليوم السابع
                         </p>
@@ -283,6 +292,7 @@ const Economic = () => {
                           <img
                             style={{ width: 20, marginLeft: 6 }}
                             src="/images/Group 1198.png"
+                            alt=""
                           />
                           سكاي نيوز عربية
                         </p>
@@ -306,6 +316,7 @@ const Economic = () => {
                           <img
                             style={{ width: 20, marginLeft: 6 }}
                             src="/images/Group 1205.png"
+                            alt=""
                           />
                           مصراوي
                         </p>
@@ -329,6 +340,7 @@ const Economic = () => {
                           <img
                             style={{ width: 20, marginLeft: 6 }}
                             src="/images/Group 1206.png"
+                            alt=""
                           />
                           الجزيرة
                         </p>
@@ -352,6 +364,7 @@ const Economic = () => {
                           <img
                             style={{ width: 20, marginLeft: 6 }}
                             src="/images/Group 1207.png"
+                            alt=""
                           />
                           المصري اليوم
                         </p>
@@ -375,6 +388,7 @@ const Economic = () => {
                           <img
                             style={{ width: 20, marginLeft: 6 }}
                             src="/images/Group 1208.png"
+                            alt=""
                           />
                           سكاي نيوز عربية
                         </p>
@@ -398,6 +412,7 @@ const Economic = () => {
                           <img
                             style={{ width: 20, marginLeft: 6 }}
                             src="/images/Group 1209.png"
+                            alt=""
                           />
                           الحدث اليوم
                         </p>
@@ -430,54 +445,7 @@ const Economic = () => {
                 className="w-100"
               />
             </div>
-            <div className="jawlatt-news-image my-5">
-              <div className="row jawlatt-bg-light">
-                <div className="col-8">
-                  <h4 className="pt-2 fw-bold jawlatt-fs-1531">تطبيق عربي</h4>
-                  <p className="jawlatt-fs-945">
-                    حمل التطبيق الآن وتمتع بميزات عديدة
-                  </p>
-                  <a href="#" className="ms-1">
-                    <img src="/images/App Store.png" alt="" />
-                  </a>
-                  <a href="#">
-                    <img src="/images/App Store (1).png" alt="" />
-                  </a>
-                </div>
-                <div className="col-4 ">
-                  <img
-                    src="/images/image 1 (4).png"
-                    alt=""
-                    style={{ width: 120 }}
-                    className="img-fluid "
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="jawlatt-news-image mt-5">
-              <div className="jawlatt-social-link">
-                <a href="#" className="text-dark">
-                  <i className="fa-brands fa-tiktok"></i>
-                </a>
-                <a href="#" className="text-dark">
-                  <i className="fa-brands fa-youtube"></i>
-                </a>
-                <a href="#" className="text-dark">
-                  <i className="fa-brands fa-instagram"></i>
-                </a>
-                <a href="#" className="text-dark">
-                  <i className="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="#" className="text-dark">
-                  <i className="fa-brands fa-x-twitter"></i>
-                </a>
-              </div>
-              <p className="pt-4 text-center">
-                الشروط وسياسة الخصوصية لوحة معلومات الخصوصية يعلن حول إعلاناتنا
-                وظائفي © 2024 خبر الإخبارية. كل الحقوق محفوظة.
-              </p>
-            </div>
-          </div>
+          </Sidebar>
         </div>
       </div>
     </>

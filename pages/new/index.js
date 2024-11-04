@@ -2,6 +2,7 @@ import NewsBigItem from "@/components/v2/NewsBigItem";
 import NewsItem from "@/components/v2/NewsItem";
 import RedCaret from "@/components/v2/RedCaret";
 import Header from "@/partials/v2/Header";
+import Sidebar from "@/partials/v2/Sidebar";
 
 const Home = () => (
   <>
@@ -173,7 +174,11 @@ const Home = () => (
                   <div className="d-flex gap-2">
                     <a className="d-block text-decoration-none" href="#">
                       <p className="m-0 fw-bold text-start jawlatt-card-fs">
-                        <img style={{ width: 20 }} src="images/sky-news.png" />
+                        <img
+                          style={{ width: 20 }}
+                          src="images/sky-news.png"
+                          alt=""
+                        />
                         سكاي نيوز عربية
                       </p>
                     </a>
@@ -255,7 +260,7 @@ const Home = () => (
               alt="NewsAd"
             />
           </div>
-          <div className="card-body px-3 jawlatt-card-border ">
+          <Sidebar>
             <ul className="list-group mt-3">
               <li className="list-group-item pr-0 border-0">
                 <div className="d-flex gap-2">
@@ -424,54 +429,7 @@ const Home = () => (
                 المزيد
               </button>
             </div>
-          </div>
-          <div className="jawlatt-news-image my-5">
-            <div className="row jawlatt-bg-light">
-              <div className="col-8">
-                <h4 className="pt-2 fw-bold jawlatt-fs-1531">تطبيق عربي</h4>
-                <p className="jawlatt-fs-945">
-                  حمل التطبيق الآن وتمتع بميزات عديدة
-                </p>
-                <a href="#" className="ms-1">
-                  <img src="./images/App Store.png" alt="" />
-                </a>
-                <a href="#">
-                  <img src="./images/App Store (1).png" alt="" />
-                </a>
-              </div>
-              <div className="col-4 ">
-                <img
-                  src="/images/image 1 (4).png"
-                  alt=""
-                  style={{ width: 120 }}
-                  className="img-fluid "
-                />
-              </div>
-            </div>
-          </div>
-          <div className="jawlatt-news-image mt-5">
-            <div className="jawlatt-social-link">
-              <a href="#" className="text-dark">
-                <i className="fa-brands fa-tiktok" />
-              </a>
-              <a href="#" className="text-dark">
-                <i className="fa-brands fa-youtube" />
-              </a>
-              <a href="#" className="text-dark">
-                <i className="fa-brands fa-instagram" />
-              </a>
-              <a href="#" className="text-dark">
-                <i className="fa-brands fa-facebook-f" />
-              </a>
-              <a href="#" className="text-dark">
-                <i className="fa-brands fa-x-twitter" />
-              </a>
-            </div>
-            <p className="pt-4 text-center">
-              الشروط وسياسة الخصوصية لوحة معلومات الخصوصية يعلن حول إعلاناتنا
-              وظائفي © 2024 خبر الإخبارية. كل الحقوق محفوظة.
-            </p>
-          </div>
+          </Sidebar>
         </div>
       </div>
     </div>
