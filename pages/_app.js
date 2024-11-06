@@ -27,6 +27,7 @@ config.autoAddCss = false;
 function MyApp({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
   const { pageProps } = props;
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <>
       <SessionProvider session={pageProps.session}>
@@ -36,7 +37,8 @@ function MyApp({ Component, ...rest }) {
             strategy="lazyOnload"
           />
           <NextNProgress color={"#B4000B"} />
-          <Component {...pageProps} />
+          {/* <Component {...pageProps} /> */}
+          {getLayout(<Component {...pageProps} />)}
           <ToastContainer
             position="top-right"
             autoClose={5000}

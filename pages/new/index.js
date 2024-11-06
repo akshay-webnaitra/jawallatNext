@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
+import NewsBigItem from "@/components/v2/NewsBigItem";
+import RedCaret from "@/components/v2/RedCaret";
+import NewsItem from "@/components/v2/NewsItem";
+import Sidebar from "@/partials/v2/Sidebar";
+import MainLayout from "layout/mainLayout";
+import VideoImage from "../../assets/images/video.png";
 import { getSession } from "next-auth/react";
-import Head from "next/head";
-import Header from "@/partials/v2/Header";
-import NewsTicker from "@/components/NewsTicker";
-import { useSelector } from "react-redux";
 import { wrapper } from "@/utils/store";
 import { fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import { useMediaQuery } from "react-responsive";
-import NewsBigItem from "@/components/v2/NewsBigItem";
-import RedCaret from "@/components/v2/RedCaret";
-import NewsItem from "@/components/v2/NewsItem";
-import Sidebar from "@/partials/v2/Sidebar";
-
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -26,34 +23,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home = () => {
-  const {
-    tags,
-    ticker,
-    featured,
-    videos,
-    featured_categories,
-    homeItemHasError,
-    homeItemLoading,
-  } = useSelector(homeItemsSelector);
-
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
-
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
   return (
     <>
-      <Head>
-        <title>الرئيسية</title>
-      </Head>
-      <Header />
-      <div className="mb-4">
-        <NewsTicker items={ticker} />
-      </div>
       <div className="container">
         <div className="row">
+          {/* right side */}
           <div className="col-md-9">
             <div className="jawlatt-bnr-top-mid jawlatt-bnr-top-rt">
               <NewsBigItem />
@@ -77,6 +56,59 @@ const Home = () => {
                 </>
               ))}
               <div className="row">
+                <div
+                  className="col-md-12  px-0"
+                  style={{ backgroundColor: "#F6F8F8", borderRadius: 8 }}
+                >
+                  <div className="d-flex gap-2 pt-3">
+                    <RedCaret />
+                    <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title">
+                      المزيد
+                      <span
+                        className="arab24-text-red me-3"
+                        style={{ fontSize: 14 }}
+                      >
+                        {" "}
+                        فيديو
+                      </span>
+                    </h3>
+                  </div>
+                  <div className="p-4">
+                    <div className="row g-3">
+                      {[...Array(3)].map(() => (
+                        <div className="col-sm-6 col-lg-4">
+                          <div className="arab24-news-card">
+                            <div className="arab24-news-card-img">
+                              <img src={VideoImage.src} alt="img" />
+                            </div>
+                            <div>
+                              <p
+                                className="m-0 text-end fw-medium text-nowrap"
+                                style={{ fontSize: 10 }}
+                              >
+                                <img
+                                  style={{ minWidth: 24, height: 24 }}
+                                  src="/images/sky-news-round.png"
+                                  className="ms-2 rounded-circle"
+                                />
+                                سكاي نيوز عربية
+                              </p>
+                              <p
+                                style={{ fontSize: 14, lineHeight: 1.3 }}
+                                className="fw-bold mt-1"
+                              >
+                                باريس هيلتون تنشر الصورة الأولى لابنة زوجها
+                                كارتر ريوم في لندن
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row mt-5">
                 <div
                   className="col-md-12 py-4 px-0"
                   style={{ backgroundColor: "#F6F8F8", borderRadius: 8 }}
@@ -133,7 +165,7 @@ const Home = () => {
                   موضوعات تهمك
                 </h3>
               </div>
-              {[...Array(11)].map(() => (
+              {[...Array(7)].map(() => (
                 <>
                   <NewsItem />
                 </>
@@ -147,8 +179,8 @@ const Home = () => {
               <div className="row g-3">
                 {[...Array(4)].map(() => (
                   <div className="col-sm-6 col-lg-4 col-xl-3">
-                    <div className="card1 arabic24-card2 border bg-white">
-                      <div className="arabic24-card2-img">
+                    <div className="card1 arab24-card2 border bg-white">
+                      <div className="arab24-card2-img">
                         <img
                           src="./images/hospital-img.png"
                           alt=""
@@ -177,6 +209,7 @@ const Home = () => {
               ))}
             </div>
           </div>
+          {/* left side */}
           <div className="col-md-3 jawlatt-bnr-top-lt">
             <div className="card mb-3 jawlatt-card-border rounded-4">
               <div className="card-header py-3 pb-0">
@@ -430,4 +463,7 @@ const Home = () => {
   );
 };
 
+Home.getLayout = (page) => {
+  return <MainLayout title={"الرئيسية"}>{page}</MainLayout>;
+};
 export default Home;

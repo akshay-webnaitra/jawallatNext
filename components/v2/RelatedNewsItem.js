@@ -1,7 +1,11 @@
+import SocialIconOne from "./icons/socialIcon1";
+import SocialIconTwo from "./icons/socialIcon2";
+import SocialIconThree from "./icons/socialIcon3";
+
 const RelatedNewsItem = ({ containerClassName }) => {
   return (
     <div className={containerClassName}>
-      <div className="card">
+      <div className="card rounded-3">
         <div className="card-body p-3">
           <h5
             className="fw-medium text-dark"
@@ -28,22 +32,22 @@ const RelatedNewsItem = ({ containerClassName }) => {
                 </span>
               </p>
             </div>
-            <ul className="d-flex p-0 list-unstyled m-0 jawlatt-social-icon">
+            <ul className="d-flex p-0 gap-3 list-unstyled m-0 jawlatt-social-icon">
               <li>
                 <a href="#" className="text-dark">
-                  <i className="fa-solid fa-share" />
+                  <SocialIconThree />
                 </a>
               </li>
               <li>
                 <a href="#" className="text-dark">
-                  <i className="fa-solid fa-bookmark" />
+                  <SocialIconTwo />
                 </a>
               </li>
-              {/* <li>
+              <li>
                 <a href="#" className="text-dark">
-                  <i className="fa-solid fa-book" />
+                  <SocialIconOne />
                 </a>
-              </li> */}
+              </li>
             </ul>
           </div>
         </div>

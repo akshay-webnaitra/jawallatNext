@@ -531,14 +531,14 @@ ul.p-0.jawlatt-card-body-badge {
   border-bottom: 1px solid hsl(0deg 0% 0% / 11%);
   padding-bottom: 10px;
 }
-
+/* 
 .jawlatt-news-source {
   font-size: 15.01px;
   line-height: 31.78px;
-}
+} */
 
 .jawlatt-list-color {
-  color: #b22e39;
+  color: #b22e39 !important;
   font-size: 14.01px;
   line-height: 16.81px;
 }
@@ -604,7 +604,6 @@ ul.p-0.jawlatt-card-body-badge {
 .jawlatt-news-small-title {
   font-size: 25px;
   line-height: 30px;
-  padding-bottom: 10px;
 }
 
 .jawlatt-bg-red {

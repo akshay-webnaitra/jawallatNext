@@ -3,20 +3,21 @@ import NewsItem from "@/components/v2/NewsItem";
 import CategorySlider from "@/components/v2/CategorySlider";
 import MainLayout from "layout/mainLayout";
 import GreenCaret from "@/components/v2/GreenCaret";
-import SkyNews from "../../../../assets/images/sky-news.png";
-import NewsAdd from "../../../../assets/images/news-ad.png";
-import Group from "../../../../assets/images/group 1197.png";
-import Plus from "../../../../assets/images/group 1304.png";
+import SkyNews from "assets/images/sky-news.png";
+import NewsAdd from "assets/images/news-ad.png";
+import Group from "assets/images/group 1197.png";
+import Plus from "assets/images/group 1304.png";
 import RedCaret from "@/components/v2/RedCaret";
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
-import icon1 from "../../../../assets/images/icon1.png";
-import icon2 from "../../../../assets/images/icon2.png";
+import icon1 from "assets/images/icon1.png";
+import icon2 from "assets/images/icon2.png";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
-import Hospital from "../../../../assets/images/hospital-img.png";
+import Hospital from "assets/images/hospital-img.png";
+import Table from "@/components/v2/table";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -26,7 +27,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await store.dispatch(fetchHomeItems(session));
   }
 );
-const Category = () => {
+const Economic = () => {
   const data = [
     {
       title: " اليوم السابع",
@@ -83,99 +84,73 @@ const Category = () => {
                 </button>
               </div>
               {/* <CategorySlider /> */}
-              <div className="row jawlatt-bnr-top">
-                <div className="col-12 ">
-                  {[...Array(3)].map(() => (
-                    <NewsItem green />
-                  ))}
-                  <div className="jawlatt-news-image">
-                    <img
-                      src="/images/news-bg.png"
-                      alt="news"
-                      className="w-100"
-                    />
-                  </div>
-                  {[...Array(4)].map(() => (
-                    <NewsItem green />
-                  ))}
-                  <div className="row">
-                    <div className="col-md-12 py-5 px-0">
-                      <div className="jawlatt-news-image">
-                        <a href="#">
-                          <img
-                            src="/images/Screenshot 2024-04-20 at 4.17 3.png"
-                            alt="news"
-                            className="w-100"
-                          />
-                        </a>
-                      </div>
+              <div>
+                <div className="my-4 table-responsive">
+                  <Table />
+                </div>
+                <div className="border-bottom pb-3">
+                  <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
+                    <RedCaret />
+                    الاكثر قراءة
+                  </h3>
+                </div>
+                {[...Array(7)].map(() => (
+                  <NewsItem green />
+                ))}
+                <div className="row my-5">
+                  <div
+                    className="col-md-12 py-4 px-0"
+                    style={{ backgroundColor: "#F6F8F8", borderRadius: 8 }}
+                  >
+                    <div className="jawlatt-single-news pt-3">
+                      <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title">
+                        <RedCaret />
+                        موضوعات تهمك
+                      </h3>
                     </div>
-                  </div>
-                  <div className="border-bottom pb-3">
-                    <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
-                      <RedCaret />
-                      الاكثر قراءة
-                    </h3>
-                  </div>
-                  {[...Array(7)].map(() => (
-                    <NewsItem green />
-                  ))}
-                  <div className="row my-5">
-                    <div
-                      className="col-md-12 py-4 px-0"
-                      style={{ backgroundColor: "#F6F8F8", borderRadius: 8 }}
-                    >
-                      <div className="jawlatt-single-news pt-3">
-                        <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title">
-                          <RedCaret />
-                          موضوعات تهمك
-                        </h3>
-                      </div>
-                      <div className="jawlatt-news-image px-4 mt-4">
-                        <div className="row g-3">
-                          {[...Array(4)].map(() => (
-                            <div className="col-sm-6 col-lg-4 col-xl-3">
-                              <div className="card1 pb-4 bg-white">
-                                <div>
-                                  <img
-                                    src={Hospital.src}
-                                    alt="img"
-                                    className="img-fluid w-100"
-                                  />
-                                </div>
-                                <div className="jawlatt-card1-heading px-2">
-                                  <h4 className="my-2 px-1 jawlatt-right-border">
-                                    إعلان
-                                  </h4>
-                                  <p>
-                                    أسرة ذكية بأسعار مذهلة في مصر - لا تفوت
-                                    الفرصة
-                                  </p>
-                                  <div className="d-flex">
-                                    <a
-                                      href="#"
-                                      className=" arab24-text-gray fw-medium"
-                                    >
-                                      {" "}
-                                      ذكية بأسعار
-                                    </a>{" "}
-                                    <button className="btn p-1 px-2 border border-dark me-4 text-nowrap">
-                                      ابحث الآن
-                                    </button>
-                                  </div>
+                    <div className="jawlatt-news-image px-4 mt-4">
+                      <div className="row g-3">
+                        {[...Array(4)].map(() => (
+                          <div className="col-sm-6 col-lg-4 col-xl-3">
+                            <div className="card1 pb-4 bg-white">
+                              <div>
+                                <img
+                                  src={Hospital.src}
+                                  alt="img"
+                                  className="img-fluid w-100"
+                                />
+                              </div>
+                              <div className="jawlatt-card1-heading px-2">
+                                <h4 className="my-2 px-1 jawlatt-right-border">
+                                  إعلان
+                                </h4>
+                                <p>
+                                  أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة
+                                </p>
+                                <div className="d-flex">
+                                  <a
+                                    href="#"
+                                    className=" arab24-text-gray fw-medium"
+                                  >
+                                    {" "}
+                                    ذكية بأسعار
+                                  </a>{" "}
+                                  <button className="btn p-1 px-2 border border-dark me-4 text-nowrap">
+                                    ابحث الآن
+                                  </button>
                                 </div>
                               </div>
                             </div>
-                          ))}
-                        </div>
-                        <p className="text-start pt-3">للإعلان معنا</p>
+                          </div>
+                        ))}
                       </div>
+                      <p className="text-start pt-3">للإعلان معنا</p>
                     </div>
                   </div>
-                  {[...Array(3)].map(() => (
-                    <NewsItem green />
-                  ))}
                 </div>
+                {[...Array(3)].map(() => (
+                  <NewsItem green />
+                ))}
               </div>
             </div>
           </div>
@@ -275,11 +250,11 @@ const Category = () => {
   );
 };
 
-Category.getLayout = (page) => {
+Economic.getLayout = (page) => {
   return (
     <MainLayout title={"الرئيسية"} category>
       {page}
     </MainLayout>
   );
 };
-export default Category;
+export default Economic;

@@ -1,0 +1,15 @@
+const GreenCaret = () => {
+  return (
+    <svg
+      width={13}
+      height={25}
+      viewBox="0 0 13 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M0 12.48L12.48 0V24.96L0 12.48Z" fill="#4DB22C" />
+    </svg>
+  );
+};
+
+export default GreenCaret;

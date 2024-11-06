@@ -1,7 +1,7 @@
 const RelatedNewsBigItem = ({ containerClassName }) => {
   return (
     <div className={containerClassName}>
-      <div className="card arabic24-big-news-card mb-3 border-0">
+      <div className="card arab24-big-news-card mb-3 border-0">
         <div className="row g-0 flex-column ">
           <div className="">
             <img

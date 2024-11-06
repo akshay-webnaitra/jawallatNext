@@ -6,12 +6,12 @@ const NewsBigItem = () => {
 
   return (
     <>
-      <div className="arabic24-right-content my-4">
+      <div className="arab24-right-content my-4">
         <div className="">
           <div className="card mb-3 border-0">
             <div className="row g-4">
               <div className="col-md-5">
-                <div className="arabic24-right-image">
+                <div className="arab24-right-image">
                   <img
                     src="/images/newsImage.png"
                     className="img-fluid rounded-3"
