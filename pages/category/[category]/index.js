@@ -19,6 +19,7 @@ import JawlattShopIframe from "@/components/JawlattShopIframe";
 import Ads6 from "@/public/ads6.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import Head from "next/head";
+import HeaderV2 from "@/partials/v2/Header";
 import GoogleAds from "@/components/GoogleAds";
 
 import { wrapper } from "@/utils/store";
@@ -90,7 +91,8 @@ const CategoryPage = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
+      <HeaderV2 />
       <Head>
         <title>{category?.cat_name}</title>
       </Head>

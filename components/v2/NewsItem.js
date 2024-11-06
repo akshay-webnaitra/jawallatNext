@@ -6,18 +6,18 @@ const NewsItem = () => {
 
   return (
     <>
-      <div className="row jawlatt-right-image-left-text my-5">
+      <div className="row arabic24-newsItem-card jawlatt-right-image-left-text my-4">
         <div className="col-md-12">
-          <div className="card mb-3 border-0">
-            <div className="row g-0">
-              <div className="col-md-2">
+          <div className="card border-0">
+            <div className="row g-2">
+              <div className="col-2">
                 <img
                   src="/images/newsImage.png"
                   className="img-fluid rounded-start"
                   alt="news"
                 />
               </div>
-              <div className="col-md-10">
+              <div className="col-10">
                 <div className="card-body p-0">
                   <div className="d-flex gap-2 align-items-center">
                     <a className="d-block text-decoration-none" href="#">
@@ -86,11 +86,11 @@ const NewsItem = () => {
         </div>
       </div>
       {relatedNewsOpen ? (
-        <div className="jawlatt-mid-grey-cards">
-          <div className="row">
-            <RelatedNewsItem containerClassName="col-md-4" />
-            <RelatedNewsItem containerClassName="col-md-4" />
-            <RelatedNewsItem containerClassName="col-md-4" />
+        <div className="jawlatt-mid-grey-cards mb-3">
+          <div className="row g-2">
+            <RelatedNewsItem containerClassName="col-sm-6 col-lg-4" />
+            <RelatedNewsItem containerClassName="col-sm-6 col-lg-4" />
+            <RelatedNewsItem containerClassName="col-sm-6 col-lg-4" />
           </div>
         </div>
       ) : null}

@@ -62,17 +62,16 @@ const Home = () => {
       <Head>
         <title>الرئيسية</title>
       </Head>
-
-      <Header />
-      <HeaderV2 />
+      {/* <Header /> */}
       {/* <TrendingNews tags={tags} /> */}
-      <div className="d-lg-block">
+      <HeaderV2 />
+      <div className="d-block">
         <NewsTicker items={ticker} />
       </div>
 
       <div className={"wrapper pt-0 " + styles.jawallat_home_top_wrapper}>
         <div className="container">
-          <div className="w1 row g-3">
+          <div className="row g-3">
             <div className="col-lg-6">
               {featured_categories[0]?.news?.length > 0 && (
                 <NewsMainPost item={featured_categories[0]?.news[0]} />

@@ -1,0 +1,57 @@
+@import "./theme.scss";
+
+.arab24-text-gray {
+  color: $gray !important;
+}
+.arab24-text-red {
+  color: $red;
+}
+
+.arabic24-btn-red {
+  background: $btn-red !important;
+}
+// new homepage
+.arabic24-right-image {
+  width: 100%;
+  height: 249px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.arabic24-right-content {
+  .card-title {
+    font-size: 26px;
+  }
+}
+
+.arabic24-big-news-card {
+  small {
+    font-size: 9px;
+  }
+  h5 {
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
+.arabic24-card2 {
+  .arabic24-card2-img {
+    width: 100%;
+    height: 220px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.jawlatt-right-image-left-text {
+  @media(width < 767px){
+    .card-body {
+      margin-right: 0 !important;
+    }
+  }
+}

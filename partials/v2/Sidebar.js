@@ -1,7 +1,7 @@
 const Sidebar = ({ children }) => {
   return (
     <>
-      <div className="col-md-3 jawlatt-bnr-top-lt">
+      <div className="jawlatt-bnr-top-lt">
         {children}
         <div className="jawlatt-news-image my-5">
           <div className="row jawlatt-bg-light">

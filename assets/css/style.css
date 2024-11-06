@@ -369,10 +369,10 @@ ul.p-0.jawlatt-card-body-badge {
   font-size: 30px;
 }
 
-.jawlatt-bnr-mid-btm ul.p-0 li::marker {
+/* .jawlatt-bnr-mid-btm ul.p-0 li::marker {
   background: #4db22c !important;
   color: #4db22c !important;
-}
+} */
 
 [dir="rtl"] .slick-prev:before {
   background: #d9d9d9;
@@ -428,10 +428,10 @@ ul.p-0.jawlatt-card-body-badge {
   padding-block: 0px;
 }
 
-.jawlatt-bnr-mid-btm ul.p-0 li::marker {
+/* .jawlatt-bnr-mid-btm ul.p-0 li::marker {
   background: #4db22c !important;
   color: #4db22c !important;
-}
+} */
 
 .input-icon {
   position: relative;
@@ -705,7 +705,7 @@ ul.p-0.jawlatt-card-body-badge {
   width: 30px !important;
 }
 .jawlatt-right-border {
-  border-right: 3px solid #d93932;
+  border-right: 4px solid #d93932;
 }
 
 .jawlatt-box-right-border {

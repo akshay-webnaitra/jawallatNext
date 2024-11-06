@@ -162,7 +162,7 @@ ul.p-0.jawlatt-card-body-badge {
 .jawlatt-box a:nth-child(3) {
   border-right: 1px solid #000000;
 }
-.jawlatt-bnr-mid-btm ul.p-0 li::marker {
+/* .jawlatt-bnr-mid-btm ul.p-0 li::marker {
   background: #4db22c !important;
   color: #4db22c !important;
-}
+} */

@@ -125,8 +125,8 @@ const Header = () => {
       <header
         className={
           scrolled
-            ? "jawlatt-sticky-header jawlatt-header pt-4 pb-4 mb-3"
-            : "jawlatt-header pt-4 pb-4 mb-3"
+            ? "jawlatt-sticky-header jawlatt-header py-1 "
+            : "jawlatt-header py-1 "
         }
       >
         <div className="container">

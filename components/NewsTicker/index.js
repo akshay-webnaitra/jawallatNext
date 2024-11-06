@@ -37,26 +37,28 @@ const NewsTicker = ({ items }) => {
 
   return (
     <>
-      <div className="jawlatt-header-btm py-3 jawlatt-bottom-header-bg-color">
+      <div className=" py-3 jawlatt-bottom-header-bg-color">
         <div className="container">
-          <div className="jawlatt-header-btm-content d-flex align-items-center">
-            <div className="col-lg-10">
+          <div className="row align-items-center g-1">
+            <div className="col-md-10">
               <Slider {...news_tickets_v2}>
                 {items &&
                   items.map((item, index) => (
                     <p className="mb-0" dir="ltr" key={index}>
                       <PostLink item={item}>
-                        <a>
-                          <strong dir="ltr">{item?.news_site}</strong>{" "}
+                        <a className="arab24-text-gray fw-medium">
                           {decode(item?.news_title)}
+                          <strong dir="ltr" className="arab24-text-red ps-2">
+                            :{item?.news_site}
+                          </strong>{" "}
                         </a>
                       </PostLink>
                     </p>
                   ))}
               </Slider>
             </div>
-            <div className="col-lg-2">
-              <ul className="list-unstyled d-flex m-0 gap-2 justify-content-end">
+            <div className="col-md-2">
+              <ul className="list-unstyled d-flex m-0 gap-4 justify-content-end">
                 <li>
                   <a
                     href="#"

@@ -2,14 +2,14 @@ const RelatedNewsItem = ({ containerClassName }) => {
   return (
     <div className={containerClassName}>
       <div className="card">
-        <div className="card-body jawlatt-card-body-space">
+        <div className="card-body p-3">
           <h5
-            className="fw-semibold text-dark"
-            style={{ fontSize: "14.71px", lineHeight: "19.9px" }}
+            className="fw-medium text-dark"
+            style={{ fontSize: "14", lineHeight: "19.9px" }}
           >
             يرى ترامب أخيرًا عواقب فمه الكبير في محاكمة الصمت بشأن الأموال.....
           </h5>
-          <div className="jawlatt-mid-grey-card-content d-flex flex-row justify-content-between align-items-center">
+          <div className="jawlatt-mid-grey-card-content d-flex justify-content-between align-items-center mt-2">
             <div className="card-text d-flex align-items-center gap-1">
               <img
                 src="/images/sadaElBada.png"
@@ -39,11 +39,11 @@ const RelatedNewsItem = ({ containerClassName }) => {
                   <i className="fa-solid fa-bookmark" />
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="text-dark">
                   <i className="fa-solid fa-book" />
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
