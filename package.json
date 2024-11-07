@@ -19,6 +19,7 @@
     "apisauce": "^2.1.6",
     "babel-plugin-macros": "^3.1.0",
     "bootstrap": "^5.2.0",
+    "bootstrap-icons": "^1.11.3",
     "html-entities": "^2.3.3",
     "lodash": "^4.17.21",
     "moment-hijri": "^2.1.2",

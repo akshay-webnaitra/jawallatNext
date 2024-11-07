@@ -7,6 +7,7 @@ import "../styles/globals.css";
 import "../assets/css/style.css";
 import "../assets/css/media.css";
 import "../assets/css/article.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../assets/scss/global.scss";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
