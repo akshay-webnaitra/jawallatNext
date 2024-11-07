@@ -1,0 +1,166 @@
+import Sidebar from "@/partials/v2/Sidebar";
+import NewsItem from "@/components/v2/NewsItem";
+import MainLayout from "layout/mainLayout";
+import NewsAdd from "assets/images/news-ad.png";
+import RedCaret from "@/components/v2/RedCaret";
+import { getSession } from "next-auth/react";
+import { wrapper } from "@/utils/store";
+import { fetchCategories } from "@/slices/categories";
+import { fetchSources } from "@/slices/sources";
+import { fetchServerItem } from "@/slices/serverItems";
+import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
+import Plus from "../../../assets/images/+.png";
+import Share from "../../../assets/images/group 6736.png";
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    const session = await getSession(context);
+    await store.dispatch(fetchSources(session));
+    await store.dispatch(fetchCategories(session));
+    await store.dispatch(fetchServerItem(session));
+    await store.dispatch(fetchHomeItems(session));
+  }
+);
+const Fan = () => {
+  return (
+    <>
+      <section>
+        <div className="container">
+          <div className="row g-3">
+            {/* right side */}
+            <div className="col-md-9">
+              <div className="ps-sm-5">
+                <div
+                  className="d-flex flex-column flex-sm-row align-items-center rounded-3 p-4"
+                  style={{ background: "#d9d9d948" }}
+                >
+                  <a href="#" className="px-2">
+                    {" "}
+                    <img
+                      src="/images/Group 6276.png"
+                      className="img-fluid rounded-start"
+                      alt="news"
+                      style={{ minWidth: "95px", height: "95px" }}
+                    />
+                  </a>
+                  <div className="w-100">
+                    <div className="row">
+                      <div className="col-md-8">
+                        <div className="card-body p-0 px-3">
+                          <div className="d-flex gap-2 align-items-center">
+                            <h3 style={{ fontSize: 26 }} className="fw-bold">
+                              احمد عز
+                            </h3>
+                          </div>
+                          <p
+                            className="mt-1 fw-bold"
+                            style={{ color: "#040404" }}
+                          >
+                            {" "}
+                            ممثل مصري من مواليد السيدة زينب، تاريخ ميلاد ١٥
+                            اكتوبر ١٩٨٠
+                          </p>
+                        </div>
+                      </div>
+                      <div className="col-md-4  d-flex align-items-center justify-content-center">
+                        <div className="jawlatt-review ">
+                          <div className="jawlatt-review-box d-flex gap-3 align-items-center justify-content-center flex-wrap">
+                            <div className="d-flex gap-3 align-items-center">
+                              <div className="jawlatt-review-box1">
+                                <span>
+                                  <h4 className="jawlatt-review-heading">
+                                    3.8k
+                                  </h4>
+                                  <p className="m-0 jawlatt-text-small-muted">
+                                    مشاركة
+                                  </p>
+                                </span>
+                              </div>
+                              <div className="jawlatt-review-box1">
+                                <span>
+                                  <h4 className="jawlatt-review-heading">
+                                    1.4k
+                                  </h4>
+                                  <p className="m-0 jawlatt-text-small-muted">
+                                    مشاركة
+                                  </p>
+                                </span>
+                              </div>
+                            </div>
+                            <div className="jawlatt-btn  d-flex align-items-center gap-2 justify-content-start">
+                              <a
+                                href="#"
+                                className="d-flex justify-content-center align-items-center bg-dark"
+                                style={{
+                                  borderRadius: "50px",
+                                  width: "40px",
+                                  height: "40px",
+                                }}
+                              >
+                                <img
+                                  src={Share.src}
+                                  alt="img"
+                                  style={{ width: "13px", height: "13px" }}
+                                />
+                              </a>
+                              <a
+                                href="#"
+                                className="d-flex justify-content-center align-items-center jawlatt-bg-red"
+                                style={{
+                                  borderRadius: "50px",
+                                  width: "40px",
+                                  height: "40px",
+                                }}
+                              >
+                                <img
+                                  src={Plus.src}
+                                  alt="img"
+                                  style={{ width: "13px", height: "13px" }}
+                                />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row jawlatt-bnr-top">
+                  <div className="col-12 ">
+                    {[...Array(4)].map(() => (
+                      <NewsItem green />
+                    ))}
+                    <div className="jawlatt-news-image">
+                      <img
+                        src="/images/news-bg.png"
+                        alt="news"
+                        className="w-100"
+                      />
+                    </div>
+                    {[...Array(4)].map(() => (
+                      <NewsItem green />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* left side */}
+            <div className="col-md-3 jawlatt-bnr-top-lt">
+              <div className="p-md-4 mb-3">
+                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              </div>
+              <div className="p-md-4 mb-3">
+                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              </div>
+              <Sidebar />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+Fan.getLayout = (page) => {
+  return <MainLayout title={"الرئيسية"}>{page}</MainLayout>;
+};
+export default Fan;

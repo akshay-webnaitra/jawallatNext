@@ -40,7 +40,8 @@
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
     "sass": "^1.80.6",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "eslint": "^8.30.0",
