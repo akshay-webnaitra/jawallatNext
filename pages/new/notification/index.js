@@ -258,7 +258,7 @@ const Notification = () => {
               <div className="mt-2 position-relative">
                 <select
                   className="form-select shadow-none pe-3 "
-                  style={{ border: "2px solid #00000045" }}
+                  style={{ border: "1px solid #00000045" }}
                   aria-label="Default select example"
                 >
                   <option selected>مصر</option>

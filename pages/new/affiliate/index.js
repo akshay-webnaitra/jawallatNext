@@ -91,7 +91,7 @@ const Affiliate = () => {
                 <button
                   className="btn text-nowrap fs-16 px-3 border"
                   style={{
-                    borderRadius: 16,
+                    borderRadius: 13,
                     border: "2px solid #E5E5E5",
                   }}
                 >

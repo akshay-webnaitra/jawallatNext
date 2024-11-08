@@ -350,11 +350,60 @@
 }
 
 // affiliate page
-
 .affiliate-banner {
   width: 100%;
   height: 270px;
   img {
     @include img;
+  }
+}
+
+// video page
+.video {
+  .news-video-card {
+    .news-video-card-img {
+      position: relative;
+      width: 100%;
+      height: 462px;
+      img,video {
+        @include img;
+      }
+      .video-play-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .video-play-btn{
+        opacity: 0;
+        transition: 0.2s;
+      }
+      &:hover{
+        .video-play-btn{
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// live stream page
+.live-stream {
+  .live-stream-banner {
+    width: 100%;
+    height: 489px;
+    img {
+      @include img;
+    }
+  }
+  .live-stream-card {
+    cursor: pointer;
+    .live-stream-card-img {
+      width: 100%;
+      height: 120px;
+      img {
+        @include img;
+      }
+    }
   }
 }
