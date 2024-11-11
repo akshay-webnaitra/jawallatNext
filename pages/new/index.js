@@ -37,7 +37,7 @@ const Home = () => {
             <div className="jawlatt-bnr-top-mid jawlatt-bnr-top-rt">
               <NewsBigItem />
               <div className="jawlatt-single-news pt-3 px-0">
-                <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom">
+                <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
                   <RedCaret />
                   موضوعات تهمك
                 </h3>
@@ -55,9 +55,9 @@ const Home = () => {
                   <NewsItem />
                 </>
               ))}
-              <div className="row">
+              <div>
                 <div
-                  className="col-md-12  px-0"
+                  className=""
                   style={{ backgroundColor: "#F6F8F8", borderRadius: 8 }}
                 >
                   <div className="d-flex gap-2 pt-3">
@@ -108,13 +108,13 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="row mt-5">
+              <div>
                 <div
-                  className="col-md-12 py-4 px-0"
+                  className="py-4 mt-5"
                   style={{ backgroundColor: "#F6F8F8", borderRadius: 8 }}
                 >
                   <div className="jawlatt-single-news pt-3">
-                    <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title">
+                    <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title d-flex align-items-center gap-2">
                       <RedCaret />
                       موضوعات تهمك
                     </h3>
@@ -160,7 +160,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="jawlatt-single-news pt-3 px-0">
-                <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom">
+                <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
                   <RedCaret />
                   موضوعات تهمك
                 </h3>
@@ -171,7 +171,7 @@ const Home = () => {
                 </>
               ))}
               <div className="jawlatt-single-news py-3 px-0">
-                <h3 className="fw-bold m-0 text-dark ">
+                <h3 className="fw-bold m-0 text-dark d-flex align-items-center gap-2">
                   <RedCaret />
                   موضوعات تهمك
                 </h3>
@@ -210,7 +210,7 @@ const Home = () => {
             </div>
           </div>
           {/* left side */}
-          <div className="col-md-3 jawlatt-bnr-top-lt">
+          <div className="col-md-3">
             <div className="card mb-3 jawlatt-card-border rounded-4">
               <div className="card-header py-3 pb-0">
                 <h5 className="card-title fw-bold text-end mb-0" dir="ltr">

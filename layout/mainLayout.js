@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-import { getSession } from "next-auth/react";
 import Head from "next/head";
 import Header from "@/partials/v2/Header";
 import NewsTicker from "@/components/NewsTicker";
-import { wrapper } from "@/utils/store";
 import { useSelector } from "react-redux";
 import { homeItemsSelector } from "@/slices/homeItems";
 

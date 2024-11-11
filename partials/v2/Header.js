@@ -1,20 +1,6 @@
 import { useRouter } from "next/router";
-import { signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Nav, Navbar, NavDropdown, Dropdown } from "react-bootstrap";
-
-import MessengerIcon from "@/public/messenger.svg";
-import TwitterIcon from "@/public/twitter.svg";
-import WhattsappIcon from "@/public/whattsapp.svg";
-import FacebookIcon from "@/public/facebook.svg";
-import Logo from "@/public/logo.png";
-import MobileLogo from "@/public/footer-logo.png";
-import Cart from "@/public/cart.svg";
-import Search from "@/public/search.svg";
-import User from "@/public/user-dark.svg";
-import AppStore from "@/public/app-store.png";
-import PlayStore from "@/public/play-store.png";
 import JawlattLink from "@/components/JawlattLink";
 import { useDispatch, useSelector } from "react-redux";
 import { categoriesSelector } from "@/slices/categories";
@@ -29,6 +15,7 @@ import GoogleAds from "@/components/GoogleAds";
 import useScrollingUp from "@/hooks/useScrollingUp";
 import { useMediaQuery } from "react-responsive";
 import { stripMenu, slugify } from "@/utils/index";
+import Logo from "../../assets/images/logo.png";
 
 const Header = () => {
   const scrolled = useScrollingUp();
@@ -42,15 +29,21 @@ const Header = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState(router?.query?.q);
   const [subMenuColor, setSubMenuColor] = useState("#666666");
-
   const [mainMenu, setMainMenu] = useState([]);
   const [dropdownMenu, setDropdownMenu] = useState([]);
   const [dropdownMenuName, setDropdownMenuName] = useState(null);
-
   const { serverItem, serverItemHasError, serverItemLoading } =
     useSelector(serverItemSelector);
-
   const [isMobile, setIsMobile] = useState(false);
+  const [isHeaderOpen, setIsHeaderOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsHeaderOpen(!isHeaderOpen);
+  };
+  // Close the sidebar
+  const handleClose = () => {
+    setIsHeaderOpen(false);
+  };
 
   useEffect(() => {
     setIsMobile(isMobileMedia);
@@ -122,6 +115,7 @@ const Header = () => {
 
   return (
     <>
+      {/* main header */}
       <header
         className={
           scrolled
@@ -143,59 +137,67 @@ const Header = () => {
               {serverItem.site_date}
             </p>
           </div>
-          <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mb-3">
-            <JawlattLink href="/">
-              <a className="d-flex col-lg-2 align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-                <img src="/images/logo.png" className="img-fluid w-75" />
-              </a>
-            </JawlattLink>
-            <ul className="nav col-12 col-lg-8  mb-2 justify-content-start mb-md-0">
-              {mainMenu.slice(0, 7).map((item, index) => (
-                <li
-                  key={`${item?.id}-cat-${index}`}
-                  className={
-                    stripMenu(item.name) === stripMenu(category) ? "active" : ""
-                  }
-                >
-                  <JawlattLink href={item?.link}>
-                    <a className="nav-link px-3 link-body-emphasis">
-                      {item?.name}
-                    </a>
-                  </JawlattLink>
-                </li>
-              ))}
-              <li>
-                <a
-                  href="#"
-                  className="nav-link px-3 link-body-emphasis dropdown-toggle"
-                >
-                  المزيد
+          <div
+            className={`d-flex flex-column-reverse flex-sm-row gap-3 align-items-center justify-content-between mb-3 ${
+              isHeaderOpen ? "jawlatt-header-content-active" : ""
+            }`}
+          >
+            <div className="d-flex align-items-center gap-4">
+              <JawlattLink href="/">
+                <a className="logo">
+                  <img src={Logo.src} alt="img" style={{ maxWidth: "unset" }} />
                 </a>
-                <ul className={"dropdown-menu text-small"}>
-                  {mainMenu.slice(7).map((item, index) => (
-                    <li
-                      key={`${item?.id}-cat-${index}`}
-                      className={
-                        stripMenu(item.name) === stripMenu(category)
-                          ? "active"
-                          : ""
-                      }
-                    >
-                      <JawlattLink href={item?.link}>
-                        <a className="dropdown-item">{item?.name}</a>
-                      </JawlattLink>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
+              </JawlattLink>
+              <ul className="nav mb-2 mb-md-0 d-none d-lg-flex">
+                {mainMenu.slice(0, 7).map((item, index) => (
+                  <li
+                    key={`${item?.id}-cat-${index}`}
+                    className={
+                      stripMenu(item.name) === stripMenu(category)
+                        ? "active"
+                        : ""
+                    }
+                  >
+                    <JawlattLink href={item?.link}>
+                      <a className="nav-link px-3 link-body-emphasis">
+                        {item?.name}
+                      </a>
+                    </JawlattLink>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    href="#"
+                    className="nav-link px-3 link-body-emphasis dropdown-toggle"
+                  >
+                    المزيد
+                  </a>
+                  <ul className={"dropdown-menu text-small"}>
+                    {mainMenu.slice(7).map((item, index) => (
+                      <li
+                        key={`${item?.id}-cat-${index}`}
+                        className={
+                          stripMenu(item.name) === stripMenu(category)
+                            ? "active"
+                            : ""
+                        }
+                      >
+                        <JawlattLink href={item?.link}>
+                          <a className="dropdown-item">{item?.name}</a>
+                        </JawlattLink>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+            </div>
             <div
-              className="col-12 col-lg-2 mb-3 mb-lg-0  d-flex gap-4 align-items-center justify-content-end"
+              className="mb-3 mb-lg-0  d-flex gap-4 align-items-center justify-content-end"
               role="search"
             >
               <a
                 href="#"
-                className="jawlatt-hdr-lt-btn text-decoration-none m-0"
+                className="jawlatt-hdr-lt-btn text-nowrap text-decoration-none m-0"
               >
                 بث مباشر
               </a>
@@ -227,6 +229,16 @@ const Header = () => {
                   </a>
                 </li>
               </ul>
+              <button
+                className="jawlatt-header-toggle-btn d-lg-none"
+                onClick={handleToggle}
+              >
+                <i
+                  className={`fa-solid ${
+                    isHeaderOpen ? "fa-xmark" : "fa-bars"
+                  }`}
+                />
+              </button>
             </div>
           </div>
         </div>
@@ -306,6 +318,42 @@ const Header = () => {
           </div>
         </div>
       </header>
+      {/* overlay header */}
+      <div className={`jawlatt-header-overlay ${isHeaderOpen ? "open" : ""}`}>
+        <div className="jawlatt-header-content">
+          <button className="jawlatt-header-close-btn" onClick={handleClose}>
+            <i className="fa-solid fa-xmark" />
+          </button>
+          <ul className="mt-5">
+            {mainMenu.slice(0, 7).map((item, index) => (
+              <li key={`${item?.id}-cat-${index}`}>
+                <JawlattLink href={item?.link}>
+                  <a className="nav-link px-3 link-body-emphasis">
+                    {item?.name}
+                  </a>
+                </JawlattLink>
+              </li>
+            ))}
+            <li>
+              <a
+                href="#"
+                className="nav-link px-3 link-body-emphasis dropdown-toggle"
+              >
+                المزيد
+              </a>
+              <ul className="dropdown-menu text-small">
+                {mainMenu.slice(7).map((item, index) => (
+                  <li key={`${item?.id}-cat-${index}`}>
+                    <JawlattLink href={item?.link}>
+                      <a className="dropdown-item">{item?.name}</a>
+                    </JawlattLink>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
       <LoginModal />
       <RegisterModal />
       <ResetPasswordModal />

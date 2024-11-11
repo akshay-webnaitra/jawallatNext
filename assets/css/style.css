@@ -24,6 +24,8 @@ body {
 [data-bs-theme="dark"] .jawlatt-heading-subtitle,
 [data-bs-theme="dark"] .jawlatt-announcement-bar-par,
 [data-bs-theme="dark"] a,
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h1 span,
 [data-bs-theme="dark"] h2,
 [data-bs-theme="dark"] h3,
 [data-bs-theme="dark"] h4,
@@ -32,7 +34,11 @@ body {
 }
 
 [data-bs-theme="dark"] .form-control {
-  background-color: #333;
+  background-color: #333 !important;
+  color: #fff;
+}
+[data-bs-theme="dark"] .auth-card {
+  background-color: rgb(31, 31, 31) !important;
   color: #fff;
 }
 
