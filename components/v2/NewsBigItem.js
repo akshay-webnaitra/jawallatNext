@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import RelatedNewsBigItem from "@/components/v2/RelatedNewsBigItem";
+import PostLink from "@/components/PostLink";
 import moment from "moment";
-import "moment/locale/ar";
 const NewsBigItem = ({ item }) => {
-  moment.locale("ar");
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
 
   return (
@@ -14,11 +13,13 @@ const NewsBigItem = ({ item }) => {
             <div className="row g-4">
               <div className="col-md-5">
                 <div className="arab24-right-image">
-                  <img
-                    src={item?.news_image_url}
-                    className="img-fluid rounded-3"
-                    alt="news"
-                  />
+                  <PostLink item={item}>
+                    <img
+                      src={item?.news_image_url}
+                      className="img-fluid rounded-3"
+                      alt="news"
+                    />
+                  </PostLink>
                 </div>
               </div>
               <div className="col-md-7">
@@ -43,7 +44,9 @@ const NewsBigItem = ({ item }) => {
                     </a>
                   </div>
                   <h2 className="card-title fw-bolder mt-2">
-                    {item?.news_title}
+                    <PostLink item={item}>
+                      <a>{item?.news_title}</a>
+                    </PostLink>
                   </h2>
                   <p>{item?.news_excerpt}</p>
                   <div className="jawlatt-bnr-mid-btm d-flex flex-row-reverse justify-content-end jawlatt-gap-margin">

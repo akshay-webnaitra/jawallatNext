@@ -5,6 +5,7 @@ import SocialIconThree from "./icons/socialIcon3";
 import SocialIconTwo from "./icons/socialIcon2";
 import moment from "moment";
 import "moment/locale/ar";
+import PostLink from "../PostLink";
 const NewsItem = ({ green, item }) => {
   moment.locale("ar");
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
@@ -15,7 +16,9 @@ const NewsItem = ({ green, item }) => {
           <div className="d-flex flex-column flex-sm-row gap-4 gap-md-0">
             {/* right side */}
             <div className="arab24-newsItem-card-img">
-              <img src={item?.news_image_url} className="" alt="news" />
+              <PostLink item={item}>
+                <img src={item?.news_image_url} className="" alt="news" />
+              </PostLink>
             </div>
             {/* left side */}
             <div className="card-body p-0">
@@ -35,7 +38,7 @@ const NewsItem = ({ green, item }) => {
                 </a>
               </div>
               <h2 className="card-title fw-bolder mt-2 mt-sm-3 fs-6">
-                {item?.news_title}
+                <PostLink item={item}>{item?.news_title}</PostLink>
               </h2>
               <div className="d-flex gap-3 flex-row-reverse justify-content-end mt-sm-4">
                 <ul className="d-flex p-0 list-unstyled jawlatt-social-icon">
