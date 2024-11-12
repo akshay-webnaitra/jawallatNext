@@ -3,10 +3,11 @@ import RelatedNewsItem from "@/components/v2/RelatedNewsItem";
 import SocialIconOne from "./icons/socialIcon1";
 import SocialIconThree from "./icons/socialIcon3";
 import SocialIconTwo from "./icons/socialIcon2";
-
-const NewsItem = ({ green }) => {
+import moment from "moment";
+import "moment/locale/ar";
+const NewsItem = ({ green, item }) => {
+  moment.locale("ar");
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
-
   return (
     <>
       <div className="arab24-newsItem-card jawlatt-right-image-left-text my-4">
@@ -14,7 +15,7 @@ const NewsItem = ({ green }) => {
           <div className="d-flex flex-column flex-sm-row gap-4 gap-md-0">
             {/* right side */}
             <div className="arab24-newsItem-card-img">
-              <img src="/images/newsImage.png" className="" alt="news" />
+              <img src={item?.news_image_url} className="" alt="news" />
             </div>
             {/* left side */}
             <div className="card-body p-0">
@@ -22,7 +23,7 @@ const NewsItem = ({ green }) => {
                 <a className="d-block text-decoration-none" href="#">
                   <p className="m-0 text-end fw-semibold jawlatt-news-source">
                     <img src="/images/sky-news-round.png" className="ms-2" />
-                    سكاي نيوز عربية
+                    {item?.news_site}
                   </p>
                 </a>
                 <a
@@ -34,8 +35,7 @@ const NewsItem = ({ green }) => {
                 </a>
               </div>
               <h2 className="card-title fw-bolder mt-2 mt-sm-3 fs-6">
-                وزير الخارجية يلتقي مستشارة الرئيس الفرنسي لشؤون الشرق الأوسط -
-                ضمن سلسلة من اللقاءات الدولية لتعزيز العلاقات
+                {item?.news_title}
               </h2>
               <div className="d-flex gap-3 flex-row-reverse justify-content-end mt-sm-4">
                 <ul className="d-flex p-0 list-unstyled jawlatt-social-icon">
@@ -62,7 +62,11 @@ const NewsItem = ({ green }) => {
                     </a>
                   </li>
                 </ul>
-                <p className="jawlatt-time-text">قبل 6 ساعات</p>
+                <p className="jawlatt-time-text">
+                  {item?.created_at
+                    ? moment(item?.created_at).fromNow()
+                    : "N/A"}
+                </p>
                 <ul className="p-0 me-3" style={{ listStyleType: "disc" }}>
                   <li className={green ? "dot2" : "dot"}>
                     <a
@@ -71,7 +75,7 @@ const NewsItem = ({ green }) => {
                       } `}
                       href="#"
                     >
-                      سياسة
+                      {item?.category?.cat_name}
                     </a>
                   </li>
                 </ul>

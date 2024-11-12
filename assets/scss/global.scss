@@ -1,7 +1,76 @@
 @import "theme";
 @import "layout";
-@import 'mixins';
+@import "mixins";
 
+// dark mode
+[data-bs-theme="dark"] {
+  .jawlatt-header-overlay,
+  .jawlatt-header-content {
+    background: $dark;
+  }
+  .fa-xmark,
+  .fa-bars,
+  .fa-cloud-moon,
+  .fa-sun,
+  .fa-share,
+  .fa-bookmark,
+  .fa-book {
+    color: white !important;
+  }
+  .jawlatt-sticky-header {
+    background: $dark;
+  }
+  .arab24-right-content,
+  .arab24-newsItem-card,
+  .arab24-big-news-card {
+    background: transparent;
+    .card {
+      background: transparent;
+    }
+  }
+
+  .new-video-card,
+  .jawlatt-bottom-header-bg-color {
+    background: rgb(231 231 231 / 11%);
+  }
+  .card1 {
+    .jawlatt-card1-heading {
+      h4,
+      h3,
+      p,
+      a {
+        color: $dark !important;
+      }
+    }
+  }
+  .jawlatt-mid-grey-cards {
+    .card {
+      background: transparent;
+      h5 {
+        color: white !important;
+      }
+    }
+  }
+  .jawlatt-border-bottom {
+    border-bottom: 1px solid rgb(93, 93, 93);
+  }
+  a {
+    svg {
+      path {
+        fill: white !important;
+      }
+    }
+  }
+  .status,
+  .dot {
+    a {
+      color: #b22e39 !important;
+    }
+  }
+}
+.fa-sun {
+  color: $dark !important;
+}
 .arab24-text-gray {
   color: $gray !important;
 }
@@ -46,10 +115,13 @@
 // new homepage
 .arab24-right-image {
   width: 100%;
-  height: 249px;
+  height: 100%;
   img {
     @include img;
   }
+}
+.new-video-card {
+  background-color: #F6F8F8;
 }
 
 .arab24-right-content {
@@ -92,6 +164,7 @@
   }
   .arab24-newsItem-card-img {
     min-width: 142px;
+    width: 142px;
     height: 142px;
     img {
       @include img;
@@ -123,6 +196,27 @@
   .arab24-news-card-img {
     min-width: 94px;
     height: 94px;
+    position: relative;
+    .video-icon {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: 0.1s ease-in-out;
+      img {
+        @include img;
+        border-radius: 50%;
+      }
+    }
+    &:hover {
+      .video-icon {
+        opacity: 1;
+      }
+    }
+    cursor: pointer;
     img {
       @include img;
       border-radius: 8px;

@@ -3,13 +3,11 @@ const RelatedNewsBigItem = ({ containerClassName }) => {
     <div className={containerClassName}>
       <div className="card arab24-big-news-card mb-3 border-0">
         <div className="row g-0 flex-column ">
-          <div className="">
-            <img
-              src="/images/single.png"
-              className="img-fluid rounded-start"
-              alt="..."
-            />
-          </div>
+          <img
+            src="/images/single.png"
+            className="img-fluid rounded"
+            alt="..."
+          />
           <div>
             <div className="card-body p-0 mt-2">
               <p className="card-text mb-1">

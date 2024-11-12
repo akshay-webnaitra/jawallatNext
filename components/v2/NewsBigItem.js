@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import RelatedNewsBigItem from "@/components/v2/RelatedNewsBigItem";
-
-const NewsBigItem = () => {
+import moment from "moment";
+import "moment/locale/ar";
+const NewsBigItem = ({ item }) => {
+  moment.locale("ar");
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
 
   return (
@@ -13,7 +15,7 @@ const NewsBigItem = () => {
               <div className="col-md-5">
                 <div className="arab24-right-image">
                   <img
-                    src="/images/newsImage.png"
+                    src={item?.news_image_url}
                     className="img-fluid rounded-3"
                     alt="news"
                   />
@@ -30,7 +32,7 @@ const NewsBigItem = () => {
                       href="# "
                       style={{ fontSize: "14px", padding: "4px 10px" }}
                     >
-                      سكاي نيوز عربية
+                      {item?.news_site}
                     </a>
                     <a
                       className="jawlatt-hdr-lt-btn fw-normal text-white px-3"
@@ -41,14 +43,9 @@ const NewsBigItem = () => {
                     </a>
                   </div>
                   <h2 className="card-title fw-bolder mt-2">
-                    إسرائيل تبحث مع واشنطن بدء عملية رفح.. وخبراء يناقشون موقف
-                    مصر
+                    {item?.news_title}
                   </h2>
-                  <p>
-                    في ظل الحديث عن مناقشات بين رئيس الوزراء الإسرائيلي، بنيامين
-                    نتانياهو، الجمعة، مع الولايات المتحدة بشأن المُضي قدماً في
-                    هجوم بري على رفح بجنوب غزة.
-                  </p>
+                  <p>{item?.news_excerpt}</p>
                   <div className="jawlatt-bnr-mid-btm d-flex flex-row-reverse justify-content-end jawlatt-gap-margin">
                     <ul className="d-flex p-0 list-unstyled jawlatt-social-icon">
                       <li>
@@ -74,7 +71,11 @@ const NewsBigItem = () => {
                         </a>
                       </li>
                     </ul>
-                    <p className="jawlatt-time-text">قبل 6 ساعات</p>
+                    <p className="jawlatt-time-text">
+                      {item?.created_at
+                        ? moment(item?.created_at).fromNow()
+                        : "N/A"}
+                    </p>
                     <ul
                       className="p-0 me-3 status"
                       style={{ listStyleType: "disc" }}
@@ -84,7 +85,7 @@ const NewsBigItem = () => {
                           className="fw-semibold text-end jawlatt-list-color"
                           href="#"
                         >
-                          سياسة
+                          {item?.category?.cat_name}
                         </a>
                       </li>
                     </ul>
