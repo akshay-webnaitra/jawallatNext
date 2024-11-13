@@ -13,6 +13,7 @@ import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
+import GoogleAds from "@/components/GoogleAds";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -45,19 +46,21 @@ const Home = () => {
                   موضوعات تهمك
                 </h3>
               </div>
-              {featured_categories[0]?.news.slice(1, 4).map((item) => (
-                <div key={item?.id}>
-                  <NewsItem item={item} />
-                </div>
-              ))}
+              {Array.isArray(featured_categories) &&
+                featured_categories[0]?.news.slice(1, 4).map((item) => (
+                  <div key={item?.id}>
+                    <NewsItem item={item} />
+                  </div>
+                ))}
               <div className="jawlatt-news-image">
                 <img src="images/news-bg.png" alt="news" className="w-100" />
               </div>
-              {featured_categories[0]?.news.slice(4, 9).map((item) => (
-                <div key={item?.id}>
-                  <NewsItem item={item} />
-                </div>
-              ))}
+              {Array.isArray(featured_categories) &&
+                featured_categories[0]?.news.slice(4, 9).map((item) => (
+                  <div key={item?.id}>
+                    <NewsItem item={item} />
+                  </div>
+                ))}
               {/* news video */}
               <div className="new-video-card" style={{ borderRadius: 8 }}>
                 <div className="d-flex gap-2 pt-3">
@@ -168,21 +171,22 @@ const Home = () => {
                 </div>
               </div>
               {/* topics of interest */}
-              {featured_categories?.slice(0, 1).map((item) => (
-                <div key={item?.category_id}>
-                  <div className="jawlatt-single-news pt-3 px-0">
-                    <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
-                      <RedCaret />
-                      {item?.category_name}
-                    </h3>
-                  </div>
-                  {item?.news?.slice(0, 4).map((news) => (
-                    <div key={news?.id}>
-                      <NewsItem item={news} />
+              {Array.isArray(featured_categories) &&
+                featured_categories?.slice(0, 1).map((item) => (
+                  <div key={item?.category_id}>
+                    <div className="jawlatt-single-news pt-3 px-0">
+                      <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
+                        <RedCaret />
+                        {item?.category_name}
+                      </h3>
                     </div>
-                  ))}
-                </div>
-              ))}
+                    {item?.news?.slice(0, 4).map((news) => (
+                      <div key={news?.id}>
+                        <NewsItem item={news} />
+                      </div>
+                    ))}
+                  </div>
+                ))}
               <div className="jawlatt-single-news py-3 px-0">
                 <h3 className="fw-bold m-0 text-dark d-flex align-items-center gap-2">
                   <RedCaret />
@@ -216,21 +220,22 @@ const Home = () => {
                 ))}
               </div>
               {/* topics of interest */}
-              {featured_categories?.slice(1, 3).map((item) => (
-                <div key={item?.category_id}>
-                  <div className="jawlatt-single-news pt-3 px-0">
-                    <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
-                      <RedCaret />
-                      {item?.category_name}
-                    </h3>
-                  </div>
-                  {item?.news?.slice(0, 4).map((news) => (
-                    <div key={news?.id}>
-                      <NewsItem item={news} />
+              {Array.isArray(featured_categories) &&
+                featured_categories?.slice(1, 3).map((item) => (
+                  <div key={item?.category_id}>
+                    <div className="jawlatt-single-news pt-3 px-0">
+                      <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
+                        <RedCaret />
+                        {item?.category_name}
+                      </h3>
                     </div>
-                  ))}
-                </div>
-              ))}
+                    {item?.news?.slice(0, 4).map((news) => (
+                      <div key={news?.id}>
+                        <NewsItem item={news} />
+                      </div>
+                    ))}
+                  </div>
+                ))}
             </div>
           </div>
           {/* left side */}
@@ -273,12 +278,29 @@ const Home = () => {
                 </ul>
               </div>
             </div>
-            <div className="p-md-4 mb-3">
-              <img
-                src="images/news-ad.png"
-                className="card-img-top"
-                alt="NewsAd"
-              />
+            <div className="full-img mb-0 mb-lg-3">
+              {isMobile ? (
+                <div
+                  className={
+                    "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
+                    styles.jawallat_ads_section
+                  }
+                >
+                  <GoogleAds
+                    id="div-gpt-ad-1686735176139-0"
+                    slot="/29958771/New_Jaw_MPU_Mobile_01"
+                    width={300}
+                    height={250}
+                  />
+                </div>
+              ) : (
+                <GoogleAds
+                  id="div-gpt-ad-1686735042414-0"
+                  slot="/29958771/New_Jaw_MPU_Desktop_01"
+                  width={300}
+                  height={250}
+                />
+              )}
             </div>
             <div className="card mb-3 jawlatt-card-border rounded-4">
               <div className="card-header py-3 pb-0">

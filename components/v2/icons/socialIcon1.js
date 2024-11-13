@@ -11,51 +11,51 @@ const SocialIconOne = () => {
         <path
           d="M10.0381 1.31551V0.468521H0.721313V12.3263C0.721313 12.7943 1.10034 13.1733 1.5683 13.1733H10.8851C11.3531 13.1733 11.7321 12.7943 11.7321 12.3263V1.31551H10.0381Z"
           stroke="#4F545C"
-          stroke-width="0.846985"
-          stroke-miterlimit="10"
-          stroke-linejoin="round"
+          strokeWidth="0.846985"
+          strokeMiterlimit="10"
+          strokeLinejoin="round"
         />
         <path
           d="M8.34418 2.16251H2.41528V4.70346H8.34418V2.16251Z"
           stroke="#4F545C"
-          stroke-width="0.846985"
-          stroke-miterlimit="10"
-          stroke-linejoin="round"
+          strokeWidth="0.846985"
+          strokeMiterlimit="10"
+          strokeLinejoin="round"
         />
         <path
           d="M10.0381 1.31557V10.2089"
           stroke="#4F545C"
-          stroke-width="0.846985"
-          stroke-miterlimit="10"
-          stroke-linejoin="round"
+          strokeWidth="0.846985"
+          strokeMiterlimit="10"
+          strokeLinejoin="round"
         />
         <path
           d="M10.0381 11.0559V11.9029"
           stroke="#4F545C"
-          stroke-width="0.846985"
-          stroke-miterlimit="10"
-          stroke-linejoin="round"
+          strokeWidth="0.846985"
+          strokeMiterlimit="10"
+          strokeLinejoin="round"
         />
         <path
           d="M1.9917 6.3974H8.76758"
           stroke="#4F545C"
-          stroke-width="0.846985"
-          stroke-miterlimit="10"
-          stroke-linejoin="round"
+          strokeWidth="0.846985"
+          strokeMiterlimit="10"
+          strokeLinejoin="round"
         />
         <path
           d="M1.9917 8.09138H8.76758"
           stroke="#4F545C"
-          stroke-width="0.846985"
-          stroke-miterlimit="10"
-          stroke-linejoin="round"
+          strokeWidth="0.846985"
+          strokeMiterlimit="10"
+          strokeLinejoin="round"
         />
         <path
           d="M1.9917 9.78537H7.07361"
           stroke="#4F545C"
-          stroke-width="0.846985"
-          stroke-miterlimit="10"
-          stroke-linejoin="round"
+          strokeWidth="0.846985"
+          strokeMiterlimit="10"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

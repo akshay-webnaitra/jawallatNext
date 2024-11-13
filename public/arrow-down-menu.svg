@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="11px" height="6px" viewBox="0 0 11 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Path</title>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="homepage" transform="translate(-451.000000, -211.000000)" fill="#FFFFFF" fill-rule="nonzero">
+    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <g id="homepage" transform="translate(-451.000000, -211.000000)" fill="#FFFFFF" fillRule="nonzero">
             <g id="Group-36" transform="translate(-459.000000, 0.000000)">
                 <g id="Group-4" transform="translate(548.000000, 207.000000)">
                     <path d="M369.170371,12 C368.954198,12.0006858 368.749318,11.9035256 368.61313,11.7356906 L365.16252,7.45038762 C364.945827,7.18684016 364.945827,6.80687928 365.16252,6.54333182 L368.73458,2.25802881 C368.987098,1.95430136 369.43809,1.91273179 369.741901,2.16518059 C370.045711,2.41762938 370.087292,2.86849932 369.834774,3.17222679 L366.641353,7.0004308 L369.727613,10.8286348 C369.905996,11.0427023 369.943578,11.3409329 369.823877,11.5925431 C369.704176,11.8441533 369.449047,12.0032058 369.170371,12 Z" id="Path" transform="translate(367.500000, 7.000000) rotate(-90.000000) translate(-367.500000, -7.000000) "></path>

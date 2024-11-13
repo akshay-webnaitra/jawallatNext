@@ -9,8 +9,8 @@ const PlayBtn = () => {
     >
       <circle cx="10.1441" cy="10.4161" r="9.8415" fill="white" />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M7.46732 5.61348V14.4315L15.1831 10.0225L7.46732 5.61348Z"
         fill="#EA5153"
       />

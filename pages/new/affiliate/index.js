@@ -14,6 +14,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Banner from "../../../assets/images/affiliate-banner.png";
 import Trimmer from "../../../assets/images/barnner-img1.1.png";
+import { useMediaQuery } from "react-responsive";
+import { useEffect, useState } from "react";
+import GoogleAds from "@/components/GoogleAds";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -24,6 +27,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 const Affiliate = () => {
+  const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(isMobileMedia);
+  }, [isMobileMedia]);
   const slider = {
     arrows: true,
     infinite: true,
@@ -165,11 +173,53 @@ const Affiliate = () => {
             </div>
             {/* left side */}
             <div className="col-md-3">
-              <div className="px-md-4 mb-3">
-                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              <div className="full-img mb-0 mb-lg-3">
+                {isMobile ? (
+                  <div
+                    className={
+                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
+                      styles.jawallat_ads_section
+                    }
+                  >
+                    <GoogleAds
+                      id="div-gpt-ad-1686735176139-0"
+                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      width={300}
+                      height={250}
+                    />
+                  </div>
+                ) : (
+                  <GoogleAds
+                    id="div-gpt-ad-1686735042414-0"
+                    slot="/29958771/New_Jaw_MPU_Desktop_01"
+                    width={300}
+                    height={250}
+                  />
+                )}
               </div>
-              <div className="p-md-4 mb-3">
-                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              <div className="full-img mb-0 mb-lg-3">
+                {isMobile ? (
+                  <div
+                    className={
+                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
+                      styles.jawallat_ads_section
+                    }
+                  >
+                    <GoogleAds
+                      id="div-gpt-ad-1686735196963-0"
+                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      width={300}
+                      height={250}
+                    />
+                  </div>
+                ) : (
+                  <GoogleAds
+                    id="div-gpt-ad-1686735196963-0"
+                    slot="/29958771/New_Jaw_MPU_Desktop_01"
+                    width={300}
+                    height={250}
+                  />
+                )}
               </div>
               <Sidebar />
             </div>

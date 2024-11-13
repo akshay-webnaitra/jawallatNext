@@ -22,6 +22,9 @@ import Banner from "../../../assets/images/article-banner.png";
 import RedCaret from "@/components/v2/RedCaret";
 import Share from "@/components/v2/icons/share";
 import ShareRed from "@/components/v2/icons/shareRed";
+import GoogleAds from "@/components/GoogleAds";
+import { useMediaQuery } from "react-responsive";
+import { useEffect, useState } from "react";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -32,6 +35,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 const Article = () => {
+  const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(isMobileMedia);
+  }, [isMobileMedia]);
   const data = [
     {
       title: " اليوم السابع",
@@ -204,8 +212,25 @@ const Article = () => {
                 </div>
                 <div>
                   {[...Array(3)].map(() => (
-                    <NewsItem green />
+                    <NewsItem />
                   ))}
+                </div>
+                <div className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}>
+                  {!isMobile ? (
+                    <GoogleAds
+                      id="div-gpt-ad-1686734411945-0"
+                      slot="/29958771/New_Jaw_Leader_Desktop_02"
+                      width={728}
+                      height={90}
+                    />
+                  ) : (
+                    <GoogleAds
+                      id="div-gpt-ad-1686734836746-0"
+                      slot="/29958771/New_Jaw_Leader_Mobile_02"
+                      width={320}
+                      height={100}
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -249,8 +274,29 @@ const Article = () => {
                   </ul>
                 </div>
               </div>
-              <div className="p-md-4 mb-3">
-                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              <div className="full-img mb-0 mb-lg-3">
+                {isMobile ? (
+                  <div
+                    className={
+                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
+                      styles.jawallat_ads_section
+                    }
+                  >
+                    <GoogleAds
+                      id="div-gpt-ad-1686735176139-0"
+                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      width={300}
+                      height={250}
+                    />
+                  </div>
+                ) : (
+                  <GoogleAds
+                    id="div-gpt-ad-1686735042414-0"
+                    slot="/29958771/New_Jaw_MPU_Desktop_01"
+                    width={300}
+                    height={250}
+                  />
+                )}
               </div>
               <div className="card mb-3 jawlatt-card-border rounded-4">
                 <div className="card-header py-3 pb-0">

@@ -171,14 +171,6 @@
       border-radius: 8px;
     }
   }
-  .dot::marker {
-    color: #b22e39;
-    background: #b22e39;
-  }
-  .dot2::marker {
-    color: #36c706;
-    background: #36c706;
-  }
   @include media-query(smallest) {
     .arab24-newsItem-card-img {
       .card-title {

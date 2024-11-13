@@ -18,6 +18,9 @@ import icon2 from "assets/images/icon2.png";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import Hospital from "assets/images/hospital-img.png";
 import Table from "@/components/v2/table";
+import GoogleAds from "@/components/GoogleAds";
+import { useMediaQuery } from "react-responsive";
+import { useEffect, useState } from "react";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -28,6 +31,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 const Economic = () => {
+  const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(isMobileMedia);
+  }, [isMobileMedia]);
   const data = [
     {
       title: " اليوم السابع",
@@ -96,7 +104,7 @@ const Economic = () => {
                     </h3>
                   </div>
                   {[...Array(7)].map(() => (
-                    <NewsItem green />
+                    <NewsItem />
                   ))}
                   <div className="row my-5">
                     <div
@@ -151,7 +159,7 @@ const Economic = () => {
                     </div>
                   </div>
                   {[...Array(3)].map(() => (
-                    <NewsItem green />
+                    <NewsItem />
                   ))}
                 </div>
               </div>
@@ -196,8 +204,29 @@ const Economic = () => {
                   </ul>
                 </div>
               </div>
-              <div className="p-md-4 mb-3">
-                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              <div className="full-img mb-0 mb-lg-3">
+                {isMobile ? (
+                  <div
+                    className={
+                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
+                      styles.jawallat_ads_section
+                    }
+                  >
+                    <GoogleAds
+                      id="div-gpt-ad-1686735176139-0"
+                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      width={300}
+                      height={250}
+                    />
+                  </div>
+                ) : (
+                  <GoogleAds
+                    id="div-gpt-ad-1686735042414-0"
+                    slot="/29958771/New_Jaw_MPU_Desktop_01"
+                    width={300}
+                    height={250}
+                  />
+                )}
               </div>
               <div className="card mb-3 jawlatt-card-border rounded-4">
                 <div className="card-header py-3 pb-0">

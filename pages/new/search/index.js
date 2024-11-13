@@ -9,16 +9,69 @@ import { fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { fetchSearch, searchSelector } from "@/slices/search";
+import GoogleAds from "@/components/GoogleAds";
+import { useMediaQuery } from "react-responsive";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
     await store.dispatch(fetchSources(session));
-    await store.dispatch(fetchCategories(session));
+    await store.dispatch(
+      fetchSearch(
+        {
+          keyword: context?.query?.q,
+          category: context?.query?.category,
+          source: context?.query?.source,
+          type: context?.query?.type,
+        },
+        1,
+        () => {},
+        session
+      )
+    );
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
   }
 );
 const Search = () => {
+  const router = useRouter();
+  const { searchResults, currentPage, total, lastPage } =
+    useSelector(searchSelector);
+  const { q, category, source, type } = router.query;
+  const [searchTerm, setSearchTerm] = useState(q);
+  const [searchResultItems, setSearchResultItems] = useState([]);
+  const dispatch = useDispatch();
+  const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileMedia);
+  }, [isMobileMedia]);
+  const loadMoreResults = () => {
+    dispatch(
+      fetchSearch(
+        {
+          keyword: q,
+          category: category,
+          source: source,
+          type: type,
+        },
+        currentPage + 1,
+        (results) => {
+          if (searchResultItems.length) {
+            setSearchResultItems([...searchResultItems, ...results]);
+          } else {
+            setSearchResultItems([...searchResults, ...results]);
+          }
+        }
+      )
+    );
+  };
+  console.log(searchResults, "news");
+
   return (
     <>
       <section>
@@ -36,32 +89,98 @@ const Search = () => {
                     نتائج البحث عن “الخبز السياحي في مصر”
                   </p>
                 </div>
-                <div className="row jawlatt-bnr-top">
-                  <div className="col-12 ">
-                    {[...Array(4)].map(() => (
-                      <NewsItem green />
-                    ))}
-                    <div className="jawlatt-news-image">
-                      <img
-                        src="/images/news-bg.png"
-                        alt="news"
-                        className="w-100"
-                      />
-                    </div>
-                    {[...Array(4)].map(() => (
-                      <NewsItem green />
-                    ))}
+                <div>
+                  {Array.isArray(searchResults) &&
+                    searchResults
+                      ?.slice(0, 4)
+                      ?.map((item) => <NewsItem key={item?.id} item={item} />)}
+                  <div className="jawlatt-news-image">
+                    <img
+                      src="/images/news-bg.png"
+                      alt="news"
+                      className="w-100"
+                    />
                   </div>
+                  {Array.isArray(searchResults) &&
+                    searchResults
+                      ?.slice(4, 8)
+                      ?.map((item) => <NewsItem key={item?.id} item={item} />)}
+
+                  <div
+                    className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}
+                  >
+                    {!isMobile ? (
+                      <GoogleAds
+                        id="div-gpt-ad-1686734411945-0"
+                        slot="/29958771/New_Jaw_Leader_Desktop_02"
+                        width={728}
+                        height={90}
+                      />
+                    ) : (
+                      <GoogleAds
+                        id="div-gpt-ad-1686734836746-0"
+                        slot="/29958771/New_Jaw_Leader_Mobile_02"
+                        width={320}
+                        height={100}
+                      />
+                    )}
+                  </div>
+                  {Array.isArray(searchResults) &&
+                    searchResults
+                      ?.slice(8, 11)
+                      ?.map((item) => <NewsItem key={item?.id} item={item} />)}
                 </div>
               </div>
             </div>
             {/* left side */}
             <div className="col-md-3 jawlatt-bnr-top-lt">
-              <div className="p-md-4 mb-3">
-                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              <div className="full-img mb-0 mb-lg-3">
+                {isMobile ? (
+                  <div
+                    className={
+                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
+                      styles.jawallat_ads_section
+                    }
+                  >
+                    <GoogleAds
+                      id="div-gpt-ad-1686735176139-0"
+                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      width={300}
+                      height={250}
+                    />
+                  </div>
+                ) : (
+                  <GoogleAds
+                    id="div-gpt-ad-1686735042414-0"
+                    slot="/29958771/New_Jaw_MPU_Desktop_01"
+                    width={300}
+                    height={250}
+                  />
+                )}
               </div>
-              <div className="p-md-4 mb-3">
-                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
+              <div className="full-img mb-0 mb-lg-3">
+                {isMobile ? (
+                  <div
+                    className={
+                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
+                      styles.jawallat_ads_section
+                    }
+                  >
+                    <GoogleAds
+                      id="div-gpt-ad-1686735196963-0"
+                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      width={300}
+                      height={250}
+                    />
+                  </div>
+                ) : (
+                  <GoogleAds
+                    id="div-gpt-ad-1686735196963-0"
+                    slot="/29958771/New_Jaw_MPU_Desktop_01"
+                    width={300}
+                    height={250}
+                  />
+                )}
               </div>
               <Sidebar />
             </div>

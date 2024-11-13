@@ -6,7 +6,7 @@ import SocialIconTwo from "./icons/socialIcon2";
 import moment from "moment";
 import "moment/locale/ar";
 import PostLink from "../PostLink";
-const NewsItem = ({ green, item }) => {
+const NewsItem = ({ item }) => {
   moment.locale("ar");
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
   return (
@@ -17,7 +17,7 @@ const NewsItem = ({ green, item }) => {
             {/* right side */}
             <div className="arab24-newsItem-card-img">
               <PostLink item={item}>
-                <img src={item?.news_image_url} className="" alt="news" />
+                <img src={item?.news_image_url} className="border" alt="news" />
               </PostLink>
             </div>
             {/* left side */}
@@ -70,12 +70,16 @@ const NewsItem = ({ green, item }) => {
                     ? moment(item?.created_at).fromNow()
                     : "N/A"}
                 </p>
-                <ul className="p-0 me-3" style={{ listStyleType: "disc" }}>
-                  <li className={green ? "dot2" : "dot"}>
+                <ul className="p-0 me-3">
+                  <li
+                    style={{
+                      listStyleType: "disc",
+                      color: item?.category?.cat_color,
+                    }}
+                  >
                     <a
-                      className={`text-decoration-none fw-semibold text-end ${
-                        green ? " arab24-green" : "jawlatt-list-color"
-                      } `}
+                      className={`text-decoration-none fw-semibold text-end`}
+                      style={{ color: item?.category?.cat_color }}
                       href="#"
                     >
                       {item?.category?.cat_name}
