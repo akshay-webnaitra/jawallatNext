@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import styles from "./style.module.css";
 import icon1 from "../../../../assets/images/icon1.png";
 import icon2 from "../../../../assets/images/icon2.png";
 import Hospital from "../../../../assets/images/hospital-img.png";
 import SkyNews from "../../../../assets/images/sky-news.png";
-import NewsAdd from "../../../../assets/images/news-ad.png";
-import Group from "../../../../assets/images/group 1197.png";
-import Plus from "../../../../assets/images/group 1304.png";
 import { useSelector, useDispatch } from "react-redux";
 import { wrapper } from "@/utils/store";
 import {
@@ -24,12 +22,17 @@ import RedCaret from "@/components/v2/RedCaret";
 import Sidebar from "@/partials/v2/Sidebar";
 import MainLayout from "layout/mainLayout";
 import GoogleAds from "@/components/GoogleAds";
+import Table from "@/components/v2/table";
+import CategorySlider from "@/components/v2/CategorySlider";
+import InfiniteScroll from "react-infinite-scroller";
+import { fetchHomeItems } from "@/slices/homeItems";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
     await store.dispatch(fetchCategories(session));
     await store.dispatch(fetchSources());
+    await store.dispatch(fetchHomeItems(session));
     await store.dispatch(
       fetchCategoriesItems(context.query.category, null, null, session)
     );
@@ -42,33 +45,7 @@ const CategoryPage = () => {
   const [nextPage, setNextPage] = useState(2);
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
-  const data = [
-    {
-      title: " اليوم السابع",
-    },
-    {
-      title: " سكاي نيوز عربية",
-    },
-    {
-      title: " مصراوي",
-    },
-    {
-      title: "  الجزيرة",
-    },
-    {
-      title: "  المصري اليوم",
-    },
-    {
-      title: "  سكاي نيوز عربية",
-    },
-    {
-      title: " الحدث اليوم",
-    },
-  ];
-  useEffect(() => {
-    setIsMobile(isMobileMedia);
-  }, [isMobileMedia]);
-
+  const dispatch = useDispatch();
   const router = useRouter();
   const {
     videos,
@@ -78,22 +55,17 @@ const CategoryPage = () => {
     news,
     lastPage,
     main_news,
+    related_news,
+    categoriesItemHasError,
+    categoriesItemLoading,
   } = useSelector(categoriesSelector);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setIsMobile(isMobileMedia);
-  }, [isMobileMedia]);
+  const categoryName = router.query.category;
 
   const takeAndSkip = (array, skip, n) => {
     let skippedArray = array.slice(skip - 1, skip + n);
     return skippedArray;
   };
-
-  useEffect(() => {
-    setloadMoreNews([]);
-  }, [router]);
 
   const loadNextPage = () => {
     dispatch(
@@ -103,48 +75,79 @@ const CategoryPage = () => {
       })
     );
   };
+  useEffect(() => {
+    setloadMoreNews([]);
+  }, [categoryName]);
+  useEffect(() => {
+    setIsMobile(isMobileMedia);
+  }, [isMobileMedia]);
 
   return (
     <>
-      <section>
+      <section className="notification">
         <div className="container">
-          <div className="row g-3 mt-5">
+          <div className="row g-3">
+            <div className="col-12">
+              {categoryName === "رياضة" && (
+                <>
+                  <div className="border-bottom pb-3">
+                    <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
+                      <RedCaret />| فن
+                    </h3>
+                  </div>
+                  <CategorySlider />
+                </>
+              )}
+            </div>
             {/* right side */}
             <div className="col-md-9">
               <div className="ps-sm-5">
+                {categoryName !== "رياضة" && (
+                  <>
+                    <div className="border-bottom pb-3">
+                      <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
+                        <GreenCaret />| {category?.cat_name}
+                      </h3>
+                    </div>
+                    <div className="d-flex flex-wrap gap-2 mt-3">
+                      <button className="btn btn-dark arab24-bg-black">
+                        <img
+                          src={icon2.src}
+                          style={{ width: 26, height: 26 }}
+                          className="ms-1"
+                          alt="img"
+                        />{" "}
+                        أسعار الذهب
+                      </button>
+                      <button className="btn btn-dark arab24-bg-black">
+                        <img
+                          src={icon1.src}
+                          style={{ width: 26, height: 26 }}
+                          className="ms-1"
+                          alt="img"
+                        />{" "}
+                        أسعار الصرف
+                      </button>
+                    </div>
+                  </>
+                )}
+                {categoryName === "إقتصاد" && (
+                  <div className="my-4 table-responsive">
+                    <Table />
+                  </div>
+                )}
                 <div className="border-bottom pb-3">
                   <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
-                    <GreenCaret />| {category?.cat_name}
+                    <RedCaret />| الاكثر قراءة
                   </h3>
                 </div>
-                <div className="d-flex flex-wrap gap-2 mt-3">
-                  <button className="btn btn-dark arab24-bg-black">
-                    <img
-                      src={icon2.src}
-                      style={{ width: 26, height: 26 }}
-                      className="ms-1"
-                      alt="img"
-                    />{" "}
-                    أسعار الذهب
-                  </button>
-                  <button className="btn btn-dark arab24-bg-black">
-                    <img
-                      src={icon1.src}
-                      style={{ width: 26, height: 26 }}
-                      className="ms-1"
-                      alt="img"
-                    />{" "}
-                    أسعار الصرف
-                  </button>
-                </div>
-                {/* <CategorySlider /> */}
                 <div className="row jawlatt-bnr-top">
                   <div className="col-12 ">
                     {Array.isArray(news) &&
                       news
                         ?.slice(0, 3)
                         ?.map((item) => (
-                          <NewsItem key={item?.id} item={item} green />
+                          <NewsItem key={item?.id} item={item} />
                         ))}
                     <div className="jawlatt-news-image">
                       <img
@@ -157,21 +160,8 @@ const CategoryPage = () => {
                       news
                         ?.slice(3, 7)
                         ?.map((item) => (
-                          <NewsItem key={item?.id} item={item} green />
+                          <NewsItem key={item?.id} item={item} />
                         ))}
-                    {/* <div className="row">
-                      <div className="col-md-12 py-5 px-0">
-                        <div className="jawlatt-news-image">
-                          <a href="#">
-                            <img
-                              src="/images/Screenshot 2024-04-20 at 4.17 3.png"
-                              alt="news"
-                              className="w-100"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    </div> */}
                     <div
                       className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}
                     >
@@ -201,7 +191,7 @@ const CategoryPage = () => {
                       news
                         ?.slice(7, 13)
                         ?.map((item) => (
-                          <NewsItem key={item?.id} item={item} green />
+                          <NewsItem key={item?.id} item={item} />
                         ))}
                     <div className="row my-5">
                       <div
@@ -260,21 +250,41 @@ const CategoryPage = () => {
                       </div>
                     </div>
                     {Array.isArray(featured_categories) &&
-                      featured_categories?.slice(0, 4).map((item) => (
-                        <div key={item?.category_id}>
+                      featured_categories?.map((item, index) => (
+                        <div key={index}>
                           <div className="jawlatt-single-news pt-3 px-0">
                             <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
                               <RedCaret />
                               {item?.category_name}
                             </h3>
                           </div>
-                          {item?.news?.slice(0, 4).map((news) => (
+                          {item?.news?.map((news) => (
                             <div key={news?.id}>
                               <NewsItem item={news} />
                             </div>
                           ))}
                         </div>
                       ))}
+                    <div className="container wrapper mb-3 mb-lg-1">
+                      <div className="section-block">
+                        <InfiniteScroll
+                          className="row"
+                          pageStart={0}
+                          loadMore={loadNextPage}
+                          hasMore={nextPage <= lastPage && nextPage < 6}
+                          loader={
+                            <div className="loader" key={0}>
+                              جارى التحميل ...
+                            </div>
+                          }
+                          threshold={500}
+                        >
+                          {loadMoreNews?.map((item) => (
+                            <NewsItem key={item?.id} item={item} />
+                          ))}
+                        </InfiniteScroll>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

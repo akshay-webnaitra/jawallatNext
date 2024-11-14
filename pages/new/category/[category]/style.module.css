@@ -299,7 +299,7 @@
 .jawlatt_category_video_section
   .jawlatt_video_mainSec_card
   [class*="_jawallat_post_image__"]::after {
-  background: url(../../../public/play.png) no-repeat center;
+  background: url(../../../../public/play.png) no-repeat center;
   background-size: 50px;
   position: absolute;
   top: 0;

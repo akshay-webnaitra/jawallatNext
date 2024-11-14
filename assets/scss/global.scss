@@ -121,7 +121,7 @@
   }
 }
 .new-video-card {
-  background-color: #F6F8F8;
+  background-color: #f6f8f8;
 }
 
 .arab24-right-content {
@@ -232,6 +232,32 @@
       border-left: 0;
       box-shadow: none !important;
     }
+  }
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  background: white !important;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+}
+
+.slick-prev {
+  left: 10px;
+  &::before {
+    content: url("../images/slick-left-arrow.png");
+    opacity: 1 !important;
+  }
+}
+
+.slick-next {
+  right: 10px;
+  &::before {
+    content: url("../images/slick-right-arrow.png");
+    opacity: 1 !important;
   }
 }
 

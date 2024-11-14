@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { fetchSearch, searchSelector } from "@/slices/search";
 import GoogleAds from "@/components/GoogleAds";
 import { useMediaQuery } from "react-responsive";
+import InfiniteScroll from "react-infinite-scroller";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -40,8 +41,8 @@ const Search = () => {
   const router = useRouter();
   const { searchResults, currentPage, total, lastPage } =
     useSelector(searchSelector);
+  const [nextPage, setNextPage] = useState(2);
   const { q, category, source, type } = router.query;
-  const [searchTerm, setSearchTerm] = useState(q);
   const [searchResultItems, setSearchResultItems] = useState([]);
   const dispatch = useDispatch();
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
@@ -70,7 +71,12 @@ const Search = () => {
       )
     );
   };
-  console.log(searchResults, "news");
+
+  const takeAndSkip = (array, skip, n) => {
+    let skippedArray = array.slice(skip - 1, skip + n);
+    return skippedArray;
+  };
+  console.log(searchResultItems, "search");
 
   return (
     <>
@@ -129,6 +135,30 @@ const Search = () => {
                     searchResults
                       ?.slice(8, 11)
                       ?.map((item) => <NewsItem key={item?.id} item={item} />)}
+                </div>
+                <div className="container wrapper mb-3 mb-lg-1">
+                  <div className="section-block">
+                    <InfiniteScroll
+                      className="row"
+                      pageStart={0}
+                      loadMore={loadMoreResults}
+                      hasMore={
+                        searchResults.concat(searchResultItems).length < total
+                      }
+                      loader={
+                        <div className="loader" key={0}>
+                          جارى التحميل ...
+                        </div>
+                      }
+                      threshold={500}
+                    >
+                      {searchResults
+                        .concat(searchResultItems)
+                        .map((item, index) => (
+                          <NewsItem key={item?.id} item={item} />
+                        ))}
+                    </InfiniteScroll>
+                  </div>
                 </div>
               </div>
             </div>

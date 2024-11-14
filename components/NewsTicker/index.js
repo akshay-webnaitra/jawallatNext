@@ -39,7 +39,7 @@ const NewsTicker = ({ items, category }) => {
     <>
       <div className=" py-3 jawlatt-bottom-header-bg-color">
         <div className="container">
-          {category ? (
+          {/* {category ? (
             <div className="row justify-content-end">
               <div className="col-md-3">
                 <div className="arab24-custom-input">
@@ -61,55 +61,55 @@ const NewsTicker = ({ items, category }) => {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="row align-items-center g-1">
-              <div className="col-md-10">
-                <Slider {...news_tickets_v2}>
-                  {items &&
-                    items.map((item, index) => (
-                      <p className="mb-0" dir="ltr" key={index}>
-                        <PostLink item={item}>
-                          <a className="arab24-text-gray fw-medium">
-                            {decode(item?.news_title)}
-                            <strong dir="ltr" className="arab24-text-red ps-2">
-                              :{item?.news_site}
-                            </strong>{" "}
-                          </a>
-                        </PostLink>
-                      </p>
-                    ))}
-                </Slider>
-              </div>
-              <div className="col-md-2">
-                <ul className="list-unstyled d-flex m-0 gap-4 justify-content-end">
-                  <li>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setTheme("dark");
-                      }}
-                      className="text-decoration-none jawlatt-cmn-color"
-                    >
-                      <i className="fa-solid fa-cloud-moon fs-6" />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setTheme("light");
-                      }}
-                      className="text-decoration-none jawlatt-cmn-color"
-                    >
-                      <i className="fa-solid fa-sun fs-6" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
+          ) : ( */}
+          <div className="row align-items-center g-1">
+            <div className="col-md-10">
+              <Slider {...news_tickets_v2}>
+                {items &&
+                  items.map((item, index) => (
+                    <p className="mb-0" dir="ltr" key={index}>
+                      <PostLink item={item}>
+                        <a className="arab24-text-gray fw-medium">
+                          {decode(item?.news_title)}
+                          <strong dir="ltr" className="arab24-text-red ps-2">
+                            :{item?.news_site}
+                          </strong>{" "}
+                        </a>
+                      </PostLink>
+                    </p>
+                  ))}
+              </Slider>
             </div>
-          )}
+            <div className="col-md-2">
+              <ul className="list-unstyled d-flex m-0 gap-4 justify-content-end">
+                <li>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setTheme("dark");
+                    }}
+                    className="text-decoration-none jawlatt-cmn-color"
+                  >
+                    <i className="fa-solid fa-cloud-moon fs-6" />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setTheme("light");
+                    }}
+                    className="text-decoration-none jawlatt-cmn-color"
+                  >
+                    <i className="fa-solid fa-sun fs-6" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {/* )} */}
         </div>
       </div>
     </>
