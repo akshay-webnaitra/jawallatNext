@@ -15,7 +15,7 @@ const MainLayout = ({ children, title, category }) => {
       <div className="mb-4">
         <NewsTicker items={ticker} category={category} />
       </div>
-      <main>{children}</main>
+      <main className="mb-4">{children}</main>
     </>
   );
 };

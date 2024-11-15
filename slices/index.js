@@ -9,6 +9,7 @@ import serverItemReducer from "./serverItems";
 import sourcesReducer from "./sources";
 import tagsReducer from "./tags";
 import userReducer from "./user";
+import LiveStream from "./livestream";
 
 const rootReducer = combineReducers({
   homeItems: homeItemReducer,
@@ -21,5 +22,6 @@ const rootReducer = combineReducers({
   news: newsReducer,
   page: pageReducer,
   user: userReducer,
+  live: LiveStream,
 });
 export default rootReducer;

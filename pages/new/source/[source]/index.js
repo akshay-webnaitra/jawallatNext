@@ -20,6 +20,7 @@ import Sidebar from "@/partials/v2/Sidebar";
 import NewsItem from "@/components/v2/NewsItem";
 import { fetchHomeItems } from "@/slices/homeItems";
 import GoogleAds from "@/components/GoogleAds";
+import InfiniteScroll from "react-infinite-scroller";
 const news = [];
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -149,6 +150,26 @@ const SourcePage = () => {
                       news
                         ?.slice(8, 11)
                         ?.map((item) => <NewsItem item={item} />)}
+                  </div>
+                  <div className="container wrapper mb-3 mb-lg-1">
+                    <div className="section-block">
+                      <InfiniteScroll
+                        className="row"
+                        pageStart={0}
+                        loadMore={loadNextPage}
+                        hasMore={nextPage <= lastPage && nextPage < 6}
+                        loader={
+                          <div className="loader" key={0}>
+                            جارى التحميل ...
+                          </div>
+                        }
+                        threshold={500}
+                      >
+                        {loadMoreNews?.map((item) => (
+                          <NewsItem key={item?.id} item={item} />
+                        ))}
+                      </InfiniteScroll>
+                    </div>
                   </div>
                 </div>
               </div>
