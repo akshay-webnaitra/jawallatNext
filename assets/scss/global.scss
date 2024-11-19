@@ -67,6 +67,18 @@
       color: #b22e39 !important;
     }
   }
+  .blur-effect {
+    position: relative;
+    &::before {
+      opacity: 0;
+    }
+  }
+  .jawlatt-fs-1531 {
+    color: #000000 !important;
+  }
+  .jawlatt-fs-945 {
+    color: #1e1e1e !important;
+  }
 }
 .fa-sun {
   color: $dark !important;
@@ -234,30 +246,41 @@
     }
   }
 }
-
-.slick-prev,
-.slick-next {
-  z-index: 1;
-  background: white !important;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  @include flex-center;
-}
-
-.slick-prev {
-  left: 10px;
-  &::before {
-    content: url("../images/slick-left-arrow.png");
-    opacity: 1 !important;
+.slick-arrow {
+  .slick-prev,
+  .slick-next {
+    z-index: 1;
+    background: white !important;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    @include flex-center;
   }
 }
 
-.slick-next {
-  right: 10px;
-  &::before {
-    content: url("../images/slick-right-arrow.png");
-    opacity: 1 !important;
+.slick-arrow {
+  .slick-prev {
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    &::before {
+      content: url("../images/slick-left-arrow.png");
+      opacity: 1 !important;
+    }
+  }
+}
+
+.slick-arrow {
+  .slick-next {
+    right: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    &::before {
+      content: url("../images/slick-right-arrow.png");
+      opacity: 1 !important;
+    }
   }
 }
 
@@ -280,6 +303,7 @@
     }
     tr {
       td {
+        background: #fafafa;
         font-weight: 500;
       }
     }
@@ -315,6 +339,7 @@
       .active {
         color: $btn-red !important;
         border-color: $btn-red !important;
+        background: transparent;
       }
     }
   }
@@ -439,6 +464,7 @@
   .slick-track {
     display: flex;
   }
+
   .blur-effect {
     position: relative;
     &::before {

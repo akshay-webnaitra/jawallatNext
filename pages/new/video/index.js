@@ -96,7 +96,7 @@ const Category = () => {
     <>
       <section className="notification video">
         <div className="container">
-          <div className="row g-3 mt-3">
+          <div className="row g-5 mt-3 flex-column-reverse flex-md-row">
             {/* right side */}
             <div className="col-md-9">
               <div className="pb-3">
@@ -125,7 +125,7 @@ const Category = () => {
                   </div>
                 ))}
               </Slider>
-              <div className="ps-sm-5">
+              <div className="ps-md-5">
                 {[...Array(3)].map((_, index) => (
                   <div className="news-video-card mb-5">
                     <div className="row">
@@ -198,55 +198,57 @@ const Category = () => {
             </div>
             {/* left side */}
             <div className="col-md-3 jawlatt-bnr-top-lt">
-              <div className="full-img mb-0 mb-lg-3">
-                {isMobile ? (
-                  <div
-                    className={
-                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
-                      styles.jawallat_ads_section
-                    }
-                  >
+              <div className="left-side">
+                <div className="full-img mb-0 mb-lg-3">
+                  {isMobile ? (
+                    <div
+                      className={
+                        "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
+                        // + styles.jawallat_ads_section
+                      }
+                    >
+                      <GoogleAds
+                        id="div-gpt-ad-1686735176139-0"
+                        slot="/29958771/New_Jaw_MPU_Mobile_01"
+                        width={300}
+                        height={250}
+                      />
+                    </div>
+                  ) : (
                     <GoogleAds
-                      id="div-gpt-ad-1686735176139-0"
-                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      id="div-gpt-ad-1686735042414-0"
+                      slot="/29958771/New_Jaw_MPU_Desktop_01"
                       width={300}
                       height={250}
                     />
-                  </div>
-                ) : (
-                  <GoogleAds
-                    id="div-gpt-ad-1686735042414-0"
-                    slot="/29958771/New_Jaw_MPU_Desktop_01"
-                    width={300}
-                    height={250}
-                  />
-                )}
-              </div>
-              <div className="full-img mb-0 mb-lg-3">
-                {isMobile ? (
-                  <div
-                    className={
-                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
-                      styles.jawallat_ads_section
-                    }
-                  >
+                  )}
+                </div>
+                <div className="full-img mb-0 mb-lg-3">
+                  {isMobile ? (
+                    <div
+                      className={
+                        "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
+                        // + styles.jawallat_ads_section
+                      }
+                    >
+                      <GoogleAds
+                        id="div-gpt-ad-1686735196963-0"
+                        slot="/29958771/New_Jaw_MPU_Mobile_01"
+                        width={300}
+                        height={250}
+                      />
+                    </div>
+                  ) : (
                     <GoogleAds
                       id="div-gpt-ad-1686735196963-0"
-                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      slot="/29958771/New_Jaw_MPU_Desktop_01"
                       width={300}
                       height={250}
                     />
-                  </div>
-                ) : (
-                  <GoogleAds
-                    id="div-gpt-ad-1686735196963-0"
-                    slot="/29958771/New_Jaw_MPU_Desktop_01"
-                    width={300}
-                    height={250}
-                  />
-                )}
+                  )}
+                </div>
+                <Sidebar />
               </div>
-              <Sidebar></Sidebar>
             </div>
           </div>
         </div>

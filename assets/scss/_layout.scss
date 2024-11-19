@@ -1,4 +1,4 @@
-@import 'mixins';
+@import "mixins";
 
 .logo {
   width: 175px;
@@ -19,7 +19,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: white;
+  background-color: #191919;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 9999;
   transform: translateX(-100%);
@@ -31,13 +31,13 @@
     }
   }
   .jawlatt-header-close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    // position: absolute;
+    // top: 20px;
+    // right: 20px;
     background: transparent;
     border: none;
     font-size: 24px;
-    color: #333;
+    color: #ffffff;
     cursor: pointer;
   }
 
@@ -45,19 +45,39 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    .white-logo {
+      width: 104px;
+      height: 44px;
+      img {
+        @include img;
+      }
+    }
     ul {
       list-style: none;
       padding-left: 0;
+      li {
+        border-bottom: 1px solid #ffffff1c;
+        transition: 0.2s ease-in-out;
+        &:hover{
+          a{
+            color: #EA5153;
+          }
+        }
+        a {
+          display: block;
+          padding: 10px;
+          color: #ffffff;
+          text-decoration: none;
+        }
+      }
     }
-    a {
-      display: block;
-      padding: 10px;
-      color: #333;
-      text-decoration: none;
-    }
+ 
     @include media-query(medium) {
-      width: 250px;
-      background-color: white;
+      width: 50%;
+      padding: 20px;
+    }
+    @include media-query(smallest) {
+      width: 100%;
       padding: 20px;
     }
   }
@@ -71,5 +91,21 @@
   display: none;
   @include media-query(medium) {
     display: block;
+  }
+}
+.left-side {
+  position: sticky;
+  top: 150px;
+}
+
+.sidebar-mobile{
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-20%);
+  width: 105px;
+  height: 123px;
+  img{
+    @include img;
   }
 }

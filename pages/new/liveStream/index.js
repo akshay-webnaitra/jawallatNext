@@ -103,7 +103,7 @@ const LiveStream = () => {
     <>
       <section className="notification live-stream">
         <div className="container">
-          <div className="row g-3 mt-3">
+          <div className="row g-3 mt-3 flex-column-reverse flex-md-row">
             {/* right side */}
             <div className="col-md-9">
               <div className="ps-md-5">
@@ -163,54 +163,56 @@ const LiveStream = () => {
               </div>
             </div>
             {/* left side */}
-            <div className="col-md-3 jawlatt-bnr-top-lt">
-              <div className="full-img mb-0 mb-lg-3">
-                {isMobile ? (
-                  <div
-                    className={
-                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
-                    }
-                  >
+            <div className="col-md-3">
+              <div className="left-side">
+                <div className="full-img mb-0 mb-lg-3">
+                  {isMobile ? (
+                    <div
+                      className={
+                        "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
+                      }
+                    >
+                      <GoogleAds
+                        id="div-gpt-ad-1686735176139-0"
+                        slot="/29958771/New_Jaw_MPU_Mobile_01"
+                        width={300}
+                        height={250}
+                      />
+                    </div>
+                  ) : (
                     <GoogleAds
-                      id="div-gpt-ad-1686735176139-0"
-                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      id="div-gpt-ad-1686735042414-0"
+                      slot="/29958771/New_Jaw_MPU_Desktop_01"
                       width={300}
                       height={250}
                     />
-                  </div>
-                ) : (
-                  <GoogleAds
-                    id="div-gpt-ad-1686735042414-0"
-                    slot="/29958771/New_Jaw_MPU_Desktop_01"
-                    width={300}
-                    height={250}
-                  />
-                )}
-              </div>
-              <div className="full-img mb-0 mb-lg-3">
-                {isMobile ? (
-                  <div
-                    className={
-                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
-                    }
-                  >
+                  )}
+                </div>
+                <div className="full-img mb-0 mb-lg-3">
+                  {isMobile ? (
+                    <div
+                      className={
+                        "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
+                      }
+                    >
+                      <GoogleAds
+                        id="div-gpt-ad-1686735196963-0"
+                        slot="/29958771/New_Jaw_MPU_Mobile_01"
+                        width={300}
+                        height={250}
+                      />
+                    </div>
+                  ) : (
                     <GoogleAds
                       id="div-gpt-ad-1686735196963-0"
-                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      slot="/29958771/New_Jaw_MPU_Desktop_01"
                       width={300}
                       height={250}
                     />
-                  </div>
-                ) : (
-                  <GoogleAds
-                    id="div-gpt-ad-1686735196963-0"
-                    slot="/29958771/New_Jaw_MPU_Desktop_01"
-                    width={300}
-                    height={250}
-                  />
-                )}
+                  )}
+                </div>
+                <Sidebar />
               </div>
-              <Sidebar />
             </div>
           </div>
         </div>

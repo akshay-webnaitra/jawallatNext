@@ -1,11 +1,15 @@
 import Slider from "react-slick";
 const CategorySlider = () => {
   const CustomPrevArrow = ({ onClick }) => (
-    <div className="slick-prev" onClick={onClick}></div>
+    <div className="slick-arrow">
+      <div className="slick-prev" onClick={onClick}></div>
+    </div>
   );
 
   const CustomNextArrow = ({ onClick }) => (
-    <div className="slick-next" onClick={onClick}></div>
+    <div className="slick-arrow">
+      <div className="slick-next" onClick={onClick}></div>
+    </div>
   );
   const sliderSettings = {
     infinite: true,

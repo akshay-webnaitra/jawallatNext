@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import styles from "./style.module.css";
 import icon1 from "../../../../assets/images/icon1.png";
 import icon2 from "../../../../assets/images/icon2.png";
 import Hospital from "../../../../assets/images/hospital-img.png";
@@ -100,8 +99,8 @@ const CategoryPage = () => {
               )}
             </div>
             {/* right side */}
-            <div className="col-md-9">
-              <div className="ps-sm-5">
+            <div className="col-md-9 order-2 order-md-1">
+              <div className="ps-md-5">
                 {categoryName !== "رياضة" && (
                   <>
                     <div className="border-bottom pb-3">
@@ -110,7 +109,7 @@ const CategoryPage = () => {
                       </h3>
                     </div>
                     <div className="d-flex flex-wrap gap-2 mt-3">
-                      <button className="btn btn-dark arab24-bg-black">
+                      <button className="btn btn-dark arab24-bg-black text-white">
                         <img
                           src={icon2.src}
                           style={{ width: 26, height: 26 }}
@@ -119,7 +118,7 @@ const CategoryPage = () => {
                         />{" "}
                         أسعار الذهب
                       </button>
-                      <button className="btn btn-dark arab24-bg-black">
+                      <button className="btn btn-dark arab24-bg-black text-white">
                         <img
                           src={icon1.src}
                           style={{ width: 26, height: 26 }}
@@ -290,70 +289,75 @@ const CategoryPage = () => {
               </div>
             </div>
             {/* left side */}
-            <div className="col-md-3 jawlatt-bnr-top-lt">
-              <div className="card mb-3 jawlatt-card-border rounded-4">
-                <div className="card-header py-3 pb-0">
-                  <h5 className="card-title fw-bold text-end mb-0" dir="ltr">
-                    أخبار مصر
-                    <i className="fa-solid fa-caret-left ms-2  jawlatt-text-red" />
-                  </h5>
-                </div>
-                <div className="card-body">
-                  <ul className="list-group">
-                    {[...Array(4)].map((_, index) => (
-                      <li key={index} className="list-group-item pr-0">
-                        <div className="d-flex align-items-center gap-2">
-                          <a className="d-block text-decoration-none" href="#">
-                            <p className="m-0 fw-bold text-start jawlatt-card-fs">
-                              <img
-                                style={{ width: 20 }}
-                                src={SkyNews.src}
-                                alt="img"
-                                className="ms-1"
-                              />
-                              سكاي نيوز عربية
-                            </p>
+            <div className="col-md-3 order-1 order-md-2">
+              <div className="left-side">
+                <div className="card mb-3 jawlatt-card-border rounded-4">
+                  <div className="card-header py-3 pb-0">
+                    <h5 className="card-title fw-bold text-end mb-0" dir="ltr">
+                      أخبار مصر
+                      <i className="fa-solid fa-caret-left ms-2  jawlatt-text-red" />
+                    </h5>
+                  </div>
+                  <div className="card-body">
+                    <ul className="list-group">
+                      {[...Array(4)].map((_, index) => (
+                        <li key={index} className="list-group-item pr-0">
+                          <div className="d-flex align-items-center gap-2">
+                            <a
+                              className="d-block text-decoration-none"
+                              href="#"
+                            >
+                              <p className="m-0 fw-bold text-start jawlatt-card-fs">
+                                <img
+                                  style={{ width: 20 }}
+                                  src={SkyNews.src}
+                                  alt="img"
+                                  className="ms-1"
+                                />
+                                سكاي نيوز عربية
+                              </p>
+                            </a>
+                            <ul className="p-0 jawlatt-card-body-badge">
+                              <li>
+                                <a href="#">رياضة</a>
+                              </li>
+                            </ul>
+                          </div>
+                          <a href="#" className="text-decoration-none">
+                            إسرائيل تبحث مع واشنطن بدء عملية رفح.. وخبراء
+                            يناقشون موقف مصر
                           </a>
-                          <ul className="p-0 jawlatt-card-body-badge">
-                            <li>
-                              <a href="#">رياضة</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <a href="#" className="text-decoration-none">
-                          إسرائيل تبحث مع واشنطن بدء عملية رفح.. وخبراء يناقشون
-                          موقف مصر
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className="full-img mb-0 mb-lg-3">
-                {isMobile ? (
-                  <div
-                    className={
-                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
-                      styles.jawallat_ads_section
-                    }
-                  >
+                <div className="full-img mb-0 mb-lg-3">
+                  {isMobile ? (
+                    <div
+                      className={
+                        "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
+                        // + styles.jawallat_ads_section
+                      }
+                    >
+                      <GoogleAds
+                        id="div-gpt-ad-1686735196963-0"
+                        slot="/29958771/New_Jaw_MPU_Mobile_01"
+                        width={300}
+                        height={250}
+                      />
+                    </div>
+                  ) : (
                     <GoogleAds
                       id="div-gpt-ad-1686735196963-0"
-                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      slot="/29958771/New_Jaw_MPU_Desktop_01"
                       width={300}
                       height={250}
                     />
-                  </div>
-                ) : (
-                  <GoogleAds
-                    id="div-gpt-ad-1686735196963-0"
-                    slot="/29958771/New_Jaw_MPU_Desktop_01"
-                    width={300}
-                    height={250}
-                  />
-                )}
+                  )}
+                </div>
+                <Sidebar />
               </div>
-              <Sidebar></Sidebar>
             </div>
           </div>
         </div>

@@ -76,16 +76,15 @@ const Search = () => {
     let skippedArray = array.slice(skip - 1, skip + n);
     return skippedArray;
   };
-  console.log(searchResultItems, "search");
 
   return (
     <>
       <section>
         <div className="container">
-          <div className="row g-3 mt-5">
+          <div className="row g-3 mt-5 flex-column-reverse flex-md-row">
             {/* right side */}
             <div className="col-md-9">
-              <div className="ps-sm-5">
+              <div className="ps-md-5">
                 <div className="pb-3">
                   <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
                     <RedCaret />
@@ -164,55 +163,57 @@ const Search = () => {
             </div>
             {/* left side */}
             <div className="col-md-3 jawlatt-bnr-top-lt">
-              <div className="full-img mb-0 mb-lg-3">
-                {isMobile ? (
-                  <div
-                    className={
-                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
-                      styles.jawallat_ads_section
-                    }
-                  >
+              <div className="left-side">
+                <div className="full-img mb-0 mb-lg-3">
+                  {isMobile ? (
+                    <div
+                      className={
+                        "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
+                        // + styles.jawallat_ads_section
+                      }
+                    >
+                      <GoogleAds
+                        id="div-gpt-ad-1686735176139-0"
+                        slot="/29958771/New_Jaw_MPU_Mobile_01"
+                        width={300}
+                        height={250}
+                      />
+                    </div>
+                  ) : (
                     <GoogleAds
-                      id="div-gpt-ad-1686735176139-0"
-                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      id="div-gpt-ad-1686735042414-0"
+                      slot="/29958771/New_Jaw_MPU_Desktop_01"
                       width={300}
                       height={250}
                     />
-                  </div>
-                ) : (
-                  <GoogleAds
-                    id="div-gpt-ad-1686735042414-0"
-                    slot="/29958771/New_Jaw_MPU_Desktop_01"
-                    width={300}
-                    height={250}
-                  />
-                )}
-              </div>
-              <div className="full-img mb-0 mb-lg-3">
-                {isMobile ? (
-                  <div
-                    className={
-                      "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center " +
-                      styles.jawallat_ads_section
-                    }
-                  >
+                  )}
+                </div>
+                <div className="full-img mb-0 mb-lg-3">
+                  {isMobile ? (
+                    <div
+                      className={
+                        "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
+                        // + styles.jawallat_ads_section
+                      }
+                    >
+                      <GoogleAds
+                        id="div-gpt-ad-1686735196963-0"
+                        slot="/29958771/New_Jaw_MPU_Mobile_01"
+                        width={300}
+                        height={250}
+                      />
+                    </div>
+                  ) : (
                     <GoogleAds
                       id="div-gpt-ad-1686735196963-0"
-                      slot="/29958771/New_Jaw_MPU_Mobile_01"
+                      slot="/29958771/New_Jaw_MPU_Desktop_01"
                       width={300}
                       height={250}
                     />
-                  </div>
-                ) : (
-                  <GoogleAds
-                    id="div-gpt-ad-1686735196963-0"
-                    slot="/29958771/New_Jaw_MPU_Desktop_01"
-                    width={300}
-                    height={250}
-                  />
-                )}
+                  )}
+                </div>
+                <Sidebar />
               </div>
-              <Sidebar />
             </div>
           </div>
         </div>

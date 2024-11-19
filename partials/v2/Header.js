@@ -11,7 +11,7 @@ import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
 import ResetPasswordModal from "@/components/modals/ResetPasswordModal";
 import { setShowLogin, setShowResetPassword } from "@/slices/settings";
-import GoogleAds from "@/components/GoogleAds";
+import Whitelogo from "../../assets/images/white-logo.png";
 import useScrollingUp from "@/hooks/useScrollingUp";
 import { useMediaQuery } from "react-responsive";
 import { stripMenu, slugify } from "@/utils/index";
@@ -321,10 +321,15 @@ const Header = () => {
       {/* overlay header */}
       <div className={`jawlatt-header-overlay ${isHeaderOpen ? "open" : ""}`}>
         <div className="jawlatt-header-content">
-          <button className="jawlatt-header-close-btn" onClick={handleClose}>
-            <i className="fa-solid fa-xmark" />
-          </button>
-          <ul className="mt-5">
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="white-logo">
+              <img src={Whitelogo.src} alt="img" />
+            </div>
+            <button className="jawlatt-header-close-btn" onClick={handleClose}>
+              <i className="fa-solid fa-xmark" />
+            </button>
+          </div>
+          <ul className="mt-4">
             {mainMenu.slice(0, 7).map((item, index) => (
               <li key={`${item?.id}-cat-${index}`}>
                 <JawlattLink href={item?.link}>
