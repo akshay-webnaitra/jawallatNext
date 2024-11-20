@@ -126,11 +126,9 @@ const Header = () => {
       <div className={"d-none d-lg-block "}>
         <div className="container">
           <div className="row align-items-center">
-            <div
-              className={"col-12 text-right jawlatt-announcement-bar" }>
+            <div className={"col-12 text-right jawlatt-announcement-bar"}>
               <h3>{serverItem.site_date}</h3>
             </div>
-
           </div>
         </div>
       </div>
@@ -153,67 +151,78 @@ const Header = () => {
             <div className={"col-8 text-center " + styles.jawallat_header_ads}>
               {!isMobile ? (
                 <div className="d-block">
-      <nav
-      className={
-        !scrolled
-          ? "d-block " + styles.jawallat_navigation
-          : "d-block " + styles.jawallat_navigation + " " + styles.jawallat_navigation_scrolled
-      }
-    >
-      <div className="container">
-        <ul className={styles.jawallat_menu}>
-          <li className="">
-            <JawlattLink href="/">
-              <a>
-                <span>
-                  <i className="fa-solid fa-house"></i>
-                </span>
-              </a>
-            </JawlattLink>
-          </li>
-          {mainMenu.map((item, index) => (
-            <li
-              key={`${item?.id}-cat-${index}`}
-              className={stripMenu(item.name) === stripMenu(category) ? "active" : ""}
-            >
-              <JawlattLink href={item?.link}>
-                <a>
-                  <span>{item?.name}</span>
-                </a>
-              </JawlattLink>
-            </li>
-          ))}
-          {dropdownMenu.length ? (
-            <li className={styles.jawallat_has_sub_menu}>
-              <JawlattLink href="#">
-                <a>
-                  <span>{dropdownMenuName}</span>
-                </a>
-              </JawlattLink>
-              <ul className={styles.jawallat_sub_menu}>
-                {dropdownMenu.map((item, index) => (
-                  <li
-                    key={`${item?.id}-cat-${index}`}
-                    className={stripMenu(category) === stripMenu(item.link) ? "active" : ""}
+                  <nav
+                    className={
+                      !scrolled
+                        ? "d-block " + styles.jawallat_navigation
+                        : "d-block " +
+                          styles.jawallat_navigation +
+                          " " +
+                          styles.jawallat_navigation_scrolled
+                    }
                   >
-                    <JawlattLink href={item?.link}>
-                      <a>{item?.name}</a>
-                    </JawlattLink>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ) : null}
-        </ul>
-      </div>
-    </nav>
+                    <div className="container">
+                      <ul className={styles.jawallat_menu}>
+                        <li className="">
+                          <JawlattLink href="/">
+                            <a>
+                              <span>
+                                <i className="fa-solid fa-house"></i>
+                              </span>
+                            </a>
+                          </JawlattLink>
+                        </li>
+                        {mainMenu.map((item, index) => (
+                          <li
+                            key={`${item?.id}-cat-${index}`}
+                            className={
+                              stripMenu(item.name) === stripMenu(category)
+                                ? "active"
+                                : ""
+                            }
+                          >
+                            <JawlattLink href={item?.link}>
+                              <a>
+                                <span>{item?.name}</span>
+                              </a>
+                            </JawlattLink>
+                          </li>
+                        ))}
+                        {dropdownMenu.length ? (
+                          <li className={styles.jawallat_has_sub_menu}>
+                            <JawlattLink href="#">
+                              <a>
+                                <span>{dropdownMenuName}</span>
+                              </a>
+                            </JawlattLink>
+                            <ul className={styles.jawallat_sub_menu}>
+                              {dropdownMenu.map((item, index) => (
+                                <li
+                                  key={`${item?.id}-cat-${index}`}
+                                  className={
+                                    stripMenu(category) === stripMenu(item.link)
+                                      ? "active"
+                                      : ""
+                                  }
+                                >
+                                  <JawlattLink href={item?.link}>
+                                    <a>{item?.name}</a>
+                                  </JawlattLink>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        ) : null}
+                      </ul>
+                    </div>
+                  </nav>
                 </div>
               ) : null}
             </div>
 
             <div className={"col-2 " + styles.jawallat_header_cart}>
-              <div class="jawallat_header_cartMain gap-4">
-                                <div
+              <div className="jawallat_header_cartMain gap-4">
+                <div
                   className={"d-none d-lg-block " + styles.jawallat_header_btn}
                 >
                   <a
@@ -226,59 +235,63 @@ const Header = () => {
                 </div>
                 <div className={"ps-2 " + styles.jawallat_header_search}>
                   <span onClick={searchClick} style={{ cursor: "pointer" }}>
-                  <i class="fa-solid fa-magnifying-glass jawlatt-font-medium"></i>{" "}
+                    <i className="fa-solid fa-magnifying-glass jawlatt-font-medium"></i>{" "}
                     {searchClick.toString}
                   </span>
                 </div>
-                <div class="d-flex gap-4">
-                <ul>
-                  <li>
-                    <a
-                      href={`http://m.me/${serverItem.app_massenger}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-<i class="fa-solid fa-bell jawlatt-font-medium"></i>                    </a>
-                  </li>
-                </ul>
-
-                {status == "authenticated" ? (
-                  <Dropdown>
-                    <Dropdown.Toggle
-                      className={styles.jawlatt_user_btn}
-                      variant="success"
-                      id="logout-button"
-                    >
-                      <div className={styles.jawallat_header_topbar_userBtn}>
-                        <span>
-                          {session?.user?.first_name} {session?.user?.last_name}
-                        </span>
-                      </div>
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                      <Dropdown.Item
-                        as={JawlattLink}
-                        href="/my-news"
-                        className="dropdown-item"
+                <div className="d-flex gap-4">
+                  <ul>
+                    <li>
+                      <a
+                        href={`http://m.me/${serverItem.app_massenger}`}
+                        target="_blank"
+                        rel="noreferrer"
                       >
-                        تسجيل خروج
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() => {
-                          signOut();
-                        }}
+                        <i className="fa-solid fa-bell jawlatt-font-medium"></i>{" "}
+                      </a>
+                    </li>
+                  </ul>
+
+                  {status == "authenticated" ? (
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        className={styles.jawlatt_user_btn}
+                        variant="success"
+                        id="logout-button"
                       >
-                        Logout
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                ) : (
-                  <div className={styles.jawallat_header_topbar_userBtn}>
-                    <span onClick={loginHandleShow}><i class="fa-regular fa-circle-user jawlatt-font-medium"></i></span>
-                  </div>
-                )}
-              </div>
+                        <div className={styles.jawallat_header_topbar_userBtn}>
+                          <span>
+                            {session?.user?.first_name}{" "}
+                            {session?.user?.last_name}
+                          </span>
+                        </div>
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <Dropdown.Item
+                          as={JawlattLink}
+                          href="/my-news"
+                          className="dropdown-item"
+                        >
+                          تسجيل خروج
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => {
+                            signOut();
+                          }}
+                        >
+                          Logout
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  ) : (
+                    <div className={styles.jawallat_header_topbar_userBtn}>
+                      <span onClick={loginHandleShow}>
+                        <i className="fa-regular fa-circle-user jawlatt-font-medium"></i>
+                      </span>
+                    </div>
+                  )}
+                </div>
                 <div className={"d-lg-none " + styles.jawallat_header_search}>
                   <span onClick={loginHandleShow}>
                     <img src={User?.src} alt="user" height={30} />
@@ -439,7 +452,7 @@ const Header = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-<i class="fa-solid fa-bell jawlatt-font-medium"></i>                    </a>
+<i className="fa-solid fa-bell jawlatt-font-medium"></i>                    </a>
                   </li>
                 </ul>
 
@@ -481,7 +494,6 @@ const Header = () => {
                 )}
               </div>
             </div> */}
-
 
       {/* {subCategories.length > 0 && (
         <nav

@@ -103,8 +103,8 @@ const Economic = () => {
                       الاكثر قراءة
                     </h3>
                   </div>
-                  {[...Array(7)].map(() => (
-                    <NewsItem />
+                  {[...Array(7)].map((_, index) => (
+                    <NewsItem key={index} />
                   ))}
                   <div className="row my-5">
                     <div
@@ -119,8 +119,11 @@ const Economic = () => {
                       </div>
                       <div className="jawlatt-news-image px-4 mt-4">
                         <div className="row g-3">
-                          {[...Array(4)].map(() => (
-                            <div className="col-sm-6 col-lg-4 col-xl-3">
+                          {[...Array(4)].map((_, index) => (
+                            <div
+                              key={index}
+                              className="col-sm-6 col-lg-4 col-xl-3"
+                            >
                               <div className="card1 pb-4 bg-white">
                                 <div>
                                   <img
@@ -158,8 +161,8 @@ const Economic = () => {
                       </div>
                     </div>
                   </div>
-                  {[...Array(3)].map(() => (
-                    <NewsItem />
+                  {[...Array(3)].map((_, index) => (
+                    <NewsItem key={index} />
                   ))}
                 </div>
               </div>
@@ -176,8 +179,8 @@ const Economic = () => {
                   </div>
                   <div className="card-body">
                     <ul className="list-group">
-                      {[...Array(4)].map(() => (
-                        <li className="list-group-item pr-0">
+                      {[...Array(4)].map((_, index) => (
+                        <li key={index} className="list-group-item pr-0">
                           <div className="d-flex align-items-center gap-2">
                             <a
                               className="d-block text-decoration-none"

@@ -113,8 +113,8 @@ const Affiliate = () => {
             <div className="col-md-9">
               <div className="ps-md-5">
                 <div className="row g-2">
-                  {[...Array(12)].map(() => (
-                    <div className="col-sm-6 col-lg-4 col-xl-3">
+                  {[...Array(12)].map((_, index) => (
+                    <div key={index} className="col-sm-6 col-lg-4 col-xl-3">
                       <div className="card1 arab24-card2 border bg-white">
                         <div className="arab24-card2-img">
                           <img
@@ -144,8 +144,8 @@ const Affiliate = () => {
                       className="w-100"
                     />
                   </div>
-                  {[...Array(12)].map(() => (
-                    <div className="col-sm-6 col-lg-4 col-xl-3">
+                  {[...Array(12)].map((_, index) => (
+                    <div key={index} className="col-sm-6 col-lg-4 col-xl-3">
                       <div className="card1 arab24-card2 border bg-white">
                         <div className="arab24-card2-img">
                           <img

@@ -197,8 +197,11 @@ const Notification = () => {
                 </h3>
               </div>
               <div className="grid-container">
-                {data.map((item) => (
-                  <div className="notification-card text-center p-4">
+                {data.map((item, index) => (
+                  <div
+                    key={index}
+                    className="notification-card text-center p-4"
+                  >
                     {item.icon}
                     <p className="fs-20 fw-bold m-0 mt-1">{item.title}</p>
                   </div>
@@ -231,8 +234,9 @@ const Notification = () => {
                 </div>
               </div>
               <div className="d-flex flex-wrap gap-3 mt-4">
-                {[...Array(10)].map(() => (
+                {[...Array(10)].map((_, index) => (
                   <button
+                    key={index}
                     className="btn fs-20 px-3 position-relative notify-button"
                     style={{ borderRadius: 16, border: "2px solid #E5E5E5" }}
                   >
@@ -288,8 +292,8 @@ const Notification = () => {
                 ))}
               </Slider>
               <div className="news-channel-container mt-3">
-                {newsChannel.map((item) => (
-                  <div className="news-channel-card text-center">
+                {newsChannel.map((item, index) => (
+                  <div key={index} className="news-channel-card text-center">
                     <div className="news-channel-card-image mx-auto">
                       <img src={NewsImage.src} alt="img" />
                     </div>
@@ -378,12 +382,7 @@ const Notification = () => {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="row mb-3">
-                      <label
-                        for="inputEmail3"
-                        className="col-sm-2 col-form-label"
-                      >
-                        الإسم
-                      </label>
+                      <label className="col-sm-2 col-form-label">الإسم</label>
                       <div className="col-sm-10">
                         <input
                           type="email"
@@ -393,12 +392,7 @@ const Notification = () => {
                       </div>
                     </div>
                     <div className="row mb-3">
-                      <label
-                        for="inputPassword3"
-                        className="col-sm-2 col-form-label"
-                      >
-                        الايميل
-                      </label>
+                      <label className="col-sm-2 col-form-label">الايميل</label>
                       <div className="col-sm-10">
                         <input
                           type="password"

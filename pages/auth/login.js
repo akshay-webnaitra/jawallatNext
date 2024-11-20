@@ -37,12 +37,12 @@ const Login = () => {
         <div className="mb-4">
           <input
             type="password"
-            class="form-control shadow-none border-0"
+            className="form-control shadow-none border-0"
             id="inputPassword"
             placeholder="كلمه المرور"
           />
         </div>
-        <button type="submit" class="btn btn-primary border-0 w-100 mt-4">
+        <button type="submit" className="btn btn-primary border-0 w-100 mt-4">
           تسجيل دخول بالإيميل
         </button>
       </form>

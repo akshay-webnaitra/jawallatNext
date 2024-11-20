@@ -49,12 +49,12 @@ const Signup = () => {
         <div className="mb-4">
           <input
             type="password"
-            class="form-control shadow-none border-0"
+            className="form-control shadow-none border-0"
             id="inputPassword"
             placeholder="كلمة السر"
           />
         </div>
-        <button type="submit" class="btn btn-primary border-0 w-100 mt-4">
+        <button type="submit" className="btn btn-primary border-0 w-100 mt-4">
           تسجيل دخول
         </button>
         <div className="d-flex flex-column flex-sm-row gap-3 mt-5">

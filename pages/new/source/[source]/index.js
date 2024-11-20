@@ -67,7 +67,6 @@ const SourcePage = () => {
   const handleSourceChange = (e) => {
     router.push(`/source/${e?.target?.value}`);
   };
-  console.log(news, "news");
 
   const loadNextPage = () => {
     dispatch(
@@ -115,7 +114,9 @@ const SourcePage = () => {
                     {Array.isArray(news) &&
                       news
                         ?.slice(0, 4)
-                        ?.map((item) => <NewsItem item={item} />)}
+                        ?.map((item, index) => (
+                          <NewsItem key={index} item={item} />
+                        ))}
                     <div className="jawlatt-news-image">
                       <img
                         src="/images/news-bg.png"
@@ -126,7 +127,9 @@ const SourcePage = () => {
                     {Array.isArray(news) &&
                       news
                         ?.slice(4, 8)
-                        ?.map((item) => <NewsItem item={item} />)}
+                        ?.map((item, index) => (
+                          <NewsItem key={index} item={item} />
+                        ))}
                     <div
                       className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}
                     >
@@ -149,7 +152,9 @@ const SourcePage = () => {
                     {Array.isArray(news) &&
                       news
                         ?.slice(8, 11)
-                        ?.map((item) => <NewsItem item={item} />)}
+                        ?.map((item, index) => (
+                          <NewsItem key={index} item={item} />
+                        ))}
                   </div>
                   <div className="container wrapper mb-3 mb-lg-1">
                     <div className="section-block">

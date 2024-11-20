@@ -79,8 +79,6 @@ const LiveStream = () => {
     },
   ];
   const selectedVideo = useSelector((state) => state.live.selectedVideo);
-  console.log(selectedVideo);
-
   const dispatch = useDispatch();
   const getYouTubeEmbedUrl = (url) => {
     const regex =

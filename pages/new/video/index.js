@@ -4,7 +4,7 @@ import NewsAdd from "assets/images/news-ad.png";
 import RedCaret from "@/components/v2/RedCaret";
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
-import { fetchCategories } from "@/slices/categories";
+import { categoriesSelector, fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import Slider from "react-slick";
@@ -19,6 +19,7 @@ import VideoPlayBtn from "@/components/v2/icons/videoPlayBtn";
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import GoogleAds from "@/components/GoogleAds";
+import { useSelector } from "react-redux";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -31,6 +32,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 const Category = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
+  const { videos, news } = useSelector(categoriesSelector);
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
@@ -82,7 +84,6 @@ const Category = () => {
   };
   const handlePlay = (index) => {
     const video = videoRef.current[index];
-    console.log(video, "video");
     if (video) {
       if (video.paused) {
         video.play();
@@ -127,7 +128,7 @@ const Category = () => {
               </Slider>
               <div className="ps-md-5">
                 {[...Array(3)].map((_, index) => (
-                  <div className="news-video-card mb-5">
+                  <div key={index} className="news-video-card mb-5">
                     <div className="row">
                       <div className="col-md-8">
                         <h4 className="fw-bold">

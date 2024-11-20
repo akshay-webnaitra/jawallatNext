@@ -14,7 +14,6 @@ import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import GoogleAds from "@/components/GoogleAds";
-import "./style.module.css";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -85,6 +84,7 @@ const Home = () => {
                           <a
                             href={item?.news_video}
                             target="_blank"
+                            rel="noopener noreferrer"
                             className="arab24-news-card-img"
                           >
                             <img src={item?.news_image_url} alt="img" />
@@ -195,8 +195,8 @@ const Home = () => {
                 </h3>
               </div>
               <div className="row g-3 mb-4">
-                {[...Array(4)].map(() => (
-                  <div className="col-sm-6 col-lg-4 col-xl-3">
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="col-sm-6 col-lg-4 col-xl-3">
                     <div className="card1 arab24-card2 border bg-white">
                       <div className="arab24-card2-img">
                         <img
@@ -251,8 +251,8 @@ const Home = () => {
                 </div>
                 <div className="card-body">
                   <ul className="list-group">
-                    {[...Array(4)].map(() => (
-                      <li className="list-group-item pr-0">
+                    {[...Array(4)].map((_, index) => (
+                      <li key={index} className="list-group-item pr-0">
                         <div className="d-flex align-items-center gap-2">
                           <a className="d-block text-decoration-none" href="#">
                             <p className="m-0 fw-bold text-start jawlatt-card-fs">
@@ -285,7 +285,6 @@ const Home = () => {
                   <div
                     className={
                       "wrapper wrapper-sm p-2 mb-1 mb-lg-5 text-center "
-                      //  + styles.jawallat_ads_section
                     }
                   >
                     <GoogleAds

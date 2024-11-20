@@ -32,7 +32,7 @@ const ForgetPassword = () => {
             placeholder="البريد الإلكتروني"
           />
         </div>
-        <button type="submit" class="btn btn-primary border-0 w-100">
+        <button type="submit" className="btn btn-primary border-0 w-100">
           التالي
         </button>
       </form>

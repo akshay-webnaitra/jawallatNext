@@ -51,7 +51,7 @@ const Verify = () => {
           لم أستلم كود التفعيل،
           <span className="arab24-text-red"> إرسال الكود مرة أخري</span>
         </p>
-        <button type="submit" class="btn btn-primary border-0 w-100 mt-4">
+        <button type="submit" className="btn btn-primary border-0 w-100 mt-4">
           تأكيد
         </button>
       </form>

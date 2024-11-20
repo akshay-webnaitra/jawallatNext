@@ -39,8 +39,8 @@ const Favourite = () => {
                 <div className="ps-sm-5">
                   <div className="row jawlatt-bnr-top">
                     <div className="col-12 ">
-                      {[...Array(4)].map(() => (
-                        <NewsItem />
+                      {[...Array(4)].map((_, index) => (
+                        <NewsItem key={index} />
                       ))}
                       <div className="jawlatt-news-image">
                         <img
@@ -49,8 +49,8 @@ const Favourite = () => {
                           className="w-100"
                         />
                       </div>
-                      {[...Array(4)].map(() => (
-                        <NewsItem />
+                      {[...Array(4)].map((_, index) => (
+                        <NewsItem key={index} />
                       ))}
                     </div>
                   </div>

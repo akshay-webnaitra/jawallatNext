@@ -134,8 +134,8 @@ const Fan = () => {
                 </div>
                 <div className="row jawlatt-bnr-top">
                   <div className="col-12 ">
-                    {[...Array(4)].map(() => (
-                      <NewsItem />
+                    {[...Array(4)].map((_, index) => (
+                      <NewsItem key={index} />
                     ))}
                     <div className="jawlatt-news-image">
                       <img
@@ -144,8 +144,8 @@ const Fan = () => {
                         className="w-100"
                       />
                     </div>
-                    {[...Array(4)].map(() => (
-                      <NewsItem />
+                    {[...Array(4)].map((_, index) => (
+                      <NewsItem key={index} />
                     ))}
                     <div
                       className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}
