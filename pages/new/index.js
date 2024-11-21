@@ -8,12 +8,13 @@ import VideoStop from "../../assets/images/video-stop.png";
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { fetchCategories } from "@/slices/categories";
-import { fetchSources } from "@/slices/sources";
+import { fetchSources, sourcesSelector } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import GoogleAds from "@/components/GoogleAds";
+import JawlattLink from "@/components/JawlattLink";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -25,7 +26,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home = () => {
-  const { videos, featured_categories } = useSelector(homeItemsSelector);
+  const { videos, featured, featured_categories } =
+    useSelector(homeItemsSelector);
+  const { sources } = useSelector(sourcesSelector);
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -39,15 +42,15 @@ const Home = () => {
           {/* right side */}
           <div className="col-md-9">
             <div className="jawlatt-bnr-top-mid jawlatt-bnr-top-rt">
-              <NewsBigItem item={featured_categories[0]?.news[0]} />
-              <div className="jawlatt-single-news pt-3 px-0">
+              <NewsBigItem item={featured[1]} />
+              {/* <div className="jawlatt-single-news pt-3 px-0">
                 <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
                   <RedCaret />
                   موضوعات تهمك
                 </h3>
-              </div>
-              {Array.isArray(featured_categories) &&
-                featured_categories[0]?.news.slice(1, 4).map((item) => (
+              </div> */}
+              {Array.isArray(featured) &&
+                featured?.slice(2, 5).map((item) => (
                   <div key={item?.id}>
                     <NewsItem item={item} />
                   </div>
@@ -55,8 +58,8 @@ const Home = () => {
               <div className="jawlatt-news-image">
                 <img src="images/news-bg.png" alt="news" className="w-100" />
               </div>
-              {Array.isArray(featured_categories) &&
-                featured_categories[0]?.news.slice(4, 9).map((item) => (
+              {Array.isArray(featured) &&
+                featured?.slice(5, 9).map((item) => (
                   <div key={item?.id}>
                     <NewsItem item={item} />
                   </div>
@@ -66,54 +69,61 @@ const Home = () => {
                 <div className="d-flex gap-2 pt-3">
                   <RedCaret />
                   <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title">
-                    المزيد
+                    فيديو
                     <span
                       className="arab24-text-red me-3"
                       style={{ fontSize: 14 }}
                     >
                       {" "}
-                      فيديو
+                      المزيد
                     </span>
                   </h3>
                 </div>
                 <div className="p-4">
                   <div className="row g-3">
-                    {videos?.slice(0, 3).map((item) => (
-                      <div key={item?.id} className="col-sm-6 col-lg-4">
-                        <div className="arab24-news-card">
-                          <a
-                            href={item?.news_video}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arab24-news-card-img"
-                          >
-                            <img src={item?.news_image_url} alt="img" />
-                            <div className="video-icon">
-                              <img src={VideoStop.src} alt="img" />
+                    {Array.isArray(videos) &&
+                      videos?.slice(0, 3).map((item) => (
+                        <div key={item?.id} className="col-sm-6 col-lg-4">
+                          <div className="arab24-news-card">
+                            <a
+                              href={item?.news_video}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="arab24-news-card-img"
+                            >
+                              <img src={item?.news_image} alt="img" />
+                              <div className="video-icon">
+                                <img src={VideoStop.src} alt="img" />
+                              </div>
+                            </a>
+                            <div>
+                              <p
+                                className="m-0 text-end fw-medium text-nowrap"
+                                style={{ fontSize: 10 }}
+                              >
+                                <img
+                                  style={{ minWidth: 24, height: 24 }}
+                                  src={item?.news_source_icon}
+                                  className="ms-2 rounded-circle"
+                                />
+                                <a
+                                  href={item?.news_source_link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {item?.news_source}
+                                </a>
+                              </p>
+                              <p
+                                style={{ fontSize: 14, lineHeight: 1.3 }}
+                                className="fw-bold mt-1"
+                              >
+                                {item?.news_title}
+                              </p>
                             </div>
-                          </a>
-                          <div>
-                            <p
-                              className="m-0 text-end fw-medium text-nowrap"
-                              style={{ fontSize: 10 }}
-                            >
-                              <img
-                                style={{ minWidth: 24, height: 24 }}
-                                src="/images/sky-news-round.png"
-                                className="ms-2 rounded-circle"
-                              />
-                              {item?.news_site}
-                            </p>
-                            <p
-                              style={{ fontSize: 14, lineHeight: 1.3 }}
-                              className="fw-bold mt-1"
-                            >
-                              {item?.news_title}
-                            </p>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               </div>
@@ -145,19 +155,19 @@ const Home = () => {
                             </div>
                             <div className="jawlatt-card1-heading px-2">
                               <h4 className="my-2 px-1 jawlatt-right-border">
-                                {item?.category_name}
+                                <JawlattLink
+                                  href={`/category/${item?.category_slug}`}
+                                >
+                                  {item?.category_name}
+                                </JawlattLink>
                               </h4>
                               <p>
                                 أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة
                               </p>
                               <div className="d-flex">
-                                <a
-                                  href="#"
-                                  className=" arab24-text-gray fw-medium"
-                                >
-                                  {" "}
+                                <p className=" arab24-text-gray fw-medium mb-0">
                                   ذكية بأسعار
-                                </a>{" "}
+                                </p>
                                 <button className="btn p-1 px-2 border border-dark me-4 text-nowrap">
                                   ابحث الآن
                                 </button>
@@ -181,7 +191,7 @@ const Home = () => {
                         {item?.category_name}
                       </h3>
                     </div>
-                    {item?.news?.slice(0, 4).map((news) => (
+                    {item?.news?.slice(0, 7).map((news) => (
                       <div key={news?.id}>
                         <NewsItem item={news} />
                       </div>
@@ -191,7 +201,7 @@ const Home = () => {
               <div className="jawlatt-single-news py-3 px-0">
                 <h3 className="fw-bold m-0 text-dark d-flex align-items-center gap-2">
                   <RedCaret />
-                  موضوعات تهمك
+                  منتجات قد تعجبك
                 </h3>
               </div>
               <div className="row g-3 mb-4">
@@ -222,7 +232,7 @@ const Home = () => {
               </div>
               {/* topics of interest */}
               {Array.isArray(featured_categories) &&
-                featured_categories?.slice(1, 3).map((item) => (
+                featured_categories?.slice(1).map((item) => (
                   <div key={item?.category_id}>
                     <div className="jawlatt-single-news pt-3 px-0">
                       <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
@@ -230,11 +240,17 @@ const Home = () => {
                         {item?.category_name}
                       </h3>
                     </div>
-                    {item?.news?.slice(0, 4).map((news) => (
-                      <div key={news?.id}>
-                        <NewsItem item={news} />
-                      </div>
-                    ))}
+                    {item?.news && item?.news?.length > 0 ? (
+                      <>
+                        {item?.news?.map((news) => (
+                          <div key={news?.id}>
+                            <NewsItem item={news} />
+                          </div>
+                        ))}
+                      </>
+                    ) : (
+                      <p className="text-center mt-3">No Data</p>
+                    )}
                   </div>
                 ))}
             </div>
@@ -312,188 +328,38 @@ const Home = () => {
                 </div>
                 <div className="card-body p-3">
                   <ul className="list-group ">
-                    <li className="list-group-item py-2 px-0 border-0">
-                      <div className="d-flex gap-2">
-                        <a
-                          className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                          href="#"
+                    {Array.isArray(sources) &&
+                      sources?.slice(0, 7).map((item, index) => (
+                        <li
+                          key={index}
+                          className="list-group-item py-2 px-0 border-0"
                         >
-                          <p
-                            className="m-0 fw-bold text-start"
-                            style={{ fontSize: "15px" }}
-                          >
-                            <img
-                              style={{ width: 20, marginLeft: 6 }}
-                              src="images/Group 1197.png"
-                            />
-                            اليوم السابع
-                          </p>
-                          <div className="plus">
-                            <img
-                              src="./images/Group 1304.png"
-                              alt=""
-                              style={{ width: 20 }}
-                            />
+                          <div className="d-flex gap-2">
+                            <a
+                              className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
+                              href="#"
+                            >
+                              <p
+                                className="m-0 fw-bold text-start"
+                                style={{ fontSize: "15px" }}
+                              >
+                                <img
+                                  style={{ width: 20, marginLeft: 6 }}
+                                  src={item?.image}
+                                />
+                                {item?.name}
+                              </p>
+                              <div className="plus">
+                                <img
+                                  src="./images/Group 1304.png"
+                                  alt="img"
+                                  style={{ width: 20 }}
+                                />
+                              </div>
+                            </a>
                           </div>
-                        </a>
-                      </div>
-                    </li>
-                    <li className="list-group-item py-2 px-0 border-0">
-                      <div className="d-flex gap-2">
-                        <a
-                          className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                          href="#"
-                        >
-                          <p
-                            className="m-0 fw-bold text-start"
-                            style={{ fontSize: "15px" }}
-                          >
-                            <img
-                              style={{ width: 20, marginLeft: 6 }}
-                              src="images/Group 1198.png"
-                            />
-                            سكاي نيوز عربية
-                          </p>
-                          <div className="plus">
-                            <img
-                              src="./images/Group 1304.png"
-                              alt=""
-                              style={{ width: 20 }}
-                            />
-                          </div>
-                        </a>
-                      </div>
-                    </li>
-                    <li className="list-group-item py-2 px-0 border-0">
-                      <div className="d-flex gap-2">
-                        <a
-                          className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                          href="#"
-                        >
-                          <p
-                            className="m-0 fw-bold text-start"
-                            style={{ fontSize: "15px" }}
-                          >
-                            <img
-                              style={{ width: 20, marginLeft: 6 }}
-                              src="images/Group 1205.png"
-                            />
-                            مصراوي
-                          </p>
-                          <div className="plus">
-                            <img
-                              src="./images/Group 1304.png"
-                              alt=""
-                              style={{ width: 20 }}
-                            />
-                          </div>
-                        </a>
-                      </div>
-                    </li>
-                    <li className="list-group-item py-2 px-0 border-0">
-                      <div className="d-flex gap-2">
-                        <a
-                          className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                          href="#"
-                        >
-                          <p
-                            className="m-0 fw-bold text-start"
-                            style={{ fontSize: "15px" }}
-                          >
-                            <img
-                              style={{ width: 20, marginLeft: 6 }}
-                              src="images/Group 1206.png"
-                            />
-                            الجزيرة
-                          </p>
-                          <div className="plus">
-                            <img
-                              src="./images/Group 1304.png"
-                              alt=""
-                              style={{ width: 20 }}
-                            />
-                          </div>
-                        </a>
-                      </div>
-                    </li>
-                    <li className="list-group-item py-2 px-0 border-0">
-                      <div className="d-flex gap-2">
-                        <a
-                          className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                          href="#"
-                        >
-                          <p
-                            className="m-0 fw-bold text-start"
-                            style={{ fontSize: "15px" }}
-                          >
-                            <img
-                              style={{ width: 20, marginLeft: 6 }}
-                              src="images/Group 1207.png"
-                            />
-                            المصري اليوم
-                          </p>
-                          <div className="plus">
-                            <img
-                              src="./images/Group 1304.png"
-                              alt=""
-                              style={{ width: 20 }}
-                            />
-                          </div>
-                        </a>
-                      </div>
-                    </li>
-                    <li className="list-group-item py-2 px-0 border-0">
-                      <div className="d-flex gap-2">
-                        <a
-                          className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                          href="#"
-                        >
-                          <p
-                            className="m-0 fw-bold text-start"
-                            style={{ fontSize: "15px" }}
-                          >
-                            <img
-                              style={{ width: 20, marginLeft: 6 }}
-                              src="images/Group 1208.png"
-                            />
-                            سكاي نيوز عربية
-                          </p>
-                          <div className="plus">
-                            <img
-                              src="./images/Group 1304.png"
-                              alt=""
-                              style={{ width: 20 }}
-                            />
-                          </div>
-                        </a>
-                      </div>
-                    </li>
-                    <li className="list-group-item py-2 px-0 border-0">
-                      <div className="d-flex gap-2">
-                        <a
-                          className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                          href="#"
-                        >
-                          <p
-                            className="m-0 fw-bold text-start"
-                            style={{ fontSize: "15px" }}
-                          >
-                            <img
-                              style={{ width: 20, marginLeft: 6 }}
-                              src="images/Group 1209.png"
-                            />
-                            الحدث اليوم
-                          </p>
-                          <div className="plus">
-                            <img
-                              src="./images/Group 1304.png"
-                              alt=""
-                              style={{ width: 20 }}
-                            />
-                          </div>
-                        </a>
-                      </div>
-                    </li>
+                        </li>
+                      ))}
                   </ul>
                 </div>
                 <div className="detail-btn mb-3  text-center">

@@ -26,14 +26,17 @@ const NewsBigItem = ({ item }) => {
                 <div className="card-body p-0">
                   <div className="d-flex gap-2 align-items-center">
                     <a className="d-block text-decoration-none" href="#">
-                      <img src="/images/sky-news-round.png" className="ms-2" />
+                      <img
+                        src={"/images/sky-news-round.png"}
+                        className="ms-2"
+                      />
                     </a>
                     <a
                       className="fw-medium text-black"
                       href="# "
                       style={{ fontSize: "14px", padding: "4px 10px" }}
                     >
-                      {item?.news_site}
+                      {item?.news_source}
                     </a>
                     <a
                       className="jawlatt-hdr-lt-btn fw-normal text-white px-3"
@@ -101,11 +104,16 @@ const NewsBigItem = ({ item }) => {
       </div>
       {relatedNewsOpen ? (
         <div className="row">
-          {[...Array(6)].map(() => (
-            <>
-              <RelatedNewsBigItem containerClassName="col-sm-6 col-md-4 col-lg-3 col-xl-2" />
-            </>
-          ))}
+          {Array.isArray(item?.related_news) &&
+            item?.related_news?.map((res) => (
+              <>
+                <RelatedNewsBigItem
+                  key={res?.id}
+                  data={res}
+                  containerClassName="col-sm-6 col-md-4 col-lg-3 col-xl-2"
+                />
+              </>
+            ))}
         </div>
       ) : null}
     </>

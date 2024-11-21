@@ -59,6 +59,7 @@ const Header = () => {
 
   useEffect(() => {
     let menus = serverItem?.menus;
+
     if (menus) {
       let mainMenuTemp = find(menus, { menu_location: "header" });
       let dropdownMenuTemp = find(menus, { menu_location: "header-dropdown" });

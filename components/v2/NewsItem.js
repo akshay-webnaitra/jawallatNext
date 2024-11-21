@@ -93,11 +93,19 @@ const NewsItem = ({ item }) => {
       </div>
       {relatedNewsOpen ? (
         <div className="jawlatt-mid-grey-cards mb-3">
-          <div className="row g-2">
-            <RelatedNewsItem containerClassName="col-sm-6 col-lg-4" />
-            <RelatedNewsItem containerClassName="col-sm-6 col-lg-4" />
-            <RelatedNewsItem containerClassName="col-sm-6 col-lg-4" />
-          </div>
+          {item?.related_news ? (
+            <div className="row g-2">
+              {item?.related_news?.slice(0, 3).map((res) => (
+                <RelatedNewsItem
+                  key={res?.id}
+                  data={res}
+                  containerClassName="col-sm-6 col-lg-4"
+                />
+              ))}
+            </div>
+          ) : (
+            <p>No Data</p>
+          )}
         </div>
       ) : null}
     </>
