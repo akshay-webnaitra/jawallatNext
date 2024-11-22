@@ -15,6 +15,7 @@ import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import GoogleAds from "@/components/GoogleAds";
 import JawlattLink from "@/components/JawlattLink";
+import Link from "next/link";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -334,29 +335,34 @@ const Home = () => {
                           key={index}
                           className="list-group-item py-2 px-0 border-0"
                         >
-                          <div className="d-flex gap-2">
-                            <a
-                              className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                              href="#"
+                          <div className="d-flex gap-2 align-items-center justify-content-between w-100 ">
+                            <JawlattLink
+                              className="d-flex text-decoration-none"
+                              href={`/new/source/${item?.name}`}
                             >
                               <p
                                 className="m-0 fw-bold text-start"
-                                style={{ fontSize: "15px" }}
+                                style={{ fontSize: "15px", cursor: "pointer" }}
                               >
                                 <img
-                                  style={{ width: 20, marginLeft: 6 }}
+                                  style={{
+                                    width: 20,
+                                    height: 20,
+                                    marginLeft: 6,
+                                  }}
                                   src={item?.image}
+                                  className="rounded-circle"
                                 />
                                 {item?.name}
                               </p>
-                              <div className="plus">
-                                <img
-                                  src="./images/Group 1304.png"
-                                  alt="img"
-                                  style={{ width: 20 }}
-                                />
-                              </div>
-                            </a>
+                            </JawlattLink>
+                            <div className="plus">
+                              <img
+                                src="./images/Group 1304.png"
+                                alt="img"
+                                style={{ width: 20 }}
+                              />
+                            </div>
                           </div>
                         </li>
                       ))}
