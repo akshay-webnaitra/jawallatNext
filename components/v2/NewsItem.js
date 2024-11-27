@@ -9,6 +9,7 @@ import PostLink from "../PostLink";
 const NewsItem = ({ item }) => {
   moment.locale("ar");
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
+  const [status, setStatus] = useState(false);
   return (
     <>
       <div className="arab24-newsItem-card jawlatt-right-image-left-text my-4">
@@ -29,13 +30,16 @@ const NewsItem = ({ item }) => {
                     {item?.news_site}
                   </p>
                 </a>
-                <a
-                  className="jawlatt-hdr-lt-btn text-decoration-none text-white bg-dark fw-semibold"
+                <button
+                  className={`btn  ${
+                    status ? "bg-dark" : "btn-danger"
+                  } text-white fw-semibold`}
                   href="# "
                   style={{ fontSize: "11.71px", padding: "4px 10px" }}
+                  onClick={() => setStatus(!status)}
                 >
-                  تمت المتابعة
-                </a>
+                  {status ? "تمت المتابعة" : "+ متابعة"}
+                </button>
               </div>
               <h2 className="card-title fw-bolder mt-2 mt-sm-3 fs-6">
                 <PostLink item={item}>{item?.news_title}</PostLink>

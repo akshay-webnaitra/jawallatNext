@@ -33,6 +33,8 @@ const Category = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
   const { videos, news } = useSelector(categoriesSelector);
+  console.log(videos, "video");
+
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);

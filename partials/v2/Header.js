@@ -36,6 +36,7 @@ const Header = () => {
     useSelector(serverItemSelector);
   const [isMobile, setIsMobile] = useState(false);
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
+  console.log(serverItem, "server");
 
   const handleToggle = () => {
     setIsHeaderOpen(!isHeaderOpen);

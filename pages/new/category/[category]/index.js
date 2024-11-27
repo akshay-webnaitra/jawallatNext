@@ -45,10 +45,9 @@ const CategoryPage = () => {
   const [nextPage, setNextPage] = useState(2);
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
-  const [show, setShow] = useState(false);
+  const [active, setActive] = useState("أسعار الذهب");
   const dispatch = useDispatch();
   const router = useRouter();
-
   const {
     videos,
     featured_categories,
@@ -56,16 +55,16 @@ const CategoryPage = () => {
     tags,
     news,
     lastPage,
+    gold_exchange_rates,
     main_news,
     related_news,
     categoriesItemHasError,
     categoriesItemLoading,
   } = useSelector(categoriesSelector);
+  console.log(videos, "data");
+
   const { sources } = useSelector(sourcesSelector);
   const categoryName = router.query.category;
-
-  console.log(category, "data");
-
   const takeAndSkip = (array, skip, n) => {
     let skippedArray = array.slice(skip - 1, skip + n);
     return skippedArray;
@@ -78,6 +77,24 @@ const CategoryPage = () => {
         setNextPage(nextPage + 1);
       })
     );
+  };
+  const GoldTable = () => {
+    return (
+      <div className="my-4 table-responsive">
+        <Table data={gold_exchange_rates} type={"أسعار الذهب"} />
+      </div>
+    );
+  };
+  const ExchangeTable = () => {
+    return (
+      <div className="my-4 table-responsive">
+        <Table data={gold_exchange_rates} type={"أسعار الصرف"} />
+      </div>
+    );
+  };
+
+  const handleTabClick = (tabName) => {
+    setActive((prev) => (prev === tabName ? null : tabName));
   };
   useEffect(() => {
     setloadMoreNews([]);
@@ -115,7 +132,7 @@ const CategoryPage = () => {
                     </div>
                     <div className="d-flex flex-wrap gap-2 mt-3">
                       <button
-                        onClick={() => setShow(!show)}
+                        onClick={() => handleTabClick("أسعار الذهب")}
                         className="btn btn-dark arab24-bg-black text-white"
                       >
                         <img
@@ -123,31 +140,38 @@ const CategoryPage = () => {
                           style={{ width: 26, height: 26 }}
                           className="ms-1"
                           alt="img"
-                        />{" "}
+                        />
                         أسعار الذهب
                       </button>
-                      <button className="btn btn-dark arab24-bg-black text-white">
+                      <button
+                        onClick={() => handleTabClick("أسعار الصرف")}
+                        className="btn btn-dark arab24-bg-black text-white"
+                      >
                         <img
                           src={icon1.src}
                           style={{ width: 26, height: 26 }}
                           className="ms-1"
                           alt="img"
-                        />{" "}
+                        />
                         أسعار الصرف
                       </button>
                     </div>
                   </>
                 )}
-                {show && categoryName === "إقتصاد" && (
-                  <div className="my-4 table-responsive">
-                    <Table />
-                  </div>
+                {categoryName === "إقتصاد" && (
+                  <>
+                    {active === "أسعار الذهب" && (
+                      <div>
+                        <GoldTable />
+                      </div>
+                    )}
+                    {active === "أسعار الصرف" && (
+                      <div>
+                        <ExchangeTable />
+                      </div>
+                    )}
+                  </>
                 )}
-                {/* <div className="border-bottom pb-3">
-                  <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
-                    <RedCaret />| الاكثر قراءة
-                  </h3>
-                </div> */}
                 <div className="row jawlatt-bnr-top">
                   <div className="col-12 ">
                     {Array.isArray(news) &&

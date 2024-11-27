@@ -14,6 +14,7 @@ export const initialState = {
   tags: [],
   news: [],
   related_news: [],
+  gold_exchange_rates: [],
   videos: [],
   categoriesItemsLoading: false,
   categoriesItemsHasErrors: false,
@@ -45,6 +46,7 @@ const categoriesSlice = createSlice({
       state.related_news = [];
       state.featured_categories = [];
       state.videos = [];
+      state.gold_exchange_rates = [];
       state.categoriesItemsLoading = true;
     },
     getCategoriesItemsSuccess: (state, { payload }) => {
@@ -54,6 +56,7 @@ const categoriesSlice = createSlice({
         state.tags = payload?.tags;
         state.news = payload?.news?.data;
         state.related_news = payload?.related_news;
+        state.gold_exchange_rates = payload?.gold_exchange_rates;
         state.featured_categories = payload?.featured_categories;
         state.videos = payload?.videos;
         state.lastPage =
