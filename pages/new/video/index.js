@@ -6,7 +6,7 @@ import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { categoriesSelector, fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
-import { fetchServerItem } from "@/slices/serverItems";
+import { fetchServerItem, serverItemSelector } from "@/slices/serverItems";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,31 +19,30 @@ import VideoPlayBtn from "@/components/v2/icons/videoPlayBtn";
 import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import GoogleAds from "@/components/GoogleAds";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchVideos, videosSelector } from "@/slices/video";
+import JawlattLink from "@/components/JawlattLink";
+import Link from "next/link";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
-    await store.dispatch(fetchSources(session));
-    await store.dispatch(fetchCategories(session));
+    await store.dispatch(fetchVideos(session));
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
   }
 );
+
 const Category = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
-  const { videos, news } = useSelector(categoriesSelector);
-  console.log(videos, "video");
-
-  useEffect(() => {
-    setIsMobile(isMobileMedia);
-  }, [isMobileMedia]);
-  const videoRef = useRef([]);
+  const { videos } = useSelector(videosSelector);
+  const { serverItem } = useSelector(serverItemSelector);
+  const categoryItem = serverItem.menus[0].menu_list;
   const slider = {
     arrows: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 7,
+    slidesToShow: 8,
     slidesToScroll: 2,
     rtl: true,
     responsive: [
@@ -84,17 +83,13 @@ const Category = () => {
       },
     ],
   };
-  const handlePlay = (index) => {
-    const video = videoRef.current[index];
-    if (video) {
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    }
+  const dispatch = useDispatch();
+  const handleCategoryClick = (slug) => {
+    dispatch(fetchVideos(slug));
   };
-
+  useEffect(() => {
+    setIsMobile(isMobileMedia);
+  }, [isMobileMedia]);
   return (
     <>
       <section className="notification video">
@@ -109,7 +104,7 @@ const Category = () => {
                 </h3>
               </div>
               <Slider {...slider} className="blur-effect mb-4">
-                {[...Array(16)].map((_, index) => (
+                {categoryItem.map((res, index) => (
                   <div
                     key={index}
                     className={`slick-slide ${
@@ -122,64 +117,61 @@ const Category = () => {
                         borderRadius: 13,
                         border: "2px solid #E5E5E5",
                       }}
+                      onClick={() => handleCategoryClick(res?.name)}
                     >
-                      الحرب في غزة
+                      {res?.name}
                     </button>
                   </div>
                 ))}
               </Slider>
               <div className="ps-md-5">
-                {[...Array(3)].map((_, index) => (
-                  <div key={index} className="news-video-card mb-5">
-                    <div className="row">
-                      <div className="col-md-8">
-                        <h4 className="fw-bold">
-                          إسرائيل تبحث مع واشنطن بدء عملية رفح.. وخبراء يناقشون
-                          موقف مصر
-                        </h4>
+                {Array.isArray(videos) &&
+                  videos.map((res) => (
+                    <div key={res?.id} className="news-video-card mb-5">
+                      <div className="row">
+                        <div className="col-md-8">
+                          <h4 className="fw-bold">{res?.news_title}</h4>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center gap-4 mt-2">
+                        <div className="d-flex align-items-center gap-2">
+                          <img
+                            src={res?.news_source_icon}
+                            style={{ minWidth: 34, height: 34 }}
+                            alt="img"
+                            className="rounded-circle border"
+                          />
+                          <p className="mb-0">
+                            <Link
+                              className="fw-normal"
+                              href={res?.news_source_link}
+                            >
+                              {res?.news_source}
+                            </Link>
+                          </p>
+                        </div>
+                        <p className="fs-12 m-0">
+                          23 <ShareOutline />
+                        </p>
+                        <p className="fs-12 m-0">
+                          12 <Favourite />
+                        </p>
+                        <p className="fs-12 m-0">
+                          2k <Like />
+                        </p>
+                      </div>
+                      <div className=" mt-3">
+                        <iframe
+                          width="100%"
+                          height="462"
+                          src={res?.news_video}
+                          title="YouTube video"
+                          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
                       </div>
                     </div>
-                    <div className="d-flex align-items-center gap-4 mt-2">
-                      <div className="d-flex align-items-center gap-2">
-                        <img
-                          src={NewsImg.src}
-                          style={{ minWidth: 34, height: 34 }}
-                          alt="img"
-                          className="rounded-circle"
-                        />
-                        <p className="m-0">سكاي نيوز عربية</p>
-                      </div>
-                      <p className="fs-12 m-0">
-                        23 <ShareOutline />
-                      </p>
-                      <p className="fs-12 m-0">
-                        12 <Favourite />
-                      </p>
-                      <p className="fs-12 m-0">
-                        2k <Like />
-                      </p>
-                    </div>
-                    <div className="news-video-card-img mt-3">
-                      <video
-                        ref={(el) => (videoRef.current[index] = el)}
-                        style={{ width: "100%" }}
-                      >
-                        <source
-                          src={
-                            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                          }
-                          type="video/mp4"
-                        />
-                      </video>
-                      <button
-                        onClick={() => handlePlay(index)}
-                        className="btn rounded-circle border-0 video-play-btn"
-                      >
-                        <VideoPlayBtn />
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
               <div className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}>
                 {!isMobile ? (

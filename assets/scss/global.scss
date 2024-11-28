@@ -500,6 +500,9 @@
 // video page
 .video {
   .news-video-card {
+    a{
+      font-weight: 500 !important;
+    }
     .news-video-card-img {
       position: relative;
       width: 100%;

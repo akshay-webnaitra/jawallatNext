@@ -10,6 +10,7 @@ import sourcesReducer from "./sources";
 import tagsReducer from "./tags";
 import userReducer from "./user";
 import LiveStream from "./livestream";
+import videoReducer from "./video";
 
 const rootReducer = combineReducers({
   homeItems: homeItemReducer,
@@ -23,5 +24,6 @@ const rootReducer = combineReducers({
   page: pageReducer,
   user: userReducer,
   live: LiveStream,
+  videos: videoReducer,
 });
 export default rootReducer;
