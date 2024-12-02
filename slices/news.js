@@ -7,6 +7,7 @@ export const initialState = {
   newsLoading: false,
   newsHasErrors: false,
   news: {},
+  related_news: [],
   previous_news_id: 0,
 };
 
@@ -20,6 +21,7 @@ const newsSlice = createSlice({
     },
     getNewsSuccess: (state, { payload }) => {
       state.news = payload?.news;
+      state.related_news = payload?.related_news;
       state.previous_news_id = payload?.previous_news_id;
       state.newsLoading = false;
       state.newsHasErrors = false;
@@ -66,12 +68,11 @@ export function fetchNews(
         api.setAuthData({ "X-User-ID": `${session?.user?.id}` });
       }
 
-      console.log(params);
       const response = await api.getSingleNewsPage(params);
 
       if (!!response?.data?.return?.news) {
         callback(response?.data?.return);
-        
+
         dispatch(getNewsSuccess(response?.data?.return));
       } else {
         dispatch(getNewsFailure());

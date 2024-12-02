@@ -10,8 +10,9 @@ const getPostLink = (item) => {
     let month = dateObject?.format("MM");
     let date = dateObject?.format("DD");
     let formattedSlug = item?.news_name;
-
-    return `/${year}/${month}/${date}/${formattedSlug}`;
+    let id = item?.id;
+    // return `/new/article/${year}/${month}/${date}/${formattedSlug}`;
+    return `/new/article/${id}`;
   }
 };
 

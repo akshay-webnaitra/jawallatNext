@@ -9,7 +9,7 @@ import Group from "assets/images/group 1197.png";
 import Plus from "assets/images/group 1304.png";
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
-import { fetchCategories } from "@/slices/categories";
+import { fetchCategories, fetchCategoriesItems } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
@@ -18,28 +18,46 @@ import PlayBtn from "@/components/v2/icons/playbtn";
 import SocialIconOne from "@/components/v2/icons/socialIcon1";
 import SocialIconTwo from "@/components/v2/icons/socialIcon2";
 import SocialIconThree from "@/components/v2/icons/socialIcon3";
-import Banner from "../../../assets/images/article-banner.png";
+import Banner from "../../../../assets/images/article-banner.png";
 import RedCaret from "@/components/v2/RedCaret";
 import Share from "@/components/v2/icons/share";
 import ShareRed from "@/components/v2/icons/shareRed";
 import GoogleAds from "@/components/GoogleAds";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
+import { fetchNews, newsSelector } from "@/slices/news";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import { useRouter } from "next/router";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
-    await store.dispatch(fetchSources(session));
-    await store.dispatch(fetchCategories(session));
-    await store.dispatch(fetchServerItem(session));
+    await store.dispatch(fetchNews(session));
+    await store.dispatch(fetchSources());
     await store.dispatch(fetchHomeItems(session));
+    await store.dispatch(
+      fetchCategoriesItems(context.query.category, null, null, session)
+    );
+    await store.dispatch(fetchServerItem(session));
   }
 );
 const Article = () => {
+  const router = useRouter();
+  const id = router?.query?.article;
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
+  const dispatch = useDispatch();
+  const { news, related_news } = useSelector(newsSelector);
   useEffect(() => {
-    setIsMobile(isMobileMedia);
+    if (typeof window !== "undefined") {
+      setIsMobile(isMobileMedia);
+    }
   }, [isMobileMedia]);
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchNews(id, "id"));
+    }
+  }, [id, dispatch]);
   const data = [
     {
       title: " اليوم السابع",
@@ -63,6 +81,7 @@ const Article = () => {
       title: " الحدث اليوم",
     },
   ];
+
   return (
     <>
       <section>
@@ -74,12 +93,12 @@ const Article = () => {
                 <div className="d-flex align-items-center">
                   <div className="d-flex align-items-center gap-3 ps-3">
                     <img
-                      src={SkyNews.src}
+                      src={news?.news_source_icon}
                       style={{ width: 35, height: 35 }}
                       alt="img"
-                      className="rounded-circle"
+                      className="rounded-circle border"
                     />
-                    <p className="fs-14 m-0">المتابعون</p>
+                    <p className="fs-14 m-0">{news?.news_source}</p>
                   </div>
                   <div className="d-flex align-items-center gap-3 border-end pe-3">
                     <p className="fs-14 fw-semibold m-0">34k</p>
@@ -91,18 +110,26 @@ const Article = () => {
                   </div>
                 </div>
                 <h2 style={{ fontSize: 38 }} className="fw-bold">
-                  إسرائيل تبحث مع واشنطن بدء عملية رفح.. وخبراء يناقشون موقف مصر
+                  {news?.news_title}
                 </h2>
                 <div className="d-flex align-items-center gap-4 arab24-newsItem-card my-3 flex-wrap">
                   <ul
-                    style={{ listStyleType: "disc", color: "#b22e39" }}
+                    style={{
+                      listStyleType: "disc",
+                      color: news?.category?.cat_color,
+                    }}
                     className="m-0 p-0"
                   >
                     <li className=" me-4">
-                      <p className="m-0 text-dark-red">قبل 6 ساعات</p>
+                      <p
+                        className="m-0"
+                        style={{ color: news?.category?.cat_color }}
+                      >
+                        {news?.category?.cat_name}
+                      </p>
                     </li>
                   </ul>
-                  <p className="m-0">قبل 6 ساعات</p>
+                  <p className="m-0">{moment(news?.created_at).fromNow()}</p>
                   <p className="d-flex align-items-center gap-1 m-0">
                     23
                     <SocialIconThree />
@@ -129,37 +156,11 @@ const Article = () => {
                 </div>
                 <div className="article">
                   <div className="article-banner mb-3">
-                    <img src={Banner.src} alt="img" />
+                    <img src={news?.news_image} alt="img" />
                   </div>
-                  <p>
-                    في ظل الحديث عن مناقشات بين رئيس الوزراء الإسرائيلي، بنيامين
-                    نتانياهو، الجمعة، مع الولايات المتحدة بشأن المُضي قدماً في
-                    هجوم بري على رفح بجنوب غزة، تظهر تساؤلات بشأن موقف الجانب
-                    المصري من العملية وردود الفعل المتوقعة، لا سيما في ظل تخوفات
-                    الجانب الأميركي من العواقب الكارثية على المدنيين.في ظل
-                    الحديث عن مناقشات بين رئيس الوزراء الإسرائيلي، بنيامين
-                    نتانياهو، الجمعة، مع الولايات المتحدة بشأن المُضي قدماً في
-                    هجوم بري على رفح بجنوب غزة، تظهر تساؤلات بشأن موقف الجانب
-                    المصري من العملية وردود الفعل المتوقعة، لا سيما في ظل تخوفات
-                    الجانب الأميركي من العواقب الكارثية على المدنيين.في ظل
-                    الحديث عن مناقشات بين رئيس الوزراء الإسرائيلي، بنيامين
-                    نتانياهو، الجمعة، مع الولايات المتحدة بشأن المُضي قدماً في
-                    هجوم بري على رفح بجنوب غزة، تظهر تساؤلات بشأن موقف الجانب
-                    المصري من العملية وردود الفعل المتوقعة، لا سيما في ظل تخوفات
-                    الجانب الأميركي من العواقب الكارثية على المدنيين.في ظل
-                    الجانب الأميركي من العواقب الكارثية على المدنيين.في ظل
-                    الحديث عن مناقشات بين رئيس الوزراء الإسرائيلي، بنيامين
-                    نتانياهو، الجمعة، مع الولايات المتحدة بشأن المُضي قدماً في
-                    هجوم بري على رفح بجنوب غزة، تظهر تساؤلات بشأن موقف الجانب
-                    المصري من العملية وردود الفعل المتوقعة، لا سيما في ظل تخوفات
-                    الجانب الأميركي من العواقب الكارثية على المدنيين.في ظل
-                    الجانب الأميركي من العواقب الكارثية على المدنيين.في ظل
-                    الحديث عن مناقشات بين رئيس الوزراء الإسرائيلي، بنيامين
-                    نتانياهو، الجمعة، مع الولايات المتحدة بشأن المُضي قدماً في
-                    هجوم بري على رفح بجنوب غزة، تظهر تساؤلات بشأن موقف الجانب
-                    المصري من العملية وردود الفعل المتوقعة، لا سيما في ظل تخوفات
-                    الجانب الأميركي من العواقب الكارثية على المدنيين.في ظل
-                  </p>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: news?.news_content }}
+                  ></div>
                   <div className="d-flex flex-wrap gap-2 mb-2">
                     <span
                       style={{ background: "#f7f7f7", color: "#000000" }}
@@ -197,13 +198,14 @@ const Article = () => {
                 </div>
                 <div className="border-bottom pb-3 mt-5">
                   <h3 className="text-dark fw-bold m-0 d-flex gap-2 align-items-center">
-                    <RedCaret />| اقتصاد
+                    <RedCaret />| أخبار ذات صلة
                   </h3>
                 </div>
                 <div>
-                  {[...Array(3)].map((_, index) => (
-                    <NewsItem key={index} />
-                  ))}
+                  {Array.isArray(related_news) &&
+                    related_news
+                      ?.slice(0, 4)
+                      .map((item) => <NewsItem key={item?.id} item={item} />)}
                 </div>
                 <div className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}>
                   {!isMobile ? (
@@ -222,6 +224,10 @@ const Article = () => {
                     />
                   )}
                 </div>
+                {Array.isArray(related_news) &&
+                  related_news
+                    ?.slice(4)
+                    .map((item) => <NewsItem key={item?.id} item={item} />)}
               </div>
             </div>
             {/* left side */}

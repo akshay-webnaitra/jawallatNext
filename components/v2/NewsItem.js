@@ -41,7 +41,7 @@ const NewsItem = ({ item }) => {
                   {status ? "تمت المتابعة" : "+ متابعة"}
                 </button>
               </div>
-              <h2 className="card-title fw-bolder mt-2 mt-sm-3 fs-6">
+              <h2 className="card-title fw-bolder mt-2   mt-sm-3 fs-6">
                 <PostLink item={item}>{item?.news_title}</PostLink>
               </h2>
               <div className="d-flex gap-3 flex-row-reverse justify-content-end mt-sm-4">

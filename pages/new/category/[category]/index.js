@@ -61,7 +61,6 @@ const CategoryPage = () => {
     categoriesItemHasError,
     categoriesItemLoading,
   } = useSelector(categoriesSelector);
-  console.log(videos, "data");
 
   const { sources } = useSelector(sourcesSelector);
   const categoryName = router.query.category;
