@@ -6,8 +6,7 @@ import SocialIconTwo from "./icons/socialIcon2";
 import moment from "moment";
 import "moment/locale/ar";
 import PostLink from "../PostLink";
-const NewsItem = ({ item }) => {
-  moment.locale("ar");
+const NewsItem = ({ item, addFavourite, marked }) => {
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
   const [status, setStatus] = useState(false);
   return (
@@ -52,9 +51,12 @@ const NewsItem = ({ item }) => {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-dark">
-                      <SocialIconTwo />
-                    </a>
+                    <button
+                      onClick={() => addFavourite(item)}
+                      className="border-0 btn p-0 text-dark"
+                    >
+                      {marked ? "Fav" : <SocialIconTwo />}
+                    </button>
                   </li>
                   <li>
                     <a

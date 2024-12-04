@@ -5,17 +5,20 @@ import NewsItem from "@/components/v2/NewsItem";
 import Sidebar from "@/partials/v2/Sidebar";
 import MainLayout from "layout/mainLayout";
 import VideoStop from "../../assets/images/video-stop.png";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { fetchCategories } from "@/slices/categories";
 import { fetchSources, sourcesSelector } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import { useMediaQuery } from "react-responsive";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import GoogleAds from "@/components/GoogleAds";
 import JawlattLink from "@/components/JawlattLink";
 import Link from "next/link";
+import { setShowLogin } from "@/slices/settings";
+import { addUserFavorite, deleteUserFavorite } from "@/slices/user";
+import { toast } from "react-toastify";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -32,10 +35,38 @@ const Home = () => {
   const { sources } = useSelector(sourcesSelector);
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
+  const [markedItems, setMarkedItems] = useState([]);
+  const { data: session, status } = useSession();
+
+  const dispatch = useDispatch();
+  const toggleFavourite = (item) => {
+    const userId = "72";
+    const newsId = item?.id;
+    if (status !== "authenticated") {
+      // dispatch(setShowLogin(true));
+      toast.error("You need to log in first");
+    } else {
+      if (!markedItems.includes(newsId)) {
+        dispatch(
+          addUserFavorite({ userId, newsId }, () => {
+            toast.success("تمت إضافة إشارة مرجعية بنجاح");
+            setMarkedItems((prev) => [...prev, newsId]);
+          })
+        );
+      } else {
+        dispatch(
+          deleteUserFavorite({ userId, newsId }, () => {
+            toast.success("تمت إزالة إشارة مرجعية بنجاح");
+            setMarkedItems((prev) => prev.filter((id) => id !== newsId));
+          })
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
-
   return (
     <>
       <div className="container">
@@ -44,16 +75,14 @@ const Home = () => {
           <div className="col-md-9">
             <div className="jawlatt-bnr-top-mid jawlatt-bnr-top-rt">
               <NewsBigItem item={featured[1]} />
-              {/* <div className="jawlatt-single-news pt-3 px-0">
-                <h3 className="fw-bold m-0 text-dark jawlatt-border-bottom d-flex align-items-center gap-2">
-                  <RedCaret />
-                  موضوعات تهمك
-                </h3>
-              </div> */}
               {Array.isArray(featured) &&
                 featured?.slice(2, 5).map((item) => (
                   <div key={item?.id}>
-                    <NewsItem item={item} />
+                    <NewsItem
+                      addFavourite={() => toggleFavourite(item)}
+                      marked={markedItems.includes(item?.id)}
+                      item={item}
+                    />
                   </div>
                 ))}
               <div className="jawlatt-news-image">
@@ -62,7 +91,11 @@ const Home = () => {
               {Array.isArray(featured) &&
                 featured?.slice(5, 9).map((item) => (
                   <div key={item?.id}>
-                    <NewsItem item={item} />
+                    <NewsItem
+                      addFavourite={() => toggleFavourite(item)}
+                      marked={markedItems.includes(item?.id)}
+                      item={item}
+                    />
                   </div>
                 ))}
               {/* news video */}
