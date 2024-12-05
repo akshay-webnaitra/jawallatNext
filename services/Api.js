@@ -52,7 +52,9 @@ const Api = {
         api.post(`/api/updateNotificationSettings`, params),
       getNotificationSettings: (params) =>
         api.post(`/api/getNotificationSettings`, params),
-      getUserFavorites: (params) => api.post(`/api/getUserFavorites`, params),
+      // getUserFavorites: (params) => api.post(`/api/getUserFavorites`, params),
+      getUserFavorites: (params) =>
+        api.get(`/api/web/getUserFavorites`, params),
       updateProfile: (params) => api.post(`/api/updateProfile`, params),
       Contactus: (params) => api.post(`/api/Contactus`, params),
     };

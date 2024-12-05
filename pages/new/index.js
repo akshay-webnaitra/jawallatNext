@@ -39,10 +39,13 @@ const Home = () => {
   const { data: session, status } = useSession();
 
   const dispatch = useDispatch();
+  const data = useSelector(homeItemsSelector);
+  console.log(data, "home");
+
   const toggleFavourite = (item) => {
     const userId = "72";
     const newsId = item?.id;
-    if (status !== "authenticated") {
+    if (status === "authenticated") {
       // dispatch(setShowLogin(true));
       toast.error("You need to log in first");
     } else {
