@@ -82,6 +82,7 @@ export function fetchVideos(categorySlug) {
     dispatch(getVideos());
     try {
       const response = await api.getVideoPage({ category: categorySlug });
+
       if (response?.data) {
         dispatch(getVideosSuccess(response?.data?.return));
       } else {

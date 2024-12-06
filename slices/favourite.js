@@ -10,7 +10,6 @@ export const initialState = {
   favourite: [], // Store the list of videos
   lastPage: 0, // Keep track of the pagination
   favouriteItemsLoading: false,
-  related_videos: [],
   favouriteItemsHasErrors: false,
 };
 
@@ -23,7 +22,7 @@ const favouriteSlice = createSlice({
       state.favouriteLoading = true;
     },
     getFavouriteSuccess: (state, { payload }) => {
-      state.favourite = payload?.return?.data || [];
+      state.favourite = payload?.news;
       state.favouriteLoading = false;
       state.favouriteHasErrors = false;
       state.lastPage = payload?.return?.last_page || 1;
@@ -50,7 +49,7 @@ const favouriteSlice = createSlice({
     builder.addCase(HYDRATE, (state, { payload }) => {
       return {
         ...state,
-        ...payload.favourite,
+        ...payload?.favourite,
       };
     });
   },
@@ -76,14 +75,10 @@ export default favouriteSlice.reducer;
 export function fetchFavourite() {
   return async (dispatch) => {
     dispatch(getFavourite());
-    const params = { favUserId: 72 };
-
     try {
-      const response = await api.getUserFavorites(params);
-      console.log(response, "resp");
-
-      if (response?.data) {
-        dispatch(getFavouriteSuccess(response?.data?.return));
+      const response = await api.getUserFavorites();
+      if (response?.data?.favourite) {
+        dispatch(getFavouriteSuccess(response?.data?.favourite));
       } else {
         dispatch(getFavouriteFailure());
       }
@@ -94,14 +89,14 @@ export function fetchFavourite() {
 }
 
 // Asynchronous thunk action to fetch videos with pagination
-export function fetchVideosItems({ categorySlug, page = 1 }) {
+export function fetchFavouriteItems({ page = 1 }) {
   return async (dispatch) => {
     dispatch(getFavouriteItems());
 
     try {
-      const response = await api.getVideoPage({ page, categorySlug });
-      if (response?.data?.return?.main_videos?.data) {
-        dispatch(getVideosItemsSuccess(response?.data?.return));
+      const response = await api.getFavourite({ page });
+      if (response?.data) {
+        dispatch(getVideosItemsSuccess(response?.data?.favourite));
       } else {
         dispatch(getVideosItemsFailure());
       }

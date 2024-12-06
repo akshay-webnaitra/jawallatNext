@@ -37,11 +37,9 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [markedItems, setMarkedItems] = useState([]);
   const { data: session, status } = useSession();
+  console.log(videos, "res");
 
   const dispatch = useDispatch();
-  const data = useSelector(homeItemsSelector);
-  console.log(data, "home");
-
   const toggleFavourite = (item) => {
     const userId = "72";
     const newsId = item?.id;

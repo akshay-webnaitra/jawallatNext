@@ -18,7 +18,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
     await store.dispatch(fetchSources(session));
-    await store.dispatch(fetchFavourite(session));
+    await store.dispatch(fetchFavourite());
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
   }
@@ -29,7 +29,6 @@ const Favourite = () => {
   const { favourite } = useSelector(favouriteSelector);
   const dispatch = useDispatch();
   useEffect(() => {
-    // Dispatch the action to fetch the favourites
     dispatch(fetchFavourite());
   }, [dispatch]);
 
@@ -46,9 +45,12 @@ const Favourite = () => {
               <div className="ps-sm-5">
                 <div className="row jawlatt-bnr-top">
                   <div className="col-12 ">
-                    {data?.slice(0, 4).map((res, index) => (
-                      <NewsItem key={index} item={res} />
-                    ))}
+                    {Array.isArray(favourite) &&
+                      favourite
+                        ?.slice(0, 3)
+                        .map((res, index) => (
+                          <NewsItem key={index} item={res} />
+                        ))}
                     <div className="jawlatt-news-image">
                       <img
                         src="/images/news-bg.png"
@@ -56,9 +58,12 @@ const Favourite = () => {
                         className="w-100"
                       />
                     </div>
-                    {data?.slice(4).map((res, index) => (
-                      <NewsItem key={index} item={res} />
-                    ))}
+                    {Array.isArray(favourite) &&
+                      favourite
+                        ?.slice(3)
+                        .map((res, index) => (
+                          <NewsItem key={index} item={res} />
+                        ))}
                   </div>
                 </div>
               </div>
