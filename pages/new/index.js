@@ -19,6 +19,7 @@ import Link from "next/link";
 import { setShowLogin } from "@/slices/settings";
 import { addUserFavorite, deleteUserFavorite } from "@/slices/user";
 import { toast } from "react-toastify";
+import { shareNews } from "@/slices/news";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -65,6 +66,9 @@ const Home = () => {
     }
   };
 
+  const handleShare = (id) => {
+    dispatch(shareNews(id));
+  };
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
@@ -93,6 +97,7 @@ const Home = () => {
                 featured?.slice(5, 9).map((item) => (
                   <div key={item?.id}>
                     <NewsItem
+                      shareNews={() => handleShare(item.id)}
                       addFavourite={() => toggleFavourite(item)}
                       marked={markedItems.includes(item?.id)}
                       item={item}

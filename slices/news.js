@@ -9,6 +9,9 @@ export const initialState = {
   news: {},
   related_news: [],
   previous_news_id: 0,
+  shareLoading: false,
+  shareSuccess: false,
+  shareError: null,
 };
 
 // A slice for news with our three reducers
@@ -31,6 +34,19 @@ const newsSlice = createSlice({
       state.previous_news_id = 0;
       state.newsHasErrors = true;
     },
+    shareNewsStart: (state) => {
+      state.shareLoading = true;
+      state.shareSuccess = false;
+      state.shareError = null;
+    },
+    shareNewsSuccess: (state) => {
+      state.shareLoading = false;
+      state.shareSuccess = true;
+    },
+    shareNewsFailure: (state, { payload }) => {
+      state.shareLoading = false;
+      state.shareError = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, { payload }) => {
@@ -43,7 +59,14 @@ const newsSlice = createSlice({
 });
 
 // Three actions generated from the slice
-export const { getNews, getNewsSuccess, getNewsFailure } = newsSlice.actions;
+export const {
+  getNews,
+  getNewsSuccess,
+  getNewsFailure,
+  shareNewsStart,
+  shareNewsSuccess,
+  shareNewsFailure,
+} = newsSlice.actions;
 
 // A selector
 export const newsSelector = (state) => state.news;
@@ -80,6 +103,22 @@ export function fetchNews(
     } catch (error) {
       console.log(error);
       dispatch(getNewsFailure());
+    }
+  };
+}
+
+// Thunk for Sharing News
+export function shareNews(videoId) {
+  return async (dispatch) => {
+    dispatch(shareNewsStart());
+
+    try {
+      const response = await api.post(`/api/increaseShares`, { id: videoId });
+      dispatch(shareNewsSuccess());
+      console.log("Share successful:", response.data);
+    } catch (error) {
+      console.error("Error sharing news:", error);
+      dispatch(shareNewsFailure(error.message));
     }
   };
 }

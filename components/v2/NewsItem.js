@@ -6,7 +6,7 @@ import SocialIconTwo from "./icons/socialIcon2";
 import moment from "moment";
 import "moment/locale/ar";
 import PostLink from "../PostLink";
-const NewsItem = ({ item, addFavourite, marked }) => {
+const NewsItem = ({ item, addFavourite, marked, shareNews }) => {
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
   const [status, setStatus] = useState(false);
   return (
@@ -46,9 +46,12 @@ const NewsItem = ({ item, addFavourite, marked }) => {
               <div className="d-flex gap-3 flex-row-reverse justify-content-end mt-sm-4">
                 <ul className="d-flex p-0 list-unstyled jawlatt-social-icon">
                   <li>
-                    <a href="#" className="text-dark">
+                    <button
+                      onClick={() => shareNews(item?.id)}
+                      className="text-dark"
+                    >
                       <SocialIconThree />
-                    </a>
+                    </button>
                   </li>
                   <li>
                     <button
