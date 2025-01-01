@@ -16,8 +16,9 @@ import {
 import Modal from "react-bootstrap/Modal";
 import styles from "@/partials/header/style.module.css";
 import PostMeta from "@/components/PostMeta";
+import SocialIconThree from "../v2/icons/socialIcon3";
 
-const SocialShareButton = ({ iconClassName, srClassName, item }) => {
+const SocialShareButton = ({ iconClassName, srClassName, item, bigItem }) => {
   const [postLink, setPostLink] = useState("#");
   const [title, setTitle] = useState("");
   const [newsSocialShow, setNewsSocialShow] = useState(false);
@@ -40,7 +41,8 @@ const SocialShareButton = ({ iconClassName, srClassName, item }) => {
   return (
     <>
       <a href="#" className={iconClassName} onClick={newsSocialHandleShow}>
-        <i className="fa-solid fa-arrow-up-from-bracket"></i>
+        {/* <i className="fa-solid fa-arrow-up-from-bracket"></i> */}
+        {bigItem ? <i className="fa-solid fa-share" /> : <SocialIconThree />}
         <span className={srClassName}>Upload</span>
       </a>
       <Modal

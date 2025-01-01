@@ -21,6 +21,7 @@ const Api = {
       signup: (params) => api.post(`/api/web/signup`, params),
       forgotPassword: (params) => api.post(`/api/forgotPassword`, params),
       resetPassword: (params) => api.post(`/api/resetPassword`, params),
+      increaseShare: (params) => api.post(`/api/web/increaseShare`, params),
       getHomePage: () => api.get(`/api/web/getHomePage`),
       getCategoryPage: (params) => api.get(`/api/web/getCategoryPage`, params),
       getPage: (params) => api.get(`/api/web/getPage`, params),

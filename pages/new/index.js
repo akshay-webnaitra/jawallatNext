@@ -16,10 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import GoogleAds from "@/components/GoogleAds";
 import JawlattLink from "@/components/JawlattLink";
 import Link from "next/link";
-import { setShowLogin } from "@/slices/settings";
 import { addUserFavorite, deleteUserFavorite } from "@/slices/user";
 import { toast } from "react-toastify";
-import { shareNews } from "@/slices/news";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -38,7 +36,6 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [markedItems, setMarkedItems] = useState([]);
   const { data: session, status } = useSession();
-  console.log(videos, "res");
 
   const dispatch = useDispatch();
   const toggleFavourite = (item) => {
@@ -65,11 +62,6 @@ const Home = () => {
       }
     }
   };
-
-  const handleShare = (id) => {
-    dispatch(shareNews(id));
-    console.log("share", id);
-  };
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
@@ -85,7 +77,6 @@ const Home = () => {
                 featured?.slice(2, 5).map((item) => (
                   <div key={item?.id}>
                     <NewsItem
-                      shareNews={() => handleShare(item?.id)}
                       addFavourite={() => toggleFavourite(item)}
                       marked={markedItems.includes(item?.id)}
                       item={item}
@@ -99,7 +90,6 @@ const Home = () => {
                 featured?.slice(5, 9).map((item) => (
                   <div key={item?.id}>
                     <NewsItem
-                      shareNews={() => handleShare(item?.id)}
                       addFavourite={() => toggleFavourite(item)}
                       marked={markedItems.includes(item?.id)}
                       item={item}

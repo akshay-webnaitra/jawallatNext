@@ -6,9 +6,11 @@ import SocialIconTwo from "./icons/socialIcon2";
 import moment from "moment";
 import "moment/locale/ar";
 import PostLink from "../PostLink";
-const NewsItem = ({ item, addFavourite, marked, shareNews }) => {
+import SocialShareButton from "../SocialShareButton";
+const NewsItem = ({ item, addFavourite, marked }) => {
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
   const [status, setStatus] = useState(false);
+
   return (
     <>
       <div className="arab24-newsItem-card jawlatt-right-image-left-text my-4">
@@ -46,9 +48,11 @@ const NewsItem = ({ item, addFavourite, marked, shareNews }) => {
               <div className="d-flex gap-3 flex-row-reverse justify-content-end mt-sm-4">
                 <ul className="d-flex p-0 list-unstyled jawlatt-social-icon">
                   <li>
-                    <button onClick={shareNews} className="text-dark">
-                      <SocialIconThree />
-                    </button>
+                    <SocialShareButton
+                      iconClassName="text-dark"
+                      srClassName="sr-only"
+                      item={item}
+                    />
                   </li>
                   <li>
                     <button

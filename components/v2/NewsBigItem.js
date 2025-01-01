@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RelatedNewsBigItem from "@/components/v2/RelatedNewsBigItem";
 import PostLink from "@/components/PostLink";
 import moment from "moment";
+import SocialShareButton from "../SocialShareButton";
 const NewsBigItem = ({ item }) => {
   const [relatedNewsOpen, setRelatedNewsOpen] = useState(false);
 
@@ -55,9 +56,15 @@ const NewsBigItem = ({ item }) => {
                   <div className="jawlatt-bnr-mid-btm d-flex flex-row-reverse justify-content-end jawlatt-gap-margin">
                     <ul className="d-flex p-0 list-unstyled jawlatt-social-icon">
                       <li>
-                        <a href="#" className="text-dark">
+                        {/* <a href="#" className="text-dark">
                           <i className="fa-solid fa-share" />
-                        </a>
+                        </a> */}
+                        <SocialShareButton
+                          bigItem
+                          iconClassName="text-dark"
+                          srClassName="sr-only"
+                          item={item}
+                        />
                       </li>
                       <li>
                         <a href="#" className="text-dark">

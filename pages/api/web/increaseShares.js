@@ -5,7 +5,7 @@ const increaseShares = async (id, accessToken) => {
   const api = Api.create();
   api.setAuthData({ Authorization: `Bearer ${accessToken}` });
   const params = { videoId: id };
-  const response = await api.shareNews(params);
+  const response = await api.increaseShare(params);
   return response;
 };
 

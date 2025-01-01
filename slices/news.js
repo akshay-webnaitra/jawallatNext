@@ -106,20 +106,3 @@ export function fetchNews(
     }
   };
 }
-
-// Thunk for Sharing News
-export function shareNews(videoId) {
-  return async (dispatch) => {
-    dispatch(shareNewsStart());
-
-    try {
-      const params = { videoId };
-      const response = await api.shareNews(params);
-      dispatch(shareNewsSuccess());
-      console.log("Share successful:", response);
-    } catch (error) {
-      console.error(error);
-      dispatch(shareNewsFailure(error.message));
-    }
-  };
-}
