@@ -68,6 +68,7 @@ const Home = () => {
 
   const handleShare = (id) => {
     dispatch(shareNews(id));
+    console.log("share", id);
   };
   useEffect(() => {
     setIsMobile(isMobileMedia);
@@ -84,6 +85,7 @@ const Home = () => {
                 featured?.slice(2, 5).map((item) => (
                   <div key={item?.id}>
                     <NewsItem
+                      shareNews={() => handleShare(item?.id)}
                       addFavourite={() => toggleFavourite(item)}
                       marked={markedItems.includes(item?.id)}
                       item={item}
@@ -97,7 +99,7 @@ const Home = () => {
                 featured?.slice(5, 9).map((item) => (
                   <div key={item?.id}>
                     <NewsItem
-                      shareNews={() => handleShare(item.id)}
+                      shareNews={() => handleShare(item?.id)}
                       addFavourite={() => toggleFavourite(item)}
                       marked={markedItems.includes(item?.id)}
                       item={item}

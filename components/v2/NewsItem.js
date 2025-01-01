@@ -46,10 +46,7 @@ const NewsItem = ({ item, addFavourite, marked, shareNews }) => {
               <div className="d-flex gap-3 flex-row-reverse justify-content-end mt-sm-4">
                 <ul className="d-flex p-0 list-unstyled jawlatt-social-icon">
                   <li>
-                    <button
-                      onClick={() => shareNews(item?.id)}
-                      className="text-dark"
-                    >
+                    <button onClick={shareNews} className="text-dark">
                       <SocialIconThree />
                     </button>
                   </li>

@@ -113,11 +113,12 @@ export function shareNews(videoId) {
     dispatch(shareNewsStart());
 
     try {
-      const response = await api.post(`/api/increaseShares`, { id: videoId });
+      const params = { videoId };
+      const response = await api.shareNews(params);
       dispatch(shareNewsSuccess());
-      console.log("Share successful:", response.data);
+      console.log("Share successful:", response);
     } catch (error) {
-      console.error("Error sharing news:", error);
+      console.error(error);
       dispatch(shareNewsFailure(error.message));
     }
   };
