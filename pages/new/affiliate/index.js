@@ -32,57 +32,57 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await store.dispatch(fetchHomeItems(session));
   }
 );
+const slider = {
+  arrows: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 9,
+  slidesToScroll: 2,
+  rtl: true,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 10,
+        slidesToScroll: 2,
+      },
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 6,
+        slidesToScroll: 2,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 0,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
 const Affiliate = () => {
   const dispatch = useDispatch();
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
   const { products, product_categories } = useSelector(AffiliateSelector);
-
-  const slider = {
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 9,
-    slidesToScroll: 2,
-    rtl: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 10,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 6,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 0,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
 
   const handleCategoryClick = (catName) => {
     dispatch(fetchAffiliate(catName));
