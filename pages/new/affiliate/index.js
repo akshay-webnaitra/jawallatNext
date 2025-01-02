@@ -17,21 +17,27 @@ import Trimmer from "../../../assets/images/barnner-img1.1.png";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import GoogleAds from "@/components/GoogleAds";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AffiliateSelector,
+  fetchAffiliate,
+  setCategory,
+} from "@/slices/affiliate";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
     await store.dispatch(fetchSources(session));
-    await store.dispatch(fetchCategories(session));
+    await store.dispatch(fetchAffiliate(session));
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
   }
 );
 const Affiliate = () => {
+  const dispatch = useDispatch();
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(isMobileMedia);
-  }, [isMobileMedia]);
+  const { products, product_categories } = useSelector(AffiliateSelector);
+
   const slider = {
     arrows: false,
     infinite: true,
@@ -77,6 +83,12 @@ const Affiliate = () => {
       },
     ],
   };
+
+  const handleCategoryClick = (catName) => {
+    dispatch(fetchAffiliate(catName));
+    dispatch(setCategory(catName));
+  };
+
   return (
     <>
       <section className="notification">
@@ -91,52 +103,56 @@ const Affiliate = () => {
             </h3>
           </div>
           <Slider {...slider} className="blur-effect">
-            {[...Array(16)].map((_, index) => (
-              <div
-                key={index}
-                className={`slick-slide ${index === 0 ? "first-slide" : ""}`}
-              >
-                <button
-                  className="btn text-nowrap fs-16 px-3 border bg-white"
-                  style={{
-                    borderRadius: 13,
-                    border: "2px solid #E5E5E5",
-                  }}
+            {Array.isArray(product_categories) &&
+              product_categories.map((res, index) => (
+                <div
+                  key={res.id}
+                  className={`slick-slide ${index === 0 ? "first-slide" : ""}`}
                 >
-                  الحرب في غزة
-                </button>
-              </div>
-            ))}
+                  <button
+                    onClick={() => handleCategoryClick(res?.cat_slug)}
+                    className="btn text-nowrap fs-16 px-3 border bg-white"
+                    style={{
+                      borderRadius: 13,
+                      border: "2px solid #E5E5E5",
+                    }}
+                  >
+                    {res?.cat_name}
+                  </button>
+                </div>
+              ))}
           </Slider>
           <div className="row g-3 mt-2 flex-column-reverse flex-md-row">
             {/* right side */}
             <div className="col-md-9">
               <div className="ps-md-5">
                 <div className="row g-2">
-                  {[...Array(12)].map((_, index) => (
-                    <div key={index} className="col-sm-6 col-lg-4 col-xl-3">
-                      <div className="card1 arab24-card2 border bg-white">
-                        <div className="arab24-card2-img">
-                          <img
-                            src={Trimmer.src}
-                            alt=""
-                            className="img-fluid w-100"
-                          />
-                        </div>
-                        <div className="jawlatt-card1-heading px-2 mt-2">
-                          <p className="fw-semibold">
-                            أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة
-                          </p>
-                          <h3>
-                            2499
-                            <sup style={{ fontSize: 14 }} className="fw-medium">
-                              00
-                            </sup>
-                          </h3>
+                  {Array.isArray(products) &&
+                    products.map((res, index) => (
+                      <div key={res.id} className="col-sm-6 col-lg-4 col-xl-3">
+                        <div className="card1 arab24-card2 border bg-white">
+                          <div className="arab24-card2-img">
+                            <img
+                              src={res?.image || Trimmer.src}
+                              alt="img"
+                              className="img-fluid w-100"
+                            />
+                          </div>
+                          <div className="jawlatt-card1-heading px-2 mt-2">
+                            <p className="fw-semibold">{res?.title}</p>
+                            <h3>
+                              {res?.price?.slice(0, 4)}
+                              <sup
+                                style={{ fontSize: 14 }}
+                                className="fw-medium"
+                              >
+                                {res?.price?.slice(4, 6)}
+                              </sup>
+                            </h3>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                   <div className="jawlatt-news-image my-3">
                     <img
                       src="/images/news-bg.png"

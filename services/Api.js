@@ -41,7 +41,7 @@ const Api = {
       subscribeToWhatsapp: (params) =>
         api.post(`/api/web/subscribeToWhatsapp`, params),
       getVideoPage: (params) => api.get(`/api/web/getVideoPage`, params),
-
+      getAffiliate: (params) => api.get(`/api/web/getAffiliatePage`, params),
       getTags: (params) => api.post(`/api/getTags`, params),
       getTagPage: (params) => api.get(`/api/web/getTagPage`, params),
       getSearchPage: (params) => api.get(`/api/web/getSearchPage`, params),
