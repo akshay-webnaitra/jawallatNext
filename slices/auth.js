@@ -131,7 +131,6 @@ export function postLogin(
 
     try {
       const response = await api.login(params);
-
       if (response?.data?.status == 200) {
         dispatch(postLoginSuccess(response?.data?.return));
         toast.success(response?.data?.message);
@@ -148,26 +147,49 @@ export function postLogin(
   };
 }
 
-export function postSignup(params, callback = () => {}) {
+export function postSignup(
+  params,
+  callback = () => {},
+  errorCallback = () => {}
+) {
   return async (dispatch) => {
     dispatch(postSignupRequest());
     try {
       const response = await api.signup(params);
-      dispatch(postSignupSuccess(response?.data?.return));
-      callback(response?.data?.return);
+      console.log(response, "signup");
+      if (response?.data?.status === 200) {
+        dispatch(postSignupSuccess(response?.data?.return));
+        callback(response?.data?.return);
+        toast.success(response?.data?.message || "Signup successful!");
+      } else {
+        dispatch(postSignupFailure(response?.data?.message));
+        toast.error(response?.data?.message || "Signup failed.");
+        errorCallback();
+      }
     } catch (error) {
       dispatch(postSignupFailure(error));
     }
   };
 }
 
-export function postForgotPassword(params, callback = () => {}) {
+export function postForgotPassword(
+  params,
+  callback = () => {},
+  errorCallback = () => {}
+) {
   return async (dispatch) => {
     dispatch(postForgotPasswordRequest());
     try {
       const response = await api.login(params);
-      dispatch(postForgotPasswordSuccess(response?.data?.return));
-      callback(response?.data?.return);
+      if (response?.data?.status === 200) {
+        dispatch(postForgotPasswordSuccess(response?.data?.return));
+        callback(response?.data?.return);
+        toast.success(response?.data?.message || "forgot successful!");
+      } else {
+        dispatch(postSignupFailure(response?.data?.message));
+        toast.error(response?.data?.message || "forgot failed.");
+        errorCallback(); // Execute error callback
+      }
     } catch (error) {
       dispatch(postForgotPasswordFailure(error));
     }
