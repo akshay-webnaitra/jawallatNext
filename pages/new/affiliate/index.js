@@ -160,7 +160,7 @@ const Affiliate = () => {
                       className="w-100"
                     />
                   </div>
-                  {[...Array(12)].map((_, index) => (
+                  {/* {[...Array(12)].map((_, index) => (
                     <div key={index} className="col-sm-6 col-lg-4 col-xl-3">
                       <div className="card1 arab24-card2 border bg-white">
                         <div className="arab24-card2-img">
@@ -183,7 +183,7 @@ const Affiliate = () => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               </div>
             </div>

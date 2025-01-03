@@ -16,8 +16,8 @@ const fetchAffiliate = async (category, page, currentUserId = null) => {
 export default async function handler(req, res) {
   const session = await getSession({ req });
   const result = await fetchAffiliate(
-    // req?.query?.category,
-    // req?.query?.page,
+    req?.query?.category,
+    req?.query?.page,
     session?.user?.id
   );
   res.status(200).json(result);
