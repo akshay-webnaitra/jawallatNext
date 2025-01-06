@@ -13,6 +13,7 @@ import LiveStream from "./livestream";
 import videoReducer from "./video";
 import favouriteReducer from "./favourite";
 import affiliateReducer from "./affiliate";
+import fanReducer from "./fan";
 
 const rootReducer = combineReducers({
   homeItems: homeItemReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   live: LiveStream,
   videos: videoReducer,
   favourite: favouriteReducer,
+  fan: fanReducer,
   affiliate: affiliateReducer,
 });
 export default rootReducer;

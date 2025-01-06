@@ -14,6 +14,8 @@ import Share from "../../../assets/images/group 6736.png";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import GoogleAds from "@/components/GoogleAds";
+import { useDispatch, useSelector } from "react-redux";
+import { categorySearchSelector, fetchCategorySearch } from "@/slices/fan";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -26,6 +28,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
 const Fan = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
+  const dispatch = useDispatch();
+  const { news, celebrity } = useSelector(categorySearchSelector);
+
+  useEffect(() => {
+    dispatch(fetchCategorySearch());
+  }, []);
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
@@ -44,10 +52,15 @@ const Fan = () => {
                   <a href="#" className="px-2">
                     {" "}
                     <img
-                      src="/images/Group 6276.png"
-                      className="img-fluid rounded-start"
+                      src={celebrity?.image}
+                      className="img-fluid rounded-circle"
                       alt="news"
-                      style={{ minWidth: "95px", height: "95px" }}
+                      style={{
+                        minWidth: "95px",
+                        width: "95px",
+                        height: "95px",
+                        objectFit: "cover",
+                      }}
                     />
                   </a>
                   <div className="w-100">
@@ -56,7 +69,7 @@ const Fan = () => {
                         <div className="card-body p-0 px-3">
                           <div className="d-flex gap-2 align-items-center">
                             <h3 style={{ fontSize: 26 }} className="fw-bold">
-                              احمد عز
+                              {celebrity?.name}
                             </h3>
                           </div>
                           <p
@@ -64,8 +77,7 @@ const Fan = () => {
                             style={{ color: "#040404" }}
                           >
                             {" "}
-                            ممثل مصري من مواليد السيدة زينب، تاريخ ميلاد ١٥
-                            اكتوبر ١٩٨٠
+                            {celebrity?.description}
                           </p>
                         </div>
                       </div>
@@ -134,9 +146,12 @@ const Fan = () => {
                 </div>
                 <div className="row jawlatt-bnr-top">
                   <div className="col-12 ">
-                    {[...Array(4)].map((_, index) => (
-                      <NewsItem key={index} />
-                    ))}
+                    {Array.isArray(news) &&
+                      news
+                        .slice(0, 4)
+                        .map((res, index) => (
+                          <NewsItem key={index} item={res} />
+                        ))}
                     <div className="jawlatt-news-image">
                       <img
                         src="/images/news-bg.png"
@@ -144,9 +159,12 @@ const Fan = () => {
                         className="w-100"
                       />
                     </div>
-                    {[...Array(4)].map((_, index) => (
-                      <NewsItem key={index} />
-                    ))}
+                    {Array.isArray(news) &&
+                      news
+                        .slice(4, 8)
+                        .map((res, index) => (
+                          <NewsItem key={index} item={res} />
+                        ))}
                     <div
                       className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}
                     >

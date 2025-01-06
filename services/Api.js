@@ -29,6 +29,8 @@ const Api = {
         api.get(`/api/web/getSubCategoryPage`, params),
       getMainCategories: (params) =>
         api.get(`/api/web/getMainCategories`, params),
+      getCategorySearchPage: (params) =>
+        api.get(`/api/web/getCategorySearchPage`, params),
       getMainSources: (params) => api.get(`/api/web/getMainSources`, params),
       getNewsSourcePage: (params) =>
         api.get(`/api/web/getNewsSourcePage`, params),
