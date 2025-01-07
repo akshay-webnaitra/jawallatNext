@@ -8,20 +8,19 @@ export const initialState = {
   videosLoading: false,
   videosHasErrors: false,
   category: null,
-  videos: [], // Store the list of videos
-  lastPage: 0, // Keep track of the pagination
+  videos: [],
+  lastPage: 0,
   videosItemsLoading: false,
   related_videos: [],
   videosItemsHasErrors: false,
 };
 
-// A slice for videos with reducers
 const videosSlice = createSlice({
   name: "videos",
   initialState,
   reducers: {
     setCategory: (state, { payload }) => {
-      state.category = payload; // Set the category slug
+      state.category = payload;
     },
     getVideos: (state) => {
       state.videosLoading = true;
@@ -60,7 +59,6 @@ const videosSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getVideos,
   getVideosSuccess,
@@ -70,10 +68,8 @@ export const {
   getVideosItemsFailure,
 } = videosSlice.actions;
 
-// A selector to get videos from state
 export const videosSelector = (state) => state.videos;
 
-// The reducer
 export default videosSlice.reducer;
 
 // Asynchronous thunk action to fetch videos

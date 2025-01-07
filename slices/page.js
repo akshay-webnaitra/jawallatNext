@@ -9,10 +9,9 @@ export const initialState = {
   page_name: null,
   page_content: null,
   page_slug: null,
-  imageUrl: null
+  imageUrl: null,
 };
 
-// A slice for page with our three reducers
 const pageSlice = createSlice({
   name: "page",
   initialState,
@@ -20,13 +19,13 @@ const pageSlice = createSlice({
     getPage: (state) => {
       state.pageLoading = true;
       state.page_name = null;
-      state.page_content= null;
+      state.page_content = null;
       state.page_slug = null;
       state.imageUrl = null;
     },
     getPageSuccess: (state, { payload }) => {
       state.page_name = payload?.page_name;
-      state.page_content= payload?.page_content;
+      state.page_content = payload?.page_content;
       state.page_slug = payload?.page_slug;
       state.imageUrl = payload?.imageUrl;
       state.page = payload;
@@ -35,7 +34,7 @@ const pageSlice = createSlice({
     },
     getPageFailure: (state) => {
       state.page_name = null;
-      state.page_content= null;
+      state.page_content = null;
       state.page_slug = null;
       state.imageUrl = null;
       state.pageLoading = false;
@@ -52,17 +51,10 @@ const pageSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
-export const {
-  getPage,
-  getPageSuccess,
-  getPageFailure,
-} = pageSlice.actions;
+export const { getPage, getPageSuccess, getPageFailure } = pageSlice.actions;
 
-// A selector
 export const pageSelector = (state) => state.page;
 
-// The reducer
 export default pageSlice.reducer;
 
 //Asynchronous thunk action
@@ -78,5 +70,3 @@ export function fetchPage(params) {
     }
   };
 }
-
-

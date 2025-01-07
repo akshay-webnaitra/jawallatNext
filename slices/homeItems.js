@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import Api from "@/services/Api";
-import { getSession, getServerSession } from "next-auth/react";
 
 const api = Api.create();
 export const initialState = {
@@ -14,7 +13,6 @@ export const initialState = {
   featured_categories: [],
 };
 
-// A slice for homeItems with our three reducers
 const homeItemsSlice = createSlice({
   name: "homeItems",
   initialState,
@@ -51,14 +49,11 @@ const homeItemsSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const { getHomeItems, getHomeItemsSuccess, getHomeItemsFailure } =
   homeItemsSlice.actions;
 
-// A selector
 export const homeItemsSelector = (state) => state.homeItems;
 
-// The reducer
 export default homeItemsSlice.reducer;
 
 //Asynchronous thunk action

@@ -14,6 +14,7 @@ import videoReducer from "./video";
 import favouriteReducer from "./favourite";
 import affiliateReducer from "./affiliate";
 import fanReducer from "./fan";
+import countryReducer from "./countries";
 
 const rootReducer = combineReducers({
   homeItems: homeItemReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   page: pageReducer,
   user: userReducer,
   live: LiveStream,
+  country: countryReducer,
   videos: videoReducer,
   favourite: favouriteReducer,
   fan: fanReducer,

@@ -13,7 +13,12 @@ import React, { useEffect, useState } from "react";
 import GoogleAds from "@/components/GoogleAds";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedVideo } from "@/slices/livestream";
+import {
+  fetchLiveStreamVideos,
+  liveStreamSelector,
+  setSelectedVideo,
+} from "@/slices/livestream";
+import { countrySelector, fetchAllCountries } from "@/slices/countries";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -21,65 +26,18 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await store.dispatch(fetchCategories(session));
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
+    await store.dispatch(fetchLiveStreamVideos());
+    await store.dispatch(fetchAllCountries());
   }
 );
 const LiveStream = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
-  const data = [
-    {
-      id: 1,
-      title:
-        "&quot;سلمان للإغاثة&quot; يوقع برنامجا مع الصحة العالمية لـتحسين خدمات المياه والصرف الصحي في اليمن",
-      description:
-        "&quot;سلمان للإغاثة&quot; يوقع برنامجا مع الصحة العالمية لـتحسين خدمات المياه والصرف الصحي في اليمن",
-      thumbnail:
-        "https://dashboard.jawlatt.com/storage/images/2024/5/306378-2389839.jpg",
-      video: "https://www.youtube.com/watch?v=4i79mMroF40",
-      link: "https://www.al-madina.com/article/889450/دولية/سلمان-للإغاثة-يوقع-برنامجا-مع-الصحة-العالمية-لتحسين-خدمات-المياه-والصرف-الصحي-في-اليمن",
-      created_at: "2024-11-14T11:39:36.000000Z",
-      updated_at: "2024-11-14T11:39:36.000000Z",
-    },
-    {
-      id: 2,
-      title: "وصول الفوج الأول من حجاج سوريا إلى مكة",
-      description:
-        "وصل إلى مكة المكرمة اليوم, الفوج الأول من حجاج سوريا، القادمين من سوريا, ويضم نحو مئتي حاج.وعمل مكتب ( 60 ) بشركة رواف منى, على تجهيز وإعداد جميع الإمكانيات وتجنيد الطاقات البشرية...",
-      thumbnail:
-        "https://dashboard.jawlatt.com/storage/images/2024/5/306379-5648.jpg",
-      video: "https://www.youtube.com/watch?v=j9mTwNMJydM",
-      link: "https://dashboard.jawlatt.com/storage/images/2024/5/306379-5648.jpg",
-      created_at: "2024-11-14T11:48:03.000000Z",
-      updated_at: "2024-11-14T11:48:03.000000Z",
-    },
-    {
-      id: 3,
-      title:
-        "&quot;سلمان للإغاثة&quot; يوقع برنامجا مع الصحة العالمية لـتحسين خدمات المياه والصرف الصحي في اليمن",
-      description:
-        "&quot;سلمان للإغاثة&quot; يوقع برنامجا مع الصحة العالمية لـتحسين خدمات المياه والصرف الصحي في اليمن",
-      thumbnail:
-        "https://dashboard.jawlatt.com/storage/images/2024/5/306378-2389839.jpg",
-      video: "https://www.youtube.com/watch?v=4i79mMroF40",
-      link: "https://www.al-madina.com/article/889450/دولية/سلمان-للإغاثة-يوقع-برنامجا-مع-الصحة-العالمية-لتحسين-خدمات-المياه-والصرف-الصحي-في-اليمن",
-      created_at: "2024-11-14T11:39:36.000000Z",
-      updated_at: "2024-11-14T11:39:36.000000Z",
-    },
-    {
-      id: 4,
-      title: "وصول الفوج الأول من حجاج سوريا إلى مكة",
-      description:
-        "وصل إلى مكة المكرمة اليوم, الفوج الأول من حجاج سوريا، القادمين من سوريا, ويضم نحو مئتي حاج.وعمل مكتب ( 60 ) بشركة رواف منى, على تجهيز وإعداد جميع الإمكانيات وتجنيد الطاقات البشرية...",
-      thumbnail:
-        "https://dashboard.jawlatt.com/storage/images/2024/5/306379-5648.jpg",
-      video: "https://www.youtube.com/watch?v=gCNeDWCI0vo",
-      link: "https://dashboard.jawlatt.com/storage/images/2024/5/306379-5648.jpg",
-      created_at: "2024-11-14T11:48:03.000000Z",
-      updated_at: "2024-11-14T11:48:03.000000Z",
-    },
-  ];
   const selectedVideo = useSelector((state) => state.live.selectedVideo);
+  const videos = useSelector((state) => state.live.videos);
+  const countries = useSelector(countrySelector);
   const dispatch = useDispatch();
+
   const getYouTubeEmbedUrl = (url) => {
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|\S+\/|\S+\/\S+|\S+\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -89,11 +47,17 @@ const LiveStream = () => {
     }
     return "";
   };
+
+  const handleSelectChange = (e) => {
+    const countrySlug = e.target.value;
+    dispatch(fetchLiveStreamVideos(countrySlug)); // Fetch live streams for selected country
+  };
   useEffect(() => {
-    if (!selectedVideo) {
-      dispatch(setSelectedVideo(data[0].video));
+    if (!selectedVideo && videos?.length > 0) {
+      dispatch(setSelectedVideo(videos[0]?.video)); // Set the first video as the selected video
     }
-  }, [selectedVideo, dispatch]);
+  }, [selectedVideo, dispatch, videos]);
+
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
@@ -132,11 +96,14 @@ const LiveStream = () => {
                       className="form-select shadow-none pe-3 "
                       style={{ border: "1px solid #00000045" }}
                       aria-label="Default select example"
+                      onChange={handleSelectChange}
                     >
-                      <option>مصر</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      {Array.isArray(countries) &&
+                        countries.map((res) => (
+                          <option key={res?.id} value={res?.name}>
+                            {res?.name}
+                          </option>
+                        ))}
                     </select>
                     <div className="down-arrow">
                       <img src={DownArrow.src} alt="img" />
@@ -144,19 +111,20 @@ const LiveStream = () => {
                   </div>
                 </div>
                 <div className="row g-4">
-                  {data.map((item) => (
-                    <div key={item.id} className="col-sm-6 col-lg-4 col-xl-3">
-                      <div
-                        className="live-stream-card border text-center"
-                        onClick={() => dispatch(setSelectedVideo(item.video))}
-                      >
-                        <div className="live-stream-card-img">
-                          <img src={item.thumbnail} alt="img" />
+                  {Array.isArray(videos) &&
+                    videos.map((item) => (
+                      <div key={item.id} className="col-sm-6 col-lg-4 col-xl-3">
+                        <div
+                          className="live-stream-card border text-center"
+                          onClick={() => dispatch(setSelectedVideo(item.video))}
+                        >
+                          <div className="live-stream-card-img">
+                            <img src={item.thumbnail} alt="img" />
+                          </div>
+                          <p className="m-0 p-2">{item?.title?.slice(0, 12)}</p>
                         </div>
-                        <p className="m-0 p-2">{item?.title?.slice(0, 12)}</p>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             </div>

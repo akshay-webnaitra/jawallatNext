@@ -5,23 +5,20 @@ import Api from "@/services/Api";
 const api = Api.create();
 
 export const initialState = {
-  // main_products: [],
   category: null,
   affiliateLoading: false,
-  products: [], // Store the list of videos
-  lastPage: 0, // Keep track of the pagination
+  products: [],
+  lastPage: 0,
   product_categories: [],
   filtered_products: [],
 };
 
-// A slice for videos with reducers
 const AffiliateSlice = createSlice({
   name: "affiliate",
   initialState,
   reducers: {
     setCategory: (state, { payload }) => {
-      state.category = payload; // Set the selected category
-      // Filter products based on the selected category
+      state.category = payload;
       state.filtered_products = state.category
         ? state.products.filter((product) => product.category === payload)
         : state?.products;
@@ -34,7 +31,6 @@ const AffiliateSlice = createSlice({
       state.product_categories = payload?.product_categories || [];
       state.affiliateLoading = false;
       state.lastPage = payload?.products?.last_page || 1;
-      //   state.videosHasErrors = false;
       state.lastPage = payload?.main_products?.last_page || 1;
     },
     getAffiliateFailure: (state) => {
@@ -52,7 +48,6 @@ const AffiliateSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getAffiliate,
   getAffiliateSuccess,
@@ -60,10 +55,8 @@ export const {
   setCategory,
 } = AffiliateSlice.actions;
 
-// A selector to get affiliate from state
 export const AffiliateSelector = (state) => state.affiliate;
 
-// The reducer
 export default AffiliateSlice.reducer;
 
 // Asynchronous thunk action to fetch videos

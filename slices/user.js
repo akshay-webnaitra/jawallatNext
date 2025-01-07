@@ -11,7 +11,6 @@ export const initialState = {
   favoriteHasErrors: false,
 };
 
-// A slice for user with our three reducers
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -64,7 +63,6 @@ const userSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getUser,
   getUserSuccess,
@@ -77,10 +75,8 @@ export const {
   deleteUserFavoriteFailure,
 } = userSlice.actions;
 
-// A selector
 export const userSelector = (state) => state.user;
 
-// The reducer
 export default userSlice.reducer;
 
 // Asynchronous thunk action

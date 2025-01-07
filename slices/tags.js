@@ -18,7 +18,6 @@ export const initialState = {
   tagsItemsHasErrors: false,
 };
 
-// A slice for tags with our three reducers
 const tagsSlice = createSlice({
   name: "tags",
   initialState,
@@ -72,7 +71,6 @@ const tagsSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getTags,
   getTagsSuccess,
@@ -82,10 +80,8 @@ export const {
   getTagsItemsFailure,
 } = tagsSlice.actions;
 
-// A selector
 export const tagsSelector = (state) => state.tags;
 
-// The reducer
 export default tagsSlice.reducer;
 
 //Asynchronous thunk action

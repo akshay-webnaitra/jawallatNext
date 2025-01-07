@@ -7,13 +7,12 @@ const api = Api.create();
 export const initialState = {
   favouriteLoading: false,
   favouriteHasErrors: false,
-  favourite: [], // Store the list of videos
-  lastPage: 0, // Keep track of the pagination
+  favourite: [],
+  lastPage: 0,
   favouriteItemsLoading: false,
   favouriteItemsHasErrors: false,
 };
 
-// A slice for videos with reducers
 const favouriteSlice = createSlice({
   name: "favourite",
   initialState,
@@ -55,7 +54,6 @@ const favouriteSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getFavourite,
   getFavouriteSuccess,
@@ -65,10 +63,8 @@ export const {
   getFavouriteItemsFailure,
 } = favouriteSlice.actions;
 
-// A selector to get videos from state
 export const favouriteSelector = (state) => state.favourite;
 
-// The reducer
 export default favouriteSlice.reducer;
 
 // Asynchronous thunk action to fetch videos

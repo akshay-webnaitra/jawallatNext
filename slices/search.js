@@ -14,7 +14,6 @@ export const initialState = {
   perPage: 40,
 };
 
-// A slice for search with our three reducers
 const searchSlice = createSlice({
   name: "search",
   initialState,
@@ -61,7 +60,6 @@ const searchSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getSearch,
   getSearchSuccess,
@@ -69,10 +67,8 @@ export const {
   getSearchFailure,
 } = searchSlice.actions;
 
-// A selector
 export const searchSelector = (state) => state.search;
 
-// The reducer
 export default searchSlice.reducer;
 
 // Asynchronous thunk action

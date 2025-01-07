@@ -13,7 +13,6 @@ export const initialState = {
   related_news: [],
 };
 
-// A slice for sources with our three reducers
 const categorySearchSlice = createSlice({
   name: "categorySearch",
   initialState,
@@ -63,13 +62,12 @@ const categorySearchSlice = createSlice({
     builder.addCase(HYDRATE, (state, { payload }) => {
       return (state = {
         ...state,
-        ...payload.categorySearch,
+        ...payload.fan,
       });
     });
   },
 });
 
-// Three actions generated from the slice
 export const {
   getCategorySearch,
   getCategorySearchSuccess,
@@ -79,19 +77,17 @@ export const {
   getCategorySearchItemsFailure,
 } = categorySearchSlice.actions;
 
-// A selector
 export const categorySearchSelector = (state) => state.fan;
 
-// The reducer
 export default categorySearchSlice.reducer;
 
 //Asynchronous thunk action
 export function fetchCategorySearch() {
   return async (dispatch) => {
     dispatch(getCategorySearch());
-
+    const params = {};
     try {
-      const response = await api.getCategorySearchPage("abc");
+      const response = await api.getCategorySearchPage(params);
       console.log(response, "resp");
 
       dispatch(getCategorySearchSuccess(response?.data));

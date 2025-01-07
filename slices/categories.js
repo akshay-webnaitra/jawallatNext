@@ -109,7 +109,6 @@ const categoriesSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getCategories,
   getCategoriesSuccess,
@@ -122,10 +121,8 @@ export const {
   getSubCategoriesItemsFailure,
 } = categoriesSlice.actions;
 
-// A selector
 export const categoriesSelector = (state) => state.categories;
 
-// The reducer
 export default categoriesSlice.reducer;
 
 //Asynchronous thunk action

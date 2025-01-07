@@ -18,7 +18,6 @@ export const initialState = {
   sourcesItemsHasErrors: false,
 };
 
-// A slice for sources with our three reducers
 const sourcesSlice = createSlice({
   name: "sources",
   initialState,
@@ -71,7 +70,6 @@ const sourcesSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getSources,
   getSourcesSuccess,
@@ -81,10 +79,8 @@ export const {
   getSourcesItemsFailure,
 } = sourcesSlice.actions;
 
-// A selector
 export const sourcesSelector = (state) => state.sources;
 
-// The reducer
 export default sourcesSlice.reducer;
 
 //Asynchronous thunk action

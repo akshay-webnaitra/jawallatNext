@@ -14,7 +14,6 @@ export const initialState = {
   shareError: null,
 };
 
-// A slice for news with our three reducers
 const newsSlice = createSlice({
   name: "news",
   initialState,
@@ -58,7 +57,6 @@ const newsSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   getNews,
   getNewsSuccess,
@@ -68,10 +66,8 @@ export const {
   shareNewsFailure,
 } = newsSlice.actions;
 
-// A selector
 export const newsSelector = (state) => state.news;
 
-// The reducer
 export default newsSlice.reducer;
 
 // Asynchronous thunk action

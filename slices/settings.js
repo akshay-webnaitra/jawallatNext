@@ -10,7 +10,6 @@ export const initialState = {
   resetPasswordStep: 1,
 };
 
-// A slice for setting with our three reducers
 const settingSlice = createSlice({
   name: "setting",
   initialState,
@@ -38,7 +37,6 @@ const settingSlice = createSlice({
   },
 });
 
-// Three actions generated from the slice
 export const {
   setShowLogin,
   setShowRegister,
@@ -46,8 +44,6 @@ export const {
   setResetPasswordStep,
 } = settingSlice.actions;
 
-// A selector
 export const settingSelector = (state) => state.setting;
 
-// The reducer
 export default settingSlice.reducer;

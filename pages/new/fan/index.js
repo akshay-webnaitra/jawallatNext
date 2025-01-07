@@ -23,6 +23,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await store.dispatch(fetchCategories(session));
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
+    // await store.dispatch(fetchCategorySearch());
   }
 );
 const Fan = () => {
@@ -30,6 +31,8 @@ const Fan = () => {
   const [isMobile, setIsMobile] = useState(false);
   const dispatch = useDispatch();
   const { news, celebrity } = useSelector(categorySearchSelector);
+  const data = useSelector(categorySearchSelector);
+  console.log(data, "data");
 
   useEffect(() => {
     dispatch(fetchCategorySearch());
