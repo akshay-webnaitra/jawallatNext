@@ -62,7 +62,7 @@ const Api = {
       getUserFavorites: (params) =>
         api.get(`/api/web/getUserFavorites`, params),
       updateProfile: (params) => api.post(`/api/updateProfile`, params),
-      Contactus: (params) => api.post(`/api/Contactus`, params),
+      Contactus: (params) => api.post(`/api/web/saveContactus`, params),
     };
   },
 };

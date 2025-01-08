@@ -3,6 +3,7 @@ import Header from "@/partials/v2/Header";
 import NewsTicker from "@/components/NewsTicker";
 import { useSelector } from "react-redux";
 import { homeItemsSelector } from "@/slices/homeItems";
+import Footer from "@/partials/footer";
 
 const MainLayout = ({ children, title, category }) => {
   const { ticker } = useSelector(homeItemsSelector);
@@ -16,6 +17,7 @@ const MainLayout = ({ children, title, category }) => {
         <NewsTicker items={ticker} category={category} />
       </div>
       <main className="mb-4">{children}</main>
+      <Footer />
     </>
   );
 };

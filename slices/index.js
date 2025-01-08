@@ -15,7 +15,7 @@ import favouriteReducer from "./favourite";
 import affiliateReducer from "./affiliate";
 import fanReducer from "./fan";
 import countryReducer from "./countries";
-
+import contactReducer from "./contactUs";
 const rootReducer = combineReducers({
   homeItems: homeItemReducer,
   serverItem: serverItemReducer,
@@ -32,6 +32,7 @@ const rootReducer = combineReducers({
   videos: videoReducer,
   favourite: favouriteReducer,
   fan: fanReducer,
+  contact: contactReducer,
   affiliate: affiliateReducer,
 });
 export default rootReducer;

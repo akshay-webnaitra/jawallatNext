@@ -8,6 +8,10 @@ import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import RedCaret from "@/components/v2/RedCaret";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { contactUs } from "@/slices/contactUs";
+import { toast } from "react-toastify";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -18,6 +22,59 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 const ContactUs = () => {
+  const dispatch = useDispatch();
+  const [value, setValue] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!value.name || !value.phone || !value.email || !value.message) {
+      toast.error("Please fill in all the fields.");
+      return;
+    }
+
+    const phoneRegex = /^[0-9]+$/;
+    if (!phoneRegex.test(value.phone)) {
+      toast.error("Phone number must contain only numbers.");
+      return;
+    }
+
+    let data = {
+      name: value?.name,
+      phone: value?.phone,
+      email: value?.email,
+      message: value?.message,
+    };
+    dispatch(
+      contactUs(
+        data,
+        () => {
+          setValue({
+            name: "",
+            phone: "",
+            email: "",
+            message: "",
+          });
+        },
+        () => {
+          console.log("Error occurred, form not cleared.");
+        }
+      )
+    );
+  };
   return (
     <>
       <section>
@@ -37,7 +94,7 @@ const ContactUs = () => {
                       الاتصال بنا أو إرسال بريد إلكتروني إلينا أو ملء نموذج
                       الاتصال وسنقوم بالرد عليك.
                     </h5>
-                    <div className="jawlatt-form-title mt-5 ">
+                    <div className="jawlatt-form-title mt-5">
                       <div className="px-sm-5">
                         <h2
                           className=" mb-2 fw-bold"
@@ -46,12 +103,15 @@ const ContactUs = () => {
                           يسعدنا ان نستمع لآرائك
                         </h2>
                         <p className=" mb-5">*لن يتم نشر بريدك الإلكتروني.</p>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                           <div className="row g-3 mb-3">
                             <div className="col-md-6">
                               <div className="form-group">
                                 <input
                                   type="text"
+                                  name="name"
+                                  value={value.name}
+                                  onChange={handleChange}
                                   className="form-control bg-white shadow-none border rounded-0"
                                   id="name"
                                   placeholder="الإسم"
@@ -62,6 +122,10 @@ const ContactUs = () => {
                               <div className="form-group">
                                 <input
                                   type="text"
+                                  name="phone"
+                                  maxLength={14}
+                                  value={value.phone}
+                                  onChange={handleChange}
                                   className="form-control bg-white shadow-none border rounded-0"
                                   id="phone"
                                   placeholder="رقم الهاتف"
@@ -72,6 +136,9 @@ const ContactUs = () => {
                           <div className="form-group mb-3">
                             <input
                               type="email"
+                              name="email"
+                              value={value.email}
+                              onChange={handleChange}
                               className="form-control bg-white shadow-none border rounded-0"
                               id="email"
                               placeholder="الايميل الإلكتروني"
@@ -81,6 +148,9 @@ const ContactUs = () => {
                             <textarea
                               className="form-control bg-white shadow-none border rounded-0"
                               id="message"
+                              name="message"
+                              value={value.message}
+                              onChange={handleChange}
                               placeholder="رسالتك"
                               rows={4}
                               defaultValue={""}
@@ -163,7 +233,7 @@ const ContactUs = () => {
               <div className="p-md-4 mb-3">
                 <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
               </div>
-              <Sidebar></Sidebar>
+              <Sidebar />
             </div>
           </div>
         </div>
