@@ -132,6 +132,8 @@ export function fetchCategories() {
 
     try {
       const response = await api.getMainCategories("abc");
+      console.log(response, "cat");
+
       dispatch(getCategoriesSuccess(response?.data?.return));
     } catch (error) {
       dispatch(getCategoriesFailure());

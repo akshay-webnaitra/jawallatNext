@@ -6,20 +6,23 @@ const fetchInfo = async (countrySlug, categorySlug, currentUserId = null) => {
   if (!!currentUserId) {
     api.setAuthData({ "X-User-ID": `${currentUserId}` });
   }
-  const response = await api.filterSources({
-    country: countrySlug,
-    category: categorySlug,
-  });
-
+  const params = {
+    country_slug: countrySlug,
+    category_slug: categorySlug,
+  };
+  const response = await api.filterSources(params);
+  console.log("API response:", response);
   return response;
 };
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
+  console.log("Session data:", session);
   const result = await fetchInfo(
-    req?.query?.countrySlug,
-    req?.query?.categorySlug,
+    req?.query?.country_slug,
+    req?.query?.category_slug,
     session?.user?.id
   );
+  console.log("Result from fetchInfo:", result);
   res.status(result?.status).json(result?.data);
 }

@@ -37,7 +37,7 @@ const Api = {
       getSingleNewsPage: (params) =>
         api.get(`/api/web/getSingleNewsPage`, params),
       getNews: (params) => api.post(`/api/getNews`, params),
-      filterSources: (params) => api.post(`/api/web/filterSources`, params),
+      filterSources: (params) => api.get(`/api/web/filterSources`, params),
       shareNews: (params) => api.post(`/api/increaseShares`, params),
       subscribeToNewsletter: (params) =>
         api.post(`/api/web/subscribeToNewsletter`, params),
@@ -53,7 +53,6 @@ const Api = {
       getServer: () => api.get(`/api/web/getServer`),
       getSettings: (params) => api.post(`/api/getSettings`, params),
       getUser: (params) => api.get(`/api/getUser`, params),
-
       getFooterMenu: (params) => api.post(`/api/getFooterMenu`, params),
       updateNotificationSettings: (params) =>
         api.post(`/api/updateNotificationSettings`, params),

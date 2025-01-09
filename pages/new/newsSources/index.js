@@ -1,7 +1,7 @@
 import MainLayout from "layout/mainLayout";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
-import { fetchCategories } from "@/slices/categories";
+import { categoriesSelector, fetchCategories } from "@/slices/categories";
 import { fetchSources, filterSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -45,12 +45,20 @@ export const getServerSideProps = wrapper.getServerSideProps(
 const NewsSources = () => {
   const countries = useSelector(countrySelector);
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const { sources } = useSelector(notificationSourcesSelector);
+  const { categories } = useSelector(categoriesSelector);
+  console.log(categories, "cat");
+
   const dispatch = useDispatch();
   const handleSelectChange = (e) => {
     const countrySlug = e.target.value;
     setSelectedCountry(countrySlug);
-    dispatch(fetchNotificationSources(countrySlug)); // Fetch live streams for selected country
+    dispatch(fetchNotificationSources(countrySlug, selectedCategory));
+  };
+  const handleCategorySelect = (slug) => {
+    setSelectedCategory(slug);
+    dispatch(fetchNotificationSources(selectedCountry, slug));
   };
   const data = [
     {
@@ -145,12 +153,12 @@ const NewsSources = () => {
     dispatch(fetchAllCountries());
   }, []);
   useEffect(() => {
-    if (selectedCountry) {
-      dispatch(fetchNotificationSources(selectedCountry, ""));
+    if (selectedCountry || selectedCategory) {
+      dispatch(fetchNotificationSources(selectedCountry, selectedCategory));
     } else {
-      dispatch(fetchNotificationSources()); // Fallback to fetch all sources if no country is selected
+      dispatch(fetchNotificationSources());
     }
-  }, [dispatch, selectedCountry]);
+  }, [dispatch, selectedCountry, selectedCategory]);
   return (
     <>
       <section>
@@ -247,19 +255,29 @@ const NewsSources = () => {
               </div>
             </div>
             <Slider {...slider} className="mt-4 blur-effect">
-              {[...Array(10)].map((_, index) => (
-                <div
-                  key={index}
-                  className={`slick-slide ${index === 0 ? "first-slide" : ""}`}
-                >
-                  <button
-                    className="btn text-nowrap fs-20 px-3 border"
-                    style={{ borderRadius: 16, border: "2px solid #E5E5E5" }}
+              {Array.isArray(categories) &&
+                categories.map((res, index) => (
+                  <div
+                    key={res.cat_id}
+                    className={`slick-slide ${
+                      index === 0 ? "first-slide" : ""
+                    }`}
                   >
-                    الحرب في غزة
-                  </button>
-                </div>
-              ))}
+                    <button
+                      onClick={() => handleCategorySelect(res?.cat_slug)}
+                      className="btn text-nowrap fs-20 px-3 border"
+                      style={{
+                        borderRadius: 16,
+                        border: "2px solid #E5E5E5",
+                        backgroundColor:
+                          selectedCategory === res.cat_slug ? "#EA5153" : "",
+                        color: selectedCategory === res.cat_slug ? "white" : "",
+                      }}
+                    >
+                      {res?.cat_name}
+                    </button>
+                  </div>
+                ))}
             </Slider>
             <div className="news-channel-container mt-3">
               {Array.isArray(sources) &&

@@ -58,10 +58,10 @@ export function fetchNotificationSources(countrySlug = "", categorySlug = "") {
     try {
       const params = {};
       if (countrySlug) {
-        params.country = countrySlug;
+        params.country_slug = countrySlug;
       }
       if (categorySlug) {
-        params.category = categorySlug;
+        params.category_slug = categorySlug;
       }
       const response = await api.filterSources(params);
       console.log(response, "noti");
