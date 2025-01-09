@@ -30,7 +30,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Page = () => {
-  const { page } = useSelector(pageSelector);
+  const page = useSelector(pageSelector);
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);

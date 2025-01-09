@@ -16,6 +16,7 @@ import affiliateReducer from "./affiliate";
 import fanReducer from "./fan";
 import countryReducer from "./countries";
 import contactReducer from "./contactUs";
+import notificationSourceReducer from "./notificationSource";
 const rootReducer = combineReducers({
   homeItems: homeItemReducer,
   serverItem: serverItemReducer,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   live: LiveStream,
   country: countryReducer,
   videos: videoReducer,
+  notificationSource: notificationSourceReducer,
   favourite: favouriteReducer,
   fan: fanReducer,
   contact: contactReducer,

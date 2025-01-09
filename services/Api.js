@@ -37,6 +37,7 @@ const Api = {
       getSingleNewsPage: (params) =>
         api.get(`/api/web/getSingleNewsPage`, params),
       getNews: (params) => api.post(`/api/getNews`, params),
+      filterSources: (params) => api.post(`/api/web/filterSources`, params),
       shareNews: (params) => api.post(`/api/increaseShares`, params),
       subscribeToNewsletter: (params) =>
         api.post(`/api/web/subscribeToNewsletter`, params),

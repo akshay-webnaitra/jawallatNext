@@ -34,6 +34,9 @@ const sourcesSlice = createSlice({
       state.sourcesLoading = false;
       state.sourcesHasErrors = true;
     },
+    setFilterSources: (state, { payload }) => {
+      state.filterSources = payload;
+    },
     getSourcesItems: (state) => {
       state.category = null;
       state.tags = [];
@@ -75,6 +78,7 @@ export const {
   getSourcesSuccess,
   getSourcesFailure,
   getSourcesItems,
+  setFilterSources,
   getSourcesItemsSuccess,
   getSourcesItemsFailure,
 } = sourcesSlice.actions;
@@ -87,10 +91,8 @@ export default sourcesSlice.reducer;
 export function fetchSources() {
   return async (dispatch) => {
     dispatch(getSources());
-
     try {
       const response = await api.getMainSources("abc");
-
       dispatch(getSourcesSuccess(response?.data?.return));
     } catch (error) {
       dispatch(getSourcesFailure());
@@ -98,6 +100,29 @@ export function fetchSources() {
   };
 }
 
+export function filterSources(countrySlug = "", categorySlug = "") {
+  return async (dispatch) => {
+    dispatch(getSources());
+    try {
+      const params = {};
+      if (countrySlug) {
+        params.country = countrySlug; // Include country if provided
+      }
+      if (categorySlug) {
+        params.category = categorySlug; // Include category if provided
+      }
+
+      // Call the API with the prepared parameters
+      const response = await api.filterSources(params);
+
+      console.log(response, "response");
+
+      dispatch(setFilterSources(response?.data?.return));
+    } catch (error) {
+      dispatch(getSourcesFailure());
+    }
+  };
+}
 //Asynchronous thunk action
 export function fetchSourcesItems(
   source,

@@ -2,7 +2,7 @@ import MainLayout from "layout/mainLayout";
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { fetchCategories } from "@/slices/categories";
-import { fetchSources } from "@/slices/sources";
+import { fetchSources, filterSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
@@ -24,6 +24,13 @@ import StarIconGray from "@/components/v2/icons/starIconGray";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { countrySelector, fetchAllCountries } from "@/slices/countries";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  fetchNotificationSources,
+  notificationSourcesSelector,
+} from "@/slices/notificationSource";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -31,9 +38,20 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await store.dispatch(fetchCategories(session));
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
+    await store.dispatch(fetchAllCountries());
+    await store.dispatch(fetchNotificationSources());
   }
 );
 const NewsSources = () => {
+  const countries = useSelector(countrySelector);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const { sources } = useSelector(notificationSourcesSelector);
+  const dispatch = useDispatch();
+  const handleSelectChange = (e) => {
+    const countrySlug = e.target.value;
+    setSelectedCountry(countrySlug);
+    dispatch(fetchNotificationSources(countrySlug)); // Fetch live streams for selected country
+  };
   const data = [
     {
       title: "اخبار",
@@ -76,64 +94,7 @@ const NewsSources = () => {
       icon: <NotificationIconSix />,
     },
   ];
-  const newsChannel = [
-    {
-      title: "اليوم السابع",
-      icon: <StarIconRed />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconGray />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconRed />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconGray />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconRed />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconGray />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconRed />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconGray />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconRed />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconGray />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconRed />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconGray />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconRed />,
-    },
-    {
-      title: "اليوم السابع",
-      icon: <StarIconGray />,
-    },
-  ];
+
   const slider = {
     arrows: true,
     infinite: true,
@@ -179,6 +140,17 @@ const NewsSources = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    dispatch(fetchAllCountries());
+  }, []);
+  useEffect(() => {
+    if (selectedCountry) {
+      dispatch(fetchNotificationSources(selectedCountry, ""));
+    } else {
+      dispatch(fetchNotificationSources()); // Fallback to fetch all sources if no country is selected
+    }
+  }, [dispatch, selectedCountry]);
   return (
     <>
       <section>
@@ -257,12 +229,18 @@ const NewsSources = () => {
               <select
                 className="form-select shadow-none pe-3 "
                 style={{ border: "1px solid #00000045" }}
-                aria-label="Default select example"
+                onChange={handleSelectChange}
+                value={selectedCountry}
               >
-                <option selected>مصر</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="" disabled selected>
+                  Select a country
+                </option>
+                {Array.isArray(countries) &&
+                  countries.map((res) => (
+                    <option key={res?.id} value={res?.name}>
+                      {res?.name}
+                    </option>
+                  ))}
               </select>
               <div className="down-arrow">
                 <img src={DownArrow.src} alt="img" />
@@ -284,15 +262,18 @@ const NewsSources = () => {
               ))}
             </Slider>
             <div className="news-channel-container mt-3">
-              {newsChannel.map((item, index) => (
-                <div key={index} className="news-channel-card text-center">
-                  <div className="news-channel-card-image mx-auto">
-                    <img src={NewsImage.src} alt="img" />
+              {Array.isArray(sources) &&
+                sources.map((item, index) => (
+                  <div key={index} className="news-channel-card text-center">
+                    <div className="news-channel-card-image mx-auto">
+                      <img src={NewsImage.src} alt="img" />
+                    </div>
+                    <p className="fs-18 m-0 mt-2 mb-4">{item.name} </p>
+                    <div className="star-icon">
+                      {item.icon || <StarIconRed />}
+                    </div>
                   </div>
-                  <p className="fs-18 m-0 mt-2 mb-4">{item.title} </p>
-                  <div className="star-icon">{item.icon}</div>
-                </div>
-              ))}
+                ))}
             </div>
           </section>
           <section className="mt-5">
