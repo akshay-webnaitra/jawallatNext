@@ -8,6 +8,8 @@ export const initialState = {
   sourcesHasErrors: false,
   sources: [],
   filterSources: [],
+  changePasswordLoading: false,
+  changePasswordHasErrors: false,
 };
 
 const notificationSourcesSlice = createSlice({
@@ -25,6 +27,18 @@ const notificationSourcesSlice = createSlice({
     getNotificationSourcesFailure: (state) => {
       state.sourcesLoading = false;
       state.sourcesHasErrors = true;
+    },
+    setChangePassword: (state) => {
+      state.changePasswordLoading = true;
+      state.changePasswordHasErrors = false;
+    },
+    setChangePasswordSuccess: (state) => {
+      state.changePasswordLoading = false;
+      state.changePasswordHasErrors = false;
+    },
+    setChangePasswordFailure: (state) => {
+      state.changePasswordLoading = false;
+      state.changePasswordHasErrors = true;
     },
     setFilterSources: (state, { payload }) => {
       state.filterSources = payload;
@@ -45,6 +59,9 @@ export const {
   getNotificationSourcesSuccess,
   getNotificationSourcesFailure,
   setFilterSources,
+  setChangePassword,
+  setChangePasswordSuccess,
+  setChangePasswordFailure,
 } = notificationSourcesSlice.actions;
 
 export const notificationSourcesSelector = (state) => state.notificationSource;
@@ -64,11 +81,24 @@ export function fetchNotificationSources(countrySlug = "", categorySlug = "") {
         params.category_slug = categorySlug;
       }
       const response = await api.filterSources(params);
-      console.log(response, "noti");
-
       dispatch(getNotificationSourcesSuccess(response?.data));
     } catch (error) {
       dispatch(getNotificationSourcesFailure());
+    }
+  };
+}
+
+export function changePassword() {
+  return async (dispatch) => {
+    dispatch(setChangePassword());
+    try {
+      const params = {};
+      const response = await api.changePassword(params);
+      console.log(response, "change");
+
+      // dispatch(setChangePasswordSuccess(response?.data));
+    } catch (error) {
+      dispatch(setChangePasswordFailure());
     }
   };
 }

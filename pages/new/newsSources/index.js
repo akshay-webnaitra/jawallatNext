@@ -28,9 +28,11 @@ import { countrySelector, fetchAllCountries } from "@/slices/countries";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
+  changePassword,
   fetchNotificationSources,
   notificationSourcesSelector,
 } from "@/slices/notificationSource";
+import { authSelector } from "@/slices/auth";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -46,20 +48,13 @@ const NewsSources = () => {
   const countries = useSelector(countrySelector);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const dispatch = useDispatch();
   const { sources } = useSelector(notificationSourcesSelector);
   const { categories } = useSelector(categoriesSelector);
-  console.log(categories, "cat");
-
-  const dispatch = useDispatch();
-  const handleSelectChange = (e) => {
-    const countrySlug = e.target.value;
-    setSelectedCountry(countrySlug);
-    dispatch(fetchNotificationSources(countrySlug, selectedCategory));
-  };
-  const handleCategorySelect = (slug) => {
-    setSelectedCategory(slug);
-    dispatch(fetchNotificationSources(selectedCountry, slug));
-  };
+  const [password, setPassword] = useState({
+    old_password: "",
+    new_password: "",
+  });
   const data = [
     {
       title: "اخبار",
@@ -148,10 +143,39 @@ const NewsSources = () => {
       },
     ],
   };
+  const user = useSession();
+  console.log(user?.data?.user?.id, "auth");
+
+  const handleSelectChange = (e) => {
+    const countrySlug = e.target.value;
+    setSelectedCountry(countrySlug);
+    dispatch(fetchNotificationSources(countrySlug, selectedCategory));
+  };
+
+  const handleCategorySelect = (slug) => {
+    setSelectedCategory(slug);
+    dispatch(fetchNotificationSources(selectedCountry, slug));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPassword((password) => ({ ...password, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const passwordData = {
+      old_password: password.old_password,
+      new_password: password.new_password,
+    };
+    console.log("Password Data:", passwordData);
+    dispatch(changePassword(passwordData));
+  };
 
   useEffect(() => {
     dispatch(fetchAllCountries());
   }, []);
+
   useEffect(() => {
     if (selectedCountry || selectedCategory) {
       dispatch(fetchNotificationSources(selectedCountry, selectedCategory));
@@ -370,37 +394,48 @@ const NewsSources = () => {
               className="my-4 py-5 px-5"
               style={{ backgroundColor: "#F8F8F8", borderRadius: 13 }}
             >
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="row mb-3">
-                    <label className="col-sm-2 col-form-label">الإسم</label>
-                    <div className="col-sm-10">
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Ahmed"
-                      />
+              <form onSubmit={handleSubmit}>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="row mb-3">
+                      <label className="col-sm-2 col-form-label">الإسم</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="password"
+                          className="form-control"
+                          placeholder="Ahmed"
+                          name="old_password"
+                          onChange={handleChange}
+                          value={password?.old_password}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="row mb-3">
-                    <label className="col-sm-2 col-form-label">الايميل</label>
-                    <div className="col-sm-10">
-                      <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Ahmedmoftah@live.com"
-                      />
+                    <div className="row mb-3">
+                      <label className="col-sm-2 col-form-label">الايميل</label>
+                      <div className="col-sm-10">
+                        <input
+                          type="password"
+                          className="form-control"
+                          placeholder="Ahmedmoftah@live.com"
+                          name="new_password"
+                          onChange={handleChange}
+                          value={password?.new_password}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="row justify-content-end">
-                    <div className="col-sm-10">
-                      <button className="btn arabic24-bg-dark-red text-white px-1">
-                        تعديل كلمة المرور
-                      </button>
+                    <div className="row justify-content-end">
+                      <div className="col-sm-10">
+                        <button
+                          type="submit"
+                          className="btn arabic24-bg-dark-red text-white px-1"
+                        >
+                          تعديل كلمة المرور
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </section>
         </div>

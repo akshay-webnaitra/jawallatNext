@@ -17,7 +17,9 @@ import fanReducer from "./fan";
 import countryReducer from "./countries";
 import contactReducer from "./contactUs";
 import notificationSourceReducer from "./notificationSource";
+import authReducer from "./auth";
 const rootReducer = combineReducers({
+  auth: authReducer,
   homeItems: homeItemReducer,
   serverItem: serverItemReducer,
   categories: categoriesReducer,

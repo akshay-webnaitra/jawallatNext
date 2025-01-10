@@ -16,6 +16,15 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setUser: (state, action) => {
+      // state.token = action.payload.token;
+      // state.userId = action.payload.userId;
+    },
+    clearUser: (state) => {
+      // state.token = null;
+      // state.userId = null;
+    },
+
     postLoginRequest: (state) => {
       state.loading = true;
       state.hasError = false;
@@ -101,6 +110,8 @@ const authSlice = createSlice({
 
 // Three actions generated from the slice
 export const {
+  setUser,
+  clearUser,
   postLoginRequest,
   postLoginSuccess,
   postLoginFailure,
@@ -156,10 +167,16 @@ export function postSignup(
     dispatch(postSignupRequest());
     try {
       const response = await api.signup(params);
-      console.log(response, "signup");
       if (response?.data?.status === 200) {
-        dispatch(postSignupSuccess(response?.data?.return));
-        callback(response?.data?.return);
+        const token = response?.data?.return?.data?.token;
+        const userId = response?.data?.return?.data?.advertiser?.id;
+        if (token && userId) {
+          dispatch(setUser({ token, userId }));
+          localStorage.setItem("jawlatt-token", token);
+          localStorage.setItem("jawlatt-user-id", userId);
+        }
+        dispatch(postSignupSuccess(response?.data?.return?.data));
+        callback(response?.data?.return?.data);
         toast.success(response?.data?.message || "Signup successful!");
       } else {
         dispatch(postSignupFailure(response?.data?.message));

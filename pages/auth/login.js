@@ -47,7 +47,7 @@ const Login = () => {
           تسجيل <span className="fw-normal heading">دخول</span>
         </h1>
         <p className="my-4 mb-5 px-md-4">
-          pإذا واجهتك مشكلة في دخول الحساب الخاص بك
+          إذا واجهتك مشكلة في دخول الحساب الخاص بك
           <span className="arab24-text-red">إعادة تعيين كلمة السر</span>
           إضغط .
         </p>

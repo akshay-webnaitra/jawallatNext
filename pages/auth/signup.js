@@ -5,11 +5,13 @@ import React, { useState } from "react";
 import { fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import { wrapper } from "@/utils/store";
-import { useDispatch } from "react-redux";
-import { postSignup } from "@/slices/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { authSelector, postSignup } from "@/slices/auth";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -20,9 +22,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 const Signup = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [data, setData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -37,25 +41,33 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!data.firstName || !data.lastName || !data.email || !data.password) {
+      toast.error("Please fill in all the fields.");
+      return;
+    }
     let item = {
-      adv_first_name: data?.name,
-      adv_email: data?.email,
-      adv_password: data?.password,
+      firstName: data?.firstName,
+      lastName: data?.lastName,
+      email: data?.email,
+      password: data?.password,
     };
     dispatch(
-      postSignup(item),
-      () => {
+      postSignup(item, () => {
         setData({
-          name: "",
+          firstName: "",
+          lastName: "",
           email: "",
           password: "",
         });
-      },
+        router.push("/new");
+      }),
+
       () => {
         console.log("Signup failed");
       }
     );
   };
+
   return (
     <div>
       <form className="p-4" onSubmit={handleSubmit}>
@@ -73,8 +85,18 @@ const Signup = () => {
         <div className="mb-4">
           <input
             type="text"
-            name="name"
-            value={data?.name}
+            name="firstName"
+            value={data?.firstName}
+            onChange={handleChange}
+            className="form-control shadow-none border-0"
+            placeholder="الإسم"
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            type="text"
+            name="lastName"
+            value={data?.lastName}
             onChange={handleChange}
             className="form-control shadow-none border-0"
             placeholder="الإسم"
