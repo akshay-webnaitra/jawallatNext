@@ -34,6 +34,7 @@ import {
 } from "@/slices/notificationSource";
 import { authSelector } from "@/slices/auth";
 import { toast } from "react-toastify";
+import { Spinner } from "react-bootstrap";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -50,7 +51,9 @@ const NewsSources = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const dispatch = useDispatch();
-  const { sources } = useSelector(notificationSourcesSelector);
+  const { sources, changePasswordLoading } = useSelector(
+    notificationSourcesSelector
+  );
   const { categories } = useSelector(categoriesSelector);
   const [password, setPassword] = useState({
     old_password: "",
@@ -145,8 +148,6 @@ const NewsSources = () => {
     ],
   };
   const user = useSession();
-  console.log(user?.data?.user?.id, "auth");
-
   const handleSelectChange = (e) => {
     const countrySlug = e.target.value;
     setSelectedCountry(countrySlug);
@@ -437,7 +438,11 @@ const NewsSources = () => {
                           type="submit"
                           className="btn arabic24-bg-dark-red text-white px-1"
                         >
-                          تعديل كلمة المرور
+                          {changePasswordLoading ? (
+                            <Spinner />
+                          ) : (
+                            "تعديل كلمة المرور"
+                          )}
                         </button>
                       </div>
                     </div>
