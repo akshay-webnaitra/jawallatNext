@@ -35,6 +35,7 @@ import {
 import { authSelector } from "@/slices/auth";
 import { toast } from "react-toastify";
 import { Spinner } from "react-bootstrap";
+import ChangePassword from "@/components/notificationNewsSource/changePassword";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -54,11 +55,11 @@ const NewsSources = () => {
   const { sources, changePasswordLoading } = useSelector(
     notificationSourcesSelector
   );
-  const { categories } = useSelector(categoriesSelector);
   const [password, setPassword] = useState({
     old_password: "",
     new_password: "",
   });
+  const { categories } = useSelector(categoriesSelector);
   const data = [
     {
       title: "اخبار",
@@ -157,11 +158,6 @@ const NewsSources = () => {
   const handleCategorySelect = (slug) => {
     setSelectedCategory(slug);
     dispatch(fetchNotificationSources(selectedCountry, slug));
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPassword((password) => ({ ...password, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -399,57 +395,12 @@ const NewsSources = () => {
                 بيانات المستخدم
               </h3>
             </div>
-            <div
-              className="my-4 py-5 px-5"
-              style={{ backgroundColor: "#F8F8F8", borderRadius: 13 }}
-            >
-              <form onSubmit={handleSubmit}>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="row mb-3">
-                      <label className="col-sm-2 col-form-label">الإسم</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="password"
-                          className="form-control"
-                          placeholder="Ahmed"
-                          name="old_password"
-                          onChange={handleChange}
-                          value={password?.old_password}
-                        />
-                      </div>
-                    </div>
-                    <div className="row mb-3">
-                      <label className="col-sm-2 col-form-label">الايميل</label>
-                      <div className="col-sm-10">
-                        <input
-                          type="password"
-                          className="form-control"
-                          placeholder="Ahmedmoftah@live.com"
-                          name="new_password"
-                          onChange={handleChange}
-                          value={password?.new_password}
-                        />
-                      </div>
-                    </div>
-                    <div className="row justify-content-end">
-                      <div className="col-sm-10">
-                        <button
-                          type="submit"
-                          className="btn arabic24-bg-dark-red text-white px-1"
-                        >
-                          {changePasswordLoading ? (
-                            <Spinner />
-                          ) : (
-                            "تعديل كلمة المرور"
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
+            <ChangePassword
+              changePasswordLoading={changePasswordLoading}
+              handleSubmit={handleSubmit}
+              password={password}
+              setPassword={setPassword}
+            />
           </section>
         </div>
       </section>
