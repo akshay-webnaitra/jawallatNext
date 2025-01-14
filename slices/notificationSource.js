@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import Api from "@/services/Api";
+import { toast } from "react-toastify";
 
 const api = Api.create();
 export const initialState = {
@@ -88,15 +89,19 @@ export function fetchNotificationSources(countrySlug = "", categorySlug = "") {
   };
 }
 
-export function changePassword() {
+export function changePassword(params) {
   return async (dispatch) => {
     dispatch(setChangePassword());
     try {
-      const params = {};
       const response = await api.changePassword(params);
       console.log(response, "change");
-
-      // dispatch(setChangePasswordSuccess(response?.data));
+      dispatch(setChangePasswordSuccess(response?.data));
+      if (response?.data?.status === 200) {
+        toast.success(response?.data?.message);
+        window.location.reload();
+      } else if (response?.data?.status === 400) {
+        toast.error(response?.data?.message);
+      }
     } catch (error) {
       dispatch(setChangePasswordFailure());
     }

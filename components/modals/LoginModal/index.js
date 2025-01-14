@@ -1,4 +1,4 @@
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import {
@@ -47,10 +47,20 @@ const LoginModal = () => {
         password,
         redirect: false,
       });
-
       if (response?.status == 200) {
-        toast.success("تم تسجيل الدخول بنجاح");
-        window.location.reload();
+        const session = await getSession();
+        const accessToken = session?.accessToken;
+        if (accessToken) {
+          // Store the token and expiration time in localStorage
+          localStorage.setItem("jawlatt-token", accessToken);
+          localStorage.setItem("jawlatt-user-id", session?.user?.id);
+          localStorage.setItem("jawlatt-token-expiration", session?.expires);
+
+          toast.success("تم تسجيل الدخول بنجاح");
+          window.location.reload(); // Reload the page after successful login
+        } else {
+          toast.error("لم يتم العثور على التوكن");
+        }
       } else {
         toast.error("الرجاء إدخال بريد إلكتروني صالح وكلمة مرور");
       }

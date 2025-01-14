@@ -51,8 +51,6 @@ export function fetchAllCountries() {
     const params = {};
     try {
       const response = await api.getAllCountries(params);
-      console.log(response, "data");
-
       dispatch(setCountriesSuccess(response?.data));
     } catch (error) {
       dispatch(setCountriesFailure());

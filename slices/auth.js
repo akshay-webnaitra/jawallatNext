@@ -142,6 +142,8 @@ export function postLogin(
 
     try {
       const response = await api.login(params);
+      console.log(response, "login");
+
       if (response?.data?.status == 200) {
         dispatch(postLoginSuccess(response?.data?.return));
         toast.success(response?.data?.message);

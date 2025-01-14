@@ -31,6 +31,7 @@ const customAxios = axios.create({
 
 // Step-2: Create request, response & error handlers
 const requestHandler = (request) => {
+  const token = getAuthToken();
   // const token = localStorage.getItem("jawlatt-token");
 
   // request.headers.Authorization =
@@ -43,6 +44,7 @@ const requestHandler = (request) => {
 
 const responseHandler = (response) => {
   if (response.status == 401) {
+    localStorage.removeItem("jawlatt-token");
     window.location = "/";
   }
 
@@ -72,6 +74,7 @@ const errorHandler = (error) => {
 // export and call it in an init function of the application/page.
 customAxios.interceptors.request.use(
   (request) => requestHandler(request),
+  (response) => responseHandler(response),
   (error) => errorHandler(error)
 );
 

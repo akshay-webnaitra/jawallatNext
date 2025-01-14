@@ -33,6 +33,7 @@ import {
   notificationSourcesSelector,
 } from "@/slices/notificationSource";
 import { authSelector } from "@/slices/auth";
+import { toast } from "react-toastify";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -164,12 +165,19 @@ const NewsSources = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const passwordData = {
-      old_password: password.old_password,
-      new_password: password.new_password,
-    };
-    console.log("Password Data:", passwordData);
-    dispatch(changePassword(passwordData));
+    if (!password?.old_password && !password?.new_password) {
+      toast.error("Please enter a value in both fields.");
+    } else if (!password?.old_password) {
+      toast.error("Please enter your old password.");
+    } else if (!password?.new_password) {
+      toast.error("Please enter your new password.");
+    } else {
+      const passwordData = {
+        old_password: password.old_password,
+        new_password: password.new_password,
+      };
+      dispatch(changePassword(passwordData));
+    }
   };
 
   useEffect(() => {
