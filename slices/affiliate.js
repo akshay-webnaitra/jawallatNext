@@ -65,7 +65,6 @@ export function fetchAffiliate(category = "") {
     dispatch(getAffiliate());
     try {
       const response = await api.getAffiliate({ category });
-      console.log(response, "affiliate");
 
       if (response?.data) {
         dispatch(getAffiliateSuccess(response?.data?.return ?? response?.data));

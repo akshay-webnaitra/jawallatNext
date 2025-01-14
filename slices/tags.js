@@ -104,11 +104,6 @@ export function fetchTagsItems(
         api.setAuthData({ "X-User-ID": `${session?.user?.id}` });
       }
       const response = await api.getTagPage(params);
-      console.log(
-        "================================== Tag page================"
-      );
-      console.log(response?.data?.return);
-
       dispatch(getTagsItemsSuccess(response?.data?.return));
       callback(response?.data?.return);
     } catch (error) {

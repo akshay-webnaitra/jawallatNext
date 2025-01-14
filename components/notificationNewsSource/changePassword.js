@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
-import { toast } from "react-toastify"; // Assuming you are using react-toastify for displaying toasts.
 
 const ChangePassword = ({
   changePasswordLoading,

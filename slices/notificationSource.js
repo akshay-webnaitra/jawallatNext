@@ -11,6 +11,8 @@ export const initialState = {
   filterSources: [],
   changePasswordLoading: false,
   changePasswordHasErrors: false,
+  categoryUserLoading: false, // Add this for category user loading state
+  categoryUserHasErrors: false, // Add this for category user error state
 };
 
 const notificationSourcesSlice = createSlice({
@@ -41,6 +43,18 @@ const notificationSourcesSlice = createSlice({
       state.changePasswordLoading = false;
       state.changePasswordHasErrors = true;
     },
+    setCategoryUser: (state) => {
+      state.categoryUserLoading = true;
+      state.categoryUserHasErrors = false;
+    },
+    setCategoryUserSuccess: (state) => {
+      state.categoryUserLoading = false;
+      state.categoryUserHasErrors = false;
+    },
+    setCategoryUserFailure: (state) => {
+      state.categoryUserLoading = false;
+      state.categoryUserHasErrors = true;
+    },
     setFilterSources: (state, { payload }) => {
       state.filterSources = payload;
     },
@@ -63,6 +77,9 @@ export const {
   setChangePassword,
   setChangePasswordSuccess,
   setChangePasswordFailure,
+  setCategoryUser,
+  setCategoryUserSuccess,
+  setCategoryUserFailure,
 } = notificationSourcesSlice.actions;
 
 export const notificationSourcesSelector = (state) => state.notificationSource;
@@ -94,7 +111,6 @@ export function changePassword(params) {
     dispatch(setChangePassword());
     try {
       const response = await api.changePassword(params);
-      console.log(response, "change");
       dispatch(setChangePasswordSuccess(response?.data));
       if (response?.data?.status === 200) {
         toast.success(response?.data?.message);
@@ -104,6 +120,24 @@ export function changePassword(params) {
       }
     } catch (error) {
       dispatch(setChangePasswordFailure());
+    }
+  };
+}
+
+export function addCategoryToUser(user_id, cat_id) {
+  return async (dispatch) => {
+    dispatch(setCategoryUser());
+    try {
+      const response = await api.addCategoryToUser({ user_id, cat_id });
+      dispatch(setCategoryUserSuccess(response?.data));
+      if (response?.status === 200) {
+        toast.success(response?.data?.message);
+      } else if (response?.status === 400) {
+        toast.error(response?.data?.message);
+      }
+    } catch (error) {
+      dispatch(setCategoryUserFailure());
+      toast.error("Failed to add category to user");
     }
   };
 }

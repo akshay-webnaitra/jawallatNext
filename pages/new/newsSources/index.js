@@ -8,19 +8,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import RedCaret from "@/components/v2/RedCaret";
 import NewsImage from "../../../assets/images/bbc-logo.png";
-import NotificationIconOne from "@/components/v2/icons/notificationIcon1";
-import NotificationIconTwo from "@/components/v2/icons/notificationIcon2";
-import NotificationIconThree from "@/components/v2/icons/notificationIcon3";
-import NotificationIconFour from "@/components/v2/icons/notificationIcon4";
-import NotificationIconFive from "@/components/v2/icons/notificationIcon5";
-import NotificationIconSix from "@/components/v2/icons/notificationIcon6";
-import NotificationIconSeven from "@/components/v2/icons/notificationIcon7";
-import NotificationIconEight from "@/components/v2/icons/notificationIcon8";
-import NotificationIconNine from "@/components/v2/icons/notificationIcon9";
-import NotificationIconTen from "@/components/v2/icons/notificationIcon10";
 import DownArrow from "../../../assets/images/down-arrow.png";
 import StarIconRed from "@/components/v2/icons/starIconRed";
-import StarIconGray from "@/components/v2/icons/starIconGray";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -28,13 +17,12 @@ import { countrySelector, fetchAllCountries } from "@/slices/countries";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
+  addCategoryToUser,
   changePassword,
   fetchNotificationSources,
   notificationSourcesSelector,
 } from "@/slices/notificationSource";
-import { authSelector } from "@/slices/auth";
 import { toast } from "react-toastify";
-import { Spinner } from "react-bootstrap";
 import ChangePassword from "@/components/notificationNewsSource/changePassword";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
@@ -55,54 +43,12 @@ const NewsSources = () => {
   const { sources, changePasswordLoading } = useSelector(
     notificationSourcesSelector
   );
+  const session = useSession();
   const [password, setPassword] = useState({
     old_password: "",
     new_password: "",
   });
   const { categories } = useSelector(categoriesSelector);
-  const data = [
-    {
-      title: "اخبار",
-      icon: <NotificationIconOne />,
-    },
-    {
-      title: "اقتصاد",
-      icon: <NotificationIconTwo />,
-    },
-    {
-      title: "إسلاميات",
-      icon: <NotificationIconThree />,
-    },
-    {
-      title: "رياضة",
-      icon: <NotificationIconFour />,
-    },
-    {
-      title: "تكنولوجيا",
-      icon: <NotificationIconFive />,
-    },
-    {
-      title: "فيديو",
-      icon: <NotificationIconTen />,
-    },
-    {
-      title: "سفر",
-      icon: <NotificationIconNine />,
-    },
-    {
-      title: "صحة",
-      icon: <NotificationIconEight />,
-    },
-    {
-      title: "سفر",
-      icon: <NotificationIconSeven />,
-    },
-    {
-      title: "فن",
-      icon: <NotificationIconSix />,
-    },
-  ];
-
   const slider = {
     arrows: true,
     infinite: true,
@@ -148,18 +94,26 @@ const NewsSources = () => {
       },
     ],
   };
-  const user = useSession();
+
+  // adding category with user_id
+  const handleMainCategorySelect = (id) => {
+    const user_id = session?.data?.user?.id || null;
+    const cat_id = id;
+    dispatch(addCategoryToUser(user_id, cat_id));
+  };
+
+  // country and category select
   const handleSelectChange = (e) => {
     const countrySlug = e.target.value;
     setSelectedCountry(countrySlug);
     dispatch(fetchNotificationSources(countrySlug, selectedCategory));
   };
-
   const handleCategorySelect = (slug) => {
     setSelectedCategory(slug);
     dispatch(fetchNotificationSources(selectedCountry, slug));
   };
 
+  // change password
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!password?.old_password && !password?.new_password) {
@@ -180,7 +134,6 @@ const NewsSources = () => {
   useEffect(() => {
     dispatch(fetchAllCountries());
   }, []);
-
   useEffect(() => {
     if (selectedCountry || selectedCategory) {
       dispatch(fetchNotificationSources(selectedCountry, selectedCategory));
@@ -203,12 +156,16 @@ const NewsSources = () => {
               </h3>
             </div>
             <div className="grid-container">
-              {data.map((item, index) => (
-                <div key={index} className="notification-card text-center p-4">
-                  {item.icon}
-                  <p className="fs-20 fw-bold m-0 mt-1">{item.title}</p>
-                </div>
-              ))}
+              {Array.isArray(categories) &&
+                categories.map((res, index) => (
+                  <div
+                    key={res?.cat_id}
+                    className="notification-card text-center p-4"
+                    onClick={() => handleMainCategorySelect(res?.cat_id)}
+                  >
+                    <p className="fs-20 fw-bold m-0 mt-1">{res?.cat_name}</p>
+                  </div>
+                ))}
             </div>
           </section>
           <section className="mt-5">

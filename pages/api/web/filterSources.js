@@ -11,18 +11,15 @@ const fetchInfo = async (countrySlug, categorySlug, currentUserId = null) => {
     category_slug: categorySlug,
   };
   const response = await api.filterSources(params);
-  console.log("API response:", response);
   return response;
 };
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
-  console.log("Session data:", session);
   const result = await fetchInfo(
     req?.query?.country_slug,
     req?.query?.category_slug,
     session?.user?.id
   );
-  console.log("Result from fetchInfo:", result);
   res.status(result?.status).json(result?.data);
 }

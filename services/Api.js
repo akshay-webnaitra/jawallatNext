@@ -23,6 +23,8 @@ const Api = {
       resetPassword: (params) => api.post(`/api/resetPassword`, params),
       increaseShare: (params) => api.post(`/api/web/increaseShare`, params),
       changePassword: (params) => api.post(`/api/web/changePassword`, params),
+      addCategoryToUser: (params) =>
+        api.post(`/api/web/addCategoryToUser`, params),
       getHomePage: () => api.get(`/api/web/getHomePage`),
       getCategoryPage: (params) => api.get(`/api/web/getCategoryPage`, params),
       getPage: (params) => api.get(`/api/web/getPage`, params),

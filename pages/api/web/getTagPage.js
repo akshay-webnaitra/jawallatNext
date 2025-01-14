@@ -7,8 +7,6 @@ const fetchInfo = async (tag, page, currentUserId = null) => {
     api.setAuthData({ "X-User-ID": `${currentUserId}` });
   }
   const response = await api.getTagPage({ tag: tag, page: page });
-  console.log("=================response===========");
-  console.log(response);
   return response?.data;
 };
 

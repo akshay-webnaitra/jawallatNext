@@ -17,8 +17,6 @@ const getAuthToken = () => {
 };
 
 const token = getAuthToken();
-console.log(token);
-
 const customAxios = axios.create({
   baseURL: API_BASE_URL_STAGING,
   //baseURL: PROD_URL,

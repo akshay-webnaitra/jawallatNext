@@ -114,9 +114,6 @@ export function filterSources(countrySlug = "", categorySlug = "") {
 
       // Call the API with the prepared parameters
       const response = await api.filterSources(params);
-
-      console.log(response, "response");
-
       dispatch(setFilterSources(response?.data?.return));
     } catch (error) {
       dispatch(getSourcesFailure());

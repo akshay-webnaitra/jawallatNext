@@ -21,7 +21,6 @@ const categorySearchSlice = createSlice({
       state.sourcesLoading = true;
     },
     getCategorySearchSuccess: (state, { payload }) => {
-      console.log(payload, "payload");
       state.news = payload.news.data;
       state.celebrity = payload.celeb;
       state.sources = payload;
@@ -88,8 +87,6 @@ export function fetchCategorySearch() {
     const params = {};
     try {
       const response = await api.getCategorySearchPage(params);
-      console.log(response, "resp");
-
       dispatch(getCategorySearchSuccess(response?.data));
     } catch (error) {
       dispatch(getCategorySearchFailure());

@@ -32,7 +32,6 @@ const Fan = () => {
   const dispatch = useDispatch();
   const { news, celebrity } = useSelector(categorySearchSelector);
   const data = useSelector(categorySearchSelector);
-  console.log(data, "data");
 
   useEffect(() => {
     dispatch(fetchCategorySearch());
