@@ -5,9 +5,9 @@ import axios from "axios";
 // The timeout is set to 10s. If the request takes longer than
 // that then the request will be aborted.
 
-// const API_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = process.env.API_BASE_URL;
 
-const API_BASE_URL_STAGING = process.env.API_BASE_URL_STAGING;
+// const API_BASE_URL_STAGING = process.env.API_BASE_URL_STAGING;
 const getAuthToken = () => {
   if (typeof window !== "undefined") {
     // Check if window is available (which means we're on the client-side)
@@ -18,7 +18,7 @@ const getAuthToken = () => {
 
 const token = getAuthToken();
 const customAxios = axios.create({
-  baseURL: API_BASE_URL_STAGING,
+  baseURL: API_BASE_URL,
   //baseURL: PROD_URL,
   headers: {
     "Content-Type": "application/json",
