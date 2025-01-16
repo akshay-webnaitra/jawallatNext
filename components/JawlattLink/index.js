@@ -4,7 +4,6 @@ const JawlattLink = ({ href, children, className }) => {
   if (!href || !children) {
     return null;
   }
-
   return (
     <Link
       href={{

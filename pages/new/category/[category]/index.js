@@ -157,7 +157,7 @@ const CategoryPage = () => {
                     </div>
                   </>
                 )}
-                {categoryName === "إقتصاد" && (
+                {categoryName !== "رياضة" && (
                   <>
                     {active === "أسعار الذهب" && (
                       <div>

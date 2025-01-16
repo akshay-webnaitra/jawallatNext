@@ -125,18 +125,19 @@ a:hover {
 
 .searchBar {
   height: 100%;
-  padding: 8px 25px;
+  padding: 5px 25px;
   background: #fff;
   width: 100%;
   min-width: 250px;
-  border-radius: 0;
+  border-radius: 6px;
   border: 1px solid #aaaaaa;
   margin: 0 6px;
 }
 .searchBar select.searchBarCont {
   border: 0;
   width: 100%;
-  font-size: 20px;
+
+  /* font-size: 20px; */
   outline: none;
   cursor: pointer;
   background: transparent;
@@ -150,11 +151,13 @@ a:hover {
 .wrapper.mb-5 {
   margin-bottom: 0 !important;
 }
-.jawlatt-announcement-bar h3{color: #7D7D7D;
-font-size: 12.84px;
-font-weight: 500;
-line-height: 15.41px;
-text-align: left;}
+.jawlatt-announcement-bar h3 {
+  color: #7d7d7d;
+  font-size: 12.84px;
+  font-weight: 500;
+  line-height: 15.41px;
+  text-align: left;
+}
 .jawlatt-announcement-bar {
   padding-top: 24px;
 }

@@ -26,10 +26,11 @@ const videosSlice = createSlice({
       state.videosLoading = true;
     },
     getVideosSuccess: (state, { payload }) => {
-      state.videos = payload?.main_videos?.data || [];
+      state.videos = payload?.videos?.data || [];
+      state.category = payload?.category || [];
       state.videosLoading = false;
       state.videosHasErrors = false;
-      state.lastPage = payload?.main_videos?.last_page || 1;
+      state.lastPage = payload?.videos?.last_page || 1;
     },
     getVideosFailure: (state) => {
       state.videosLoading = false;
@@ -73,14 +74,16 @@ export const videosSelector = (state) => state.videos;
 export default videosSlice.reducer;
 
 // Asynchronous thunk action to fetch videos
-export function fetchVideos(categorySlug) {
+export function fetchVideos({ category = "" }) {
   return async (dispatch) => {
     dispatch(getVideos());
     try {
-      const response = await api.getVideoPage({ category: categorySlug });
-
+      // if (!!session) {
+      //   api.setAuthData({ "X-User-ID": `${session?.user?.id}` });
+      // }
+      const response = await api.getVideoPage({ category });
       if (response?.data) {
-        dispatch(getVideosSuccess(response?.data?.return));
+        dispatch(getVideosSuccess(response?.data?.return ?? response?.data));
       } else {
         dispatch(getVideosFailure());
       }

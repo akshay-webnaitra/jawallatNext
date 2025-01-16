@@ -29,7 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home = () => {
-  const { videos, featured, featured_categories } =
+  const { videos, products, featured, featured_categories } =
     useSelector(homeItemsSelector);
   const { sources } = useSelector(sourcesSelector);
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
@@ -39,10 +39,9 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const toggleFavourite = (item) => {
-    const userId = "72";
+    const userId = session?.user?.id;
     const newsId = item?.id;
-    if (status === "authenticated") {
-      // dispatch(setShowLogin(true));
+    if (status !== "authenticated") {
       toast.error("You need to log in first");
     } else {
       if (!markedItems.includes(newsId)) {
@@ -55,13 +54,14 @@ const Home = () => {
       } else {
         dispatch(
           deleteUserFavorite({ userId, newsId }, () => {
-            toast.success("تمت إزالة إشارة مرجعية بنجاح");
+            toast.error("تمت إزالة إشارة مرجعية بنجاح");
             setMarkedItems((prev) => prev.filter((id) => id !== newsId));
           })
         );
       }
     }
   };
+
   useEffect(() => {
     setIsMobile(isMobileMedia);
   }, [isMobileMedia]);
@@ -102,13 +102,7 @@ const Home = () => {
                   <RedCaret />
                   <h3 className="text-dark fw-bold m-0 jawlatt-news-small-title">
                     فيديو
-                    <span
-                      className="arab24-text-red me-3"
-                      style={{ fontSize: 14 }}
-                    >
-                      {" "}
-                      المزيد
-                    </span>
+                    <Link href={"/new/video"}>المزيد</Link>
                   </h3>
                 </div>
                 <div className="p-4">
@@ -237,30 +231,29 @@ const Home = () => {
                 </h3>
               </div>
               <div className="row g-3 mb-4">
-                {[...Array(4)].map((_, index) => (
-                  <div key={index} className="col-sm-6 col-lg-4 col-xl-3">
-                    <div className="card1 arab24-card2 border bg-white">
-                      <div className="arab24-card2-img">
-                        <img
-                          src="./images/hospital-img.png"
-                          alt="img"
-                          className="img-fluid w-100"
-                        />
-                      </div>
-                      <div className="jawlatt-card1-heading px-2 mt-2">
-                        <p className="fw-semibold">
-                          أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة
-                        </p>
-                        <h3>
-                          2499
-                          <sup style={{ fontSize: 14 }} className="fw-medium">
-                            00
-                          </sup>
-                        </h3>
+                {Array.isArray(products) &&
+                  products.map((res, index) => (
+                    <div key={res?.id} className="col-sm-6 col-lg-4 col-xl-3">
+                      <div className="card1 arab24-card2 border bg-white">
+                        <div className="arab24-card2-img">
+                          <img
+                            src={res?.media?.image_url}
+                            alt="img"
+                            className="img-fluid w-100"
+                          />
+                        </div>
+                        <div className="jawlatt-card1-heading px-2 mt-2">
+                          <p className="fw-semibold">{res?.title}</p>
+                          <h3>
+                            {res?.price?.slice(0, 4)}
+                            <sup style={{ fontSize: 14 }} className="fw-medium">
+                              {res?.price?.slice(4)}
+                            </sup>
+                          </h3>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
               {/* topics of interest */}
               {Array.isArray(featured_categories) &&

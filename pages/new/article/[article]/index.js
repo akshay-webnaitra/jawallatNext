@@ -1,13 +1,10 @@
 import Sidebar from "@/partials/v2/Sidebar";
 import NewsItem from "@/components/v2/NewsItem";
-import CategorySlider from "@/components/v2/CategorySlider";
 import MainLayout from "layout/mainLayout";
-import GreenCaret from "@/components/v2/GreenCaret";
 import SkyNews from "assets/images/sky-news-round.png";
-import NewsAdd from "assets/images/news-ad.png";
 import Group from "assets/images/group 1197.png";
 import Plus from "assets/images/group 1304.png";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { fetchCategories, fetchCategoriesItems } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
@@ -18,7 +15,6 @@ import PlayBtn from "@/components/v2/icons/playbtn";
 import SocialIconOne from "@/components/v2/icons/socialIcon1";
 import SocialIconTwo from "@/components/v2/icons/socialIcon2";
 import SocialIconThree from "@/components/v2/icons/socialIcon3";
-import Banner from "../../../../assets/images/article-banner.png";
 import RedCaret from "@/components/v2/RedCaret";
 import Share from "@/components/v2/icons/share";
 import ShareRed from "@/components/v2/icons/shareRed";
@@ -29,6 +25,8 @@ import { fetchNews, newsSelector } from "@/slices/news";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useRouter } from "next/router";
+import { addUserFavorite, deleteUserFavorite } from "@/slices/user";
+import { toast } from "react-toastify";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -47,7 +45,33 @@ const Article = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
   const dispatch = useDispatch();
+  const [markedItems, setMarkedItems] = useState([]);
+  const { data: session, status } = useSession();
   const { news, related_news } = useSelector(newsSelector);
+  const toggleFavourite = (item) => {
+    const userId = session?.user?.id;
+    const newsId = item?.id;
+    if (status !== "authenticated") {
+      // dispatch(setShowLogin(true));
+      toast.error("You need to log in first");
+    } else {
+      if (!markedItems.includes(newsId)) {
+        dispatch(
+          addUserFavorite({ userId, newsId }, () => {
+            toast.success("تمت إضافة إشارة مرجعية بنجاح");
+            setMarkedItems((prev) => [...prev, newsId]);
+          })
+        );
+      } else {
+        dispatch(
+          deleteUserFavorite({ userId, newsId }, () => {
+            toast.error("تمت إزالة إشارة مرجعية بنجاح");
+            setMarkedItems((prev) => prev.filter((id) => id !== newsId));
+          })
+        );
+      }
+    }
+  };
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsMobile(isMobileMedia);
@@ -58,29 +82,6 @@ const Article = () => {
       dispatch(fetchNews(id, "id"));
     }
   }, [id, dispatch]);
-  const data = [
-    {
-      title: " اليوم السابع",
-    },
-    {
-      title: " سكاي نيوز عربية",
-    },
-    {
-      title: " مصراوي",
-    },
-    {
-      title: "  الجزيرة",
-    },
-    {
-      title: "  المصري اليوم",
-    },
-    {
-      title: "  سكاي نيوز عربية",
-    },
-    {
-      title: " الحدث اليوم",
-    },
-  ];
 
   return (
     <>
@@ -205,7 +206,14 @@ const Article = () => {
                   {Array.isArray(related_news) &&
                     related_news
                       ?.slice(0, 4)
-                      .map((item) => <NewsItem key={item?.id} item={item} />)}
+                      .map((item) => (
+                        <NewsItem
+                          marked={markedItems.includes(item?.id)}
+                          addFavourite={() => toggleFavourite(item)}
+                          key={item?.id}
+                          item={item}
+                        />
+                      ))}
                 </div>
                 <div className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}>
                   {!isMobile ? (
@@ -227,7 +235,14 @@ const Article = () => {
                 {Array.isArray(related_news) &&
                   related_news
                     ?.slice(4)
-                    .map((item) => <NewsItem key={item?.id} item={item} />)}
+                    .map((item) => (
+                      <NewsItem
+                        marked={markedItems.includes(item?.id)}
+                        addFavourite={() => toggleFavourite(item)}
+                        key={item?.id}
+                        item={item}
+                      />
+                    ))}
               </div>
             </div>
             {/* left side */}
@@ -297,54 +312,6 @@ const Article = () => {
                       height={250}
                     />
                   )}
-                </div>
-                <div className="card mb-3 jawlatt-card-border rounded-4">
-                  <div className="card-header py-3 pb-0">
-                    <h5 className="card-title fw-bold text-end mb-0" dir="ltr">
-                      أخبار مصر
-                      <i className="fa-solid fa-caret-left ms-2  jawlatt-text-red" />
-                    </h5>
-                  </div>
-                  <div className="card-body p-3">
-                    <ul className="list-group ">
-                      {data.map((item, i) => (
-                        <li
-                          key={i}
-                          className="list-group-item py-2 px-0 border-0"
-                        >
-                          <div className="d-flex gap-2">
-                            <a
-                              className="d-flex align-items-center justify-content-between w-100 text-decoration-none"
-                              href="#"
-                            >
-                              <p
-                                className="m-0 fw-bold text-start"
-                                style={{ fontSize: "15px" }}
-                              >
-                                <img
-                                  style={{ width: 20, marginLeft: 6 }}
-                                  src={Group.src}
-                                />
-                                {item.title}
-                              </p>
-                              <div className="plus">
-                                <img
-                                  src={Plus.src}
-                                  alt="img"
-                                  style={{ width: 20 }}
-                                />
-                              </div>
-                            </a>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="detail-btn mb-3  text-center">
-                    <button className="text-white px-3  border-0 jawlatt-bg-red jawlatt-detail-btn-border fw-medium">
-                      المزيد
-                    </button>
-                  </div>
                 </div>
                 <Sidebar />
               </div>

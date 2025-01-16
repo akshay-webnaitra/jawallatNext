@@ -10,6 +10,7 @@ export const initialState = {
   ticker: [],
   featured: [],
   videos: [],
+  products: [],
   featured_categories: [],
 };
 
@@ -25,6 +26,7 @@ const homeItemsSlice = createSlice({
       state.ticker = payload?.ticker;
       state.featured = payload?.featured;
       state.videos = payload?.videos;
+      state.products = payload?.products;
       state.featured_categories = payload?.featured_categories;
       state.homeItemsLoading = false;
       state.homeItemsHasErrors = false;
@@ -35,6 +37,7 @@ const homeItemsSlice = createSlice({
       state.featured = [];
       state.videos = [];
       state.categories = [];
+      state.products = [];
       state.homeItemsLoading = false;
       state.homeItemsHasErrors = true;
     },

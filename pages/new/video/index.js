@@ -27,6 +27,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
     await store.dispatch(fetchVideos(session));
+    await store.dispatch(fetchCategories(session));
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
   }
@@ -36,8 +37,7 @@ const Category = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
   const { videos } = useSelector(videosSelector);
-  const { serverItem } = useSelector(serverItemSelector);
-  const categoryItem = serverItem.menus[0].menu_list;
+  const { categories } = useSelector(categoriesSelector);
   const slider = {
     arrows: true,
     infinite: true,
@@ -85,7 +85,7 @@ const Category = () => {
   };
   const dispatch = useDispatch();
   const handleCategoryClick = (slug) => {
-    dispatch(fetchVideos(slug));
+    dispatch(fetchVideos({ category: slug }));
   };
   useEffect(() => {
     setIsMobile(isMobileMedia);
@@ -104,7 +104,7 @@ const Category = () => {
                 </h3>
               </div>
               <Slider {...slider} className="blur-effect mb-4">
-                {categoryItem.map((res, index) => (
+                {categories.map((res, index) => (
                   <div
                     key={index}
                     className={`slick-slide ${
@@ -112,20 +112,20 @@ const Category = () => {
                     }`}
                   >
                     <button
-                      className="btn text-nowrap fs-16 px-3 border"
+                      className="btn text-nowrap fs-16 px-3 border category-btn"
                       style={{
                         borderRadius: 13,
                         border: "2px solid #E5E5E5",
                       }}
-                      onClick={() => handleCategoryClick(res?.name)}
+                      onClick={() => handleCategoryClick(res?.cat_name)}
                     >
-                      {res?.name}
+                      {res?.cat_name}
                     </button>
                   </div>
                 ))}
               </Slider>
               <div className="ps-md-5">
-                {Array.isArray(videos) &&
+                {Array.isArray(videos) && videos?.length > 0 ? (
                   videos.map((res) => (
                     <div key={res?.id} className="news-video-card mb-5">
                       <div className="row">
@@ -171,7 +171,10 @@ const Category = () => {
                         />
                       </div>
                     </div>
-                  ))}
+                  ))
+                ) : (
+                  <p className="text-center">no data</p>
+                )}
               </div>
               <div className={"wrapper wrapper-sm p-2 mb-1 mt-0 text-center"}>
                 {!isMobile ? (

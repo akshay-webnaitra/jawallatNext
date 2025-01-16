@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import JawlattLink from "@/components/JawlattLink";
 import { useDispatch, useSelector } from "react-redux";
 import { categoriesSelector } from "@/slices/categories";
@@ -36,7 +36,6 @@ const Header = () => {
     useSelector(serverItemSelector);
   const [isMobile, setIsMobile] = useState(false);
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
-
   const handleToggle = () => {
     setIsHeaderOpen(!isHeaderOpen);
   };
@@ -103,7 +102,7 @@ const Header = () => {
 
   const [searchActive, setSearchActive] = useState(false);
   const searchClick = () => {
-    setSearchActive(true);
+    setSearchActive(!searchActive);
   };
   const searchClose = () => {
     setSearchActive(!searchActive);
@@ -113,6 +112,11 @@ const Header = () => {
     dispatch(setShowLogin(true));
   };
 
+  const handleLogout = () => {
+    signOut({
+      callbackUrl: window.location.href,
+    });
+  };
   return (
     <>
       {/* main header */}
@@ -220,13 +224,22 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    onClick={loginHandleShow}
-                    className="text-decoration-none jawlatt-cmn-color"
-                  >
-                    <i className="fa-regular fa-circle-user jawlatt-font-medium" />
-                  </a>
+                  {status === "authenticated" ? (
+                    <button
+                      className="btn btn-danger py-1"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  ) : (
+                    <span
+                      style={{ cursor: "pointer" }}
+                      onClick={loginHandleShow}
+                      className="text-decoration-none jawlatt-cmn-color"
+                    >
+                      <i className="fa-regular fa-circle-user jawlatt-font-medium" />
+                    </span>
+                  )}
                 </li>
               </ul>
               <button
@@ -249,10 +262,10 @@ const Header = () => {
               : "jawlatt-search"
           }
         >
-          <div className="container">
+          <div className="container mb-3">
             <div className="row g-2">
               <div className="col-auto">
-                <button onClick={searchClose}>
+                <button onClick={searchClose} className="btn btn-dark">
                   <i className="fa-solid fa-xmark"></i>
                 </button>
               </div>
@@ -263,6 +276,8 @@ const Header = () => {
                       <input
                         type="text"
                         name="q"
+                        style={{ border: "1px solid #aaaaaa" }}
+                        className="form-control"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e?.target?.value)}
                         placeholder="كلمات البحث…."
@@ -286,7 +301,7 @@ const Header = () => {
                     <div className="col searchBar">
                       <select
                         name="category"
-                        className="searchBarCont"
+                        className="searchBarCont "
                         defaultValue={router?.query?.category}
                       >
                         <option value="">جميع الأقسام</option>
@@ -300,7 +315,7 @@ const Header = () => {
                     <div className="col searchBar">
                       <select
                         name="type"
-                        className="searchBarCont"
+                        className="searchBarCont "
                         defaultValue={router?.query?.type}
                       >
                         <option value="all">كل هذه الكلمات</option>
@@ -309,7 +324,13 @@ const Header = () => {
                       </select>
                     </div>
                     <div className="col-auto">
-                      <input type="submit" value="بحث" />
+                      <button
+                        type="submit"
+                        value="بحث"
+                        className="btn btn-dark"
+                      >
+                        بحث
+                      </button>
                     </div>
                   </div>
                 </form>
