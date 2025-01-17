@@ -4,14 +4,14 @@ const JawlattLink = ({ href, children, className }) => {
   if (!href || !children) {
     return null;
   }
+  const updatedHref = "/new" + href;
   return (
     <Link
       href={{
-        pathname: href,
+        pathname: updatedHref,
         query: { refresh: "true" },
       }}
       className={className ? className : null}
-      as={href}
     >
       {children}
     </Link>

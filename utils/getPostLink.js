@@ -12,7 +12,7 @@ const getPostLink = (item) => {
     let formattedSlug = item?.news_name;
     let id = item?.id;
     // return `/new/article/${year}/${month}/${date}/${formattedSlug}`;
-    return `/new/article/${id}`;
+    return `/article/${id}`;
   }
 };
 

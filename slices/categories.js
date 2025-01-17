@@ -159,7 +159,6 @@ export function fetchCategoriesItems(
         api.setAuthData({ "X-User-ID": `${session?.user?.id}` });
       }
       const response = await api.getCategoryPage(params);
-
       dispatch(getCategoriesItemsSuccess(response?.data?.return));
       callback(response?.data?.return);
     } catch (error) {

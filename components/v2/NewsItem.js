@@ -35,7 +35,6 @@ const NewsItem = ({ item, addFavourite, marked }) => {
                   className={`btn  ${
                     status ? "bg-dark" : "btn-danger"
                   } text-white fw-semibold`}
-                  href="# "
                   style={{ fontSize: "11.71px", padding: "4px 10px" }}
                   onClick={() => setStatus(!status)}
                 >

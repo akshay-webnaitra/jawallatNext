@@ -134,6 +134,13 @@
   text-overflow: ellipsis;
   line-height: 1.5; 
 }
+.nav{
+  .active{
+    a{
+      color: #FE0120 !important;
+    }
+  }
+}
 // new homepage
 .jawlatt-news-small-title{
   a{

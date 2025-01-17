@@ -69,7 +69,7 @@ const Header = () => {
   }, [serverItem]);
 
   useEffect(() => {
-    if (categories.length && router.query.hasOwnProperty("category")) {
+    if (categories.length && router.query.hasOwnProperty("/new/category")) {
       let mainCategorySlug = category;
       let mainCategory = find(categories, { cat_slug: mainCategorySlug });
       if (
@@ -171,7 +171,7 @@ const Header = () => {
                 ))}
                 <li>
                   <a
-                    href="#"
+                    // href="#"
                     className="nav-link px-3 link-body-emphasis dropdown-toggle"
                   >
                     المزيد
