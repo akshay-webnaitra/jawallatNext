@@ -18,6 +18,7 @@ import JawlattLink from "@/components/JawlattLink";
 import Link from "next/link";
 import { addUserFavorite, deleteUserFavorite } from "@/slices/user";
 import { toast } from "react-toastify";
+import CountryNewsCard from "@/components/CountryNewsCard";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -29,7 +30,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Home = () => {
-  const { videos, products, featured, featured_categories } =
+  const { videos, products, featured, featured_categories, top_news } =
     useSelector(homeItemsSelector);
   const { sources } = useSelector(sourcesSelector);
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
@@ -283,44 +284,7 @@ const Home = () => {
           {/* left side */}
           <div className="col-md-3">
             <div className="left-side">
-              <div className="card mb-3 jawlatt-card-border rounded-4">
-                <div className="card-header py-3 pb-0">
-                  <h5 className="card-title fw-bold text-end mb-0" dir="ltr">
-                    أخبار مصر
-                    <i className="fa-solid fa-caret-left ms-2  jawlatt-text-red" />
-                  </h5>
-                </div>
-                <div className="card-body">
-                  <ul className="list-group">
-                    {[...Array(4)].map((_, index) => (
-                      <li key={index} className="list-group-item pr-0">
-                        <div className="d-flex align-items-center gap-2">
-                          <a className="d-block text-decoration-none" href="#">
-                            <p className="m-0 fw-bold text-start jawlatt-card-fs">
-                              <img
-                                style={{ width: 20 }}
-                                src="images/sky-news.png"
-                                alt="img"
-                                className="ms-1"
-                              />
-                              سكاي نيوز عربية
-                            </p>
-                          </a>
-                          <ul className="p-0 jawlatt-card-body-badge">
-                            <li>
-                              <a href="#">رياضة</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <a href="#" className="text-decoration-none">
-                          إسرائيل تبحث مع واشنطن بدء عملية رفح.. وخبراء يناقشون
-                          موقف مصر
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <CountryNewsCard item={top_news} />
               <div className="full-img mb-0 mb-lg-3">
                 {isMobile ? (
                   <div

@@ -11,6 +11,7 @@ export const initialState = {
   featured: [],
   videos: [],
   products: [],
+  top_news: [],
   featured_categories: [],
 };
 
@@ -22,6 +23,7 @@ const homeItemsSlice = createSlice({
       state.homeItemsLoading = true;
     },
     getHomeItemsSuccess: (state, { payload }) => {
+      state.top_news = payload?.top_news;
       state.tags = payload?.tags;
       state.ticker = payload?.ticker;
       state.featured = payload?.featured;
@@ -36,6 +38,7 @@ const homeItemsSlice = createSlice({
       state.ticker = [];
       state.featured = [];
       state.videos = [];
+      state.top_news = [];
       state.categories = [];
       state.products = [];
       state.homeItemsLoading = false;

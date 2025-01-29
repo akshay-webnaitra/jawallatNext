@@ -58,13 +58,13 @@ ul.jawlatt-card-body-badge li {
   list-style: disc;
 }
 ul.jawlatt-card-body-badge li::marker {
-  color: #b22e39;
-  background: #b22e39;
+  /* color: #b22e39;
+  background: #b22e39; */
 }
 li.list-group-item {
   border: none;
   background: transparent;
-  border-bottom: 1.1px solid hsl(0deg 0% 0% / 11%);
+  /* border-bottom: 1.1px solid hsl(0deg 0% 0% / 11%); */
   padding-right: 0 !important;
 }
 .card-header {
@@ -113,8 +113,8 @@ ul.p-0.jawlatt-card-body-badge {
   padding-left: 74px;
 }
 .jawlatt-bnr-mid-btm ul.p-0 li::marker {
-  color: #b22e39;
-  background: #b22e39;
+  /* color: #b22e39;
+  background: #b22e39; */
 }
 .jawlatt-news-card-list .col-md-3 {
   width: 20% !important;

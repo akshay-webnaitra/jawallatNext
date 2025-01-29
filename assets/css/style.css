@@ -113,14 +113,14 @@ ul.jawlatt-card-body-badge li {
 }
 
 ul.jawlatt-card-body-badge li::marker {
-  color: #b22e39;
-  background: #b22e39;
+  /* color: #b22e39;
+  background: #b22e39; */
 }
 
 li.list-group-item {
   border: none;
   background: transparent;
-  border-bottom: 1.1px solid hsl(0deg 0% 0% / 11%);
+  /* border-bottom: 1.1px solid hsl(0deg 0% 0% / 11%); */
   padding-right: 0 !important;
 }
 
