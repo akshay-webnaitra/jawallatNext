@@ -19,6 +19,10 @@ import Link from "next/link";
 import { addUserFavorite, deleteUserFavorite } from "@/slices/user";
 import { toast } from "react-toastify";
 import CountryNewsCard from "@/components/CountryNewsCard";
+import NewsSourceCard from "@/components/NewsSourceCard";
+import HomeVideoCard from "@/components/HomeVideoCard";
+import HomeTopicCard from "@/components/HomeTopicCard";
+import HomeProductCard from "@/components/HomeProductCard";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -111,44 +115,7 @@ const Home = () => {
                     {Array.isArray(videos) &&
                       videos?.slice(0, 3).map((item) => (
                         <div key={item?.id} className="col-sm-6 col-lg-4">
-                          <div className="arab24-news-card">
-                            <a
-                              href={item?.news_video}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="arab24-news-card-img"
-                            >
-                              <img src={item?.news_image} alt="img" />
-                              <div className="video-icon">
-                                <img src={VideoStop.src} alt="img" />
-                              </div>
-                            </a>
-                            <div>
-                              <p
-                                className="m-0 text-end fw-medium text-nowrap"
-                                style={{ fontSize: 10 }}
-                              >
-                                <img
-                                  style={{ minWidth: 24, height: 24 }}
-                                  src={item?.news_source_icon}
-                                  className="ms-2 rounded-circle"
-                                />
-                                <a
-                                  href={item?.news_source_link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {item?.news_source}
-                                </a>
-                              </p>
-                              <p
-                                style={{ fontSize: 14, lineHeight: 1.3 }}
-                                className="fw-bold mt-1"
-                              >
-                                {item?.news_title}
-                              </p>
-                            </div>
-                          </div>
+                          <HomeVideoCard item={item} />
                         </div>
                       ))}
                   </div>
@@ -172,35 +139,7 @@ const Home = () => {
                           key={item?.category_id}
                           className="col-sm-6 col-lg-4 col-xl-3"
                         >
-                          <div className="card1 pb-4 bg-white">
-                            <div>
-                              <img
-                                src="./images/hospital-img.png"
-                                alt=""
-                                className="img-fluid w-100"
-                              />
-                            </div>
-                            <div className="jawlatt-card1-heading px-2">
-                              <h4 className="my-2 px-1 jawlatt-right-border">
-                                <JawlattLink
-                                  href={`/category/${item?.category_slug}`}
-                                >
-                                  {item?.category_name}
-                                </JawlattLink>
-                              </h4>
-                              <p>
-                                أسرة ذكية بأسعار مذهلة في مصر - لا تفوت الفرصة
-                              </p>
-                              <div className="d-flex">
-                                <p className=" arab24-text-gray fw-medium mb-0">
-                                  ذكية بأسعار
-                                </p>
-                                <button className="btn p-1 px-2 border border-dark me-4 text-nowrap">
-                                  ابحث الآن
-                                </button>
-                              </div>
-                            </div>
-                          </div>
+                          <HomeTopicCard item={item} />
                         </div>
                       ))}
                     </div>
@@ -235,24 +174,7 @@ const Home = () => {
                 {Array.isArray(products) &&
                   products.map((res, index) => (
                     <div key={res?.id} className="col-sm-6 col-lg-4 col-xl-3">
-                      <div className="card1 arab24-card2 border bg-white">
-                        <div className="arab24-card2-img">
-                          <img
-                            src={res?.media?.image_url}
-                            alt="img"
-                            className="img-fluid w-100"
-                          />
-                        </div>
-                        <div className="jawlatt-card1-heading px-2 mt-2">
-                          <p className="fw-semibold">{res?.title}</p>
-                          <h3>
-                            {res?.price?.slice(0, 4)}
-                            <sup style={{ fontSize: 14 }} className="fw-medium">
-                              {res?.price?.slice(4)}
-                            </sup>
-                          </h3>
-                        </div>
-                      </div>
+                      <HomeProductCard res={res} />
                     </div>
                   ))}
               </div>
@@ -308,60 +230,7 @@ const Home = () => {
                   />
                 )}
               </div>
-              <div className="card mb-3 jawlatt-card-border rounded-4">
-                <div className="card-header py-3 pb-0">
-                  <h5 className="card-title fw-bold text-end mb-0" dir="ltr">
-                    أخبار مصر
-                    <i className="fa-solid fa-caret-left ms-2  jawlatt-text-red" />
-                  </h5>
-                </div>
-                <div className="card-body p-3">
-                  <ul className="list-group ">
-                    {Array.isArray(sources) &&
-                      sources?.slice(0, 7).map((item, index) => (
-                        <li
-                          key={index}
-                          className="list-group-item py-2 px-0 border-0"
-                        >
-                          <div className="d-flex gap-2 align-items-center justify-content-between w-100 ">
-                            <JawlattLink
-                              className="d-flex text-decoration-none"
-                              href={`/new/source/${item?.name}`}
-                            >
-                              <p
-                                className="m-0 fw-bold text-start"
-                                style={{ fontSize: "15px", cursor: "pointer" }}
-                              >
-                                <img
-                                  style={{
-                                    width: 20,
-                                    height: 20,
-                                    marginLeft: 6,
-                                  }}
-                                  src={item?.image}
-                                  className="rounded-circle"
-                                />
-                                {item?.name}
-                              </p>
-                            </JawlattLink>
-                            <div className="plus">
-                              <img
-                                src="./images/Group 1304.png"
-                                alt="img"
-                                style={{ width: 20 }}
-                              />
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-                <div className="detail-btn mb-3  text-center">
-                  <button className="text-white px-3  border-0 jawlatt-bg-red jawlatt-detail-btn-border fw-medium">
-                    المزيد
-                  </button>
-                </div>
-              </div>
+              <NewsSourceCard sources={sources} />
               <Sidebar />
             </div>
           </div>

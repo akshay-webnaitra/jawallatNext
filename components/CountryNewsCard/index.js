@@ -44,7 +44,6 @@ const CountryNewsCard = ({ item }) => {
                         <span
                           href="#"
                           style={{
-                            color: res?.category?.cat_color,
                             fontSize: 13,
                           }}
                         >

@@ -26,6 +26,7 @@ import CategorySlider from "@/components/v2/CategorySlider";
 import InfiniteScroll from "react-infinite-scroller";
 import { fetchHomeItems } from "@/slices/homeItems";
 import JawlattLink from "@/components/JawlattLink";
+import NewsSourceCard from "@/components/NewsSourceCard";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
@@ -322,104 +323,7 @@ const CategoryPage = () => {
             {/* left side */}
             <div className="col-md-3 order-1 order-md-2">
               <div className="left-side">
-                {/* <div className="card mb-3 jawlatt-card-border rounded-4">
-                  <div className="card-header py-3 pb-0">
-                    <h5 className="card-title fw-bold text-end mb-0" dir="ltr">
-                      أخبار مصر
-                      <i className="fa-solid fa-caret-left ms-2  jawlatt-text-red" />
-                    </h5>
-                  </div>
-                  <div className="card-body">
-                    <ul className="list-group">
-                      {[...Array(4)].map((_, index) => (
-                        <li key={index} className="list-group-item pr-0">
-                          <div className="d-flex align-items-center gap-2">
-                            <a
-                              className="d-block text-decoration-none"
-                              href="#"
-                            >
-                              <p className="m-0 fw-bold text-start jawlatt-card-fs">
-                                <img
-                                  style={{ width: 20 }}
-                                  src={SkyNews.src}
-                                  alt="img"
-                                  className="ms-1"
-                                />
-                                سكاي نيوز عربية
-                              </p>
-                            </a>
-                            <ul className="p-0 jawlatt-card-body-badge">
-                              <li>
-                                <a href="#">رياضة</a>
-                              </li>
-                            </ul>
-                          </div>
-                          <a href="#" className="text-decoration-none">
-                            إسرائيل تبحث مع واشنطن بدء عملية رفح.. وخبراء
-                            يناقشون موقف مصر
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div> */}
-                <div className="card mb-3 jawlatt-card-border rounded-4">
-                  <div className="card-header py-3 pb-0">
-                    <h5 className="card-title fw-bold text-end mb-0" dir="ltr">
-                      أخبار مصر
-                      <i className="fa-solid fa-caret-left ms-2  jawlatt-text-red" />
-                    </h5>
-                  </div>
-                  <div className="card-body p-3">
-                    <ul className="list-group ">
-                      {Array.isArray(sources) &&
-                        sources?.slice(0, 7).map((item, index) => (
-                          <li
-                            key={index}
-                            className="list-group-item py-2 px-0 border-0"
-                          >
-                            <div className="d-flex gap-2 align-items-center justify-content-between w-100 ">
-                              <JawlattLink
-                                className="d-flex text-decoration-none"
-                                href={`/new/source/${item?.name}`}
-                              >
-                                <p
-                                  className="m-0 fw-bold text-start"
-                                  style={{
-                                    fontSize: "15px",
-                                    cursor: "pointer",
-                                  }}
-                                >
-                                  <img
-                                    style={{
-                                      width: 20,
-                                      height: 20,
-                                      marginLeft: 6,
-                                    }}
-                                    src={item?.image}
-                                    className="rounded-circle"
-                                  />
-                                  {item?.name}
-                                </p>
-                              </JawlattLink>
-                              <div className="plus">
-                                <img
-                                  src="../../images/Group 1304.png"
-                                  alt="img"
-                                  style={{ width: 20 }}
-                                />
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                  <div className="detail-btn mb-3  text-center">
-                    <button className="text-white px-3  border-0 jawlatt-bg-red jawlatt-detail-btn-border fw-medium">
-                      المزيد
-                    </button>
-                  </div>
-                </div>
+                <NewsSourceCard sources={sources} />
                 <div className="full-img mb-0 mb-lg-3">
                   {isMobile ? (
                     <div
