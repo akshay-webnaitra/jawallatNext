@@ -23,7 +23,7 @@ const CountryNewsCard = ({ item }) => {
                   }}
                 >
                   <div className="d-flex align-items-center gap-2">
-                    <a className="d-block text-decoration-none" href="#">
+                    <div className="d-block text-decoration-none" href="#">
                       <p className="m-0 fw-bold text-start jawlatt-card-fs">
                         <img
                           style={{ width: 20 }}
@@ -33,7 +33,7 @@ const CountryNewsCard = ({ item }) => {
                         />
                         {res?.news_source}
                       </p>
-                    </a>
+                    </div>
                     <ul className="p-0 jawlatt-card-body-badge">
                       <li
                         style={{
@@ -41,15 +41,25 @@ const CountryNewsCard = ({ item }) => {
                           color: res?.category?.cat_color,
                         }}
                       >
-                        <a href="#" style={{ color: res?.category?.cat_color }}>
+                        <span
+                          href="#"
+                          style={{
+                            color: res?.category?.cat_color,
+                            fontSize: 13,
+                          }}
+                        >
                           {res?.category?.cat_name || "no data"}
-                        </a>
+                        </span>
                       </li>
                     </ul>
                   </div>
-                  <a href="#" className="text-decoration-none">
+                  <p
+                    href="#"
+                    style={{ fontSize: 15 }}
+                    className="text-decoration-none fw-semibold"
+                  >
                     {res?.news_title}
-                  </a>
+                  </p>
                 </li>
               ))}
           </ul>
