@@ -405,6 +405,12 @@
       }
     }
   }
+  .active-category {
+    background:$btn-red !important;
+    p {
+      color: white;
+    }
+  }
 
   .cross-icon {
     width: 20px;

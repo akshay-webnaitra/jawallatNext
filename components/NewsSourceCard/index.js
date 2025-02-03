@@ -18,7 +18,7 @@ const NewsSourceCard = ({ sources }) => {
                   <div className="d-flex gap-2 align-items-center justify-content-between w-100 ">
                     <JawlattLink
                       className="d-flex text-decoration-none"
-                      href={`/new/source/${item?.name}`}
+                      href={`/source/${item?.name}`}
                     >
                       <p
                         className="m-0 fw-bold text-start"

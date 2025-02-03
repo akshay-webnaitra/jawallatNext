@@ -41,6 +41,7 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [markedItems, setMarkedItems] = useState([]);
   const { data: session, status } = useSession();
+  console.log(sources);
 
   const dispatch = useDispatch();
   const toggleFavourite = (item) => {

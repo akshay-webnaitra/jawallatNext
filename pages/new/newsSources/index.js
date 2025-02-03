@@ -19,8 +19,10 @@ import { useEffect, useState } from "react";
 import {
   addCategoryToUser,
   changePassword,
+  fetchNotificationData,
   fetchNotificationSources,
   notificationSourcesSelector,
+  setCategoryUser,
 } from "@/slices/notificationSource";
 import { toast } from "react-toastify";
 import ChangePassword from "@/components/notificationNewsSource/changePassword";
@@ -32,7 +34,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await store.dispatch(fetchServerItem(session));
     await store.dispatch(fetchHomeItems(session));
     await store.dispatch(fetchAllCountries());
-    await store.dispatch(fetchNotificationSources());
+    await store.dispatch(fetchNotificationData(session));
+    // await store.dispatch(fetchNotificationSources());
   }
 );
 const NewsSources = () => {
@@ -40,15 +43,20 @@ const NewsSources = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const dispatch = useDispatch();
-  const { sources, changePasswordLoading } = useSelector(
-    notificationSourcesSelector
-  );
+  const {
+    sources,
+    changePasswordLoading,
+    main_categories,
+    filtered_sources,
+    tags,
+  } = useSelector(notificationSourcesSelector);
   const session = useSession();
+
   const [password, setPassword] = useState({
     old_password: "",
     new_password: "",
   });
-  const { categories } = useSelector(categoriesSelector);
+
   const slider = {
     arrows: true,
     infinite: true,
@@ -100,17 +108,18 @@ const NewsSources = () => {
     const user_id = session?.data?.user?.id || null;
     const cat_id = id;
     dispatch(addCategoryToUser(user_id, cat_id));
+    dispatch(fetchNotificationData());
   };
 
   // country and category select
   const handleSelectChange = (e) => {
     const countrySlug = e.target.value;
     setSelectedCountry(countrySlug);
-    dispatch(fetchNotificationSources(countrySlug, selectedCategory));
+    dispatch(fetchNotificationData(countrySlug, selectedCategory));
   };
   const handleCategorySelect = (slug) => {
     setSelectedCategory(slug);
-    dispatch(fetchNotificationSources(selectedCountry, slug));
+    dispatch(fetchNotificationData(selectedCountry, selectedCategory));
   };
 
   // change password
@@ -132,13 +141,16 @@ const NewsSources = () => {
   };
 
   useEffect(() => {
+    dispatch(fetchNotificationData());
+  }, []);
+  useEffect(() => {
     dispatch(fetchAllCountries());
   }, []);
   useEffect(() => {
     if (selectedCountry || selectedCategory) {
-      dispatch(fetchNotificationSources(selectedCountry, selectedCategory));
+      dispatch(fetchNotificationData(selectedCountry, selectedCategory));
     } else {
-      dispatch(fetchNotificationSources());
+      dispatch(fetchNotificationData());
     }
   }, [dispatch, selectedCountry, selectedCategory]);
   return (
@@ -156,16 +168,18 @@ const NewsSources = () => {
               </h3>
             </div>
             <div className="grid-container">
-              {Array.isArray(categories) &&
-                categories.map((res, index) => (
-                  <div
-                    key={res?.cat_id}
-                    className="notification-card text-center p-4"
-                    onClick={() => handleMainCategorySelect(res?.cat_id)}
-                  >
-                    <p className="fs-20 fw-bold m-0 mt-1">{res?.cat_name}</p>
-                  </div>
-                ))}
+              {Array.isArray(main_categories) &&
+                main_categories.map((res, index) => {
+                  return (
+                    <div
+                      key={res?.id}
+                      className="notification-card text-center p-4"
+                      onClick={() => handleMainCategorySelect(res?.id)}
+                    >
+                      <p className="fs-20 fw-bold m-0 mt-1">{res?.cat_name}</p>
+                    </div>
+                  );
+                })}
             </div>
           </section>
           <section className="mt-5">
@@ -182,11 +196,27 @@ const NewsSources = () => {
             <div className="row mt-2">
               <div className="col-md-6">
                 <div className="d-flex gap-2">
-                  <input
-                    style={{ borderColor: "#00000045" }}
-                    className="form-control shadow-none"
-                    placeholder="الحرب في غزة"
-                  />
+                  <div className=" position-relative">
+                    <select
+                      className="form-select shadow-none pe-3 "
+                      style={{ border: "1px solid #00000045", width: 300 }}
+                      onChange={handleSelectChange}
+                      // value={selectedCountry}
+                    >
+                      <option value="" disabled selected>
+                        Select a tag
+                      </option>
+                      {Array.isArray(tags) &&
+                        tags.map((res) => (
+                          <option key={res?.id} value={res?.tag_name}>
+                            {res?.tag_name}
+                          </option>
+                        ))}
+                    </select>
+                    <div className="down-arrow">
+                      <img src={DownArrow.src} alt="img" />
+                    </div>
+                  </div>
                   <button className="btn btn-primary border-0 rounded-3 fs-18 px-4">
                     إضافة
                   </button>
@@ -194,18 +224,18 @@ const NewsSources = () => {
               </div>
             </div>
             <div className="d-flex flex-wrap gap-3 mt-4">
-              {[...Array(10)].map((_, index) => (
+              {/* {Array.isArray(tags) && tags.map((res, index) => (
                 <button
-                  key={index}
+                  key={res?.id}
                   className="btn fs-20 px-3 position-relative notify-button"
                   style={{ borderRadius: 16, border: "2px solid #E5E5E5" }}
                 >
-                  الحرب في غزة
+                  {res?.tag_name}
                   <span className="cross-icon fs-20 text-white rounded-circle">
                     x
                   </span>
                 </button>
-              ))}
+              ))} */}
             </div>
           </section>
           <section className="mt-5">
@@ -241,8 +271,8 @@ const NewsSources = () => {
               </div>
             </div>
             <Slider {...slider} className="mt-4 blur-effect">
-              {Array.isArray(categories) &&
-                categories.map((res, index) => (
+              {Array.isArray(main_categories) &&
+                main_categories.map((res, index) => (
                   <div
                     key={res.cat_id}
                     className={`slick-slide ${
@@ -250,14 +280,14 @@ const NewsSources = () => {
                     }`}
                   >
                     <button
-                      onClick={() => handleCategorySelect(res?.cat_slug)}
+                      onClick={() => handleCategorySelect(res?.cat_name)}
                       className="btn text-nowrap fs-20 px-3 border"
                       style={{
                         borderRadius: 16,
                         border: "2px solid #E5E5E5",
                         backgroundColor:
-                          selectedCategory === res.cat_slug ? "#EA5153" : "",
-                        color: selectedCategory === res.cat_slug ? "white" : "",
+                          selectedCategory === res.cat_name ? "#EA5153" : "",
+                        color: selectedCategory === res.cat_name ? "white" : "",
                       }}
                     >
                       {res?.cat_name}
@@ -266,8 +296,8 @@ const NewsSources = () => {
                 ))}
             </Slider>
             <div className="news-channel-container mt-3">
-              {Array.isArray(sources) &&
-                sources.map((item, index) => (
+              {Array.isArray(filtered_sources) &&
+                filtered_sources.map((item, index) => (
                   <div key={index} className="news-channel-card text-center">
                     <div className="news-channel-card-image mx-auto">
                       <img src={NewsImage.src} alt="img" />

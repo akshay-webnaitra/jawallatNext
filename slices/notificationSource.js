@@ -8,11 +8,17 @@ export const initialState = {
   sourcesLoading: false,
   sourcesHasErrors: false,
   sources: [],
+  main_categories: [],
   filterSources: [],
+  userCategories: [],
+  tags: [],
+  filtered_sources: [],
   changePasswordLoading: false,
   changePasswordHasErrors: false,
-  categoryUserLoading: false, // Add this for category user loading state
-  categoryUserHasErrors: false, // Add this for category user error state
+  categoryUserLoading: false,
+  categoryUserHasErrors: false,
+  notificationDataLoading: false,
+  notificationDataErrors: false,
 };
 
 const notificationSourcesSlice = createSlice({
@@ -31,6 +37,20 @@ const notificationSourcesSlice = createSlice({
       state.sourcesLoading = false;
       state.sourcesHasErrors = true;
     },
+    getNotificationData: (state) => {
+      state.notificationDataLoading = true;
+    },
+    getNotificationDataSuccess: (state, { payload }) => {
+      state.main_categories = payload?.main_categories;
+      state.filtered_sources = payload?.filtered_sources;
+      state.tags = payload?.tags;
+      state.notificationDataLoading = false;
+      state.notificationDataErrors = false;
+    },
+    getNotificationDataFailure: (state) => {
+      state.notificationDataLoading = false;
+      state.notificationDataErrors = true;
+    },
     setChangePassword: (state) => {
       state.changePasswordLoading = true;
       state.changePasswordHasErrors = false;
@@ -47,9 +67,10 @@ const notificationSourcesSlice = createSlice({
       state.categoryUserLoading = true;
       state.categoryUserHasErrors = false;
     },
-    setCategoryUserSuccess: (state) => {
+    setCategoryUserSuccess: (state, { payload }) => {
       state.categoryUserLoading = false;
       state.categoryUserHasErrors = false;
+      state.userCategories = payload.categories || [];
     },
     setCategoryUserFailure: (state) => {
       state.categoryUserLoading = false;
@@ -80,6 +101,9 @@ export const {
   setCategoryUser,
   setCategoryUserSuccess,
   setCategoryUserFailure,
+  getNotificationData,
+  getNotificationDataSuccess,
+  getNotificationDataFailure,
 } = notificationSourcesSlice.actions;
 
 export const notificationSourcesSelector = (state) => state.notificationSource;
@@ -98,10 +122,32 @@ export function fetchNotificationSources(countrySlug = "", categorySlug = "") {
       if (categorySlug) {
         params.category_slug = categorySlug;
       }
-      const response = await api.filterSources(params);
+      const response = await api.getSettingsObject(params);
       dispatch(getNotificationSourcesSuccess(response?.data));
     } catch (error) {
       dispatch(getNotificationSourcesFailure());
+    }
+  };
+}
+
+//Asynchronous thunk action
+export function fetchNotificationData(countrySlug = "", categorySlug = "") {
+  return async (dispatch) => {
+    dispatch(getNotificationData());
+    try {
+      const params = {};
+      if (countrySlug) {
+        params.country_slug = countrySlug;
+      }
+      if (categorySlug) {
+        params.category_slug = categorySlug;
+      }
+      const response = await api.getSettingsObject(params);
+      console.log(response, "aa");
+
+      dispatch(getNotificationDataSuccess(response?.data));
+    } catch (error) {
+      dispatch(getNotificationDataFailure());
     }
   };
 }
@@ -115,7 +161,7 @@ export function changePassword(params) {
       if (response?.data?.status === 200) {
         toast.success(response?.data?.message);
         window.location.reload();
-      } else if (response?.data?.status === 400) {
+      } else {
         toast.error(response?.data?.message);
       }
     } catch (error) {
@@ -129,10 +175,11 @@ export function addCategoryToUser(user_id, cat_id) {
     dispatch(setCategoryUser());
     try {
       const response = await api.addCategoryToUser({ user_id, cat_id });
+
       dispatch(setCategoryUserSuccess(response?.data));
       if (response?.status === 200) {
         toast.success(response?.data?.message);
-      } else if (response?.status === 400) {
+      } else {
         toast.error(response?.data?.message);
       }
     } catch (error) {
