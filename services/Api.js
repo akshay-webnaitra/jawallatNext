@@ -25,6 +25,10 @@ const Api = {
       changePassword: (params) => api.post(`/api/web/changePassword`, params),
       addCategoryToUser: (params) =>
         api.post(`/api/web/addCategoryToUser`, params),
+      addUserSources: (params) => api.post(`/api/web/addUserSources`, params),
+      addUserTopic: (params) => api.post(`/api/web/addUserTopic`, params),
+      detachUserRelation: (params) =>
+        api.post(`/api/web/detachUserRelation`, params),
       getHomePage: () => api.get(`/api/web/getHomePage`),
       getCategoryPage: (params) => api.get(`/api/web/getCategoryPage`, params),
       getPage: (params) => api.get(`/api/web/getPage`, params),

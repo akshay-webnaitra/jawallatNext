@@ -18,7 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
   addCategoryToUser,
+  addTagToUser,
+  addUserTopic,
   changePassword,
+  deleteUserTopic,
   fetchNotificationData,
   fetchNotificationSources,
   notificationSourcesSelector,
@@ -41,21 +44,24 @@ export const getServerSideProps = wrapper.getServerSideProps(
 const NewsSources = () => {
   const countries = useSelector(countrySelector);
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const dispatch = useDispatch();
   const {
-    sources,
     changePasswordLoading,
     main_categories,
     filtered_sources,
+    user_categories,
     tags,
+    user_topics,
   } = useSelector(notificationSourcesSelector);
   const session = useSession();
-
   const [password, setPassword] = useState({
     old_password: "",
     new_password: "",
   });
+
+  console.log(user_categories, "ll");
 
   const slider = {
     arrows: true,
@@ -122,6 +128,31 @@ const NewsSources = () => {
     dispatch(fetchNotificationData(selectedCountry, selectedCategory));
   };
 
+  // tag select
+  const handleTagSelect = (e) => {
+    const tagSlug = e.target.value;
+    setSelectedTag(tagSlug);
+  };
+
+  const handleSubmitTag = (e) => {
+    e.preventDefault();
+    const user_id = session?.data?.user?.id || null;
+    const keyword_id = selectedTag;
+    dispatch(addUserTopic(user_id, keyword_id));
+    dispatch(fetchNotificationData());
+  };
+
+  // delete keyword
+  const handleDeleteKeyword = (keyword_id) => {
+    const user_id = session?.data?.user?.id || null;
+    if (user_id && keyword_id) {
+      dispatch(deleteUserTopic(user_id, keyword_id));
+      dispatch(fetchNotificationData());
+    } else {
+      toast.error("User ID or Keyword ID missing");
+    }
+  };
+
   // change password
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -139,10 +170,12 @@ const NewsSources = () => {
       dispatch(changePassword(passwordData));
     }
   };
-
+  const isCategoryActive = (categoryId) => {
+    return user_categories.some((cat) => cat.id === categoryId);
+  };
   useEffect(() => {
     dispatch(fetchNotificationData());
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     dispatch(fetchAllCountries());
   }, []);
@@ -153,6 +186,7 @@ const NewsSources = () => {
       dispatch(fetchNotificationData());
     }
   }, [dispatch, selectedCountry, selectedCategory]);
+
   return (
     <>
       <section>
@@ -170,10 +204,13 @@ const NewsSources = () => {
             <div className="grid-container">
               {Array.isArray(main_categories) &&
                 main_categories.map((res, index) => {
+                  const isActive = isCategoryActive(res?.id);
                   return (
                     <div
                       key={res?.id}
-                      className="notification-card text-center p-4"
+                      className={`notification-card text-center p-4 ${
+                        isActive ? "active" : ""
+                      }`}
                       onClick={() => handleMainCategorySelect(res?.id)}
                     >
                       <p className="fs-20 fw-bold m-0 mt-1">{res?.cat_name}</p>
@@ -200,15 +237,15 @@ const NewsSources = () => {
                     <select
                       className="form-select shadow-none pe-3 "
                       style={{ border: "1px solid #00000045", width: 300 }}
-                      onChange={handleSelectChange}
-                      // value={selectedCountry}
+                      onChange={handleTagSelect}
+                      value={selectedTag}
                     >
                       <option value="" disabled selected>
                         Select a tag
                       </option>
                       {Array.isArray(tags) &&
                         tags.map((res) => (
-                          <option key={res?.id} value={res?.tag_name}>
+                          <option key={res?.id} value={res?.id}>
                             {res?.tag_name}
                           </option>
                         ))}
@@ -217,25 +254,32 @@ const NewsSources = () => {
                       <img src={DownArrow.src} alt="img" />
                     </div>
                   </div>
-                  <button className="btn btn-primary border-0 rounded-3 fs-18 px-4">
+                  <button
+                    onClick={handleSubmitTag}
+                    className="btn btn-primary border-0 rounded-3 fs-18 px-4"
+                  >
                     إضافة
                   </button>
                 </div>
               </div>
             </div>
             <div className="d-flex flex-wrap gap-3 mt-4">
-              {/* {Array.isArray(tags) && tags.map((res, index) => (
-                <button
-                  key={res?.id}
-                  className="btn fs-20 px-3 position-relative notify-button"
-                  style={{ borderRadius: 16, border: "2px solid #E5E5E5" }}
-                >
-                  {res?.tag_name}
-                  <span className="cross-icon fs-20 text-white rounded-circle">
-                    x
-                  </span>
-                </button>
-              ))} */}
+              {Array.isArray(user_topics) &&
+                user_topics.map((res, index) => (
+                  <button
+                    key={res?.id}
+                    className="btn fs-20 px-3 position-relative notify-button"
+                    style={{ borderRadius: 16, border: "2px solid #E5E5E5" }}
+                  >
+                    {res?.keyword_name}
+                    <span
+                      onClick={() => handleDeleteKeyword(res?.id)}
+                      className="cross-icon fs-20 text-white rounded-circle"
+                    >
+                      x
+                    </span>
+                  </button>
+                ))}
             </div>
           </section>
           <section className="mt-5">
@@ -256,7 +300,7 @@ const NewsSources = () => {
                 onChange={handleSelectChange}
                 value={selectedCountry}
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Select a country
                 </option>
                 {Array.isArray(countries) &&

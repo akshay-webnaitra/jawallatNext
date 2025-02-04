@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import Api from "@/services/Api";
+import { toast } from "react-toastify";
 
 const api = Api.create();
 export const initialState = {
@@ -36,6 +37,18 @@ const sourcesSlice = createSlice({
     },
     setFilterSources: (state, { payload }) => {
       state.filterSources = payload;
+    },
+    setSourceSubscribe: (state) => {
+      state.sourcesLoading = false;
+      state.sourcesHasErrors = false;
+    },
+    setSourceSubscribeSuccess: (state, { payload }) => {
+      state.sourcesLoading = false;
+      state.sourcesHasErrors = true;
+    },
+    setSourceSubscribeFailure: (state) => {
+      state.sourcesLoading = false;
+      state.sourcesHasErrors = true;
     },
     getSourcesItems: (state) => {
       state.category = null;
@@ -79,7 +92,10 @@ export const {
   getSourcesFailure,
   getSourcesItems,
   setFilterSources,
+  setSourceSubscribe,
   getSourcesItemsSuccess,
+  setSourceSubscribeSuccess,
+  setSourceSubscribeFailure,
   getSourcesItemsFailure,
 } = sourcesSlice.actions;
 
@@ -99,20 +115,34 @@ export function fetchSources() {
     }
   };
 }
-
+export function subscribeSources(user_id, source_id) {
+  return async (dispatch) => {
+    dispatch(setSourceSubscribe());
+    try {
+      const response = await api.addUserSources({ user_id, source_id });
+      console.log(response, "aa");
+      dispatch(setSourceSubscribeSuccess(response?.data));
+      if (response?.status === 200) {
+        toast.success(response?.data?.message);
+      } else {
+        toast.error(response?.data?.message);
+      }
+    } catch (error) {
+      dispatch(setSourceSubscribeFailure());
+    }
+  };
+}
 export function filterSources(countrySlug = "", categorySlug = "") {
   return async (dispatch) => {
     dispatch(getSources());
     try {
       const params = {};
       if (countrySlug) {
-        params.country = countrySlug; // Include country if provided
+        params.country = countrySlug;
       }
       if (categorySlug) {
-        params.category = categorySlug; // Include category if provided
+        params.category = categorySlug;
       }
-
-      // Call the API with the prepared parameters
       const response = await api.filterSources(params);
       dispatch(setFilterSources(response?.data?.return));
     } catch (error) {

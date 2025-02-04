@@ -28,17 +28,12 @@ const fetchInfo = async (
 export default async function handler(req, res) {
   const session = await getSession({ req });
   const { country_slug, category_slug, page } = req.query;
-  // const result = await fetchInfo(
-  //   // req?.query?.source,
-  //   req?.query?.page,
-  //   session?.data?.user?.id
-  // );
   // Fetch the info by passing necessary parameters
   const result = await fetchInfo(
     page,
     session?.data?.user?.id,
-    country_slug, // Pass countrySlug
-    category_slug, // Pass categorySlug
+    country_slug,
+    category_slug,
     session?.accessToken
   );
   res.status(200).json(result);

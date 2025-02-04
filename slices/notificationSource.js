@@ -13,12 +13,16 @@ export const initialState = {
   userCategories: [],
   tags: [],
   filtered_sources: [],
+  user_topics: [],
+  user_categories: [],
   changePasswordLoading: false,
   changePasswordHasErrors: false,
   categoryUserLoading: false,
   categoryUserHasErrors: false,
   notificationDataLoading: false,
   notificationDataErrors: false,
+  tagUserLoading: false,
+  tagUserHasErrors: false,
 };
 
 const notificationSourcesSlice = createSlice({
@@ -44,6 +48,8 @@ const notificationSourcesSlice = createSlice({
       state.main_categories = payload?.main_categories;
       state.filtered_sources = payload?.filtered_sources;
       state.tags = payload?.tags;
+      state.user_topics = payload?.user_topics || [];
+      state.user_categories = payload?.user_categories || [];
       state.notificationDataLoading = false;
       state.notificationDataErrors = false;
     },
@@ -76,6 +82,19 @@ const notificationSourcesSlice = createSlice({
       state.categoryUserLoading = false;
       state.categoryUserHasErrors = true;
     },
+    setTagUser: (state) => {
+      state.tagUserLoading = true;
+      state.tagUserHasErrors = false;
+    },
+    setTagUserSuccess: (state, { payload }) => {
+      state.tagUserLoading = false;
+      state.tagUserHasErrors = false;
+      state.userCategories = payload || [];
+    },
+    setTagUserFailure: (state) => {
+      state.tagUserLoading = false;
+      state.tagUserHasErrors = true;
+    },
     setFilterSources: (state, { payload }) => {
       state.filterSources = payload;
     },
@@ -102,6 +121,9 @@ export const {
   setCategoryUserSuccess,
   setCategoryUserFailure,
   getNotificationData,
+  setTagUser,
+  setTagUserFailure,
+  setTagUserSuccess,
   getNotificationDataSuccess,
   getNotificationDataFailure,
 } = notificationSourcesSlice.actions;
@@ -143,8 +165,6 @@ export function fetchNotificationData(countrySlug = "", categorySlug = "") {
         params.category_slug = categorySlug;
       }
       const response = await api.getSettingsObject(params);
-      console.log(response, "aa");
-
       dispatch(getNotificationDataSuccess(response?.data));
     } catch (error) {
       dispatch(getNotificationDataFailure());
@@ -184,6 +204,42 @@ export function addCategoryToUser(user_id, cat_id) {
       }
     } catch (error) {
       dispatch(setCategoryUserFailure());
+      toast.error("Failed to add category to user");
+    }
+  };
+}
+
+export function addUserTopic(user_id, keyword_id) {
+  return async (dispatch) => {
+    dispatch(setTagUser());
+    try {
+      const response = await api.addUserTopic({ user_id, keyword_id });
+      dispatch(setTagUserSuccess(response?.data));
+      if (response?.status === 200) {
+        toast.success(response?.data?.message);
+      } else {
+        toast.error(response?.data?.message);
+      }
+    } catch (error) {
+      dispatch(setTagUserFailure());
+      toast.error("Failed to add category to user");
+    }
+  };
+}
+
+export function deleteUserTopic(user_id, keyword_id) {
+  return async (dispatch) => {
+    dispatch(setTagUser());
+    try {
+      const response = await api.detachUserRelation({ user_id, keyword_id });
+      dispatch(setTagUserSuccess(response?.data));
+      if (response?.status === 200) {
+        toast.success(response?.data?.message);
+      } else {
+        toast.error(response?.data?.message);
+      }
+    } catch (error) {
+      dispatch(setTagUserFailure());
       toast.error("Failed to add category to user");
     }
   };

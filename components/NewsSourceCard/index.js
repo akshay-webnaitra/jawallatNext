@@ -1,6 +1,39 @@
 import JawlattLink from "../JawlattLink";
 import Plus from "../../assets/images/subscribePlus.png";
+import { useSession } from "next-auth/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchSources,
+  sourcesSelector,
+  subscribeSources,
+} from "@/slices/sources";
+import { useEffect, useState } from "react";
 const NewsSourceCard = ({ sources }) => {
+  const session = useSession();
+  const dispatch = useDispatch();
+  const [localSources, setLocalSources] = useState([]);
+
+  useEffect(() => {
+    if (sources) {
+      setLocalSources(sources);
+    }
+  }, [sources]);
+  const handleSubscribe = (id) => {
+    const source_id = id;
+    const user_id = session?.data?.user?.id || null;
+    dispatch(subscribeSources(user_id, source_id));
+    setLocalSources((prevSources) =>
+      prevSources.map((source) =>
+        source.id === source_id
+          ? {
+              ...source,
+              subscribe: source.subscribe === "true" ? "false" : "true",
+            }
+          : source
+      )
+    );
+  };
+
   return (
     <>
       <div className="card mb-3 jawlatt-card-border rounded-4">
@@ -12,36 +45,52 @@ const NewsSourceCard = ({ sources }) => {
         </div>
         <div className="card-body p-3">
           <ul className="list-group ">
-            {Array.isArray(sources) &&
-              sources?.slice(0, 7).map((item, index) => (
-                <li key={index} className="list-group-item py-2 px-0 border-0">
-                  <div className="d-flex gap-2 align-items-center justify-content-between w-100 ">
-                    <JawlattLink
-                      className="d-flex text-decoration-none"
-                      href={`/source/${item?.name}`}
-                    >
-                      <p
-                        className="m-0 fw-bold text-start"
-                        style={{ fontSize: "15px", cursor: "pointer" }}
+            {Array.isArray(localSources) &&
+              localSources?.slice(0, 7).map((item, index) => {
+                console.log(item);
+
+                return (
+                  <li
+                    key={index}
+                    className="list-group-item py-2 px-0 border-0"
+                  >
+                    <div className="d-flex gap-2 align-items-center justify-content-between w-100 ">
+                      <JawlattLink
+                        className="d-flex text-decoration-none"
+                        href={`/source/${item?.name}`}
                       >
-                        <img
-                          style={{
-                            width: 20,
-                            height: 20,
-                            marginLeft: 6,
-                          }}
-                          src={item?.image}
-                          className="rounded-circle"
-                        />
-                        {item?.name}
-                      </p>
-                    </JawlattLink>
-                    <div className="plus">
-                      <img src={Plus.src} alt="img" style={{ width: 20 }} />
+                        <p
+                          className="m-0 fw-bold text-start"
+                          style={{ fontSize: "15px", cursor: "pointer" }}
+                        >
+                          <img
+                            style={{
+                              width: 20,
+                              height: 20,
+                              marginLeft: 6,
+                            }}
+                            src={item?.image}
+                            className="rounded-circle"
+                          />
+                          {item?.name}
+                        </p>
+                      </JawlattLink>
+                      {item?.subscribe === "true" ? (
+                        <span onClick={() => handleSubscribe(item?.id)}>-</span>
+                      ) : (
+                        <div className="plus">
+                          <img
+                            src={Plus.src}
+                            onClick={() => handleSubscribe(item?.id)}
+                            alt="img"
+                            style={{ width: 20, cursor: "pointer" }}
+                          />
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
           </ul>
         </div>
         <div className="detail-btn mb-3  text-center">
