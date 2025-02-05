@@ -20,6 +20,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
     await store.dispatch(fetchSources(session));
+    await store.dispatch(fetchCategories(session));
     await store.dispatch(
       fetchSearch(
         {

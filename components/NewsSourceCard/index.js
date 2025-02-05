@@ -2,37 +2,42 @@ import JawlattLink from "../JawlattLink";
 import Plus from "../../assets/images/subscribePlus.png";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchSources,
-  sourcesSelector,
-  subscribeSources,
-} from "@/slices/sources";
+import { getSourcesSuccess, subscribeSources } from "@/slices/sources";
 import { useEffect, useState } from "react";
 const NewsSourceCard = ({ sources }) => {
+  const [showAll, setShowAll] = useState(false);
   const session = useSession();
   const dispatch = useDispatch();
-  const [localSources, setLocalSources] = useState([]);
-
-  useEffect(() => {
-    if (sources) {
-      setLocalSources(sources);
-    }
-  }, [sources]);
   const handleSubscribe = (id) => {
     const source_id = id;
     const user_id = session?.data?.user?.id || null;
-    dispatch(subscribeSources(user_id, source_id));
-    setLocalSources((prevSources) =>
-      prevSources.map((source) =>
-        source.id === source_id
-          ? {
-              ...source,
-              subscribe: source.subscribe === "true" ? "false" : "true",
-            }
-          : source
-      )
-    );
+    if (user_id) {
+      dispatch(subscribeSources(user_id, source_id));
+      dispatch(
+        getSourcesSuccess(
+          sources.map((source) =>
+            source.id === source_id
+              ? {
+                  ...source,
+                  subscribe: source.subscribe === "true" ? "false" : "true",
+                }
+              : source
+          )
+        )
+      );
+    }
   };
+
+  const displayedSources = showAll ? sources : sources?.slice(0, 7);
+  const handleShowMore = () => {
+    setShowAll((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (sources) {
+      dispatch(getSourcesSuccess(sources));
+    }
+  }, [dispatch, sources]);
 
   return (
     <>
@@ -45,10 +50,8 @@ const NewsSourceCard = ({ sources }) => {
         </div>
         <div className="card-body p-3">
           <ul className="list-group ">
-            {Array.isArray(localSources) &&
-              localSources?.slice(0, 7).map((item, index) => {
-                console.log(item);
-
+            {Array.isArray(displayedSources) &&
+              displayedSources?.map((item, index) => {
                 return (
                   <li
                     key={index}
@@ -76,7 +79,12 @@ const NewsSourceCard = ({ sources }) => {
                         </p>
                       </JawlattLink>
                       {item?.subscribe === "true" ? (
-                        <span onClick={() => handleSubscribe(item?.id)}>-</span>
+                        <span
+                          className="minus"
+                          onClick={() => handleSubscribe(item?.id)}
+                        >
+                          -
+                        </span>
                       ) : (
                         <div className="plus">
                           <img
@@ -94,8 +102,11 @@ const NewsSourceCard = ({ sources }) => {
           </ul>
         </div>
         <div className="detail-btn mb-3  text-center">
-          <button className="text-white px-3  border-0 jawlatt-bg-red jawlatt-detail-btn-border fw-medium">
-            المزيد
+          <button
+            className="text-white px-3 border-0 jawlatt-bg-red jawlatt-detail-btn-border fw-medium"
+            onClick={handleShowMore}
+          >
+            {showAll ? "إخفاء" : "المزيد"}
           </button>
         </div>
       </div>

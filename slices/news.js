@@ -88,7 +88,6 @@ export function fetchNews(
       }
 
       const response = await api.getSingleNewsPage(params);
-
       if (!!response?.data?.return?.news) {
         callback(response?.data?.return);
 

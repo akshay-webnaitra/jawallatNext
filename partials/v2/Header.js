@@ -16,6 +16,7 @@ import useScrollingUp from "@/hooks/useScrollingUp";
 import { useMediaQuery } from "react-responsive";
 import { stripMenu, slugify } from "@/utils/index";
 import Logo from "../../assets/images/logo.png";
+import { fetchSearch } from "@/slices/search";
 
 const Header = () => {
   const scrolled = useScrollingUp();
@@ -117,6 +118,20 @@ const Header = () => {
       callbackUrl: window.location.href,
     });
   };
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const keyword = searchTerm;
+    const source = e.target.source.value;
+    const category = e.target.category.value;
+    const type = e.target.type.value;
+
+    dispatch(fetchSearch({ keyword, source, category, type }, 1));
+    router.push({
+      pathname: "/new/search",
+      query: { q: keyword, source, category, type },
+    });
+  };
+
   return (
     <>
       {/* main header */}
@@ -270,7 +285,11 @@ const Header = () => {
                 </button>
               </div>
               <div className="col">
-                <form method="get" action="/search">
+                <form
+                  method="get"
+                  onSubmit={handleSearchSubmit}
+                  action="/search"
+                >
                   <div className="row">
                     <div className="col">
                       <input

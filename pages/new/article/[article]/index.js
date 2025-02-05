@@ -1,9 +1,6 @@
 import Sidebar from "@/partials/v2/Sidebar";
 import NewsItem from "@/components/v2/NewsItem";
 import MainLayout from "layout/mainLayout";
-import SkyNews from "assets/images/sky-news-round.png";
-import Group from "assets/images/group 1197.png";
-import Plus from "assets/images/group 1304.png";
 import { getSession, useSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { fetchCategories, fetchCategoriesItems } from "@/slices/categories";
@@ -50,6 +47,7 @@ const Article = () => {
   const [markedItems, setMarkedItems] = useState([]);
   const { data: session, status } = useSession();
   const { news, related_news } = useSelector(newsSelector);
+
   const toggleFavourite = (item) => {
     const userId = session?.user?.id;
     const newsId = item?.id;
@@ -165,38 +163,16 @@ const Article = () => {
                     dangerouslySetInnerHTML={{ __html: news?.news_content }}
                   ></div>
                   <div className="d-flex flex-wrap gap-2 mb-2">
-                    <span
-                      style={{ background: "#f7f7f7", color: "#000000" }}
-                      className="rounded-pill p-1 px-3 "
-                    >
-                      وردود الفع
-                    </span>
-                    <span
-                      style={{ background: "#f7f7f7", color: "#000000" }}
-                      className="rounded-pill p-1 px-3"
-                    >
-                      وردود الفع
-                    </span>
-                    <span
-                      style={{ background: "#f7f7f7", color: "#000000" }}
-                      className="rounded-pill p-1 px-3"
-                    >
-                      وردود الفع
-                    </span>
-                  </div>
-                  <div className="d-flex flex-wrap gap-2">
-                    <span
-                      style={{ background: "#f7f7f7", color: "#000000" }}
-                      className="rounded-pill p-1 px-3"
-                    >
-                      وردود الفع
-                    </span>
-                    <span
-                      style={{ background: "#f7f7f7", color: "#000000" }}
-                      className="rounded-pill p-1 px-3"
-                    >
-                      وردود الفع
-                    </span>
+                    {news?.tags?.length > 0 &&
+                      news?.tags?.map((res) => (
+                        <span
+                          key={res?.id}
+                          style={{ background: "#f7f7f7", color: "#000000" }}
+                          className="rounded-pill p-1 px-3 "
+                        >
+                          {res?.tag_name}
+                        </span>
+                      ))}
                   </div>
                 </div>
                 <div className="border-bottom pb-3 mt-5">

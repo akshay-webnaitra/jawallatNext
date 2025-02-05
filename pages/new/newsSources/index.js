@@ -29,6 +29,7 @@ import {
 } from "@/slices/notificationSource";
 import { toast } from "react-toastify";
 import ChangePassword from "@/components/notificationNewsSource/changePassword";
+import StarIconGray from "@/components/v2/icons/starIconGray";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -60,8 +61,7 @@ const NewsSources = () => {
     old_password: "",
     new_password: "",
   });
-
-  console.log(user_categories, "ll");
+  const user_id = session?.data?.user?.id || null;
 
   const slider = {
     arrows: true,
@@ -111,7 +111,6 @@ const NewsSources = () => {
 
   // adding category with user_id
   const handleMainCategorySelect = (id) => {
-    const user_id = session?.data?.user?.id || null;
     const cat_id = id;
     dispatch(addCategoryToUser(user_id, cat_id));
     dispatch(fetchNotificationData());
@@ -136,7 +135,6 @@ const NewsSources = () => {
 
   const handleSubmitTag = (e) => {
     e.preventDefault();
-    const user_id = session?.data?.user?.id || null;
     const keyword_id = selectedTag;
     dispatch(addUserTopic(user_id, keyword_id));
     dispatch(fetchNotificationData());
@@ -144,7 +142,6 @@ const NewsSources = () => {
 
   // delete keyword
   const handleDeleteKeyword = (keyword_id) => {
-    const user_id = session?.data?.user?.id || null;
     if (user_id && keyword_id) {
       dispatch(deleteUserTopic(user_id, keyword_id));
       dispatch(fetchNotificationData());
@@ -348,7 +345,11 @@ const NewsSources = () => {
                     </div>
                     <p className="fs-18 m-0 mt-2 mb-4">{item.name} </p>
                     <div className="star-icon">
-                      {item.icon || <StarIconRed />}
+                      {item.subscribe === "true" ? (
+                        <StarIconRed />
+                      ) : (
+                        <StarIconGray />
+                      )}
                     </div>
                   </div>
                 ))}

@@ -91,6 +91,8 @@ export function fetchSearch(
         keyword: payload?.keyword,
         page: page,
       });
+      console.log(response, "aaaaa");
+
       if (page != 1) {
         dispatch(getSearchPaginateSuccess(response?.data?.return));
 

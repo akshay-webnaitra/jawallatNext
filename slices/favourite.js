@@ -21,7 +21,7 @@ const favouriteSlice = createSlice({
       state.favouriteLoading = true;
     },
     getFavouriteSuccess: (state, { payload }) => {
-      state.favourite = payload?.news;
+      state.favourite = payload?.data;
       state.favouriteLoading = false;
       state.favouriteHasErrors = false;
       state.lastPage = payload?.return?.last_page || 1;
@@ -73,8 +73,8 @@ export function fetchFavourite() {
     dispatch(getFavourite());
     try {
       const response = await api.getUserFavorites();
-      if (response?.data?.favourite) {
-        dispatch(getFavouriteSuccess(response?.data?.favourite));
+      if (response?.data?.return) {
+        dispatch(getFavouriteSuccess(response?.data?.return));
       } else {
         dispatch(getFavouriteFailure());
       }

@@ -4,10 +4,12 @@
 
 // dark mode
 [data-bs-theme="dark"] {
+
   .jawlatt-header-overlay,
   .jawlatt-header-content {
     background: $dark;
   }
+
   .fa-xmark,
   .fa-bars,
   .fa-cloud-moon,
@@ -17,13 +19,16 @@
   .fa-book {
     color: white !important;
   }
+
   .jawlatt-sticky-header {
     background: $dark;
   }
+
   .arab24-right-content,
   .arab24-newsItem-card,
   .arab24-big-news-card {
     background: transparent;
+
     .card {
       background: transparent;
     }
@@ -33,8 +38,10 @@
   .jawlatt-bottom-header-bg-color {
     background: rgb(231 231 231 / 11%);
   }
+
   .card1 {
     .jawlatt-card1-heading {
+
       h4,
       h3,
       p,
@@ -43,17 +50,21 @@
       }
     }
   }
+
   .jawlatt-mid-grey-cards {
     .card {
       background: transparent;
+
       h5 {
         color: white !important;
       }
     }
   }
+
   .jawlatt-border-bottom {
     border-bottom: 1px solid rgb(93, 93, 93);
   }
+
   a {
     svg {
       path {
@@ -61,34 +72,43 @@
       }
     }
   }
+
   .status,
   .dot {
     a {
       color: #b22e39 !important;
     }
   }
+
   .blur-effect {
     position: relative;
+
     &::before {
       opacity: 0;
     }
   }
+
   .jawlatt-fs-1531 {
     color: #000000 !important;
   }
+
   .jawlatt-fs-945 {
     color: #1e1e1e !important;
   }
-  .category-btn{
+
+  .category-btn {
     color: white !important;
   }
 }
+
 .fa-sun {
   color: $dark !important;
 }
+
 .arab24-text-gray {
   color: $gray !important;
 }
+
 .arab24-text-red {
   color: $red !important;
 }
@@ -104,21 +124,27 @@
 .arab24-bg-black {
   background: #000000 !important;
 }
+
 .text-dark-red {
   color: #b22e39 !important;
 }
+
 .arabic24-bg-dark-red {
   background: #b22e39 !important;
 }
+
 .fs-12 {
   font-size: 12px !important;
 }
+
 .fs-14 {
   font-size: 14px !important;
 }
+
 .fs-18 {
   font-size: 18px !important;
 }
+
 .fs-20 {
   font-size: 20px !important;
 }
@@ -126,36 +152,52 @@
 .btn-primary {
   background: $btn-red !important;
 }
+
 .news-title {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.5; 
+  line-height: 1.5;
 }
-.nav{
-  .active{
-    a{
+
+.minus {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background:$btn-red;
+  color: white;
+  cursor: pointer;
+  @include flex-center;
+}
+.nav {
+  .active {
+    a {
       color: #FE0120 !important;
     }
   }
 }
+
 // new homepage
-.jawlatt-news-small-title{
-  a{
+.jawlatt-news-small-title {
+  a {
     color: #EA5153 !important;
     font-size: 15px;
     margin-right: 10px;
   }
 }
+
 .arab24-right-image {
   width: 100%;
   height: 100%;
+
   img {
     @include img;
   }
 }
+
 .new-video-card {
   background-color: #f6f8f8;
 }
@@ -170,15 +212,18 @@
   small {
     font-size: 9px;
   }
+
   h5 {
     font-size: 13px;
     font-weight: 700;
   }
 }
+
 .arab24-card2 {
   .arab24-card2-img {
     width: 100%;
     height: 220px;
+
     img {
       @include img;
     }
@@ -198,33 +243,40 @@
     font-size: 15.01px;
     line-height: 31.78px;
   }
+
   .arab24-newsItem-card-img {
     min-width: 142px;
     width: 142px;
     height: 142px;
+
     img {
       @include img;
       border-radius: 8px;
     }
   }
+
   @include media-query(smallest) {
     .arab24-newsItem-card-img {
       .card-title {
         font-size: 16px;
       }
     }
+
     .jawlatt-news-source {
       font-size: 12px !important;
     }
   }
 }
+
 .arab24-news-card {
   display: flex;
   gap: 10px;
+
   .arab24-news-card-img {
     min-width: 94px;
     height: 94px;
     position: relative;
+
     .video-icon {
       position: absolute;
       width: 25px;
@@ -234,17 +286,21 @@
       transform: translate(-50%, -50%);
       opacity: 0;
       transition: 0.1s ease-in-out;
+
       img {
         @include img;
         border-radius: 50%;
       }
     }
+
     &:hover {
       .video-icon {
         opacity: 1;
       }
     }
+
     cursor: pointer;
+
     img {
       @include img;
       border-radius: 8px;
@@ -261,6 +317,7 @@
       background: $btn-red;
       font-size: 12px;
     }
+
     .form-control {
       border-radius: 8px !important;
       border-top-left-radius: 0 !important;
@@ -270,7 +327,9 @@
     }
   }
 }
+
 .slick-arrow {
+
   .slick-prev,
   .slick-next {
     z-index: 1;
@@ -288,6 +347,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+
     &::before {
       content: url("../images/slick-left-arrow.png");
       opacity: 1 !important;
@@ -301,6 +361,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+
     &::before {
       content: url("../images/slick-right-arrow.png");
       opacity: 1 !important;
@@ -319,12 +380,14 @@
       }
     }
   }
+
   tbody {
     tr:nth-child(even) {
       td {
         background: rgb(244, 244, 244);
       }
     }
+
     tr {
       td {
         background: #fafafa;
@@ -339,17 +402,21 @@
   .article-banner {
     width: 100%;
     height: 518px;
+
     img {
       @include img;
     }
   }
+
   p {
     line-height: 32px;
   }
+
   @include media-query(small) {
     .article-banner {
       height: unset;
     }
+
     p {
       line-height: 20px;
     }
@@ -373,12 +440,15 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 30px;
     width: 100%;
+
     @include media-query(large) {
       grid-template-columns: repeat(4, 1fr);
     }
+
     @include media-query(medium) {
       grid-template-columns: repeat(3, 1fr);
     }
+
     @include media-query(small) {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -388,15 +458,19 @@
     background: #f5f5f8;
     border-radius: 20px;
     transition: 0.2s ease-in-out;
+
     p {
       color: #707071;
     }
+
     &:hover {
       background: $btn-red;
       cursor: pointer;
+
       p {
         color: white;
       }
+
       svg {
         path {
           fill: white;
@@ -404,8 +478,10 @@
         }
       }
     }
+
     &.active {
       background-color: $btn-red;
+
       p {
         color: white;
       }
@@ -425,6 +501,7 @@
     left: -8px;
     display: none;
   }
+
   .notify-button {
     &:hover {
       .cross-icon {
@@ -432,46 +509,57 @@
       }
     }
   }
+
   .form-select {
     background-image: none !important;
   }
+
   .down-arrow {
     position: absolute;
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
   }
+
   .news-channel-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 30px;
     width: 100%;
+
     @media (width < 1199px) {
       grid-template-columns: repeat(5, 1fr);
     }
+
     @media (width < 991px) {
       grid-template-columns: repeat(3, 1fr);
     }
+
     @media (width < 767px) {
       grid-template-columns: repeat(2, 1fr);
     }
+
     @media (width < 575px) {
       grid-template-columns: repeat(1, 1fr);
     }
   }
+
   .news-channel-card {
     border: 1.87px solid #e5e5e5;
     border-radius: 15px;
     padding: 10px;
     position: relative;
+
     .news-channel-card-image {
       width: 92px;
       height: 92px;
+
       img {
         @include img;
         border-radius: 50%;
       }
     }
+
     .star-icon {
       background: white;
       width: 45px;
@@ -486,10 +574,13 @@
   }
 
   .slick-slide {
-    margin-left: 15px; /* Adjust as needed */
+    margin-left: 15px;
+    /* Adjust as needed */
   }
+
   .slick-slide.first-slide {
-    width: 100% !important; /* Make the first slide take full width */
+    width: 100% !important;
+    /* Make the first slide take full width */
   }
 
   .slick-track {
@@ -498,6 +589,7 @@
 
   .blur-effect {
     position: relative;
+
     &::before {
       position: absolute;
       content: "";
@@ -516,6 +608,7 @@
 .affiliate-banner {
   width: 100%;
   height: 270px;
+
   img {
     @include img;
   }
@@ -524,27 +617,32 @@
 // video page
 .video {
   .news-video-card {
-    a{
+    a {
       font-weight: 500 !important;
     }
+
     .news-video-card-img {
       position: relative;
       width: 100%;
       height: 462px;
+
       img,
       video {
         @include img;
       }
+
       .video-play-btn {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
       .video-play-btn {
         opacity: 0;
         transition: 0.2s;
       }
+
       &:hover {
         .video-play-btn {
           opacity: 1;
@@ -559,15 +657,19 @@
   .live-stream-banner {
     width: 100%;
     height: 489px;
+
     img {
       @include img;
     }
   }
+
   .live-stream-card {
     cursor: pointer;
+
     .live-stream-card-img {
       width: 100%;
       height: 120px;
+
       img {
         @include img;
       }
@@ -580,23 +682,28 @@
   border: 1px solid #00000018;
   box-shadow: 0px 3px 0px 0px #00000018;
   border-radius: 12px;
+
   .form-control {
     background: #f5f5f8;
     border-radius: 14px;
     padding: 10px 30px;
   }
+
   .btn {
     padding: 10px 30px;
     border-radius: 14px;
   }
+
   .heading {
     text-wrap: nowrap;
     font-size: 53px;
+
     @include media-query(smallest) {
       font-size: 42px;
       text-wrap: wrap;
     }
   }
+
   .verify {
     input {
       width: 60px;
@@ -620,6 +727,7 @@
   display: flex;
   justify-content: center;
   gap: 15px;
+
   a {
     font-size: 20px;
   }

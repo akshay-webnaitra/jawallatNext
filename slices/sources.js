@@ -121,9 +121,20 @@ export function subscribeSources(user_id, source_id) {
     try {
       const response = await api.addUserSources({ user_id, source_id });
       console.log(response, "aa");
-      dispatch(setSourceSubscribeSuccess(response?.data));
       if (response?.status === 200) {
         toast.success(response?.data?.message);
+        dispatch(
+          getSourcesSuccess(
+            sources.map((source) =>
+              source.id === source_id
+                ? {
+                    ...source,
+                    subscribe: source.subscribe === "true" ? "false" : "true",
+                  }
+                : source
+            )
+          )
+        );
       } else {
         toast.error(response?.data?.message);
       }

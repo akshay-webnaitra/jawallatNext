@@ -27,6 +27,8 @@ const Favourite = () => {
   const isMobileMedia = useMediaQuery({ query: "(max-width: 786px)" });
   const [isMobile, setIsMobile] = useState(false);
   const { favourite } = useSelector(favouriteSelector);
+  console.log(favourite, "fav");
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFavourite());
