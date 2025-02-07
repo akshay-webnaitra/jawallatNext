@@ -70,7 +70,7 @@ const Header = () => {
   }, [serverItem]);
 
   useEffect(() => {
-    if (categories.length && router.query.hasOwnProperty("/new/category")) {
+    if (categories.length && router.query.hasOwnProperty("/category")) {
       let mainCategorySlug = category;
       let mainCategory = find(categories, { cat_slug: mainCategorySlug });
       if (
@@ -127,7 +127,7 @@ const Header = () => {
 
     dispatch(fetchSearch({ keyword, source, category, type }, 1));
     router.push({
-      pathname: "/new/search",
+      pathname: "/search",
       query: { q: keyword, source, category, type },
     });
   };
@@ -214,12 +214,12 @@ const Header = () => {
               className="mb-3 mb-lg-0  d-flex gap-4 align-items-center justify-content-end"
               role="search"
             >
-              <a
-                href="#"
-                className="jawlatt-hdr-lt-btn text-nowrap text-decoration-none m-0"
-              >
-                بث مباشر
-              </a>
+              <JawlattLink href="/liveStream">
+                <a className="jawlatt-hdr-lt-btn text-nowrap text-decoration-none m-0">
+                  {" "}
+                  بث مباشر
+                </a>
+              </JawlattLink>
               <ul className="jawlatt-icon-list list-unstyled d-flex m-0">
                 <li>
                   <a

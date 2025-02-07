@@ -1,119 +1,76 @@
-import styles from "./style.module.css";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Link from "next/link";
-import JawlattLink from "@/components/JawlattLink";
-import Header from "@/partials/header";
-import Footer from "@/partials/footer";
-import GoogleAds from "@/components/GoogleAds";
-import Col from "react-bootstrap/Col";
-import Nav from "react-bootstrap/Nav";
-import Row from "react-bootstrap/Row";
-import Tab from "react-bootstrap/Tab";
-import MyNewsMediaCard from "@/components/myNewsMediaCard/index";
-import MediaCard from "@/components/NewsMediaCard/index";
-import Bitmap from "@/public/Bitmap-img.png";
-import Notification from "@/public/notification-bell.png";
-import Banner from "@/public/banner-page.png";
-import Head from "next/head";
-import Ads6 from "@/public/ads6.jpg";
+import NewsAdd from "assets/images/news-ad.png";
 import { wrapper } from "@/utils/store";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchServerItem, serverItemSelector } from "@/slices/serverItems";
+import { useSelector } from "react-redux";
+import { fetchServerItem } from "@/slices/serverItems";
 import { fetchPage, pageSelector } from "@/slices/page";
-import JawlattShopSingleIframe from "@/components/JawlattShopSingleIframe";
-// import styles from './Home.css'
+import MainLayout from "layout/mainLayout";
+import Sidebar from "@/partials/v2/Sidebar";
+import RedCaret from "@/components/v2/RedCaret";
+import { fetchSources } from "@/slices/sources";
+import { getSession } from "next-auth/react";
+import { fetchCategories } from "@/slices/categories";
+import { fetchHomeItems } from "@/slices/homeItems";
+import { useEffect, useState } from "react";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
-    await store.dispatch(fetchServerItem());
-    await store.dispatch(fetchPage({ slug: context?.params?.page }));
+    const session = await getSession(context);
+    const slug = context?.params?.page;
+    await store.dispatch(fetchPage({ slug }));
+    await store.dispatch(fetchSources(session));
+    await store.dispatch(fetchCategories(session));
+    await store.dispatch(fetchServerItem(session));
+    await store.dispatch(fetchHomeItems(session));
+    return {
+      props: {
+        slug,
+      },
+    };
   }
 );
 
 const Page = () => {
-  const router = useRouter();
-  const { page, pageHasErrors, pageLoading } = useSelector(pageSelector);
-
-  const formSubmit = (e) => {
-    e.preventDefault();
-  };
+  const page = useSelector(pageSelector);
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  if (!isClient) {
+    return <p className="fs-5 arab24-text-gray">Loading...</p>;
+  }
   return (
     <>
-      <Head>
-        <title>{page?.page_name}</title>
-      </Head>
-      <Header />
-      <div className={styles.jawllat_policy_banner}>
-        {!!page?.imageUrl && <img src={page?.imageUrl} alt="banner" />}
-      </div>
-      <div className={"mb-5 " + styles.jawllat_policy_Text}>
+      <section className="notification live-stream">
         <div className="container">
-          <div className="row">
-            <div className="col-12 col-md-8">
-              <div className="page-content pt-4 mb-4">
-                <h4>{page?.page_name}</h4>
-                {!!page?.page_content && (
-                  <div
-                    className="page-content"
-                    dangerouslySetInnerHTML={{ __html: page?.page_content }}
-                  ></div>
-                )}
-              </div>
-              <div className={styles.jawllat_policy_form}>
-                <h4>تواصل معنا</h4>
-                <form onSubmit={formSubmit}>
-                  <div className="mt-4">
-                    <input
-                      type="text"
-                      placeholder="الإسم"
-                      className={styles.jwalatt_form_group}
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <input
-                      type="text"
-                      placeholder="البريد الإلكتروني"
-                      className={styles.jwalatt_form_group}
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <textarea
-                      placeholder="الرسالة"
-                      className={styles.jwalatt_form_group}
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <input type="submit" value="أرسل رسالة" />
-                  </div>
-                </form>
+          <div className="row g-3 mt-3">
+            {/* right side */}
+            <div className="col-md-9 jawlatt-bnr-top-mid jawlatt-bnr-top-rt">
+              <div className="jawlatt-single-news pt-3">
+                <h3 className="mb-0 pb-2 text-dark fw-bold jawlatt-news-title mb-4">
+                  <RedCaret />
+                  {page?.page_name}
+                </h3>
+                <p
+                  className="fs-5 arab24-text-gray"
+                  dangerouslySetInnerHTML={{ __html: page?.page_content }}
+                ></p>
               </div>
             </div>
-            <div className="col-12 col-md-1"></div>
-            <div className="d-none d-lg-block col-12 col-md-3">
-              <div className="full-img mb-0 mb-lg-3">
-                <GoogleAds
-                  id="div-gpt-ad-1686735098461-0"
-                  slot="/29958771/New_Jaw_MPU_Desktop_03"
-                  width={300}
-                  height={250}
-                />
+            {/* left side */}
+            <div className="col-md-3 jawlatt-bnr-top-lt">
+              <div className="p-md-4 mb-3">
+                <img src={NewsAdd.src} className="card-img-top" alt="NewsAd" />
               </div>
-              <div className="full-img mb-0 mb-lg-3">
-                <JawlattLink href="#">
-                  <a>
-                    <JawlattShopSingleIframe />
-                  </a>
-                </JawlattLink>
-              </div>
+              <Sidebar />
             </div>
           </div>
         </div>
-      </div>
-
-      <Footer />
+      </section>
     </>
   );
 };
 
+Page.getLayout = (page) => {
+  return <MainLayout title={page.props.slug}>{page}</MainLayout>;
+};
 export default Page;

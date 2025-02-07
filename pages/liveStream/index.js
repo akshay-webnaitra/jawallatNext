@@ -8,7 +8,7 @@ import { fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
-import DownArrow from "../../../assets/images/down-arrow.png";
+import DownArrow from "../../assets/images/down-arrow.png";
 import React, { useEffect, useState } from "react";
 import GoogleAds from "@/components/GoogleAds";
 import { useMediaQuery } from "react-responsive";

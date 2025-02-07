@@ -1,16 +1,14 @@
 import Sidebar from "@/partials/v2/Sidebar";
 import NewsItem from "@/components/v2/NewsItem";
 import MainLayout from "layout/mainLayout";
-import NewsAdd from "assets/images/news-ad.png";
-import RedCaret from "@/components/v2/RedCaret";
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { fetchCategories } from "@/slices/categories";
 import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
-import Plus from "../../../assets/images/+.png";
-import Share from "../../../assets/images/group 6736.png";
+import Plus from "../../assets/images/+.png";
+import Share from "../../assets/images/group 6736.png";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import GoogleAds from "@/components/GoogleAds";

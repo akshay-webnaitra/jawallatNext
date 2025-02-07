@@ -7,8 +7,8 @@ import { fetchServerItem } from "@/slices/serverItems";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import RedCaret from "@/components/v2/RedCaret";
-import NewsImage from "../../../assets/images/bbc-logo.png";
-import DownArrow from "../../../assets/images/down-arrow.png";
+import NewsImage from "../../assets/images/bbc-logo.png";
+import DownArrow from "../../assets/images/down-arrow.png";
 import StarIconRed from "@/components/v2/icons/starIconRed";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -18,18 +18,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
   addCategoryToUser,
-  addTagToUser,
   addUserTopic,
   changePassword,
   deleteUserTopic,
   fetchNotificationData,
-  fetchNotificationSources,
   notificationSourcesSelector,
-  setCategoryUser,
 } from "@/slices/notificationSource";
 import { toast } from "react-toastify";
 import ChangePassword from "@/components/notificationNewsSource/changePassword";
 import StarIconGray from "@/components/v2/icons/starIconGray";
+import ActivateNotificationCard from "@/components/ActivateNotificationCard";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -170,6 +168,7 @@ const NewsSources = () => {
   const isCategoryActive = (categoryId) => {
     return user_categories.some((cat) => cat.id === categoryId);
   };
+
   useEffect(() => {
     dispatch(fetchNotificationData());
   }, [dispatch]);
@@ -365,26 +364,7 @@ const NewsSources = () => {
                 موضوعات تهمك
               </h3>
             </div>
-            <div
-              className="my-4 py-5 px-5"
-              style={{ backgroundColor: "#F8F8F8", borderRadius: 13 }}
-            >
-              <div className="row gy-3">
-                <div className="col-md-7">
-                  <p style={{ fontSize: 25 }} className="m-0">
-                    تفعيل التنبيهات عبر المتصفح
-                  </p>
-                </div>
-                <div className="col-md-4">
-                  <div className="d-flex flex-column flex-sm-row gap-2 gap-sm-3">
-                    <button className="btn arabic24-bg-dark-red text-white px-5">
-                      تفعيل
-                    </button>
-                    <button className="btn btn-dark px-5">إلغاء</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ActivateNotificationCard />
           </section>
           <section className="mt-5">
             <div
@@ -396,26 +376,7 @@ const NewsSources = () => {
                 للإشتراك في خدمة الرسائل
               </h3>
             </div>
-            <div
-              className="my-4 py-5 px-5"
-              style={{ backgroundColor: "#F8F8F8", borderRadius: 13 }}
-            >
-              <div className="row gy-3">
-                <div className="col-md-7">
-                  <p style={{ fontSize: 25 }} className="m-0">
-                    تفعيل التنبيهات عبر المتصفح
-                  </p>
-                </div>
-                <div className="col-md-4">
-                  <div className="d-flex flex-column flex-sm-row gap-2 gap-sm-3">
-                    <button className="btn arabic24-bg-dark-red text-white px-5">
-                      تفعيل
-                    </button>
-                    <button className="btn btn-dark px-5">إلغاء</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ActivateNotificationCard />
           </section>
           <section className="mt-5">
             <div

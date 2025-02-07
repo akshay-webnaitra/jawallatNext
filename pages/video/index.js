@@ -1,27 +1,22 @@
 import Sidebar from "@/partials/v2/Sidebar";
 import MainLayout from "layout/mainLayout";
-import NewsAdd from "assets/images/news-ad.png";
 import RedCaret from "@/components/v2/RedCaret";
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/utils/store";
 import { categoriesSelector, fetchCategories } from "@/slices/categories";
-import { fetchSources } from "@/slices/sources";
-import { fetchServerItem, serverItemSelector } from "@/slices/serverItems";
+import { fetchServerItem } from "@/slices/serverItems";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
-import NewsImg from "assets/images/images 3.png";
+import { fetchHomeItems } from "@/slices/homeItems";
 import Like from "@/components/v2/icons/like";
 import Favourite from "@/components/v2/icons/favourite";
 import ShareOutline from "@/components/v2/icons/shareOutline";
-import VideoPlayBtn from "@/components/v2/icons/videoPlayBtn";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import GoogleAds from "@/components/GoogleAds";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVideos, videosSelector } from "@/slices/video";
-import JawlattLink from "@/components/JawlattLink";
 import Link from "next/link";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {

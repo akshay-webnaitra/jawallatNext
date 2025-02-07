@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 import GoogleAds from "@/components/GoogleAds";
 import { useDispatch, useSelector } from "react-redux";
 import { favouriteSelector, fetchFavourite } from "@/slices/favourite";
-import data from "../../../utils/data.json";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);

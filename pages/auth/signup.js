@@ -59,7 +59,7 @@ const Signup = () => {
           email: "",
           password: "",
         });
-        router.push("/new");
+        router.push("/");
       }),
 
       () => {
