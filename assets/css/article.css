@@ -51,8 +51,8 @@ ul.nav li a.nav-link {
   color: #7d7d7d;
 }
 .card-header {
-  border-bottom: none;
-  background: transparent;
+  border-bottom: none !important;
+  background: transparent !important;
 }
 ul.jawlatt-card-body-badge li {
   list-style: disc;
