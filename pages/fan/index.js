@@ -8,7 +8,7 @@ import { fetchSources } from "@/slices/sources";
 import { fetchServerItem } from "@/slices/serverItems";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import Plus from "../../assets/images/+.png";
-import Share from "../../assets/images/share.png";
+import Share from "../../assets/images/group 6736.png";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import GoogleAds from "@/components/GoogleAds";

@@ -7,6 +7,7 @@ import { getSession } from "next-auth/react";
 import { fetchHomeItems, homeItemsSelector } from "@/slices/homeItems";
 import { wrapper } from "@/utils/store";
 import { useDispatch } from "react-redux";
+import { postForgotPassword } from "@/slices/auth";
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
@@ -33,7 +34,7 @@ const ForgetPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let item = {
-      adv_email: data?.email,
+      email: data?.email,
     };
     dispatch(
       postForgotPassword(item),

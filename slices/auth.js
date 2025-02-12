@@ -198,7 +198,9 @@ export function postForgotPassword(
   return async (dispatch) => {
     dispatch(postForgotPasswordRequest());
     try {
-      const response = await api.login(params);
+      const response = await api.forgotPassword(params);
+      console.log(response, "data");
+
       if (response?.data?.status === 200) {
         dispatch(postForgotPasswordSuccess(response?.data?.return));
         callback(response?.data?.return);

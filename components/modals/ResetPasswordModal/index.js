@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import styles from "@/partials/header/style.module.css";
+import { postForgotPassword } from "@/slices/auth";
 
 const ResetPasswordModal = () => {
   const [email, setEmail] = useState("");
@@ -24,26 +25,45 @@ const ResetPasswordModal = () => {
     dispatch(setShowLogin(false));
   };
 
-  const handleResetPasswordSubmit = async (e) => {
-    e.preventDefault();
-    if (emailValidated) {
-      setLoading(true);
-      let response = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+  // const handleResetPasswordSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (emailValidated) {
+  //     setLoading(true);
+  //     let response = await signIn("credentials", {
+  //       email,
+  //       password,
+  //       redirect: false,
+  //     });
 
-      if (response?.status == 200) {
-        toast.success("Logged In successfully");
-        window.location.reload();
-      } else {
-        toast.error("Please enter valid email and password");
-      }
-    } else {
-      toast.error("Please enter valid email");
-    }
+  //     if (response?.status == 200) {
+  //       toast.success("Logged In successfully");
+  //       window.location.reload();
+  //     } else {
+  //       toast.error("Please enter valid email and password");
+  //     }
+  //   } else {
+  //     toast.error("Please enter valid email");
+  //   }
+  //   e.preventDefault();
+  // };
+
+  const handleResetPasswordSubmit = (e) => {
     e.preventDefault();
+    const data = {
+      email: email,
+    };
+    dispatch(
+      postForgotPassword(
+        data,
+        () => {
+          setEmail("");
+          window.location.reload();
+        },
+        () => {
+          console.log("error");
+        }
+      )
+    );
   };
 
   useEffect(() => {
@@ -78,7 +98,13 @@ const ResetPasswordModal = () => {
                 </div>
                 <form onSubmit={handleResetPasswordSubmit}>
                   <div className="form-group">
-                    <input type="text" placeholder="البريد الإلكتروني" />
+                    <input
+                      type="text"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="البريد الإلكتروني"
+                    />
                   </div>
                   <div className={styles.jawallat_Loginform_btn}>
                     <button type="submit" className="btn btn-primary">
